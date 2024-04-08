@@ -3,10 +3,10 @@
 
 namespace POS
 {
-    public partial class Form1 : Form
+    public partial class SplashScreen : Form
     {
         private Thread progressThread;
-        public Form1()
+        public SplashScreen()
         {
             InitializeComponent();
             progressThread = new Thread(ProgressSimulation);
