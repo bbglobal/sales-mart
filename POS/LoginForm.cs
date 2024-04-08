@@ -33,7 +33,12 @@ namespace POS
                     SqlDataReader r = cmd.ExecuteReader();
                     if (r.HasRows)
                     {
-                        MessageBox.Show("Login Successful","Success",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        while (r.Read()) { 
+                        Session.Username = r.GetString(r.GetOrdinal("username"));
+                        }
+                        Dashboard dashboard = new Dashboard();
+                        dashboard.Show();
+                        this.Hide();
                     }   
                     else
                     {

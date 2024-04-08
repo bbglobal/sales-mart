@@ -19,30 +19,33 @@ namespace POS
     {
         #region All Declared Variables
         private PrivateFontCollection privateFonts = new PrivateFontCollection();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
         private System.Windows.Forms.Timer LabelTimer;
         private System.Windows.Forms.Timer PanelTimer;
-        private Point Label1_initialPosition;
-        private Point Label2_initialPosition;
-        private Point Label3_initialPosition;
-        private Point Label4_initialPosition;
-        private Point Label5_initialPosition;
-        private Point Label6_initialPosition;
-        private Point Label7_initialPosition;
-        private Point Label8_initialPosition;
-        private Point Label1_targetPosition;
-        private Point Label2_targetPosition;
-        private Point Label3_targetPosition;
-        private Point Label4_targetPosition;
-        private Point Label5_targetPosition;
-        private Point Label6_targetPosition;
-        private Point Label7_targetPosition;
-        private Point Label8_targetPosition;
+        private Point Menu_Logo_initialPosition;
+        private Point Menu_Logo_targetPosition;
+        private Point Menu_Dashboard_label_initialPosition;
+        private Point Menu_Products_label_initialPosition;
+        private Point Menu_Tables_label_initialPosition;
+        private Point Menu_Staff_label_initialPosition;
+        private Point Menu_POS_label_initialPosition;
+        private Point Menu_Kitchen_label_initialPosition;
+        private Point Menu_Reports_label_initialPosition;
+        private Point Menu_Settings_label_initialPosition;
+        private Point Menu_Dashboard_label_targetPosition;
+        private Point Menu_Products_label_targetPosition;
+        private Point Menu_Tables_label_targetPosition;
+        private Point Menu_Staff_label_targetPosition;
+        private Point Menu_POS_label_targetPosition;
+        private Point Menu_Kitchen_label_targetPosition;
+        private Point Menu_Reports_label_targetPosition;
+        private Point Menu_Settings_label_targetPosition;
         private int targetWidth;
         private int initialWidth;
-        private int panel4initialWidth;
-        private int panel4targetWidth;
-        private int panel4initialLeft;
-        private int panel4targetLeft;
+        private int ScreenContainer_panelinitialWidth;
+        private int ScreenContainer_paneltargetWidth;
+        private int ScreenContainer_panelinitialLeft;
+        private int ScreenContainer_paneltargetLeft;
         private const int AnimationDuration = 600; // Duration of the animation in milliseconds
         private const int PanelAnimationDuration = 100; // Duration of the animation in milliseconds
         private DateTime animationStartTime;
@@ -52,15 +55,17 @@ namespace POS
         {
             InitializeComponent();
 
-            InitializeLabel(label1, "C:\\Users\\etechs\\source\\repos\\POS\\POS\\images\\sidebar_icons\\Home.png", 25, 25);
-            InitializeLabel(label2, "C:\\Users\\etechs\\source\\repos\\POS\\POS\\images\\sidebar_icons\\Products.png", 25, 25);
-            InitializeLabel(label3, "C:\\Users\\etechs\\source\\repos\\POS\\POS\\images\\sidebar_icons\\Tables.png", 25, 27);
-            InitializeLabel(label4, "C:\\Users\\etechs\\source\\repos\\POS\\POS\\images\\sidebar_icons\\Staff.png", 25, 25);
-            InitializeLabel(label5, "C:\\Users\\etechs\\source\\repos\\POS\\POS\\images\\sidebar_icons\\POS.png", 25, 25);
-            InitializeLabel(label6, "C:\\Users\\etechs\\source\\repos\\POS\\POS\\images\\sidebar_icons\\Kitchen.png", 25, 25);
-            InitializeLabel(label7, "C:\\Users\\etechs\\source\\repos\\POS\\POS\\images\\sidebar_icons\\Reports.png", 25, 25);
-            InitializeLabel(label8, "C:\\Users\\etechs\\source\\repos\\POS\\POS\\images\\sidebar_icons\\Settings1.png", 30, 30);
-            RoundCorners(label1, 20);
+            InitializeLabel(Menu_Dashboard_label,(Image)resources.GetObject("Menu_Dashboard_label.Image") , 25, 25);
+            InitializeLabel(Menu_Products_label, (Image)resources.GetObject("Menu_Products_label.Image"), 25, 25);
+            InitializeLabel(Menu_Tables_label, (Image)resources.GetObject("Menu_Tables_label.Image"), 25, 27);
+            InitializeLabel(Menu_Staff_label, (Image)resources.GetObject("Menu_Staff_label.Image"), 25, 25);
+            InitializeLabel(Menu_POS_label, (Image)resources.GetObject("Menu_POS_label.Image"), 25, 25);
+            InitializeLabel(Menu_Kitchen_label, (Image)resources.GetObject("Menu_Kitchen_label.Image"), 25, 25);
+            InitializeLabel(Menu_Reports_label, (Image)resources.GetObject("Menu_Reports_label.Image"), 25, 25);
+            InitializeLabel(Menu_Settings_label, (Image)resources.GetObject("Menu_Settings_label.Image"), 30, 30);
+            InitializeLabel(Logo, (Image)resources.GetObject("Logo.Image"), 30, 45);
+            InitializeLabel(LogoText, (Image)resources.GetObject("LogoText.Image"), 150, 25);
+            RoundCorners(Menu_Dashboard_label, 20);
             InitializeTimer();
 
             LoadCustomFont("POS.MyriadProSemibold.ttf");
@@ -69,6 +74,8 @@ namespace POS
 
 
         }
+
+        #region Setting Label Fonts, Locations, Colors & Rounding Corners Functions
 
         private void LoadCustomFont(string resourceName)
         {
@@ -124,12 +131,14 @@ namespace POS
             }
         }
 
+        #endregion
 
-        #region Resizing Sidebar Icons
-        private void InitializeLabel(Label label, string path, int newWidth, int newHeight)
+        #region Resizing Sidebar Icon Functions
+        private void InitializeLabel(Label label, Image image, int newWidth, int newHeight)
         {
             // Load the image
-            Image image = Image.FromFile(path);
+            //string fullPath = Path.Combine(GetPro, RelativePath);
+            //Image image = Image.FromFile(path);
             Image resizedImage = ResizeImage(image, newWidth, newHeight);
 
             label.Image = resizedImage;
@@ -148,15 +157,8 @@ namespace POS
 
         #endregion
 
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-            //MessageBox.Show(label1.Location.X.ToString() + "," + label1.Location.Y.ToString());
-            SetLabelColor(label1, "#0077C3");
-            StartTransition(60, "Hide");
 
-
-        }
-
+        #region Timer Initialization and Transition Functions
 
         private void InitializeTimer()
         {
@@ -174,37 +176,40 @@ namespace POS
             if (status == "Hide")
             {
 
-                Label1_initialPosition = label1.Location;
-                Label1_targetPosition = new Point(10, 114);
+                Menu_Dashboard_label_initialPosition = Menu_Dashboard_label.Location;
+                Menu_Dashboard_label_targetPosition = new Point(10, 114);
 
-                Label2_initialPosition = label2.Location;
-                Label2_targetPosition = new Point(10, 184);
+                Menu_Products_label_initialPosition = Menu_Products_label.Location;
+                Menu_Products_label_targetPosition = new Point(10, 184);
 
-                Label3_initialPosition = label3.Location;
-                Label3_targetPosition = new Point(10, 254);
+                Menu_Tables_label_initialPosition = Menu_Tables_label.Location;
+                Menu_Tables_label_targetPosition = new Point(10, 254);
 
-                Label4_initialPosition = label4.Location;
-                Label4_targetPosition = new Point(10, 324);
+                Menu_Staff_label_initialPosition = Menu_Staff_label.Location;
+                Menu_Staff_label_targetPosition = new Point(10, 324);
 
-                Label5_initialPosition = label5.Location;
-                Label5_targetPosition = new Point(10, 394);
+                Menu_POS_label_initialPosition = Menu_POS_label.Location;
+                Menu_POS_label_targetPosition = new Point(10, 394);
 
-                Label6_initialPosition = label6.Location;
-                Label6_targetPosition = new Point(10, 464);
+                Menu_Kitchen_label_initialPosition = Menu_Kitchen_label.Location;
+                Menu_Kitchen_label_targetPosition = new Point(10, 464);
 
-                Label7_initialPosition = label7.Location;
-                Label7_targetPosition = new Point(10, 534);
+                Menu_Reports_label_initialPosition = Menu_Reports_label.Location;
+                Menu_Reports_label_targetPosition = new Point(10, 534);
 
-                Label8_initialPosition = label8.Location;
-                Label8_targetPosition = new Point(10, 604);
+                Menu_Settings_label_initialPosition = Menu_Settings_label.Location;
+                Menu_Settings_label_targetPosition = new Point(10, 604);
 
-                initialWidth = panel2.Width;
+                Menu_Logo_initialPosition = Logo.Location;
+                Menu_Logo_targetPosition = new Point(10, 30);
+
+                initialWidth = Sidebar_panel.Width;
                 targetWidth = newWidth;
 
-                panel4initialLeft = panel4.Left;
-                panel4initialWidth = panel4.Width;
-                panel4targetWidth = panel4initialWidth + (initialWidth - targetWidth);
-                panel4targetLeft = initialWidth - targetWidth;
+                ScreenContainer_panelinitialLeft = ScreenContainer_panel.Left;
+                ScreenContainer_panelinitialWidth = ScreenContainer_panel.Width;
+                ScreenContainer_paneltargetWidth = ScreenContainer_panelinitialWidth + (initialWidth - targetWidth);
+                ScreenContainer_paneltargetLeft = initialWidth - targetWidth;
 
                 animationStartTime = DateTime.Now;
                 PanelTimer.Start();
@@ -213,37 +218,40 @@ namespace POS
             }
             else
             {
-                Label1_initialPosition = label1.Location;
-                Label1_targetPosition = new Point(55, 114);
+                Menu_Dashboard_label_initialPosition = Menu_Dashboard_label.Location;
+                Menu_Dashboard_label_targetPosition = new Point(55, 114);
 
-                Label2_initialPosition = label2.Location;
-                Label2_targetPosition = new Point(55, 184);
+                Menu_Products_label_initialPosition = Menu_Products_label.Location;
+                Menu_Products_label_targetPosition = new Point(55, 184);
 
-                Label3_initialPosition = label3.Location;
-                Label3_targetPosition = new Point(55, 254);
+                Menu_Tables_label_initialPosition = Menu_Tables_label.Location;
+                Menu_Tables_label_targetPosition = new Point(55, 254);
 
-                Label4_initialPosition = label4.Location;
-                Label4_targetPosition = new Point(55, 324);
+                Menu_Staff_label_initialPosition = Menu_Staff_label.Location;
+                Menu_Staff_label_targetPosition = new Point(55, 324);
 
-                Label5_initialPosition = label5.Location;
-                Label5_targetPosition = new Point(55, 394);
+                Menu_POS_label_initialPosition = Menu_POS_label.Location;
+                Menu_POS_label_targetPosition = new Point(55, 394);
 
-                Label6_initialPosition = label6.Location;
-                Label6_targetPosition = new Point(55, 464);
+                Menu_Kitchen_label_initialPosition = Menu_Kitchen_label.Location;
+                Menu_Kitchen_label_targetPosition = new Point(55, 464);
 
-                Label7_initialPosition = label7.Location;
-                Label7_targetPosition = new Point(55, 534);
+                Menu_Reports_label_initialPosition = Menu_Reports_label.Location;
+                Menu_Reports_label_targetPosition = new Point(55, 534);
 
-                Label8_initialPosition = label8.Location;
-                Label8_targetPosition = new Point(55, 604);
+                Menu_Settings_label_initialPosition = Menu_Settings_label.Location;
+                Menu_Settings_label_targetPosition = new Point(55, 604);
 
-                initialWidth = panel2.Width;
+                Menu_Logo_initialPosition = Logo.Location;
+                Menu_Logo_targetPosition = new Point(36, 30);
+
+                initialWidth = Sidebar_panel.Width;
                 targetWidth = newWidth;
 
-                panel4initialLeft = panel4.Left;
-                panel4initialWidth = panel4.Width;
-                panel4targetWidth = panel4initialWidth + (initialWidth - targetWidth);
-                panel4targetLeft = initialWidth - targetWidth;
+                ScreenContainer_panelinitialLeft = ScreenContainer_panel.Left;
+                ScreenContainer_panelinitialWidth = ScreenContainer_panel.Width;
+                ScreenContainer_paneltargetWidth = ScreenContainer_panelinitialWidth + (initialWidth - targetWidth);
+                ScreenContainer_paneltargetLeft = initialWidth - targetWidth;
 
                 animationStartTime = DateTime.Now;
                 PanelTimer.Start();
@@ -251,6 +259,8 @@ namespace POS
             }
 
         }
+
+        #endregion
 
         #region Label and Panel Timer Tick Event Functions 
 
@@ -260,49 +270,54 @@ namespace POS
             if (progress >= 1.0)
             {
                 LabelTimer.Stop();
-                label1.Location = Label1_targetPosition;
-                label2.Location = Label2_targetPosition;
-                label3.Location = Label3_targetPosition;
-                label4.Location = Label4_targetPosition;
-                label5.Location = Label5_targetPosition;
-                label6.Location = Label6_targetPosition;
-                label7.Location = Label7_targetPosition;
-                label8.Location = Label8_targetPosition;
+                Menu_Dashboard_label.Location = Menu_Dashboard_label_targetPosition;
+                Menu_Products_label.Location = Menu_Products_label_targetPosition;
+                Menu_Tables_label.Location = Menu_Tables_label_targetPosition;
+                Menu_Staff_label.Location = Menu_Staff_label_targetPosition;
+                Menu_POS_label.Location = Menu_POS_label_targetPosition;
+                Menu_Kitchen_label.Location = Menu_Kitchen_label_targetPosition;
+                Menu_Reports_label.Location = Menu_Reports_label_targetPosition;
+                Menu_Settings_label.Location = Menu_Settings_label_targetPosition;
+                Logo.Location = Menu_Logo_targetPosition;
 
             }
             else
             {
-                int label1_newX = (int)(Label1_initialPosition.X + (Label1_targetPosition.X - Label1_initialPosition.X) * progress);
-                int label1_newY = (int)Label1_targetPosition.Y;
-                label1.Location = new Point(label1_newX, label1_newY);
+                int Menu_Dashboard_label_newX = (int)(Menu_Dashboard_label_initialPosition.X + (Menu_Dashboard_label_targetPosition.X - Menu_Dashboard_label_initialPosition.X) * progress);
+                int Menu_Dashboard_label_newY = (int)Menu_Dashboard_label_targetPosition.Y;
+                Menu_Dashboard_label.Location = new Point(Menu_Dashboard_label_newX, Menu_Dashboard_label_newY);
 
-                int label2_newX = (int)(Label2_initialPosition.X + (Label2_targetPosition.X - Label2_initialPosition.X) * progress);
-                int label2_newY = (int)Label2_targetPosition.Y;
-                label2.Location = new Point(label2_newX, label2_newY);
+                int Menu_Products_label_newX = (int)(Menu_Products_label_initialPosition.X + (Menu_Products_label_targetPosition.X - Menu_Products_label_initialPosition.X) * progress);
+                int Menu_Products_label_newY = (int)Menu_Products_label_targetPosition.Y;
+                Menu_Products_label.Location = new Point(Menu_Products_label_newX, Menu_Products_label_newY);
 
-                int label3_newX = (int)(Label3_initialPosition.X + (Label3_targetPosition.X - Label3_initialPosition.X) * progress);
-                int label3_newY = (int)Label3_targetPosition.Y;
-                label3.Location = new Point(label3_newX, label3_newY);
+                int Menu_Tables_label_newX = (int)(Menu_Tables_label_initialPosition.X + (Menu_Tables_label_targetPosition.X - Menu_Tables_label_initialPosition.X) * progress);
+                int Menu_Tables_label_newY = (int)Menu_Tables_label_targetPosition.Y;
+                Menu_Tables_label.Location = new Point(Menu_Tables_label_newX, Menu_Tables_label_newY);
 
-                int label4_newX = (int)(Label4_initialPosition.X + (Label4_targetPosition.X - Label4_initialPosition.X) * progress);
-                int label4_newY = (int)Label4_targetPosition.Y;
-                label4.Location = new Point(label4_newX, label4_newY);
+                int Menu_Staff_label_newX = (int)(Menu_Staff_label_initialPosition.X + (Menu_Staff_label_targetPosition.X - Menu_Staff_label_initialPosition.X) * progress);
+                int Menu_Staff_label_newY = (int)Menu_Staff_label_targetPosition.Y;
+                Menu_Staff_label.Location = new Point(Menu_Staff_label_newX, Menu_Staff_label_newY);
 
-                int label5_newX = (int)(Label5_initialPosition.X + (Label5_targetPosition.X - Label5_initialPosition.X) * progress);
-                int label5_newY = (int)Label5_targetPosition.Y;
-                label5.Location = new Point(label5_newX, label5_newY);
+                int Menu_POS_label_newX = (int)(Menu_POS_label_initialPosition.X + (Menu_POS_label_targetPosition.X - Menu_POS_label_initialPosition.X) * progress);
+                int Menu_POS_label_newY = (int)Menu_POS_label_targetPosition.Y;
+                Menu_POS_label.Location = new Point(Menu_POS_label_newX, Menu_POS_label_newY);
 
-                int label6_newX = (int)(Label6_initialPosition.X + (Label6_targetPosition.X - Label6_initialPosition.X) * progress);
-                int label6_newY = (int)Label6_targetPosition.Y;
-                label6.Location = new Point(label6_newX, label6_newY);
+                int Menu_Kitchen_label_newX = (int)(Menu_Kitchen_label_initialPosition.X + (Menu_Kitchen_label_targetPosition.X - Menu_Kitchen_label_initialPosition.X) * progress);
+                int Menu_Kitchen_label_newY = (int)Menu_Kitchen_label_targetPosition.Y;
+                Menu_Kitchen_label.Location = new Point(Menu_Kitchen_label_newX, Menu_Kitchen_label_newY);
 
-                int label7_newX = (int)(Label7_initialPosition.X + (Label7_targetPosition.X - Label7_initialPosition.X) * progress);
-                int label7_newY = (int)Label7_targetPosition.Y;
-                label7.Location = new Point(label7_newX, label7_newY);
+                int Menu_Reports_label_newX = (int)(Menu_Reports_label_initialPosition.X + (Menu_Reports_label_targetPosition.X - Menu_Reports_label_initialPosition.X) * progress);
+                int Menu_Reports_label_newY = (int)Menu_Reports_label_targetPosition.Y;
+                Menu_Reports_label.Location = new Point(Menu_Reports_label_newX, Menu_Reports_label_newY);
 
-                int label8_newX = (int)(Label8_initialPosition.X + (Label8_targetPosition.X - Label8_initialPosition.X) * progress);
-                int label8_newY = (int)Label8_targetPosition.Y;
-                label8.Location = new Point(label8_newX, label8_newY);
+                int Menu_Settings_label_newX = (int)(Menu_Settings_label_initialPosition.X + (Menu_Settings_label_targetPosition.X - Menu_Settings_label_initialPosition.X) * progress);
+                int Menu_Settings_label_newY = (int)Menu_Settings_label_targetPosition.Y;
+                Menu_Settings_label.Location = new Point(Menu_Settings_label_newX, Menu_Settings_label_newY);
+
+                int Menu_Logo_newX = (int)(Menu_Logo_initialPosition.X + (Menu_Logo_targetPosition.X - Menu_Logo_initialPosition.X) * progress);
+                int Menu_Logo_newY = (int)Menu_Logo_targetPosition.Y;
+                Logo.Location = new Point(Menu_Logo_newX, Menu_Logo_newY);
 
 
             }
@@ -314,21 +329,21 @@ namespace POS
             if (progress1 >= 1.0)
             {
                 PanelTimer.Stop();
-                panel2.Width = targetWidth;
-                panel4.Width = panel4targetWidth;
-                panel4.Left = panel4initialLeft - panel4targetLeft;
+                Sidebar_panel.Width = targetWidth;
+                ScreenContainer_panel.Width = ScreenContainer_paneltargetWidth;
+                ScreenContainer_panel.Left = ScreenContainer_panelinitialLeft - ScreenContainer_paneltargetLeft;
 
             }
             else
             {
                 int newWidth = (int)(initialWidth + (targetWidth - initialWidth) * progress1);
-                panel2.Width = newWidth;
+                Sidebar_panel.Width = newWidth;
 
-                int panel1newWidth = (int)(panel4initialWidth + (panel4targetWidth - panel4initialWidth) * progress1);
-                panel4.Width = panel1newWidth;
+                int Main_panelnewWidth = (int)(ScreenContainer_panelinitialWidth + (ScreenContainer_paneltargetWidth - ScreenContainer_panelinitialWidth) * progress1);
+                ScreenContainer_panel.Width = Main_panelnewWidth;
 
-                int panel1newLeft = (int)(panel4initialLeft + (panel4targetLeft - panel4initialLeft) * progress1);
-                panel4.Left = panel1newLeft;
+                int Main_panelnewLeft = (int)(ScreenContainer_panelinitialLeft + (ScreenContainer_paneltargetLeft - ScreenContainer_panelinitialLeft) * progress1);
+                ScreenContainer_panel.Left = Main_panelnewLeft;
 
 
             }
@@ -337,32 +352,69 @@ namespace POS
         #endregion
 
 
-
+        #region Dashboard Load Event
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            SetLabelLocations(label1, new Point(55, 112));
-            SetLabelLocations(label2, new Point(55, 182));
-            SetLabelLocations(label3, new Point(55, 252));
-            SetLabelLocations(label4, new Point(55, 324));
-            SetLabelLocations(label5, new Point(55, 394));
-            SetLabelLocations(label6, new Point(55, 464));
-            SetLabelLocations(label7, new Point(55, 534));
-            SetLabelLocations(label8, new Point(55, 604));
-            label1.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            label2.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            label3.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            label4.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            label5.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            label6.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            label7.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            label8.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            int CurrentUserInitialWidth = CurrentUser_label.Width;
+            CurrentUser_label.Text = $"User Name:  {Session.Username}";
+            CurrentUser_label.Location = new Point(CurrentUser_label.Location.X - (CurrentUser_label.Width - CurrentUserInitialWidth), CurrentUser_label.Location.Y);
+            SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
+            SetLabelLocations(Menu_Products_label, new Point(55, 182));
+            SetLabelLocations(Menu_Tables_label, new Point(55, 252));
+            SetLabelLocations(Menu_Staff_label, new Point(55, 324));
+            SetLabelLocations(Menu_POS_label, new Point(55, 394));
+            SetLabelLocations(Menu_Kitchen_label, new Point(55, 464));
+            SetLabelLocations(Menu_Reports_label, new Point(55, 534));
+            SetLabelLocations(Menu_Settings_label, new Point(55, 604));
+            SetLabelColor(Menu_Dashboard_label, "#0077C3");
+            Menu_Dashboard_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Products_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Tables_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Staff_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_POS_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Kitchen_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Reports_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Settings_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Label Click Event Functions
+        private void Logo_Click(object sender, EventArgs e)
         {
-            StartTransition(266, "Show");
-        }
+            if (Sidebar_panel.Width == 266)
+            {
+                StartTransition(60, "Hide");
+            }
+            else 
+            {
+                StartTransition(266, "Show");
+            }
+            
+            
+        }   
 
+        private void LogoText_Click(object sender, EventArgs e)
+        {
+            if (Sidebar_panel.Width == 266)
+            {
+                StartTransition(60, "Hide");
+            }
+            else
+            {
+                StartTransition(266, "Show");
+            }
+        }
+        private void Menu_Dashboard_label_Click_1(object sender, EventArgs e)
+        {
+
+
+        }
+        private void Menu_Staff_label_Click(object sender, EventArgs e)
+        {
+            
+        }
+        #endregion
 
     }
 }
