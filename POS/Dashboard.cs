@@ -55,7 +55,8 @@ namespace POS
         {
             InitializeComponent();
 
-            InitializeLabel(Menu_Dashboard_label,(Image)resources.GetObject("Menu_Dashboard_label.Image") , 25, 25);
+            #region Calling Image Resize and Rounded Corner,Timer & Font Functions 
+            InitializeLabel(Menu_Dashboard_label, (Image)resources.GetObject("Menu_Dashboard_label.Image"), 25, 25);
             InitializeLabel(Menu_Products_label, (Image)resources.GetObject("Menu_Products_label.Image"), 25, 25);
             InitializeLabel(Menu_Tables_label, (Image)resources.GetObject("Menu_Tables_label.Image"), 25, 27);
             InitializeLabel(Menu_Staff_label, (Image)resources.GetObject("Menu_Staff_label.Image"), 25, 25);
@@ -66,13 +67,16 @@ namespace POS
             InitializeLabel(Logo, (Image)resources.GetObject("Logo.Image"), 30, 45);
             InitializeLabel(LogoText, (Image)resources.GetObject("LogoText.Image"), 150, 25);
             RoundCorners(Menu_Dashboard_label, 20);
+            RoundCorners(Menu_Products_label, 20);
+            RoundCorners(Menu_Tables_label, 20);
+            RoundCorners(Menu_Staff_label, 20);
+            RoundCorners(Menu_POS_label, 20);
+            RoundCorners(Menu_Kitchen_label, 20);
+            RoundCorners(Menu_Reports_label, 20);
+            RoundCorners(Menu_Settings_label, 20);
             InitializeTimer();
-
             LoadCustomFont("POS.MyriadProSemibold.ttf");
-
-            // Use the custom font for your controls
-
-
+            #endregion
         }
 
         #region Setting Label Fonts, Locations, Colors & Rounding Corners Functions
@@ -358,6 +362,7 @@ namespace POS
             int CurrentUserInitialWidth = CurrentUser_label.Width;
             CurrentUser_label.Text = $"User Name:  {Session.Username}";
             CurrentUser_label.Location = new Point(CurrentUser_label.Location.X - (CurrentUser_label.Width - CurrentUserInitialWidth), CurrentUser_label.Location.Y);
+            Set_CardBox_Positions();
             SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
             SetLabelLocations(Menu_Products_label, new Point(55, 182));
             SetLabelLocations(Menu_Tables_label, new Point(55, 252));
@@ -386,13 +391,13 @@ namespace POS
             {
                 StartTransition(60, "Hide");
             }
-            else 
+            else
             {
                 StartTransition(266, "Show");
             }
-            
-            
-        }   
+
+
+        }
 
         private void LogoText_Click(object sender, EventArgs e)
         {
@@ -407,14 +412,112 @@ namespace POS
         }
         private void Menu_Dashboard_label_Click_1(object sender, EventArgs e)
         {
-
+            SetLabelColor(Menu_Dashboard_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
 
         }
         private void Menu_Staff_label_Click(object sender, EventArgs e)
         {
-            
+            SetLabelColor(Menu_Staff_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
         }
         #endregion
 
+        #region Card Box Positions Functions
+        private void Set_CardBox_Positions()
+        {
+            Total_Cost_CardBox.Location = new Point(Total_Sale_CardBox.Location.X + 240, Total_Cost_CardBox.Location.Y);
+            Total_Disc_CardBox.Location = new Point(Total_Cost_CardBox.Location.X + 240, Total_Disc_CardBox.Location.Y);
+            Total_Profit_CardBox.Location = new Point(Total_Disc_CardBox.Location.X + 240, Total_Profit_CardBox.Location.Y);
+            Total_Tax_CardBox.Location = new Point(Total_Cost_CardBox.Location.X, Total_Cost_CardBox.Location.Y + 100);
+            Total_Pay_CardBox.Location = new Point(Total_Disc_CardBox.Location.X, Total_Disc_CardBox.Location.Y + 100);
+        }
+        #endregion
+
+        #region Sidebar Labels Click Event Functions
+        private void Menu_Products_label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Products_label, "#0077C3");
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+        }
+
+        private void Menu_Tables_label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Tables_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+        }
+
+        private void Menu_POS_label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_POS_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+        }
+
+        private void Menu_Kitchen_label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Kitchen_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+        }
+
+        private void Menu_Reports_label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Reports_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+        }
+
+        private void Menu_Settings_label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Settings_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+        }
+        #endregion
     }
 }
