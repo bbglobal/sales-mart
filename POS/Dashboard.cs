@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace POS
 {
@@ -380,6 +381,7 @@ namespace POS
             Menu_Kitchen_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
             Menu_Reports_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
             Menu_Settings_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            InitiateChart();
         }
 
         #endregion
@@ -518,6 +520,89 @@ namespace POS
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
         }
+        #endregion
+
+        #region Chart Create Function
+
+        private void InitiateChart() 
+        {
+
+            string[] monthLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+            double[] xValues = { 0, 2, 4, 6, 8, 9 };
+            double[] originalYValues = { 2, 4, 2, 6, 2, 10 };
+
+            var series = new Series();
+            series.ChartType = SeriesChartType.Spline;
+            series.Color = Color.FromArgb(161, 74, 222);
+
+            for (int i = 0; i < xValues.Length; i++)
+            {
+                series.Points.AddXY(xValues[i], originalYValues[i]);
+                series.Points[i].MarkerSize = 5;
+                series.Points[i].MarkerColor = Color.White;
+                series.Points[i].Tag = i;
+            }
+            chart1.Series.Add(series);
+
+
+            //chart1.ChartAreas[0].AxisY.Title = "Y-axis Label";
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisY.Minimum = 0;
+
+            chart1.ChartAreas[0].AxisX.Maximum = xValues[xValues.Length - 1];
+            chart1.ChartAreas[0].AxisY.Maximum = originalYValues.Max() + 1;
+            chart1.ChartAreas[0].AxisY.Interval = 1;
+            chart1.ChartAreas[0].AxisX.Interval = 1;
+            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+
+            //chart1.ChartAreas[0].AxisX.Title = "Month";
+            chart1.ChartAreas[0].AxisX.CustomLabels.Clear();
+
+
+            var areaSeries = new Series();
+            areaSeries.ChartType = SeriesChartType.SplineArea;
+            areaSeries.Points.DataBindXY(xValues, originalYValues); 
+            areaSeries.BackGradientStyle = GradientStyle.TopBottom;
+            areaSeries.Color = Color.FromArgb(73, 162, 215);
+            chart1.Series.Insert(0, areaSeries);
+
+
+            for (int i = 0; i < monthLabels.Length; i++)
+            {
+                chart1.ChartAreas[0].AxisX.CustomLabels.Add((double)(i + 1), (double)i, monthLabels[((int)i)]);
+            }
+
+
+            for (int i = 0; i < chart1.ChartAreas[0].AxisX.CustomLabels.Count - 1; i++)
+            {
+                if (i == 0)
+                {
+                    double intervalStart = i == 0 ? chart1.ChartAreas[0].AxisX.Minimum : chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+                    double intervalEnd = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+
+                    StripLine stripLine = new StripLine();
+                    stripLine.IntervalOffset = intervalStart;
+                    stripLine.StripWidth = intervalEnd - intervalStart;
+                    stripLine.BackColor = Color.FromArgb(249, 249, 249);
+                    chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
+                }
+
+                else
+                {
+                    StripLine stripLine = new StripLine();
+                    stripLine.IntervalOffset = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+                    stripLine.StripWidth = chart1.ChartAreas[0].AxisX.CustomLabels[i + 1].FromPosition - chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+                    stripLine.BackColor = (i % 2 != 0) ? Color.FromArgb(249, 249, 249) : Color.White; // Set color based on index
+                    chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
+                }
+            }
+
+
+        }
+
+
+
         #endregion
     }
 }

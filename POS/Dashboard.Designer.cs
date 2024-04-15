@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             Main_panel = new Panel();
             Sidebar_panel = new Panel();
             LogoText = new Label();
@@ -46,7 +48,11 @@
             Current_ScreenName_label = new Label();
             Splitter_label = new Label();
             ContentContainer_panel = new Panel();
-            CardBox_Container = new Panel();
+            comboBox1 = new ComboBox();
+            button1 = new Button();
+            ChartContainer = new TableLayoutPanel();
+            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            tableLayoutPanel2 = new TableLayoutPanel();
             Total_Pay_CardBox = new Panel();
             T_Pay_Amount_label = new Label();
             TPay_line = new Label();
@@ -55,6 +61,7 @@
             T_Tax_Amout_label = new Label();
             TT_line = new Label();
             Total_Tax_label = new Label();
+            tableLayoutPanel1 = new TableLayoutPanel();
             Total_Profit_CardBox = new Panel();
             T_Profit_Amount_label = new Label();
             TP_line = new Label();
@@ -75,9 +82,12 @@
             Sidebar_panel.SuspendLayout();
             ScreenContainer_panel.SuspendLayout();
             ContentContainer_panel.SuspendLayout();
-            CardBox_Container.SuspendLayout();
+            ChartContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
+            tableLayoutPanel2.SuspendLayout();
             Total_Pay_CardBox.SuspendLayout();
             Total_Tax_CardBox.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             Total_Profit_CardBox.SuspendLayout();
             Total_Disc_CardBox.SuspendLayout();
             Total_Cost_CardBox.SuspendLayout();
@@ -92,7 +102,7 @@
             Main_panel.Controls.Add(ScreenContainer_panel);
             Main_panel.Location = new Point(2, 0);
             Main_panel.Name = "Main_panel";
-            Main_panel.Size = new Size(800, 666);
+            Main_panel.Size = new Size(1284, 815);
             Main_panel.TabIndex = 2;
             // 
             // Sidebar_panel
@@ -113,7 +123,7 @@
             Sidebar_panel.Dock = DockStyle.Left;
             Sidebar_panel.Location = new Point(0, 0);
             Sidebar_panel.Name = "Sidebar_panel";
-            Sidebar_panel.Size = new Size(266, 666);
+            Sidebar_panel.Size = new Size(266, 815);
             Sidebar_panel.TabIndex = 0;
             // 
             // LogoText
@@ -143,7 +153,7 @@
             Menu_Settings_label.ForeColor = SystemColors.HighlightText;
             Menu_Settings_label.Image = (Image)resources.GetObject("Menu_Settings_label.Image");
             Menu_Settings_label.ImageAlign = ContentAlignment.MiddleLeft;
-            Menu_Settings_label.Location = new Point(55, 532);
+            Menu_Settings_label.Location = new Point(55, 606);
             Menu_Settings_label.Margin = new Padding(0);
             Menu_Settings_label.Name = "Menu_Settings_label";
             Menu_Settings_label.Padding = new Padding(10, 0, 0, 0);
@@ -160,7 +170,7 @@
             Menu_Reports_label.ForeColor = SystemColors.HighlightText;
             Menu_Reports_label.Image = (Image)resources.GetObject("Menu_Reports_label.Image");
             Menu_Reports_label.ImageAlign = ContentAlignment.MiddleLeft;
-            Menu_Reports_label.Location = new Point(55, 472);
+            Menu_Reports_label.Location = new Point(55, 546);
             Menu_Reports_label.Margin = new Padding(0);
             Menu_Reports_label.Name = "Menu_Reports_label";
             Menu_Reports_label.Padding = new Padding(10, 0, 0, 0);
@@ -177,7 +187,7 @@
             Menu_Kitchen_label.ForeColor = SystemColors.HighlightText;
             Menu_Kitchen_label.Image = (Image)resources.GetObject("Menu_Kitchen_label.Image");
             Menu_Kitchen_label.ImageAlign = ContentAlignment.MiddleLeft;
-            Menu_Kitchen_label.Location = new Point(55, 412);
+            Menu_Kitchen_label.Location = new Point(55, 486);
             Menu_Kitchen_label.Margin = new Padding(0);
             Menu_Kitchen_label.Name = "Menu_Kitchen_label";
             Menu_Kitchen_label.Padding = new Padding(10, 0, 0, 0);
@@ -194,7 +204,7 @@
             Menu_POS_label.ForeColor = SystemColors.HighlightText;
             Menu_POS_label.Image = (Image)resources.GetObject("Menu_POS_label.Image");
             Menu_POS_label.ImageAlign = ContentAlignment.MiddleLeft;
-            Menu_POS_label.Location = new Point(55, 352);
+            Menu_POS_label.Location = new Point(55, 426);
             Menu_POS_label.Margin = new Padding(0);
             Menu_POS_label.Name = "Menu_POS_label";
             Menu_POS_label.Padding = new Padding(10, 0, 0, 0);
@@ -211,7 +221,7 @@
             Menu_Staff_label.ForeColor = SystemColors.HighlightText;
             Menu_Staff_label.Image = (Image)resources.GetObject("Menu_Staff_label.Image");
             Menu_Staff_label.ImageAlign = ContentAlignment.MiddleLeft;
-            Menu_Staff_label.Location = new Point(55, 292);
+            Menu_Staff_label.Location = new Point(55, 366);
             Menu_Staff_label.Margin = new Padding(0);
             Menu_Staff_label.Name = "Menu_Staff_label";
             Menu_Staff_label.Padding = new Padding(10, 0, 0, 0);
@@ -228,7 +238,7 @@
             Menu_Tables_label.ForeColor = SystemColors.HighlightText;
             Menu_Tables_label.Image = (Image)resources.GetObject("Menu_Tables_label.Image");
             Menu_Tables_label.ImageAlign = ContentAlignment.MiddleLeft;
-            Menu_Tables_label.Location = new Point(55, 232);
+            Menu_Tables_label.Location = new Point(55, 306);
             Menu_Tables_label.Margin = new Padding(0);
             Menu_Tables_label.Name = "Menu_Tables_label";
             Menu_Tables_label.Padding = new Padding(10, 0, 0, 0);
@@ -245,7 +255,7 @@
             Menu_Products_label.ForeColor = SystemColors.HighlightText;
             Menu_Products_label.Image = (Image)resources.GetObject("Menu_Products_label.Image");
             Menu_Products_label.ImageAlign = ContentAlignment.MiddleLeft;
-            Menu_Products_label.Location = new Point(55, 172);
+            Menu_Products_label.Location = new Point(55, 246);
             Menu_Products_label.Margin = new Padding(0);
             Menu_Products_label.Name = "Menu_Products_label";
             Menu_Products_label.Padding = new Padding(10, 0, 0, 0);
@@ -262,7 +272,7 @@
             Menu_Dashboard_label.ForeColor = SystemColors.HighlightText;
             Menu_Dashboard_label.Image = (Image)resources.GetObject("Menu_Dashboard_label.Image");
             Menu_Dashboard_label.ImageAlign = ContentAlignment.MiddleLeft;
-            Menu_Dashboard_label.Location = new Point(55, 112);
+            Menu_Dashboard_label.Location = new Point(55, 186);
             Menu_Dashboard_label.Margin = new Padding(0);
             Menu_Dashboard_label.Name = "Menu_Dashboard_label";
             Menu_Dashboard_label.Padding = new Padding(10, 0, 0, 0);
@@ -281,7 +291,7 @@
             ScreenContainer_panel.Controls.Add(ContentContainer_panel);
             ScreenContainer_panel.Location = new Point(264, 3);
             ScreenContainer_panel.Name = "ScreenContainer_panel";
-            ScreenContainer_panel.Size = new Size(536, 663);
+            ScreenContainer_panel.Size = new Size(1020, 812);
             ScreenContainer_panel.TabIndex = 0;
             // 
             // CurrentUser_label
@@ -290,7 +300,7 @@
             CurrentUser_label.AutoSize = true;
             CurrentUser_label.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             CurrentUser_label.ForeColor = Color.FromArgb(110, 111, 115);
-            CurrentUser_label.Location = new Point(430, 27);
+            CurrentUser_label.Location = new Point(914, 27);
             CurrentUser_label.Margin = new Padding(0);
             CurrentUser_label.Name = "CurrentUser_label";
             CurrentUser_label.RightToLeft = RightToLeft.No;
@@ -318,51 +328,120 @@
             Splitter_label.ForeColor = Color.Transparent;
             Splitter_label.Location = new Point(2, 71);
             Splitter_label.Name = "Splitter_label";
-            Splitter_label.Size = new Size(533, 1);
+            Splitter_label.Size = new Size(1017, 1);
             Splitter_label.TabIndex = 5;
             // 
             // ContentContainer_panel
             // 
             ContentContainer_panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ContentContainer_panel.BackColor = Color.White;
-            ContentContainer_panel.Controls.Add(CardBox_Container);
+            ContentContainer_panel.Controls.Add(comboBox1);
+            ContentContainer_panel.Controls.Add(button1);
+            ContentContainer_panel.Controls.Add(ChartContainer);
+            ContentContainer_panel.Controls.Add(tableLayoutPanel2);
+            ContentContainer_panel.Controls.Add(tableLayoutPanel1);
             ContentContainer_panel.Location = new Point(21, 95);
             ContentContainer_panel.Name = "ContentContainer_panel";
-            ContentContainer_panel.Size = new Size(494, 552);
+            ContentContainer_panel.Size = new Size(978, 701);
             ContentContainer_panel.TabIndex = 4;
             // 
-            // CardBox_Container
+            // comboBox1
             // 
-            CardBox_Container.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            CardBox_Container.Controls.Add(Total_Pay_CardBox);
-            CardBox_Container.Controls.Add(Total_Tax_CardBox);
-            CardBox_Container.Controls.Add(Total_Profit_CardBox);
-            CardBox_Container.Controls.Add(Total_Disc_CardBox);
-            CardBox_Container.Controls.Add(Total_Cost_CardBox);
-            CardBox_Container.Controls.Add(Total_Sale_CardBox);
-            CardBox_Container.Location = new Point(3, 46);
-            CardBox_Container.Name = "CardBox_Container";
-            CardBox_Container.Size = new Size(488, 205);
-            CardBox_Container.TabIndex = 0;
+            comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            comboBox1.DropDownWidth = 150;
+            comboBox1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox1.IntegralHeight = false;
+            comboBox1.ItemHeight = 20;
+            comboBox1.Items.AddRange(new object[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
+            comboBox1.Location = new Point(441, 278);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(150, 28);
+            comboBox1.TabIndex = 5;
+            comboBox1.Text = " Month";
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            button1.BackColor = Color.Transparent;
+            button1.FlatAppearance.BorderColor = Color.FromArgb(209, 211, 212);
+            button1.FlatAppearance.BorderSize = 3;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.Location = new Point(800, 24);
+            button1.Name = "button1";
+            button1.Size = new Size(150, 34);
+            button1.TabIndex = 4;
+            button1.Text = "Print Sales Report";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // ChartContainer
+            // 
+            ChartContainer.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            ChartContainer.ColumnCount = 1;
+            ChartContainer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            ChartContainer.Controls.Add(chart1, 0, 0);
+            ChartContainer.Location = new Point(3, 340);
+            ChartContainer.Name = "ChartContainer";
+            ChartContainer.RowCount = 1;
+            ChartContainer.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            ChartContainer.Size = new Size(972, 350);
+            ChartContainer.TabIndex = 3;
+            // 
+            // chart1
+            // 
+            chart1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            chart1.BorderlineWidth = 0;
+            chartArea1.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea1);
+            chart1.Location = new Point(3, 28);
+            chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.IsVisibleInLegend = false;
+            series1.Name = "Series1";
+            chart1.Series.Add(series1);
+            chart1.Size = new Size(966, 294);
+            chart1.TabIndex = 0;
+            chart1.Text = "chart1";
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel2.ColumnCount = 4;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.Controls.Add(Total_Pay_CardBox, 2, 0);
+            tableLayoutPanel2.Controls.Add(Total_Tax_CardBox, 1, 0);
+            tableLayoutPanel2.Location = new Point(3, 160);
+            tableLayoutPanel2.Margin = new Padding(0);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.Size = new Size(972, 80);
+            tableLayoutPanel2.TabIndex = 2;
             // 
             // Total_Pay_CardBox
             // 
+            Total_Pay_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Total_Pay_CardBox.AutoSize = true;
             Total_Pay_CardBox.BackColor = Color.FromArgb(0, 148, 68);
             Total_Pay_CardBox.Controls.Add(T_Pay_Amount_label);
             Total_Pay_CardBox.Controls.Add(TPay_line);
             Total_Pay_CardBox.Controls.Add(Total_Pay_label);
-            Total_Pay_CardBox.Location = new Point(4, 7);
-            Total_Pay_CardBox.Margin = new Padding(0);
+            Total_Pay_CardBox.Location = new Point(491, 5);
+            Total_Pay_CardBox.Margin = new Padding(5, 5, 5, 0);
             Total_Pay_CardBox.Name = "Total_Pay_CardBox";
-            Total_Pay_CardBox.Size = new Size(228, 84);
+            Total_Pay_CardBox.Size = new Size(233, 75);
             Total_Pay_CardBox.TabIndex = 4;
             // 
             // T_Pay_Amount_label
             // 
+            T_Pay_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             T_Pay_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             T_Pay_Amount_label.ForeColor = Color.White;
-            T_Pay_Amount_label.Location = new Point(3, 45);
+            T_Pay_Amount_label.Location = new Point(3, 42);
             T_Pay_Amount_label.Margin = new Padding(0);
             T_Pay_Amount_label.Name = "T_Pay_Amount_label";
             T_Pay_Amount_label.Size = new Size(225, 30);
@@ -372,10 +451,11 @@
             // 
             // TPay_line
             // 
+            TPay_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             TPay_line.BackColor = Color.White;
             TPay_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TPay_line.ForeColor = Color.White;
-            TPay_line.Location = new Point(10, 40);
+            TPay_line.Location = new Point(10, 37);
             TPay_line.Name = "TPay_line";
             TPay_line.Size = new Size(210, 1);
             TPay_line.TabIndex = 1;
@@ -383,9 +463,10 @@
             // 
             // Total_Pay_label
             // 
+            Total_Pay_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             Total_Pay_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Total_Pay_label.ForeColor = Color.White;
-            Total_Pay_label.Location = new Point(0, 5);
+            Total_Pay_label.Location = new Point(0, 2);
             Total_Pay_label.Margin = new Padding(0);
             Total_Pay_label.Name = "Total_Pay_label";
             Total_Pay_label.Size = new Size(225, 30);
@@ -395,22 +476,24 @@
             // 
             // Total_Tax_CardBox
             // 
+            Total_Tax_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Total_Tax_CardBox.AutoSize = true;
             Total_Tax_CardBox.BackColor = Color.FromArgb(102, 45, 145);
             Total_Tax_CardBox.Controls.Add(T_Tax_Amout_label);
             Total_Tax_CardBox.Controls.Add(TT_line);
             Total_Tax_CardBox.Controls.Add(Total_Tax_label);
-            Total_Tax_CardBox.Location = new Point(34, 70);
-            Total_Tax_CardBox.Margin = new Padding(0);
+            Total_Tax_CardBox.Location = new Point(248, 5);
+            Total_Tax_CardBox.Margin = new Padding(5, 5, 5, 0);
             Total_Tax_CardBox.Name = "Total_Tax_CardBox";
-            Total_Tax_CardBox.Size = new Size(228, 84);
+            Total_Tax_CardBox.Size = new Size(233, 75);
             Total_Tax_CardBox.TabIndex = 3;
             // 
             // T_Tax_Amout_label
             // 
+            T_Tax_Amout_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             T_Tax_Amout_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             T_Tax_Amout_label.ForeColor = Color.White;
-            T_Tax_Amout_label.Location = new Point(3, 45);
+            T_Tax_Amout_label.Location = new Point(3, 46);
             T_Tax_Amout_label.Margin = new Padding(0);
             T_Tax_Amout_label.Name = "T_Tax_Amout_label";
             T_Tax_Amout_label.Size = new Size(225, 30);
@@ -420,6 +503,7 @@
             // 
             // TT_line
             // 
+            TT_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             TT_line.BackColor = Color.White;
             TT_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TT_line.ForeColor = Color.White;
@@ -431,9 +515,10 @@
             // 
             // Total_Tax_label
             // 
+            Total_Tax_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             Total_Tax_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Total_Tax_label.ForeColor = Color.White;
-            Total_Tax_label.Location = new Point(0, 5);
+            Total_Tax_label.Location = new Point(0, 4);
             Total_Tax_label.Margin = new Padding(0);
             Total_Tax_label.Name = "Total_Tax_label";
             Total_Tax_label.Size = new Size(225, 30);
@@ -441,21 +526,44 @@
             Total_Tax_label.Text = "Total Tax Amount";
             Total_Tax_label.TextAlign = ContentAlignment.TopCenter;
             // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.ColumnCount = 4;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.Controls.Add(Total_Profit_CardBox, 3, 0);
+            tableLayoutPanel1.Controls.Add(Total_Disc_CardBox, 2, 0);
+            tableLayoutPanel1.Controls.Add(Total_Cost_CardBox, 1, 0);
+            tableLayoutPanel1.Controls.Add(Total_Sale_CardBox, 0, 0);
+            tableLayoutPanel1.Location = new Point(3, 75);
+            tableLayoutPanel1.Margin = new Padding(0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.Size = new Size(972, 80);
+            tableLayoutPanel1.TabIndex = 1;
+            // 
             // Total_Profit_CardBox
             // 
+            Total_Profit_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Total_Profit_CardBox.AutoSize = true;
             Total_Profit_CardBox.BackColor = Color.FromArgb(243, 156, 18);
             Total_Profit_CardBox.Controls.Add(T_Profit_Amount_label);
             Total_Profit_CardBox.Controls.Add(TP_line);
             Total_Profit_CardBox.Controls.Add(Total_Profit_label);
-            Total_Profit_CardBox.Location = new Point(251, 28);
-            Total_Profit_CardBox.Margin = new Padding(0);
+            Total_Profit_CardBox.Location = new Point(734, 0);
+            Total_Profit_CardBox.Margin = new Padding(5, 0, 5, 0);
             Total_Profit_CardBox.Name = "Total_Profit_CardBox";
-            Total_Profit_CardBox.Size = new Size(230, 84);
+            Total_Profit_CardBox.Size = new Size(233, 80);
             Total_Profit_CardBox.TabIndex = 3;
             // 
             // T_Profit_Amount_label
             // 
+            T_Profit_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             T_Profit_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             T_Profit_Amount_label.ForeColor = Color.White;
             T_Profit_Amount_label.Location = new Point(3, 45);
@@ -468,6 +576,7 @@
             // 
             // TP_line
             // 
+            TP_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             TP_line.BackColor = Color.White;
             TP_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TP_line.ForeColor = Color.White;
@@ -479,6 +588,7 @@
             // 
             // Total_Profit_label
             // 
+            Total_Profit_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             Total_Profit_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Total_Profit_label.ForeColor = Color.White;
             Total_Profit_label.Location = new Point(0, 5);
@@ -490,19 +600,21 @@
             // 
             // Total_Disc_CardBox
             // 
+            Total_Disc_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Total_Disc_CardBox.AutoSize = true;
             Total_Disc_CardBox.BackColor = Color.FromArgb(231, 76, 60);
             Total_Disc_CardBox.Controls.Add(T_Disc_Amount_label);
             Total_Disc_CardBox.Controls.Add(TD_line);
             Total_Disc_CardBox.Controls.Add(Total_Disc_label);
-            Total_Disc_CardBox.Location = new Point(18, 28);
-            Total_Disc_CardBox.Margin = new Padding(0);
+            Total_Disc_CardBox.Location = new Point(491, 0);
+            Total_Disc_CardBox.Margin = new Padding(5, 0, 5, 0);
             Total_Disc_CardBox.Name = "Total_Disc_CardBox";
-            Total_Disc_CardBox.Size = new Size(230, 84);
+            Total_Disc_CardBox.Size = new Size(233, 80);
             Total_Disc_CardBox.TabIndex = 2;
             // 
             // T_Disc_Amount_label
             // 
+            T_Disc_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             T_Disc_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             T_Disc_Amount_label.ForeColor = Color.White;
             T_Disc_Amount_label.Location = new Point(3, 45);
@@ -515,6 +627,7 @@
             // 
             // TD_line
             // 
+            TD_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             TD_line.BackColor = Color.White;
             TD_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TD_line.ForeColor = Color.White;
@@ -526,6 +639,7 @@
             // 
             // Total_Disc_label
             // 
+            Total_Disc_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             Total_Disc_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Total_Disc_label.ForeColor = Color.White;
             Total_Disc_label.Location = new Point(0, 5);
@@ -538,20 +652,22 @@
             // 
             // Total_Cost_CardBox
             // 
+            Total_Cost_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Total_Cost_CardBox.AutoSize = true;
             Total_Cost_CardBox.BackColor = Color.FromArgb(3, 169, 244);
             Total_Cost_CardBox.Controls.Add(T_Cost_Amount_label);
             Total_Cost_CardBox.Controls.Add(TC_line);
             Total_Cost_CardBox.Controls.Add(Total_Cost_label);
             Total_Cost_CardBox.ForeColor = Color.White;
-            Total_Cost_CardBox.Location = new Point(34, 28);
-            Total_Cost_CardBox.Margin = new Padding(0);
+            Total_Cost_CardBox.Location = new Point(248, 0);
+            Total_Cost_CardBox.Margin = new Padding(5, 0, 5, 0);
             Total_Cost_CardBox.Name = "Total_Cost_CardBox";
-            Total_Cost_CardBox.Size = new Size(228, 84);
+            Total_Cost_CardBox.Size = new Size(233, 80);
             Total_Cost_CardBox.TabIndex = 1;
             // 
             // T_Cost_Amount_label
             // 
+            T_Cost_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             T_Cost_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             T_Cost_Amount_label.ForeColor = Color.White;
             T_Cost_Amount_label.Location = new Point(3, 45);
@@ -564,6 +680,7 @@
             // 
             // TC_line
             // 
+            TC_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             TC_line.BackColor = Color.White;
             TC_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TC_line.ForeColor = Color.White;
@@ -575,6 +692,7 @@
             // 
             // Total_Cost_label
             // 
+            Total_Cost_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             Total_Cost_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Total_Cost_label.ForeColor = Color.White;
             Total_Cost_label.Location = new Point(0, 5);
@@ -586,21 +704,22 @@
             // 
             // Total_Sale_CardBox
             // 
-            Total_Sale_CardBox.AutoSize = true;
+            Total_Sale_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             Total_Sale_CardBox.BackColor = Color.FromArgb(46, 52, 80);
             Total_Sale_CardBox.Controls.Add(T_Sale_Amount_label);
             Total_Sale_CardBox.Controls.Add(TS_line);
             Total_Sale_CardBox.Controls.Add(Total_Sale_label);
             Total_Sale_CardBox.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
             Total_Sale_CardBox.ForeColor = Color.White;
-            Total_Sale_CardBox.Location = new Point(10, 28);
-            Total_Sale_CardBox.Margin = new Padding(0);
+            Total_Sale_CardBox.Location = new Point(10, 0);
+            Total_Sale_CardBox.Margin = new Padding(10, 0, 5, 0);
             Total_Sale_CardBox.Name = "Total_Sale_CardBox";
-            Total_Sale_CardBox.Size = new Size(228, 84);
+            Total_Sale_CardBox.Size = new Size(228, 80);
             Total_Sale_CardBox.TabIndex = 0;
             // 
             // T_Sale_Amount_label
             // 
+            T_Sale_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             T_Sale_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             T_Sale_Amount_label.ForeColor = Color.White;
             T_Sale_Amount_label.Location = new Point(3, 45);
@@ -613,6 +732,7 @@
             // 
             // TS_line
             // 
+            TS_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             TS_line.BackColor = Color.White;
             TS_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TS_line.ForeColor = Color.White;
@@ -624,6 +744,7 @@
             // 
             // Total_Sale_label
             // 
+            Total_Sale_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             Total_Sale_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Total_Sale_label.Location = new Point(0, 5);
             Total_Sale_label.Name = "Total_Sale_label";
@@ -636,10 +757,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 662);
+            ClientSize = new Size(1284, 811);
             Controls.Add(Main_panel);
+            DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MdiChildrenMinimizedAnchorBottom = false;
             Name = "Dashboard";
-            Text = "S";
+            Text = "POS";
             WindowState = FormWindowState.Maximized;
             Load += Dashboard_Load;
             Main_panel.ResumeLayout(false);
@@ -647,10 +772,14 @@
             ScreenContainer_panel.ResumeLayout(false);
             ScreenContainer_panel.PerformLayout();
             ContentContainer_panel.ResumeLayout(false);
-            CardBox_Container.ResumeLayout(false);
-            CardBox_Container.PerformLayout();
+            ChartContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
             Total_Pay_CardBox.ResumeLayout(false);
             Total_Tax_CardBox.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             Total_Profit_CardBox.ResumeLayout(false);
             Total_Disc_CardBox.ResumeLayout(false);
             Total_Cost_CardBox.ResumeLayout(false);
@@ -677,7 +806,6 @@
         private Panel ScreenContainer_panel;
         private Label Logo;
         private Label LogoText;
-        private Panel CardBox_Container;
         private Panel Total_Sale_CardBox;
         private Label Total_Sale_label;
         private Panel Total_Disc_CardBox;
@@ -702,5 +830,11 @@
         private Label T_Cost_Amount_label;
         private Label T_Disc_Amount_label;
         private Label T_Profit_Amount_label;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel ChartContainer;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private Button button1;
+        private ComboBox comboBox1;
     }
 }
