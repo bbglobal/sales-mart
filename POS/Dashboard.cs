@@ -386,7 +386,20 @@ namespace POS
 
         #endregion
 
-        #region Label Click Event Functions
+
+        #region Card Box Positions Functions
+        private void Set_CardBox_Positions()
+        {
+            Total_Cost_CardBox.Location = new Point(Total_Sale_CardBox.Location.X + 240, Total_Cost_CardBox.Location.Y);
+            Total_Disc_CardBox.Location = new Point(Total_Cost_CardBox.Location.X + 240, Total_Disc_CardBox.Location.Y);
+            Total_Profit_CardBox.Location = new Point(Total_Disc_CardBox.Location.X + 240, Total_Profit_CardBox.Location.Y);
+            Total_Tax_CardBox.Location = new Point(Total_Cost_CardBox.Location.X, Total_Cost_CardBox.Location.Y + 100);
+            Total_Pay_CardBox.Location = new Point(Total_Disc_CardBox.Location.X, Total_Disc_CardBox.Location.Y + 100);
+        }
+        #endregion
+
+        #region Sidebar Labels Click Event Functions
+
         private void Logo_Click(object sender, EventArgs e)
         {
             if (Sidebar_panel.Width == 266)
@@ -422,33 +435,19 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
-
+            if (ContentContainer_panel.Visible == false)
+            {
+                ContentContainer_panel.Visible = true;
+                ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
         }
-        private void Menu_Staff_label_Click(object sender, EventArgs e)
-        {
-            SetLabelColor(Menu_Staff_label, "#0077C3");
-            Menu_Products_label.BackColor = Color.Transparent;
-            Menu_Tables_label.BackColor = Color.Transparent;
-            Menu_Dashboard_label.BackColor = Color.Transparent;
-            Menu_POS_label.BackColor = Color.Transparent;
-            Menu_Kitchen_label.BackColor = Color.Transparent;
-            Menu_Reports_label.BackColor = Color.Transparent;
-            Menu_Settings_label.BackColor = Color.Transparent;
-        }
-        #endregion
 
-        #region Card Box Positions Functions
-        private void Set_CardBox_Positions()
-        {
-            Total_Cost_CardBox.Location = new Point(Total_Sale_CardBox.Location.X + 240, Total_Cost_CardBox.Location.Y);
-            Total_Disc_CardBox.Location = new Point(Total_Cost_CardBox.Location.X + 240, Total_Disc_CardBox.Location.Y);
-            Total_Profit_CardBox.Location = new Point(Total_Disc_CardBox.Location.X + 240, Total_Profit_CardBox.Location.Y);
-            Total_Tax_CardBox.Location = new Point(Total_Cost_CardBox.Location.X, Total_Cost_CardBox.Location.Y + 100);
-            Total_Pay_CardBox.Location = new Point(Total_Disc_CardBox.Location.X, Total_Disc_CardBox.Location.Y + 100);
-        }
-        #endregion
-
-        #region Sidebar Labels Click Event Functions
         private void Menu_Products_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Products_label, "#0077C3");
@@ -459,6 +458,17 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            if (ProductPanel.Visible == false)
+            {
+                ProductPanel.Visible = true;
+                ContentContainer_panel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
         }
 
         private void Menu_Tables_label_Click(object sender, EventArgs e)
@@ -480,6 +490,17 @@ namespace POS
             Menu_Tables_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+        }
+        private void Menu_Staff_label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Staff_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
@@ -524,7 +545,7 @@ namespace POS
 
         #region Chart Create Function
 
-        private void InitiateChart() 
+        private void InitiateChart()
         {
 
             string[] monthLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
@@ -562,7 +583,7 @@ namespace POS
 
             var areaSeries = new Series();
             areaSeries.ChartType = SeriesChartType.SplineArea;
-            areaSeries.Points.DataBindXY(xValues, originalYValues); 
+            areaSeries.Points.DataBindXY(xValues, originalYValues);
             areaSeries.BackGradientStyle = GradientStyle.TopBottom;
             areaSeries.Color = Color.FromArgb(73, 162, 215);
             chart1.Series.Insert(0, areaSeries);
@@ -604,5 +625,8 @@ namespace POS
 
 
         #endregion
+
+
+        
     }
 }

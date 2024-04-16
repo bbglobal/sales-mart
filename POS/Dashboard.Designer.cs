@@ -47,6 +47,13 @@
             CurrentUser_label = new Label();
             Current_ScreenName_label = new Label();
             Splitter_label = new Label();
+            ProductPanel = new Panel();
+            ProductButtonsLayout = new TableLayoutPanel();
+            button2 = new Button();
+            comboBox2 = new ComboBox();
+            panel1 = new Panel();
+            textBox1 = new TextBox();
+            button3 = new Button();
             ContentContainer_panel = new Panel();
             comboBox1 = new ComboBox();
             button1 = new Button();
@@ -81,6 +88,9 @@
             Main_panel.SuspendLayout();
             Sidebar_panel.SuspendLayout();
             ScreenContainer_panel.SuspendLayout();
+            ProductPanel.SuspendLayout();
+            ProductButtonsLayout.SuspendLayout();
+            panel1.SuspendLayout();
             ContentContainer_panel.SuspendLayout();
             ChartContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
@@ -288,6 +298,7 @@
             ScreenContainer_panel.Controls.Add(CurrentUser_label);
             ScreenContainer_panel.Controls.Add(Current_ScreenName_label);
             ScreenContainer_panel.Controls.Add(Splitter_label);
+            ScreenContainer_panel.Controls.Add(ProductPanel);
             ScreenContainer_panel.Controls.Add(ContentContainer_panel);
             ScreenContainer_panel.Location = new Point(264, 3);
             ScreenContainer_panel.Name = "ScreenContainer_panel";
@@ -330,6 +341,91 @@
             Splitter_label.Name = "Splitter_label";
             Splitter_label.Size = new Size(1017, 1);
             Splitter_label.TabIndex = 5;
+            // 
+            // ProductPanel
+            // 
+            ProductPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ProductPanel.Controls.Add(ProductButtonsLayout);
+            ProductPanel.Location = new Point(21, 95);
+            ProductPanel.Name = "ProductPanel";
+            ProductPanel.Size = new Size(978, 701);
+            ProductPanel.TabIndex = 6;
+            ProductPanel.Visible = false;
+            // 
+            // ProductButtonsLayout
+            // 
+            ProductButtonsLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            ProductButtonsLayout.ColumnCount = 4;
+            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            ProductButtonsLayout.Controls.Add(button2, 0, 0);
+            ProductButtonsLayout.Controls.Add(comboBox2, 2, 0);
+            ProductButtonsLayout.Controls.Add(panel1, 3, 0);
+            ProductButtonsLayout.Location = new Point(3, 75);
+            ProductButtonsLayout.Name = "ProductButtonsLayout";
+            ProductButtonsLayout.RowCount = 1;
+            ProductButtonsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            ProductButtonsLayout.Size = new Size(972, 100);
+            ProductButtonsLayout.TabIndex = 0;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(37, 150, 190);
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Image = (Image)resources.GetObject("button2.Image");
+            button2.Location = new Point(15, 15);
+            button2.Margin = new Padding(15, 15, 3, 3);
+            button2.Name = "button2";
+            button2.Size = new Size(40, 40);
+            button2.TabIndex = 0;
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // comboBox2
+            // 
+            comboBox2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox2.Location = new Point(598, 25);
+            comboBox2.Margin = new Padding(15, 25, 3, 3);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(79, 29);
+            comboBox2.TabIndex = 1;
+            comboBox2.Text = "100";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(button3);
+            panel1.Location = new Point(680, 0);
+            panel1.Margin = new Padding(0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(292, 100);
+            panel1.TabIndex = 4;
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.Location = new Point(22, 25);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Search..";
+            textBox1.Size = new Size(150, 29);
+            textBox1.TabIndex = 0;
+            textBox1.WordWrap = false;
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.White;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Image = (Image)resources.GetObject("button3.Image");
+            button3.Location = new Point(169, 25);
+            button3.Name = "button3";
+            button3.Size = new Size(29, 29);
+            button3.TabIndex = 3;
+            button3.UseVisualStyleBackColor = false;
             // 
             // ContentContainer_panel
             // 
@@ -771,6 +867,10 @@
             Sidebar_panel.ResumeLayout(false);
             ScreenContainer_panel.ResumeLayout(false);
             ScreenContainer_panel.PerformLayout();
+            ProductPanel.ResumeLayout(false);
+            ProductButtonsLayout.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ContentContainer_panel.ResumeLayout(false);
             ChartContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
@@ -836,5 +936,12 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private Button button1;
         private ComboBox comboBox1;
+        private Panel ProductPanel;
+        private TableLayoutPanel ProductButtonsLayout;
+        private Button button2;
+        private ComboBox comboBox2;
+        private Button button3;
+        private Panel panel1;
+        private TextBox textBox1;
     }
 }
