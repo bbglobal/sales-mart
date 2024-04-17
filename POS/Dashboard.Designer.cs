@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             Main_panel = new Panel();
@@ -48,6 +52,7 @@
             Current_ScreenName_label = new Label();
             Splitter_label = new Label();
             ProductPanel = new Panel();
+            ProductsDataGrid = new DataGridView();
             ProductButtonsLayout = new TableLayoutPanel();
             button2 = new Button();
             comboBox2 = new ComboBox();
@@ -89,6 +94,7 @@
             Sidebar_panel.SuspendLayout();
             ScreenContainer_panel.SuspendLayout();
             ProductPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ProductsDataGrid).BeginInit();
             ProductButtonsLayout.SuspendLayout();
             panel1.SuspendLayout();
             ContentContainer_panel.SuspendLayout();
@@ -345,12 +351,70 @@
             // ProductPanel
             // 
             ProductPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ProductPanel.BackColor = Color.White;
+            ProductPanel.Controls.Add(ProductsDataGrid);
             ProductPanel.Controls.Add(ProductButtonsLayout);
             ProductPanel.Location = new Point(21, 95);
             ProductPanel.Name = "ProductPanel";
             ProductPanel.Size = new Size(978, 701);
             ProductPanel.TabIndex = 6;
             ProductPanel.Visible = false;
+            // 
+            // ProductsDataGrid
+            // 
+            ProductsDataGrid.AllowUserToAddRows = false;
+            ProductsDataGrid.AllowUserToDeleteRows = false;
+            ProductsDataGrid.AllowUserToResizeColumns = false;
+            ProductsDataGrid.AllowUserToResizeRows = false;
+            ProductsDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ProductsDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ProductsDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            ProductsDataGrid.BackgroundColor = Color.White;
+            ProductsDataGrid.BorderStyle = BorderStyle.None;
+            ProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            ProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            ProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            ProductsDataGrid.Location = new Point(3, 121);
+            ProductsDataGrid.Margin = new Padding(0);
+            ProductsDataGrid.Name = "ProductsDataGrid";
+            ProductsDataGrid.ReadOnly = true;
+            ProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new Padding(3);
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            ProductsDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle4.Padding = new Padding(3);
+            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            ProductsDataGrid.ScrollBars = ScrollBars.Horizontal;
+            ProductsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            ProductsDataGrid.Size = new Size(972, 570);
+            ProductsDataGrid.TabIndex = 1;
+            ProductsDataGrid.CellContentClick += ProductsDataGrid_CellContentClick;
+            ProductsDataGrid.CellMouseEnter += ProductsDataGrid_CellMouseEnter;
+            ProductsDataGrid.CellMouseLeave += ProductsDataGrid_CellMouseLeave;
+            ProductsDataGrid.VisibleChanged += ProductsDataGrid_VisibleChanged;
             // 
             // ProductButtonsLayout
             // 
@@ -363,11 +427,11 @@
             ProductButtonsLayout.Controls.Add(button2, 0, 0);
             ProductButtonsLayout.Controls.Add(comboBox2, 2, 0);
             ProductButtonsLayout.Controls.Add(panel1, 3, 0);
-            ProductButtonsLayout.Location = new Point(3, 75);
+            ProductButtonsLayout.Location = new Point(3, 37);
             ProductButtonsLayout.Name = "ProductButtonsLayout";
             ProductButtonsLayout.RowCount = 1;
             ProductButtonsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            ProductButtonsLayout.Size = new Size(972, 100);
+            ProductButtonsLayout.Size = new Size(972, 80);
             ProductButtonsLayout.TabIndex = 0;
             // 
             // button2
@@ -382,6 +446,7 @@
             button2.Size = new Size(40, 40);
             button2.TabIndex = 0;
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // comboBox2
             // 
@@ -402,7 +467,7 @@
             panel1.Location = new Point(680, 0);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(292, 100);
+            panel1.Size = new Size(292, 80);
             panel1.TabIndex = 4;
             // 
             // textBox1
@@ -858,16 +923,15 @@
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
-            MdiChildrenMinimizedAnchorBottom = false;
             Name = "Dashboard";
             Text = "POS";
-            WindowState = FormWindowState.Maximized;
             Load += Dashboard_Load;
             Main_panel.ResumeLayout(false);
             Sidebar_panel.ResumeLayout(false);
             ScreenContainer_panel.ResumeLayout(false);
             ScreenContainer_panel.PerformLayout();
             ProductPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ProductsDataGrid).EndInit();
             ProductButtonsLayout.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -943,5 +1007,6 @@
         private Button button3;
         private Panel panel1;
         private TextBox textBox1;
+        private DataGridView ProductsDataGrid;
     }
 }

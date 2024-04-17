@@ -10,10 +10,14 @@
 
   <ItemGroup>
     <None Remove="MyriadProSemibold.ttf" />
+    <None Remove="Resources\delete.png" />
+    <None Remove="Resources\edit.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="MyriadProSemibold.ttf" />
+    <EmbeddedResource Include="Resources\delete.png" />
+    <EmbeddedResource Include="Resources\edit.png" />
   </ItemGroup>
 
   <ItemGroup>

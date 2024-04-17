@@ -1,13 +1,17 @@
 ﻿using POS.Properties;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,12 +54,19 @@ namespace POS
         private const int AnimationDuration = 600; // Duration of the animation in milliseconds
         private const int PanelAnimationDuration = 100; // Duration of the animation in milliseconds
         private DateTime animationStartTime;
+        private SqlConnection connection;
+        private SqlCommand command;
+        private DataGridView WorkingDataGridView;
+        Image EditImage;
+        Image DeleteImage;
 
         #endregion
         public Dashboard()
         {
             InitializeComponent();
-
+            AdjustFormSize();
+            InitializeDatabaseConnection();
+            ImageEditDelLoad();
             #region Calling Image Resize and Rounded Corner,Timer & Font Functions 
             InitializeLabel(Menu_Dashboard_label, (Image)resources.GetObject("Menu_Dashboard_label.Image"), 25, 25);
             InitializeLabel(Menu_Products_label, (Image)resources.GetObject("Menu_Products_label.Image"), 25, 25);
@@ -79,6 +90,28 @@ namespace POS
             LoadCustomFont("POS.MyriadProSemibold.ttf");
             #endregion
         }
+
+
+        private void AdjustFormSize()
+        {
+            var screenBounds = Screen.PrimaryScreen.Bounds;
+
+            // Get the working area (excluding taskbars)
+            var workingArea = Screen.PrimaryScreen.WorkingArea;
+
+            // Calculate the taskbar height
+            int taskbarHeight = screenBounds.Height - workingArea.Height;
+
+            // Set form size to match the screen size excluding taskbar
+            this.Width = screenBounds.Width;
+            this.Height = screenBounds.Height - taskbarHeight;
+
+            // Set form location to top-left corner
+            //this.Location = new Point(0, 0);
+            this.StartPosition = FormStartPosition.CenterScreen;
+        }
+
+
 
         #region Setting Label Fonts, Locations, Colors & Rounding Corners Functions
 
@@ -627,6 +660,212 @@ namespace POS
         #endregion
 
 
-        
+
+        #region DatabaseInitialization
+
+        private void InitializeDatabaseConnection()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+            connection = new SqlConnection(connectionString);
+        }
+
+        #endregion
+
+
+        #region LoadDataGridViews Functions
+        private void LoadDataAsync(DataGridView myDataGrid, string query)
+        {
+            command = new SqlCommand(query, connection);
+            WorkingDataGridView = myDataGrid;
+            try
+            {
+                connection.Open();
+                command.BeginExecuteReader(OnReaderComplete, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void OnReaderComplete(IAsyncResult result)
+        {
+            try
+            {
+                using (SqlDataReader reader = command.EndExecuteReader(result))
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable.Load(reader);
+
+                    // Update UI on the main UI thread
+                    BeginInvoke(new Action(() =>
+                    {
+                        WorkingDataGridView.DataSource = dataTable;
+                        SetColumnHeaderText(WorkingDataGridView);
+                        DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
+                        {
+                            HeaderText = "Edit",
+                            Image = ResizeImage((Image)EditImage, 15, 15),
+                            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                        };
+                        WorkingDataGridView.Columns.Add(EditBtn);
+
+                        DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
+                        {
+                            HeaderText = "Delete",
+                            Image = ResizeImage((Image)DeleteImage, 15, 15),
+                            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                        };
+                        WorkingDataGridView.Columns.Add(DelBtn);
+                    }));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        #endregion 
+
+
+        private void ProductsDataGrid_VisibleChanged(object sender, EventArgs e)
+        {
+
+            ProductsDataGrid.DataSource = null;
+            ProductsDataGrid.Columns.Clear();
+
+
+            if (ProductsDataGrid.Visible == true)
+            {
+
+                string query = "select * from products";
+                LoadDataAsync(ProductsDataGrid, query);
+            }
+        }
+
+
+        private void SetColumnHeaderText(DataGridView dataGridView)
+        {
+            if (dataGridView == ProductsDataGrid)
+            {
+                dataGridView.Columns["id"].HeaderText = "SR#";
+                dataGridView.Columns["product_name"].HeaderText = "Product Name";
+                dataGridView.Columns["category"].HeaderText = "Category";
+                dataGridView.Columns["status"].HeaderText = "Status";
+            }
+        }
+
+
+        #region Loading Edit and Delete Icons
+        private void ImageEditDelLoad()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            string resourceName = "POS.Resources.edit.png";
+            string resourceName1 = "POS.Resources.delete.png";
+
+            using (Stream imageStream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (imageStream != null)
+                {
+                    Image image = Image.FromStream(imageStream);
+                    EditImage = image;
+                }
+                else
+                {
+                    MessageBox.Show("Error: Could not load Edit image resource.");
+                }
+            }
+
+            using (Stream imageStream = assembly.GetManifestResourceStream(resourceName1))
+            {
+                if (imageStream != null)
+                {
+                    Image image = Image.FromStream(imageStream);
+                    DeleteImage = image;
+                }
+                else
+                {
+                    MessageBox.Show("Error: Could not load Edit image resource.");
+                }
+            }
+        }
+
+        #endregion
+
+        private void ProductsDataGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < ProductsDataGrid.Rows.Count)
+            {
+                ProductsDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(247, 247, 247);
+            }
+        }
+
+        private void ProductsDataGrid_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < ProductsDataGrid.Rows.Count)
+            {
+                ProductsDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = ProductsDataGrid.DefaultCellStyle.BackColor;
+            }
+        }
+
+        private void ProductsDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+
+                }
+
+                else if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+                    if (MessageBox.Show("Are you sure you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "products", e.RowIndex);
+                    }
+                }
+
+            }
+        }
+
+        private void DeleteRowFromDatabase(int primaryKeyValue, string TableName, int rowIndex)
+        {
+            string query = $"DELETE FROM {TableName} WHERE id = @PrimaryKeyValue";
+            using (SqlCommand delcommand = new SqlCommand(query, connection))
+            {
+                delcommand.Parameters.AddWithValue("@PrimaryKeyValue", primaryKeyValue);
+
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = delcommand.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        ProductsDataGrid.Rows.RemoveAt(rowIndex);
+                        MessageBox.Show("Deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error deleting row from database: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ProductsForm productsForm = new ProductsForm();
+            productsForm.ShowDialog();
+        }
     }
 }
+
