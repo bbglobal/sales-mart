@@ -58,7 +58,7 @@
             comboBox2 = new ComboBox();
             panel1 = new Panel();
             textBox1 = new TextBox();
-            button3 = new Button();
+            search_button = new Button();
             ContentContainer_panel = new Panel();
             comboBox1 = new ComboBox();
             button1 = new Button();
@@ -409,7 +409,7 @@
             ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
             ProductsDataGrid.ScrollBars = ScrollBars.Horizontal;
             ProductsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            ProductsDataGrid.Size = new Size(972, 570);
+            ProductsDataGrid.Size = new Size(970, 570);
             ProductsDataGrid.TabIndex = 1;
             ProductsDataGrid.CellContentClick += ProductsDataGrid_CellContentClick;
             ProductsDataGrid.CellMouseEnter += ProductsDataGrid_CellMouseEnter;
@@ -459,11 +459,12 @@
             comboBox2.Size = new Size(79, 29);
             comboBox2.TabIndex = 1;
             comboBox2.Text = "100";
+            comboBox2.Visible = false;
             // 
             // panel1
             // 
             panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(button3);
+            panel1.Controls.Add(search_button);
             panel1.Location = new Point(680, 0);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
@@ -480,17 +481,19 @@
             textBox1.Size = new Size(150, 29);
             textBox1.TabIndex = 0;
             textBox1.WordWrap = false;
+            textBox1.KeyPress += textBox1_KeyPress;
+            textBox1.KeyUp += textBox1_KeyUp;
             // 
-            // button3
+            // search_button
             // 
-            button3.BackColor = Color.White;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Image = (Image)resources.GetObject("button3.Image");
-            button3.Location = new Point(169, 25);
-            button3.Name = "button3";
-            button3.Size = new Size(29, 29);
-            button3.TabIndex = 3;
-            button3.UseVisualStyleBackColor = false;
+            search_button.BackColor = Color.White;
+            search_button.FlatStyle = FlatStyle.Flat;
+            search_button.Image = (Image)resources.GetObject("search_button.Image");
+            search_button.Location = new Point(169, 25);
+            search_button.Name = "search_button";
+            search_button.Size = new Size(29, 29);
+            search_button.TabIndex = 3;
+            search_button.UseVisualStyleBackColor = false;
             // 
             // ContentContainer_panel
             // 
@@ -1004,7 +1007,7 @@
         private TableLayoutPanel ProductButtonsLayout;
         private Button button2;
         private ComboBox comboBox2;
-        private Button button3;
+        private Button search_button;
         private Panel panel1;
         private TextBox textBox1;
         private DataGridView ProductsDataGrid;

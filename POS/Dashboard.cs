@@ -468,6 +468,7 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Dashboard";
             if (ContentContainer_panel.Visible == false)
             {
                 ContentContainer_panel.Visible = true;
@@ -491,6 +492,7 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Products/Restaurant";
             if (ProductPanel.Visible == false)
             {
                 ProductPanel.Visible = true;
@@ -673,14 +675,57 @@ namespace POS
 
 
         #region LoadDataGridViews Functions
-        private void LoadDataAsync(DataGridView myDataGrid, string query)
+        private void LoadDataAsync(DataGridView myDataGrid, string query, string method)
         {
             command = new SqlCommand(query, connection);
             WorkingDataGridView = myDataGrid;
+            WorkingDataGridView.DataSource = null;
+            WorkingDataGridView.Columns.Clear();
             try
             {
                 connection.Open();
-                command.BeginExecuteReader(OnReaderComplete, null);
+                if (method == "Async")
+                {
+                    command.BeginExecuteReader(OnReaderComplete, null);
+                }
+                else
+                {
+                    try
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            WorkingDataGridView.DataSource = dataTable;
+                            SetColumnHeaderText(WorkingDataGridView);
+                            DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
+                            {
+                                HeaderText = "Edit",
+                                Image = ResizeImage((Image)EditImage, 15, 15),
+                                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                            };
+                            WorkingDataGridView.Columns.Add(EditBtn);
+
+                            DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
+                            {
+                                HeaderText = "Delete",
+                                Image = ResizeImage((Image)DeleteImage, 15, 15),
+                                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                            };
+                            WorkingDataGridView.Columns.Add(DelBtn);
+                        }
+                    }
+
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -696,7 +741,8 @@ namespace POS
                 {
                     DataTable dataTable = new DataTable();
                     dataTable.Load(reader);
-
+                    //WorkingDataGridView.DataSource = null;
+                    //WorkingDataGridView.Columns.Clear();
                     // Update UI on the main UI thread
                     BeginInvoke(new Action(() =>
                     {
@@ -717,6 +763,7 @@ namespace POS
                             AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         };
                         WorkingDataGridView.Columns.Add(DelBtn);
+
                     }));
                 }
             }
@@ -736,15 +783,14 @@ namespace POS
         private void ProductsDataGrid_VisibleChanged(object sender, EventArgs e)
         {
 
-            ProductsDataGrid.DataSource = null;
-            ProductsDataGrid.Columns.Clear();
+
 
 
             if (ProductsDataGrid.Visible == true)
             {
 
                 string query = "select * from products";
-                LoadDataAsync(ProductsDataGrid, query);
+                LoadDataAsync(ProductsDataGrid, query, "Async");
             }
         }
 
@@ -819,6 +865,9 @@ namespace POS
             {
                 if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
                 {
+                    ProductsForm productsForm = new ProductsForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                    productsForm.ShowDialog();
+                    LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
 
                 }
 
@@ -865,6 +914,19 @@ namespace POS
         {
             ProductsForm productsForm = new ProductsForm();
             productsForm.ShowDialog();
+            LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //string query = $"select * from products where product_name like '%{textBox1.Text}%' OR status like '%{textBox1.Text}%' ";
+            //LoadDataAsync(ProductsDataGrid,query, "Sync");
+        }
+
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            string query = $"select * from products where product_name like '%{textBox1.Text}%' OR status like '%{textBox1.Text}%' ";
+            LoadDataAsync(ProductsDataGrid, query, "Sync");
         }
     }
 }
