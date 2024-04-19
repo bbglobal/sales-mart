@@ -1,17 +1,22 @@
 ﻿using POS.Properties;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace POS
 {
@@ -49,12 +54,19 @@ namespace POS
         private const int AnimationDuration = 600; // Duration of the animation in milliseconds
         private const int PanelAnimationDuration = 100; // Duration of the animation in milliseconds
         private DateTime animationStartTime;
+        private SqlConnection connection;
+        private SqlCommand command;
+        private DataGridView WorkingDataGridView;
+        Image EditImage;
+        Image DeleteImage;
 
         #endregion
         public Dashboard()
         {
             InitializeComponent();
-
+            AdjustFormSize();
+            InitializeDatabaseConnection();
+            ImageEditDelLoad();
             #region Calling Image Resize and Rounded Corner,Timer & Font Functions 
             InitializeLabel(Menu_Dashboard_label, (Image)resources.GetObject("Menu_Dashboard_label.Image"), 25, 25);
             InitializeLabel(Menu_Products_label, (Image)resources.GetObject("Menu_Products_label.Image"), 25, 25);
@@ -78,6 +90,28 @@ namespace POS
             LoadCustomFont("POS.MyriadProSemibold.ttf");
             #endregion
         }
+
+
+        private void AdjustFormSize()
+        {
+            var screenBounds = Screen.PrimaryScreen.Bounds;
+
+            // Get the working area (excluding taskbars)
+            var workingArea = Screen.PrimaryScreen.WorkingArea;
+
+            // Calculate the taskbar height
+            int taskbarHeight = screenBounds.Height - workingArea.Height;
+
+            // Set form size to match the screen size excluding taskbar
+            this.Width = screenBounds.Width;
+            this.Height = screenBounds.Height - taskbarHeight;
+
+            // Set form location to top-left corner
+            //this.Location = new Point(0, 0);
+            this.StartPosition = FormStartPosition.CenterScreen;
+        }
+
+
 
         #region Setting Label Fonts, Locations, Colors & Rounding Corners Functions
 
@@ -380,11 +414,25 @@ namespace POS
             Menu_Kitchen_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
             Menu_Reports_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
             Menu_Settings_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            InitiateChart();
         }
 
         #endregion
 
-        #region Label Click Event Functions
+
+        #region Card Box Positions Functions
+        private void Set_CardBox_Positions()
+        {
+            Total_Cost_CardBox.Location = new Point(Total_Sale_CardBox.Location.X + 240, Total_Cost_CardBox.Location.Y);
+            Total_Disc_CardBox.Location = new Point(Total_Cost_CardBox.Location.X + 240, Total_Disc_CardBox.Location.Y);
+            Total_Profit_CardBox.Location = new Point(Total_Disc_CardBox.Location.X + 240, Total_Profit_CardBox.Location.Y);
+            Total_Tax_CardBox.Location = new Point(Total_Cost_CardBox.Location.X, Total_Cost_CardBox.Location.Y + 100);
+            Total_Pay_CardBox.Location = new Point(Total_Disc_CardBox.Location.X, Total_Disc_CardBox.Location.Y + 100);
+        }
+        #endregion
+
+        #region Sidebar Labels Click Event Functions
+
         private void Logo_Click(object sender, EventArgs e)
         {
             if (Sidebar_panel.Width == 266)
@@ -420,33 +468,20 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
-
+            Current_ScreenName_label.Text = "Dashboard";
+            if (ContentContainer_panel.Visible == false)
+            {
+                ContentContainer_panel.Visible = true;
+                ProductPanel.Visible = false;
+                StaffPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
         }
-        private void Menu_Staff_label_Click(object sender, EventArgs e)
-        {
-            SetLabelColor(Menu_Staff_label, "#0077C3");
-            Menu_Products_label.BackColor = Color.Transparent;
-            Menu_Tables_label.BackColor = Color.Transparent;
-            Menu_Dashboard_label.BackColor = Color.Transparent;
-            Menu_POS_label.BackColor = Color.Transparent;
-            Menu_Kitchen_label.BackColor = Color.Transparent;
-            Menu_Reports_label.BackColor = Color.Transparent;
-            Menu_Settings_label.BackColor = Color.Transparent;
-        }
-        #endregion
 
-        #region Card Box Positions Functions
-        private void Set_CardBox_Positions()
-        {
-            Total_Cost_CardBox.Location = new Point(Total_Sale_CardBox.Location.X + 240, Total_Cost_CardBox.Location.Y);
-            Total_Disc_CardBox.Location = new Point(Total_Cost_CardBox.Location.X + 240, Total_Disc_CardBox.Location.Y);
-            Total_Profit_CardBox.Location = new Point(Total_Disc_CardBox.Location.X + 240, Total_Profit_CardBox.Location.Y);
-            Total_Tax_CardBox.Location = new Point(Total_Cost_CardBox.Location.X, Total_Cost_CardBox.Location.Y + 100);
-            Total_Pay_CardBox.Location = new Point(Total_Disc_CardBox.Location.X, Total_Disc_CardBox.Location.Y + 100);
-        }
-        #endregion
-
-        #region Sidebar Labels Click Event Functions
         private void Menu_Products_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Products_label, "#0077C3");
@@ -457,6 +492,18 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Products/Restaurant";
+            if (ProductPanel.Visible == false)
+            {
+                ProductPanel.Visible = true;
+                ContentContainer_panel.Visible = false;
+                StaffPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
         }
 
         private void Menu_Tables_label_Click(object sender, EventArgs e)
@@ -481,6 +528,30 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+        }
+        private void Menu_Staff_label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Staff_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Staff";
+            if (StaffPanel.Visible == false)
+            {
+                StaffPanel.Visible = true;
+                ProductPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
         }
 
         private void Menu_Kitchen_label_Click(object sender, EventArgs e)
@@ -519,5 +590,490 @@ namespace POS
             Menu_Staff_label.BackColor = Color.Transparent;
         }
         #endregion
+
+        #region Chart Create Function
+
+        private void InitiateChart()
+        {
+
+            string[] monthLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+            double[] xValues = { 0, 2, 4, 6, 8, 9 };
+            double[] originalYValues = { 2, 4, 2, 6, 2, 10 };
+
+            var series = new Series();
+            series.ChartType = SeriesChartType.Spline;
+            series.Color = Color.FromArgb(161, 74, 222);
+
+            for (int i = 0; i < xValues.Length; i++)
+            {
+                series.Points.AddXY(xValues[i], originalYValues[i]);
+                series.Points[i].MarkerSize = 5;
+                series.Points[i].MarkerColor = Color.White;
+                series.Points[i].Tag = i;
+            }
+            chart1.Series.Add(series);
+
+
+            //chart1.ChartAreas[0].AxisY.Title = "Y-axis Label";
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisY.Minimum = 0;
+
+            chart1.ChartAreas[0].AxisX.Maximum = xValues[xValues.Length - 1];
+            chart1.ChartAreas[0].AxisY.Maximum = originalYValues.Max() + 1;
+            chart1.ChartAreas[0].AxisY.Interval = 1;
+            chart1.ChartAreas[0].AxisX.Interval = 1;
+            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+
+            //chart1.ChartAreas[0].AxisX.Title = "Month";
+            chart1.ChartAreas[0].AxisX.CustomLabels.Clear();
+
+
+            var areaSeries = new Series();
+            areaSeries.ChartType = SeriesChartType.SplineArea;
+            areaSeries.Points.DataBindXY(xValues, originalYValues);
+            areaSeries.BackGradientStyle = GradientStyle.TopBottom;
+            areaSeries.Color = Color.FromArgb(73, 162, 215);
+            chart1.Series.Insert(0, areaSeries);
+
+
+            for (int i = 0; i < monthLabels.Length; i++)
+            {
+                chart1.ChartAreas[0].AxisX.CustomLabels.Add((double)(i + 1), (double)i, monthLabels[((int)i)]);
+            }
+
+
+            for (int i = 0; i < chart1.ChartAreas[0].AxisX.CustomLabels.Count - 1; i++)
+            {
+                if (i == 0)
+                {
+                    double intervalStart = i == 0 ? chart1.ChartAreas[0].AxisX.Minimum : chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+                    double intervalEnd = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+
+                    StripLine stripLine = new StripLine();
+                    stripLine.IntervalOffset = intervalStart;
+                    stripLine.StripWidth = intervalEnd - intervalStart;
+                    stripLine.BackColor = Color.FromArgb(249, 249, 249);
+                    chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
+                }
+
+                else
+                {
+                    StripLine stripLine = new StripLine();
+                    stripLine.IntervalOffset = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+                    stripLine.StripWidth = chart1.ChartAreas[0].AxisX.CustomLabels[i + 1].FromPosition - chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+                    stripLine.BackColor = (i % 2 != 0) ? Color.FromArgb(249, 249, 249) : Color.White; // Set color based on index
+                    chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
+                }
+            }
+
+
+        }
+
+
+
+        #endregion
+
+
+
+        #region DatabaseInitialization
+
+        private void InitializeDatabaseConnection()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+            connection = new SqlConnection(connectionString);
+        }
+
+        #endregion
+
+
+        #region LoadDataGridViews Functions
+        private void LoadDataAsync(DataGridView myDataGrid, string query, string method)
+        {
+            command = new SqlCommand(query, connection);
+            WorkingDataGridView = myDataGrid;
+            WorkingDataGridView.DataSource = null;
+            WorkingDataGridView.Columns.Clear();
+            try
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+                if (method == "Async")
+                {
+                    command.BeginExecuteReader(OnReaderComplete, null);
+                }
+                else
+                {
+                    try
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
+                            {
+                                HeaderText = "SR#",
+                                ValueType = typeof(string),
+
+                            };
+                            WorkingDataGridView.Columns.Insert(0, SR);
+
+
+                            WorkingDataGridView.DataSource = dataTable;
+                            SetColumnHeaderText(WorkingDataGridView);
+                            DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
+                            {
+                                HeaderText = "Edit",
+                                Image = ResizeImage((Image)EditImage, 15, 15),
+                                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                            };
+                            WorkingDataGridView.Columns.Add(EditBtn);
+
+                            DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
+                            {
+                                HeaderText = "Delete",
+                                Image = ResizeImage((Image)DeleteImage, 15, 15),
+                                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                            };
+                            WorkingDataGridView.Columns.Add(DelBtn);
+                            for (int i = 0; i < dataTable.Rows.Count; i++)
+                            {
+                                WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
+                            }
+                        }
+                    }
+
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void OnReaderComplete(IAsyncResult result)
+        {
+            try
+            {
+                using (SqlDataReader reader = command.EndExecuteReader(result))
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable.Load(reader);
+
+                    BeginInvoke(new Action(() =>
+                    {
+                        DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
+                        {
+                            HeaderText = "SR#",
+                            ValueType = typeof(string),
+
+                        };
+                        WorkingDataGridView.Columns.Insert(0, SR);
+                        WorkingDataGridView.DataSource = dataTable;
+                        SetColumnHeaderText(WorkingDataGridView);
+                        DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
+                        {
+                            HeaderText = "Edit",
+                            Image = ResizeImage((Image)EditImage, 15, 15),
+                            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                        };
+                        WorkingDataGridView.Columns.Add(EditBtn);
+
+                        DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
+                        {
+                            HeaderText = "Delete",
+                            Image = ResizeImage((Image)DeleteImage, 15, 15),
+                            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                        };
+                        WorkingDataGridView.Columns.Add(DelBtn);
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
+                        {
+                            WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
+                        }
+                    }));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        #endregion 
+
+
+        private void ProductsDataGrid_VisibleChanged(object sender, EventArgs e)
+        {
+
+            if (ProductsDataGrid.Visible == true)
+            {
+
+                string query = "select * from products";
+                LoadDataAsync(ProductsDataGrid, query, "Async");
+            }
+        }
+
+
+        private void SetColumnHeaderText(DataGridView dataGridView)
+        {
+            if (dataGridView == ProductsDataGrid)
+            {
+
+                dataGridView.Columns["or_image"].Visible = false;
+                dataGridView.Columns["id"].Visible = false;
+
+                dataGridView.Columns["product_name"].HeaderText = "Product Name";
+                dataGridView.Columns["category"].HeaderText = "Category";
+                dataGridView.Columns["status"].HeaderText = "Status";
+                dataGridView.Columns["image"].HeaderText = "Image";
+            }
+
+            else if (dataGridView == StaffDataGrid)
+            {
+
+                dataGridView.Columns["id"].Visible = false;
+
+                dataGridView.Columns["staff_name"].HeaderText = "Staff Name";
+                dataGridView.Columns["type"].HeaderText = "Type";
+                dataGridView.Columns["phone_number"].HeaderText = "Phone";
+                dataGridView.Columns["address"].HeaderText = "Address";
+                dataGridView.Columns["status"].HeaderText = "Status";
+            }
+        }
+
+
+        #region Loading Edit and Delete Icons
+        private void ImageEditDelLoad()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            string resourceName = "POS.Resources.edit.png";
+            string resourceName1 = "POS.Resources.delete.png";
+
+            using (Stream imageStream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (imageStream != null)
+                {
+                    Image image = Image.FromStream(imageStream);
+                    EditImage = image;
+                }
+                else
+                {
+                    MessageBox.Show("Error: Could not load Edit image resource.");
+                }
+            }
+
+            using (Stream imageStream = assembly.GetManifestResourceStream(resourceName1))
+            {
+                if (imageStream != null)
+                {
+                    Image image = Image.FromStream(imageStream);
+                    DeleteImage = image;
+                }
+                else
+                {
+                    MessageBox.Show("Error: Could not load Edit image resource.");
+                }
+            }
+        }
+
+        #endregion
+
+        private void ProductsDataGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < ProductsDataGrid.Rows.Count)
+            {
+                ProductsDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(247, 247, 247);
+            }
+        }
+
+        private void ProductsDataGrid_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < ProductsDataGrid.Rows.Count)
+            {
+                ProductsDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = ProductsDataGrid.DefaultCellStyle.BackColor;
+            }
+        }
+
+        private void ProductsDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+                    ProductsForm productsForm = new ProductsForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                    productsForm.ShowDialog();
+                    LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
+
+                }
+
+                else if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+                    if (MessageBox.Show("Are you sure you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "products", ProductsDataGrid, e.RowIndex);
+                    }
+                }
+
+            }
+        }
+
+        private void DeleteRowFromDatabase(int primaryKeyValue, string TableName, DataGridView dataGridView, int rowIndex)
+        {
+            string query = $"DELETE FROM {TableName} WHERE id = @PrimaryKeyValue";
+            using (SqlCommand delcommand = new SqlCommand(query, connection))
+            {
+                delcommand.Parameters.AddWithValue("@PrimaryKeyValue", primaryKeyValue);
+
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = delcommand.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        //dataGridView.Rows.RemoveAt(rowIndex);
+                        LoadDataAsync(dataGridView, $"select * from {TableName}", "Sync");
+                        MessageBox.Show("Deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error deleting row from database: " + ex.Message);
+                }
+                finally
+                {
+
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ProductsForm productsForm = new ProductsForm();
+            productsForm.ShowDialog();
+            LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //string query = $"select * from products where product_name like '%{textBox1.Text}%' OR status like '%{textBox1.Text}%' ";
+            //LoadDataAsync(ProductsDataGrid,query, "Sync");
+        }
+
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            string query = $"select * from products where product_name like '%{textBox1.Text}%' OR status like '%{textBox1.Text}%' ";
+            LoadDataAsync(ProductsDataGrid, query, "Sync");
+        }
+
+
+        private void StaffCategoryTab_Click(object sender, EventArgs e)
+        {
+            StaffCategoryTab.BackColor = Color.FromArgb(37, 150, 190);
+            StaffCategoryTab.ForeColor = Color.White;
+            StaffTab.BackColor = Color.Transparent;
+            StaffTab.ForeColor = SystemColors.GrayText;
+
+        }
+
+        private void StaffTab_Click(object sender, EventArgs e)
+        {
+            StaffTab.BackColor = Color.FromArgb(37, 150, 190);
+            StaffTab.ForeColor = Color.White;
+            StaffCategoryTab.BackColor = Color.Transparent;
+            StaffCategoryTab.ForeColor = SystemColors.GrayText;
+        }
+
+        private void StaffPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (StaffPanel.Visible == true)
+            {
+                if (StaffTab.BackColor == Color.FromArgb(37, 150, 190))
+                {
+                    string query = "select * from staff_details";
+                    LoadDataAsync(StaffDataGrid, query, "Async");
+                }
+
+                else
+                {
+                    string query = "select * from staff_category";
+                    LoadDataAsync(StaffDataGrid, query, "Async");
+                }
+            }
+        }
+
+        private void AddStaffButton_Click(object sender, EventArgs e)
+        {
+            if (StaffTab.BackColor == Color.FromArgb(37, 150, 190))
+            {
+                StaffForm staffForm = new StaffForm();
+                staffForm.ShowDialog();
+                LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
+            }
+
+            else
+            {
+                //string query = "select * from staff_category";
+                //LoadDataAsync(StaffDataGrid, query, "Async");
+            }
+        }
+
+        private void StaffDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (StaffDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+                    StaffForm staffForm = new StaffForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                    staffForm.ShowDialog();
+                    LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
+
+                }
+
+                else if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+                    if (MessageBox.Show("Are you sure you want to delete this staff detail?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        DeleteRowFromDatabase(Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value), "staff_details", StaffDataGrid, e.RowIndex);
+                    }
+                }
+
+            }
+        }
+
+        private void StaffDataGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < StaffDataGrid.Rows.Count)
+            {
+                StaffDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(247, 247, 247);
+            }
+        }
+
+        private void StaffDataGrid_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < StaffDataGrid.Rows.Count)
+            {
+                StaffDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = ProductsDataGrid.DefaultCellStyle.BackColor;
+            }
+        }
     }
 }
+

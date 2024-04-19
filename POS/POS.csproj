@@ -10,17 +10,28 @@
 
   <ItemGroup>
     <None Remove="MyriadProSemibold.ttf" />
+    <None Remove="Resources\delete.png" />
+    <None Remove="Resources\edit.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="MyriadProSemibold.ttf" />
+    <EmbeddedResource Include="Resources\delete.png" />
+    <EmbeddedResource Include="Resources\edit.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="WinForms.DataVisualization" Version="1.9.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="StaffCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="StaffForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
