@@ -473,7 +473,7 @@ namespace POS
             {
                 ContentContainer_panel.Visible = true;
                 ProductPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                StaffPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -497,7 +497,7 @@ namespace POS
             {
                 ProductPanel.Visible = true;
                 ContentContainer_panel.Visible = false;
-                //ProductPanel.Visible = false;
+                StaffPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -539,6 +539,19 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Staff";
+            if (StaffPanel.Visible == false)
+            {
+                StaffPanel.Visible = true;
+                ProductPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
         }
 
         private void Menu_Kitchen_label_Click(object sender, EventArgs e)
@@ -683,7 +696,10 @@ namespace POS
             WorkingDataGridView.Columns.Clear();
             try
             {
-                connection.Open();
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
                 if (method == "Async")
                 {
                     command.BeginExecuteReader(OnReaderComplete, null);
@@ -696,6 +712,15 @@ namespace POS
                         {
                             DataTable dataTable = new DataTable();
                             dataTable.Load(reader);
+                            DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
+                            {
+                                HeaderText = "SR#",
+                                ValueType = typeof(string),
+
+                            };
+                            WorkingDataGridView.Columns.Insert(0, SR);
+
+
                             WorkingDataGridView.DataSource = dataTable;
                             SetColumnHeaderText(WorkingDataGridView);
                             DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
@@ -713,6 +738,10 @@ namespace POS
                                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                             };
                             WorkingDataGridView.Columns.Add(DelBtn);
+                            for (int i = 0; i < dataTable.Rows.Count; i++)
+                            {
+                                WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
+                            }
                         }
                     }
 
@@ -741,11 +770,16 @@ namespace POS
                 {
                     DataTable dataTable = new DataTable();
                     dataTable.Load(reader);
-                    //WorkingDataGridView.DataSource = null;
-                    //WorkingDataGridView.Columns.Clear();
-                    // Update UI on the main UI thread
+
                     BeginInvoke(new Action(() =>
                     {
+                        DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
+                        {
+                            HeaderText = "SR#",
+                            ValueType = typeof(string),
+
+                        };
+                        WorkingDataGridView.Columns.Insert(0, SR);
                         WorkingDataGridView.DataSource = dataTable;
                         SetColumnHeaderText(WorkingDataGridView);
                         DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
@@ -763,7 +797,10 @@ namespace POS
                             AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         };
                         WorkingDataGridView.Columns.Add(DelBtn);
-
+                        for (int i = 0; i < dataTable.Rows.Count; i++)
+                        {
+                            WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
+                        }
                     }));
                 }
             }
@@ -783,9 +820,6 @@ namespace POS
         private void ProductsDataGrid_VisibleChanged(object sender, EventArgs e)
         {
 
-
-
-
             if (ProductsDataGrid.Visible == true)
             {
 
@@ -799,9 +833,25 @@ namespace POS
         {
             if (dataGridView == ProductsDataGrid)
             {
-                dataGridView.Columns["id"].HeaderText = "SR#";
+
+                dataGridView.Columns["or_image"].Visible = false;
+                dataGridView.Columns["id"].Visible = false;
+
                 dataGridView.Columns["product_name"].HeaderText = "Product Name";
                 dataGridView.Columns["category"].HeaderText = "Category";
+                dataGridView.Columns["status"].HeaderText = "Status";
+                dataGridView.Columns["image"].HeaderText = "Image";
+            }
+
+            else if (dataGridView == StaffDataGrid)
+            {
+
+                dataGridView.Columns["id"].Visible = false;
+
+                dataGridView.Columns["staff_name"].HeaderText = "Staff Name";
+                dataGridView.Columns["type"].HeaderText = "Type";
+                dataGridView.Columns["phone_number"].HeaderText = "Phone";
+                dataGridView.Columns["address"].HeaderText = "Address";
                 dataGridView.Columns["status"].HeaderText = "Status";
             }
         }
@@ -875,14 +925,14 @@ namespace POS
                 {
                     if (MessageBox.Show("Are you sure you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "products", e.RowIndex);
+                        DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "products", ProductsDataGrid, e.RowIndex);
                     }
                 }
 
             }
         }
 
-        private void DeleteRowFromDatabase(int primaryKeyValue, string TableName, int rowIndex)
+        private void DeleteRowFromDatabase(int primaryKeyValue, string TableName, DataGridView dataGridView, int rowIndex)
         {
             string query = $"DELETE FROM {TableName} WHERE id = @PrimaryKeyValue";
             using (SqlCommand delcommand = new SqlCommand(query, connection))
@@ -895,7 +945,8 @@ namespace POS
                     int rowsAffected = delcommand.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
-                        ProductsDataGrid.Rows.RemoveAt(rowIndex);
+                        //dataGridView.Rows.RemoveAt(rowIndex);
+                        LoadDataAsync(dataGridView, $"select * from {TableName}", "Sync");
                         MessageBox.Show("Deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
@@ -905,7 +956,11 @@ namespace POS
                 }
                 finally
                 {
-                    connection.Close();
+
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
                 }
             }
         }
@@ -927,6 +982,97 @@ namespace POS
         {
             string query = $"select * from products where product_name like '%{textBox1.Text}%' OR status like '%{textBox1.Text}%' ";
             LoadDataAsync(ProductsDataGrid, query, "Sync");
+        }
+
+
+        private void StaffCategoryTab_Click(object sender, EventArgs e)
+        {
+            StaffCategoryTab.BackColor = Color.FromArgb(37, 150, 190);
+            StaffCategoryTab.ForeColor = Color.White;
+            StaffTab.BackColor = Color.Transparent;
+            StaffTab.ForeColor = SystemColors.GrayText;
+
+        }
+
+        private void StaffTab_Click(object sender, EventArgs e)
+        {
+            StaffTab.BackColor = Color.FromArgb(37, 150, 190);
+            StaffTab.ForeColor = Color.White;
+            StaffCategoryTab.BackColor = Color.Transparent;
+            StaffCategoryTab.ForeColor = SystemColors.GrayText;
+        }
+
+        private void StaffPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (StaffPanel.Visible == true)
+            {
+                if (StaffTab.BackColor == Color.FromArgb(37, 150, 190))
+                {
+                    string query = "select * from staff_details";
+                    LoadDataAsync(StaffDataGrid, query, "Async");
+                }
+
+                else
+                {
+                    string query = "select * from staff_category";
+                    LoadDataAsync(StaffDataGrid, query, "Async");
+                }
+            }
+        }
+
+        private void AddStaffButton_Click(object sender, EventArgs e)
+        {
+            if (StaffTab.BackColor == Color.FromArgb(37, 150, 190))
+            {
+                StaffForm staffForm = new StaffForm();
+                staffForm.ShowDialog();
+                LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
+            }
+
+            else
+            {
+                //string query = "select * from staff_category";
+                //LoadDataAsync(StaffDataGrid, query, "Async");
+            }
+        }
+
+        private void StaffDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (StaffDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+                    StaffForm staffForm = new StaffForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                    staffForm.ShowDialog();
+                    LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
+
+                }
+
+                else if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+                    if (MessageBox.Show("Are you sure you want to delete this staff detail?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        DeleteRowFromDatabase(Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value), "staff_details", StaffDataGrid, e.RowIndex);
+                    }
+                }
+
+            }
+        }
+
+        private void StaffDataGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < StaffDataGrid.Rows.Count)
+            {
+                StaffDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(247, 247, 247);
+            }
+        }
+
+        private void StaffDataGrid_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < StaffDataGrid.Rows.Count)
+            {
+                StaffDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = ProductsDataGrid.DefaultCellStyle.BackColor;
+            }
         }
     }
 }

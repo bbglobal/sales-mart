@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace POS
 {
-    public partial class ProductsForm : Form
+    public partial class StaffCategoryForm : Form
     {
         private int rowIndex;
         SqlConnection connection;
         SqlCommand command;
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductsForm));
-        public ProductsForm(int rowIndex = -1)
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
+        public StaffCategoryForm(int rowIndex = -1)
         {
 
             InitializeComponent();

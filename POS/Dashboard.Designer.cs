@@ -33,6 +33,10 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             Main_panel = new Panel();
@@ -48,23 +52,33 @@
             Menu_Products_label = new Label();
             Menu_Dashboard_label = new Label();
             ScreenContainer_panel = new Panel();
+            StaffPanel = new Panel();
+            StaffCategoryTab = new Button();
+            StaffTab = new Button();
+            StaffDataGrid = new DataGridView();
+            StaffButtonsPanel = new TableLayoutPanel();
+            AddStaffButton = new Button();
+            comboBox1 = new ComboBox();
+            panel3 = new Panel();
+            SearchStaff_TextBox = new TextBox();
+            SearchStaffIcon = new Button();
             CurrentUser_label = new Label();
             Current_ScreenName_label = new Label();
             Splitter_label = new Label();
             ProductPanel = new Panel();
             ProductsDataGrid = new DataGridView();
             ProductButtonsLayout = new TableLayoutPanel();
-            button2 = new Button();
+            AddProductsButton = new Button();
             comboBox2 = new ComboBox();
             panel1 = new Panel();
             textBox1 = new TextBox();
             search_button = new Button();
             ContentContainer_panel = new Panel();
-            comboBox1 = new ComboBox();
-            button1 = new Button();
+            Month_ComboBox = new ComboBox();
+            PrintButton = new Button();
             ChartContainer = new TableLayoutPanel();
             chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            tableLayoutPanel2 = new TableLayoutPanel();
+            CardBoxes2_TabPanel = new TableLayoutPanel();
             Total_Pay_CardBox = new Panel();
             T_Pay_Amount_label = new Label();
             TPay_line = new Label();
@@ -73,7 +87,7 @@
             T_Tax_Amout_label = new Label();
             TT_line = new Label();
             Total_Tax_label = new Label();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            CardBoxes1_TabPanel = new TableLayoutPanel();
             Total_Profit_CardBox = new Panel();
             T_Profit_Amount_label = new Label();
             TP_line = new Label();
@@ -93,6 +107,10 @@
             Main_panel.SuspendLayout();
             Sidebar_panel.SuspendLayout();
             ScreenContainer_panel.SuspendLayout();
+            StaffPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)StaffDataGrid).BeginInit();
+            StaffButtonsPanel.SuspendLayout();
+            panel3.SuspendLayout();
             ProductPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ProductsDataGrid).BeginInit();
             ProductButtonsLayout.SuspendLayout();
@@ -100,10 +118,10 @@
             ContentContainer_panel.SuspendLayout();
             ChartContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
-            tableLayoutPanel2.SuspendLayout();
+            CardBoxes2_TabPanel.SuspendLayout();
             Total_Pay_CardBox.SuspendLayout();
             Total_Tax_CardBox.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
+            CardBoxes1_TabPanel.SuspendLayout();
             Total_Profit_CardBox.SuspendLayout();
             Total_Disc_CardBox.SuspendLayout();
             Total_Cost_CardBox.SuspendLayout();
@@ -301,6 +319,7 @@
             // ScreenContainer_panel
             // 
             ScreenContainer_panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ScreenContainer_panel.Controls.Add(StaffPanel);
             ScreenContainer_panel.Controls.Add(CurrentUser_label);
             ScreenContainer_panel.Controls.Add(Current_ScreenName_label);
             ScreenContainer_panel.Controls.Add(Splitter_label);
@@ -310,6 +329,184 @@
             ScreenContainer_panel.Name = "ScreenContainer_panel";
             ScreenContainer_panel.Size = new Size(1020, 812);
             ScreenContainer_panel.TabIndex = 0;
+            // 
+            // StaffPanel
+            // 
+            StaffPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            StaffPanel.BackColor = Color.White;
+            StaffPanel.Controls.Add(StaffCategoryTab);
+            StaffPanel.Controls.Add(StaffTab);
+            StaffPanel.Controls.Add(StaffDataGrid);
+            StaffPanel.Controls.Add(StaffButtonsPanel);
+            StaffPanel.Location = new Point(21, 95);
+            StaffPanel.Name = "StaffPanel";
+            StaffPanel.Size = new Size(978, 701);
+            StaffPanel.TabIndex = 7;
+            StaffPanel.Visible = false;
+            StaffPanel.VisibleChanged += StaffPanel_VisibleChanged;
+            // 
+            // StaffCategoryTab
+            // 
+            StaffCategoryTab.BackColor = Color.Transparent;
+            StaffCategoryTab.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            StaffCategoryTab.FlatAppearance.BorderSize = 2;
+            StaffCategoryTab.FlatStyle = FlatStyle.Flat;
+            StaffCategoryTab.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            StaffCategoryTab.ForeColor = SystemColors.GrayText;
+            StaffCategoryTab.Location = new Point(151, 24);
+            StaffCategoryTab.Name = "StaffCategoryTab";
+            StaffCategoryTab.Size = new Size(151, 40);
+            StaffCategoryTab.TabIndex = 3;
+            StaffCategoryTab.Text = "Staff Category";
+            StaffCategoryTab.UseVisualStyleBackColor = false;
+            StaffCategoryTab.Click += StaffCategoryTab_Click;
+            // 
+            // StaffTab
+            // 
+            StaffTab.BackColor = Color.FromArgb(37, 150, 190);
+            StaffTab.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            StaffTab.FlatAppearance.BorderSize = 2;
+            StaffTab.FlatStyle = FlatStyle.Flat;
+            StaffTab.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            StaffTab.ForeColor = Color.White;
+            StaffTab.Location = new Point(26, 24);
+            StaffTab.Name = "StaffTab";
+            StaffTab.Size = new Size(119, 40);
+            StaffTab.TabIndex = 2;
+            StaffTab.Text = "Staff";
+            StaffTab.UseVisualStyleBackColor = false;
+            StaffTab.Click += StaffTab_Click;
+            // 
+            // StaffDataGrid
+            // 
+            StaffDataGrid.AllowUserToAddRows = false;
+            StaffDataGrid.AllowUserToDeleteRows = false;
+            StaffDataGrid.AllowUserToResizeColumns = false;
+            StaffDataGrid.AllowUserToResizeRows = false;
+            StaffDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            StaffDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            StaffDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            StaffDataGrid.BackgroundColor = Color.White;
+            StaffDataGrid.BorderStyle = BorderStyle.None;
+            StaffDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            StaffDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            StaffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            StaffDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            StaffDataGrid.Location = new Point(3, 161);
+            StaffDataGrid.Margin = new Padding(0);
+            StaffDataGrid.Name = "StaffDataGrid";
+            StaffDataGrid.ReadOnly = true;
+            StaffDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new Padding(3);
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            StaffDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle4.Padding = new Padding(3);
+            StaffDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            StaffDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            StaffDataGrid.Size = new Size(970, 530);
+            StaffDataGrid.TabIndex = 1;
+            StaffDataGrid.CellContentClick += StaffDataGrid_CellContentClick;
+            StaffDataGrid.CellMouseEnter += StaffDataGrid_CellMouseEnter;
+            StaffDataGrid.CellMouseLeave += StaffDataGrid_CellMouseLeave;
+            // 
+            // StaffButtonsPanel
+            // 
+            StaffButtonsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            StaffButtonsPanel.ColumnCount = 4;
+            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            StaffButtonsPanel.Controls.Add(AddStaffButton, 0, 0);
+            StaffButtonsPanel.Controls.Add(comboBox1, 2, 0);
+            StaffButtonsPanel.Controls.Add(panel3, 3, 0);
+            StaffButtonsPanel.Location = new Point(3, 77);
+            StaffButtonsPanel.Name = "StaffButtonsPanel";
+            StaffButtonsPanel.RowCount = 1;
+            StaffButtonsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            StaffButtonsPanel.Size = new Size(972, 80);
+            StaffButtonsPanel.TabIndex = 0;
+            // 
+            // AddStaffButton
+            // 
+            AddStaffButton.BackColor = Color.FromArgb(37, 150, 190);
+            AddStaffButton.FlatAppearance.BorderSize = 0;
+            AddStaffButton.FlatStyle = FlatStyle.Flat;
+            AddStaffButton.Image = (Image)resources.GetObject("AddStaffButton.Image");
+            AddStaffButton.Location = new Point(15, 15);
+            AddStaffButton.Margin = new Padding(15, 15, 3, 3);
+            AddStaffButton.Name = "AddStaffButton";
+            AddStaffButton.Size = new Size(40, 40);
+            AddStaffButton.TabIndex = 0;
+            AddStaffButton.UseVisualStyleBackColor = false;
+            AddStaffButton.Click += AddStaffButton_Click;
+            // 
+            // comboBox1
+            // 
+            comboBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox1.Location = new Point(598, 25);
+            comboBox1.Margin = new Padding(15, 25, 3, 3);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(79, 29);
+            comboBox1.TabIndex = 1;
+            comboBox1.Text = "100";
+            comboBox1.Visible = false;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(SearchStaff_TextBox);
+            panel3.Controls.Add(SearchStaffIcon);
+            panel3.Location = new Point(680, 0);
+            panel3.Margin = new Padding(0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(292, 80);
+            panel3.TabIndex = 4;
+            // 
+            // SearchStaff_TextBox
+            // 
+            SearchStaff_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SearchStaff_TextBox.Location = new Point(33, 25);
+            SearchStaff_TextBox.Multiline = true;
+            SearchStaff_TextBox.Name = "SearchStaff_TextBox";
+            SearchStaff_TextBox.PlaceholderText = "Search..";
+            SearchStaff_TextBox.Size = new Size(150, 29);
+            SearchStaff_TextBox.TabIndex = 0;
+            SearchStaff_TextBox.WordWrap = false;
+            // 
+            // SearchStaffIcon
+            // 
+            SearchStaffIcon.BackColor = Color.White;
+            SearchStaffIcon.FlatStyle = FlatStyle.Flat;
+            SearchStaffIcon.Image = (Image)resources.GetObject("SearchStaffIcon.Image");
+            SearchStaffIcon.Location = new Point(5, 25);
+            SearchStaffIcon.Name = "SearchStaffIcon";
+            SearchStaffIcon.Size = new Size(29, 29);
+            SearchStaffIcon.TabIndex = 3;
+            SearchStaffIcon.UseVisualStyleBackColor = false;
             // 
             // CurrentUser_label
             // 
@@ -373,41 +570,40 @@
             ProductsDataGrid.BorderStyle = BorderStyle.None;
             ProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             ProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             ProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle6;
             ProductsDataGrid.Location = new Point(3, 121);
             ProductsDataGrid.Margin = new Padding(0);
             ProductsDataGrid.Name = "ProductsDataGrid";
             ProductsDataGrid.ReadOnly = true;
             ProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new Padding(3);
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = SystemColors.Control;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.Padding = new Padding(3);
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             ProductsDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Padding = new Padding(3);
-            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            ProductsDataGrid.ScrollBars = ScrollBars.Horizontal;
+            dataGridViewCellStyle8.Padding = new Padding(3);
+            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle8;
             ProductsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             ProductsDataGrid.Size = new Size(970, 570);
             ProductsDataGrid.TabIndex = 1;
@@ -424,7 +620,7 @@
             ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            ProductButtonsLayout.Controls.Add(button2, 0, 0);
+            ProductButtonsLayout.Controls.Add(AddProductsButton, 0, 0);
             ProductButtonsLayout.Controls.Add(comboBox2, 2, 0);
             ProductButtonsLayout.Controls.Add(panel1, 3, 0);
             ProductButtonsLayout.Location = new Point(3, 37);
@@ -434,19 +630,19 @@
             ProductButtonsLayout.Size = new Size(972, 80);
             ProductButtonsLayout.TabIndex = 0;
             // 
-            // button2
+            // AddProductsButton
             // 
-            button2.BackColor = Color.FromArgb(37, 150, 190);
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(15, 15);
-            button2.Margin = new Padding(15, 15, 3, 3);
-            button2.Name = "button2";
-            button2.Size = new Size(40, 40);
-            button2.TabIndex = 0;
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            AddProductsButton.BackColor = Color.FromArgb(37, 150, 190);
+            AddProductsButton.FlatAppearance.BorderSize = 0;
+            AddProductsButton.FlatStyle = FlatStyle.Flat;
+            AddProductsButton.Image = (Image)resources.GetObject("AddProductsButton.Image");
+            AddProductsButton.Location = new Point(15, 15);
+            AddProductsButton.Margin = new Padding(15, 15, 3, 3);
+            AddProductsButton.Name = "AddProductsButton";
+            AddProductsButton.Size = new Size(40, 40);
+            AddProductsButton.TabIndex = 0;
+            AddProductsButton.UseVisualStyleBackColor = false;
+            AddProductsButton.Click += button2_Click;
             // 
             // comboBox2
             // 
@@ -474,7 +670,7 @@
             // textBox1
             // 
             textBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(22, 25);
+            textBox1.Location = new Point(33, 25);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Search..";
@@ -489,7 +685,7 @@
             search_button.BackColor = Color.White;
             search_button.FlatStyle = FlatStyle.Flat;
             search_button.Image = (Image)resources.GetObject("search_button.Image");
-            search_button.Location = new Point(169, 25);
+            search_button.Location = new Point(5, 25);
             search_button.Name = "search_button";
             search_button.Size = new Size(29, 29);
             search_button.TabIndex = 3;
@@ -499,44 +695,44 @@
             // 
             ContentContainer_panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ContentContainer_panel.BackColor = Color.White;
-            ContentContainer_panel.Controls.Add(comboBox1);
-            ContentContainer_panel.Controls.Add(button1);
+            ContentContainer_panel.Controls.Add(Month_ComboBox);
+            ContentContainer_panel.Controls.Add(PrintButton);
             ContentContainer_panel.Controls.Add(ChartContainer);
-            ContentContainer_panel.Controls.Add(tableLayoutPanel2);
-            ContentContainer_panel.Controls.Add(tableLayoutPanel1);
+            ContentContainer_panel.Controls.Add(CardBoxes2_TabPanel);
+            ContentContainer_panel.Controls.Add(CardBoxes1_TabPanel);
             ContentContainer_panel.Location = new Point(21, 95);
             ContentContainer_panel.Name = "ContentContainer_panel";
             ContentContainer_panel.Size = new Size(978, 701);
             ContentContainer_panel.TabIndex = 4;
             // 
-            // comboBox1
+            // Month_ComboBox
             // 
-            comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            comboBox1.DropDownWidth = 150;
-            comboBox1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox1.IntegralHeight = false;
-            comboBox1.ItemHeight = 20;
-            comboBox1.Items.AddRange(new object[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
-            comboBox1.Location = new Point(441, 278);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(150, 28);
-            comboBox1.TabIndex = 5;
-            comboBox1.Text = " Month";
+            Month_ComboBox.Anchor = AnchorStyles.Top;
+            Month_ComboBox.DropDownWidth = 150;
+            Month_ComboBox.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Month_ComboBox.IntegralHeight = false;
+            Month_ComboBox.ItemHeight = 20;
+            Month_ComboBox.Items.AddRange(new object[] { "All", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
+            Month_ComboBox.Location = new Point(441, 290);
+            Month_ComboBox.Name = "Month_ComboBox";
+            Month_ComboBox.Size = new Size(150, 28);
+            Month_ComboBox.TabIndex = 5;
+            Month_ComboBox.Text = " Month";
             // 
-            // button1
+            // PrintButton
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            button1.BackColor = Color.Transparent;
-            button1.FlatAppearance.BorderColor = Color.FromArgb(209, 211, 212);
-            button1.FlatAppearance.BorderSize = 3;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(800, 24);
-            button1.Name = "button1";
-            button1.Size = new Size(150, 34);
-            button1.TabIndex = 4;
-            button1.Text = "Print Sales Report";
-            button1.UseVisualStyleBackColor = false;
+            PrintButton.Anchor = AnchorStyles.Top;
+            PrintButton.BackColor = Color.Transparent;
+            PrintButton.FlatAppearance.BorderColor = Color.FromArgb(209, 211, 212);
+            PrintButton.FlatAppearance.BorderSize = 3;
+            PrintButton.FlatStyle = FlatStyle.Flat;
+            PrintButton.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            PrintButton.Location = new Point(800, 24);
+            PrintButton.Name = "PrintButton";
+            PrintButton.Size = new Size(150, 34);
+            PrintButton.TabIndex = 4;
+            PrintButton.Text = "Print Sales Report";
+            PrintButton.UseVisualStyleBackColor = false;
             // 
             // ChartContainer
             // 
@@ -567,24 +763,24 @@
             chart1.TabIndex = 0;
             chart1.Text = "chart1";
             // 
-            // tableLayoutPanel2
+            // CardBoxes2_TabPanel
             // 
-            tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel2.ColumnCount = 4;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.Controls.Add(Total_Pay_CardBox, 2, 0);
-            tableLayoutPanel2.Controls.Add(Total_Tax_CardBox, 1, 0);
-            tableLayoutPanel2.Location = new Point(3, 160);
-            tableLayoutPanel2.Margin = new Padding(0);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel2.Size = new Size(972, 80);
-            tableLayoutPanel2.TabIndex = 2;
+            CardBoxes2_TabPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            CardBoxes2_TabPanel.ColumnCount = 4;
+            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes2_TabPanel.Controls.Add(Total_Pay_CardBox, 2, 0);
+            CardBoxes2_TabPanel.Controls.Add(Total_Tax_CardBox, 1, 0);
+            CardBoxes2_TabPanel.Location = new Point(3, 160);
+            CardBoxes2_TabPanel.Margin = new Padding(0);
+            CardBoxes2_TabPanel.Name = "CardBoxes2_TabPanel";
+            CardBoxes2_TabPanel.RowCount = 1;
+            CardBoxes2_TabPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            CardBoxes2_TabPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            CardBoxes2_TabPanel.Size = new Size(972, 80);
+            CardBoxes2_TabPanel.TabIndex = 2;
             // 
             // Total_Pay_CardBox
             // 
@@ -690,26 +886,26 @@
             Total_Tax_label.Text = "Total Tax Amount";
             Total_Tax_label.TextAlign = ContentAlignment.TopCenter;
             // 
-            // tableLayoutPanel1
+            // CardBoxes1_TabPanel
             // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel1.ColumnCount = 4;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.Controls.Add(Total_Profit_CardBox, 3, 0);
-            tableLayoutPanel1.Controls.Add(Total_Disc_CardBox, 2, 0);
-            tableLayoutPanel1.Controls.Add(Total_Cost_CardBox, 1, 0);
-            tableLayoutPanel1.Controls.Add(Total_Sale_CardBox, 0, 0);
-            tableLayoutPanel1.Location = new Point(3, 75);
-            tableLayoutPanel1.Margin = new Padding(0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(972, 80);
-            tableLayoutPanel1.TabIndex = 1;
+            CardBoxes1_TabPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            CardBoxes1_TabPanel.ColumnCount = 4;
+            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes1_TabPanel.Controls.Add(Total_Profit_CardBox, 3, 0);
+            CardBoxes1_TabPanel.Controls.Add(Total_Disc_CardBox, 2, 0);
+            CardBoxes1_TabPanel.Controls.Add(Total_Cost_CardBox, 1, 0);
+            CardBoxes1_TabPanel.Controls.Add(Total_Sale_CardBox, 0, 0);
+            CardBoxes1_TabPanel.Location = new Point(3, 75);
+            CardBoxes1_TabPanel.Margin = new Padding(0);
+            CardBoxes1_TabPanel.Name = "CardBoxes1_TabPanel";
+            CardBoxes1_TabPanel.RowCount = 1;
+            CardBoxes1_TabPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            CardBoxes1_TabPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            CardBoxes1_TabPanel.Size = new Size(972, 80);
+            CardBoxes1_TabPanel.TabIndex = 1;
             // 
             // Total_Profit_CardBox
             // 
@@ -933,6 +1129,11 @@
             Sidebar_panel.ResumeLayout(false);
             ScreenContainer_panel.ResumeLayout(false);
             ScreenContainer_panel.PerformLayout();
+            StaffPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)StaffDataGrid).EndInit();
+            StaffButtonsPanel.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ProductPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ProductsDataGrid).EndInit();
             ProductButtonsLayout.ResumeLayout(false);
@@ -941,12 +1142,12 @@
             ContentContainer_panel.ResumeLayout(false);
             ChartContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
-            tableLayoutPanel2.ResumeLayout(false);
-            tableLayoutPanel2.PerformLayout();
+            CardBoxes2_TabPanel.ResumeLayout(false);
+            CardBoxes2_TabPanel.PerformLayout();
             Total_Pay_CardBox.ResumeLayout(false);
             Total_Tax_CardBox.ResumeLayout(false);
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
+            CardBoxes1_TabPanel.ResumeLayout(false);
+            CardBoxes1_TabPanel.PerformLayout();
             Total_Profit_CardBox.ResumeLayout(false);
             Total_Disc_CardBox.ResumeLayout(false);
             Total_Cost_CardBox.ResumeLayout(false);
@@ -997,19 +1198,29 @@
         private Label T_Cost_Amount_label;
         private Label T_Disc_Amount_label;
         private Label T_Profit_Amount_label;
-        private TableLayoutPanel tableLayoutPanel1;
-        private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel CardBoxes1_TabPanel;
+        private TableLayoutPanel CardBoxes2_TabPanel;
         private TableLayoutPanel ChartContainer;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private Button button1;
-        private ComboBox comboBox1;
+        private Button PrintButton;
+        private ComboBox Month_ComboBox;
         private Panel ProductPanel;
         private TableLayoutPanel ProductButtonsLayout;
-        private Button button2;
+        private Button AddProductsButton;
         private ComboBox comboBox2;
         private Button search_button;
         private Panel panel1;
         private TextBox textBox1;
         private DataGridView ProductsDataGrid;
+        private Panel StaffPanel;
+        private DataGridView StaffDataGrid;
+        private TableLayoutPanel StaffButtonsPanel;
+        private Button AddStaffButton;
+        private ComboBox comboBox1;
+        private Panel panel3;
+        private TextBox SearchStaff_TextBox;
+        private Button SearchStaffIcon;
+        private Button StaffTab;
+        private Button StaffCategoryTab;
     }
 }
