@@ -435,27 +435,32 @@ namespace POS
 
         private void Logo_Click(object sender, EventArgs e)
         {
-            if (Sidebar_panel.Width == 266)
+            if (POSPanel.Visible != true)
             {
-                StartTransition(60, "Hide");
+                if (Sidebar_panel.Width == 266)
+                {
+                    StartTransition(60, "Hide");
+                }
+                else
+                {
+                    StartTransition(266, "Show");
+                }
             }
-            else
-            {
-                StartTransition(266, "Show");
-            }
-
 
         }
 
         private void LogoText_Click(object sender, EventArgs e)
         {
-            if (Sidebar_panel.Width == 266)
+            if (POSPanel.Visible != true)
             {
-                StartTransition(60, "Hide");
-            }
-            else
-            {
-                StartTransition(266, "Show");
+                if (Sidebar_panel.Width == 266)
+                {
+                    StartTransition(60, "Hide");
+                }
+                else
+                {
+                    StartTransition(266, "Show");
+                }
             }
         }
         private void Menu_Dashboard_label_Click_1(object sender, EventArgs e)
@@ -474,7 +479,7 @@ namespace POS
                 ContentContainer_panel.Visible = true;
                 ProductPanel.Visible = false;
                 StaffPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                POSPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -498,7 +503,7 @@ namespace POS
                 ProductPanel.Visible = true;
                 ContentContainer_panel.Visible = false;
                 StaffPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                POSPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -518,6 +523,7 @@ namespace POS
             Menu_Settings_label.BackColor = Color.Transparent;
         }
 
+        private int ControlsCount = 0;
         private void Menu_POS_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_POS_label, "#0077C3");
@@ -528,6 +534,27 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            if (POSPanel.Visible == false)
+            {
+                POSPanel.Visible = true;
+                ProductPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                StaffPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                StartTransition(60, "Hide");
+                if (flowLayoutPanel1.Controls.Count > ControlsCount + 5) 
+                {
+                    int position = flowLayoutPanel1.Location.Y + flowLayoutPanel1.Height - 20;
+                    int height = flowLayoutPanel2.Location.Y;
+                    flowLayoutPanel2.Location = new Point(flowLayoutPanel2.Location.X, position);
+                    flowLayoutPanel2.Height = flowLayoutPanel2.Height - (position - height);
+                    ControlsCount += 5;
+                }
+            }
         }
         private void Menu_Staff_label_Click(object sender, EventArgs e)
         {
@@ -546,7 +573,7 @@ namespace POS
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 ContentContainer_panel.Visible = false;
-                //ProductPanel.Visible = false;
+                POSPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -846,13 +873,21 @@ namespace POS
             else if (dataGridView == StaffDataGrid)
             {
 
-                dataGridView.Columns["id"].Visible = false;
+                if (dataGridView.Columns["staff_name"] != null)
+                {
 
-                dataGridView.Columns["staff_name"].HeaderText = "Staff Name";
-                dataGridView.Columns["type"].HeaderText = "Type";
-                dataGridView.Columns["phone_number"].HeaderText = "Phone";
-                dataGridView.Columns["address"].HeaderText = "Address";
-                dataGridView.Columns["status"].HeaderText = "Status";
+                    dataGridView.Columns["id"].Visible = false;
+                    dataGridView.Columns["staff_name"].HeaderText = "Staff Name";
+                    dataGridView.Columns["type"].HeaderText = "Type";
+                    dataGridView.Columns["phone_number"].HeaderText = "Phone";
+                    dataGridView.Columns["address"].HeaderText = "Address";
+                    dataGridView.Columns["status"].HeaderText = "Status";
+                }
+                else
+                {
+                    dataGridView.Columns["id"].Visible = false;
+                    dataGridView.Columns["types"].HeaderText = " Category Types";
+                }
             }
         }
 
@@ -972,11 +1007,7 @@ namespace POS
             LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //string query = $"select * from products where product_name like '%{textBox1.Text}%' OR status like '%{textBox1.Text}%' ";
-            //LoadDataAsync(ProductsDataGrid,query, "Sync");
-        }
+
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -987,19 +1018,30 @@ namespace POS
 
         private void StaffCategoryTab_Click(object sender, EventArgs e)
         {
-            StaffCategoryTab.BackColor = Color.FromArgb(37, 150, 190);
-            StaffCategoryTab.ForeColor = Color.White;
-            StaffTab.BackColor = Color.Transparent;
-            StaffTab.ForeColor = SystemColors.GrayText;
+            if (StaffCategoryTab.BackColor != Color.FromArgb(37, 150, 190))
+            {
 
+                StaffCategoryTab.BackColor = Color.FromArgb(37, 150, 190);
+                StaffCategoryTab.ForeColor = Color.White;
+                StaffTab.BackColor = Color.Transparent;
+                StaffTab.ForeColor = SystemColors.GrayText;
+                string query = "select * from staff_category";
+                LoadDataAsync(StaffDataGrid, query, "Async");
+            }
         }
 
         private void StaffTab_Click(object sender, EventArgs e)
         {
-            StaffTab.BackColor = Color.FromArgb(37, 150, 190);
-            StaffTab.ForeColor = Color.White;
-            StaffCategoryTab.BackColor = Color.Transparent;
-            StaffCategoryTab.ForeColor = SystemColors.GrayText;
+            if (StaffTab.BackColor != Color.FromArgb(37, 150, 190))
+            {
+
+                StaffTab.BackColor = Color.FromArgb(37, 150, 190);
+                StaffTab.ForeColor = Color.White;
+                StaffCategoryTab.BackColor = Color.Transparent;
+                StaffCategoryTab.ForeColor = SystemColors.GrayText;
+                string query = "select * from staff_details";
+                LoadDataAsync(StaffDataGrid, query, "Async");
+            }
         }
 
         private void StaffPanel_VisibleChanged(object sender, EventArgs e)
@@ -1031,8 +1073,10 @@ namespace POS
 
             else
             {
-                //string query = "select * from staff_category";
-                //LoadDataAsync(StaffDataGrid, query, "Async");
+                StaffCategoryForm staffCategory = new StaffCategoryForm();
+                staffCategory.ShowDialog();
+                string query = "select * from staff_category";
+                LoadDataAsync(StaffDataGrid, query, "Sync");
             }
         }
 
@@ -1042,18 +1086,34 @@ namespace POS
             {
                 if (StaffDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
                 {
-                    StaffForm staffForm = new StaffForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
-                    staffForm.ShowDialog();
-                    LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
-
+                    if (StaffDataGrid.Columns["staff_name"] != null)
+                    {
+                        StaffForm staffForm = new StaffForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                        staffForm.ShowDialog();
+                        LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
+                    }
+                    else
+                    {
+                        StaffCategoryForm staffcategory = new StaffCategoryForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                        staffcategory.ShowDialog();
+                        LoadDataAsync(StaffDataGrid, "select * from staff_category", "Sync");
+                    }
                 }
 
-                else if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                else if (StaffDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
                 {
                     if (MessageBox.Show("Are you sure you want to delete this staff detail?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        DeleteRowFromDatabase(Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value), "staff_details", StaffDataGrid, e.RowIndex);
+                        if (StaffDataGrid.Columns["staff_name"] != null)
+                        {
+                            DeleteRowFromDatabase(Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value), "staff_details", StaffDataGrid, e.RowIndex);
+                        }
+                        else
+                        {
+                            DeleteRowFromDatabase(Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value), "staff_category", StaffDataGrid, e.RowIndex);
+                        }
                     }
+
                 }
 
             }
@@ -1074,6 +1134,22 @@ namespace POS
                 StaffDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = ProductsDataGrid.DefaultCellStyle.BackColor;
             }
         }
+
+        private void SearchStaff_TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (StaffDataGrid.Columns["staff_name"] != null)
+            {
+                string query = $"select * from staff_details where staff_name like '%{SearchStaff_TextBox.Text}%' OR status like '%{SearchStaff_TextBox.Text}%' ";
+                LoadDataAsync(StaffDataGrid, query, "Sync");
+            }
+            else
+            {
+                string query = $"select * from staff_category where types like '%{SearchStaff_TextBox.Text}%' ";
+                LoadDataAsync(StaffDataGrid, query, "Sync");
+            }
+        }
+
+        
     }
 }
 

@@ -136,7 +136,7 @@
             Status_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Status_ComboBox.FormattingEnabled = true;
             Status_ComboBox.IntegralHeight = false;
-            Status_ComboBox.Items.AddRange(new object[] { "Fast Food", "Drinks" });
+            Status_ComboBox.Items.AddRange(new object[] { "Active", "Inactive" });
             Status_ComboBox.Location = new Point(375, 299);
             Status_ComboBox.Name = "Status_ComboBox";
             Status_ComboBox.Size = new Size(181, 28);
@@ -188,7 +188,6 @@
             Type_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Type_ComboBox.FormattingEnabled = true;
             Type_ComboBox.IntegralHeight = false;
-            Type_ComboBox.Items.AddRange(new object[] { "Fast Food", "Drinks" });
             Type_ComboBox.Location = new Point(104, 269);
             Type_ComboBox.Name = "Type_ComboBox";
             Type_ComboBox.Size = new Size(181, 28);
