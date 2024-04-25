@@ -34,6 +34,8 @@
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
+            ProductPrice_TextBox = new TextBox();
+            label2 = new Label();
             Status_ComboBox = new ComboBox();
             status_label = new Label();
             Category_ComboBox = new ComboBox();
@@ -45,8 +47,6 @@
             panel4 = new Panel();
             save_button = new Button();
             cancel_button = new Button();
-            ProductPrice_TextBox = new TextBox();
-            label2 = new Label();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -121,6 +121,25 @@
             panel2.Size = new Size(655, 504);
             panel2.TabIndex = 1;
             // 
+            // ProductPrice_TextBox
+            // 
+            ProductPrice_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ProductPrice_TextBox.Location = new Point(104, 228);
+            ProductPrice_TextBox.Multiline = true;
+            ProductPrice_TextBox.Name = "ProductPrice_TextBox";
+            ProductPrice_TextBox.Size = new Size(181, 30);
+            ProductPrice_TextBox.TabIndex = 14;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(100, 201);
+            label2.Name = "label2";
+            label2.Size = new Size(96, 20);
+            label2.TabIndex = 13;
+            label2.Text = "Product Price";
+            // 
             // Status_ComboBox
             // 
             Status_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -149,7 +168,6 @@
             Category_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Category_ComboBox.FormattingEnabled = true;
             Category_ComboBox.IntegralHeight = false;
-            Category_ComboBox.Items.AddRange(new object[] { "Fast Food", "Drinks" });
             Category_ComboBox.Location = new Point(104, 302);
             Category_ComboBox.Name = "Category_ComboBox";
             Category_ComboBox.Size = new Size(181, 28);
@@ -251,25 +269,6 @@
             cancel_button.Text = "Cancel";
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
-            // 
-            // ProductPrice_TextBox
-            // 
-            ProductPrice_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ProductPrice_TextBox.Location = new Point(104, 228);
-            ProductPrice_TextBox.Multiline = true;
-            ProductPrice_TextBox.Name = "ProductPrice_TextBox";
-            ProductPrice_TextBox.Size = new Size(181, 30);
-            ProductPrice_TextBox.TabIndex = 14;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(100, 201);
-            label2.Name = "label2";
-            label2.Size = new Size(96, 20);
-            label2.TabIndex = 13;
-            label2.Text = "Product Price";
             // 
             // ProductsForm
             // 

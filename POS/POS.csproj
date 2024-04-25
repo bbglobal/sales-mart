@@ -26,6 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ProductsCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TablesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="StaffCategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>

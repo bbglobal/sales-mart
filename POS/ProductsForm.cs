@@ -23,6 +23,7 @@ namespace POS
 
             InitializeComponent();
             InitializeDatabaseConnection();
+            SetTypeComboBox();
             this.rowIndex = rowIndex;
             if (this.rowIndex != -1)
             {
@@ -41,6 +42,30 @@ namespace POS
             connection = new SqlConnection(connectionString);
         }
 
+        private void SetTypeComboBox()
+        {
+            try
+            {
+                string query = "select types from product_category";
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Category_ComboBox.Items.Add(reader["types"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Message : " + ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
 
         private void SaveData()
         {

@@ -91,6 +91,7 @@ namespace POS
             #endregion
         }
 
+
         #region Adjust Form Size Function
         private void AdjustFormSize()
         {
@@ -112,6 +113,9 @@ namespace POS
         }
 
         #endregion
+
+
+        #region All Necessary Functions(Sidebar Labels,Icons,Animations and ByteToImage)
 
         #region Setting Label Fonts, Locations, Colors & Rounding Corners Functions
 
@@ -195,6 +199,16 @@ namespace POS
 
         #endregion
 
+        #region Byte Array to Image Function
+        private Image ByteArraytoImage(byte[] imageData)
+        {
+            using (MemoryStream ms = new MemoryStream(imageData))
+            {
+                Image image = new Bitmap(Image.FromStream(ms));
+                return image;
+            }
+        }
+        #endregion
 
         #region Timer Initialization and Transition Functions
 
@@ -389,48 +403,6 @@ namespace POS
 
         #endregion
 
-
-        #region Dashboard Load Event
-        private void Dashboard_Load(object sender, EventArgs e)
-        {
-            int CurrentUserInitialWidth = CurrentUser_label.Width;
-            CurrentUser_label.Text = $"User Name:  {Session.Username}";
-            CurrentUser_label.Location = new Point(CurrentUser_label.Location.X - (CurrentUser_label.Width - CurrentUserInitialWidth), CurrentUser_label.Location.Y);
-            Set_CardBox_Positions();
-            SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
-            SetLabelLocations(Menu_Products_label, new Point(55, 182));
-            SetLabelLocations(Menu_Tables_label, new Point(55, 252));
-            SetLabelLocations(Menu_Staff_label, new Point(55, 324));
-            SetLabelLocations(Menu_POS_label, new Point(55, 394));
-            SetLabelLocations(Menu_Kitchen_label, new Point(55, 464));
-            SetLabelLocations(Menu_Reports_label, new Point(55, 534));
-            SetLabelLocations(Menu_Settings_label, new Point(55, 604));
-            SetLabelColor(Menu_Dashboard_label, "#0077C3");
-            Menu_Dashboard_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Products_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Tables_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Staff_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_POS_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Kitchen_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Reports_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Settings_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            InitiateChart();
-        }
-
-        #endregion
-
-
-        #region Card Box Positions Functions
-        private void Set_CardBox_Positions()
-        {
-            Total_Cost_CardBox.Location = new Point(Total_Sale_CardBox.Location.X + 240, Total_Cost_CardBox.Location.Y);
-            Total_Disc_CardBox.Location = new Point(Total_Cost_CardBox.Location.X + 240, Total_Disc_CardBox.Location.Y);
-            Total_Profit_CardBox.Location = new Point(Total_Disc_CardBox.Location.X + 240, Total_Profit_CardBox.Location.Y);
-            Total_Tax_CardBox.Location = new Point(Total_Cost_CardBox.Location.X, Total_Cost_CardBox.Location.Y + 100);
-            Total_Pay_CardBox.Location = new Point(Total_Disc_CardBox.Location.X, Total_Disc_CardBox.Location.Y + 100);
-        }
-        #endregion
-
         #region Sidebar Labels Click Event Functions
 
         private void Logo_Click(object sender, EventArgs e)
@@ -480,7 +452,7 @@ namespace POS
                 ProductPanel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                TablesPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -504,7 +476,7 @@ namespace POS
                 ContentContainer_panel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                TablesPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -521,6 +493,18 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Tables";
+            if (TablesPanel.Visible == false)
+            {
+                TablesPanel.Visible = true;
+                ContentContainer_panel.Visible = false;
+                StaffPanel.Visible = false;
+                POSPanel.Visible = false;
+                ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
         }
 
         private int ControlsCount = 0;
@@ -534,6 +518,7 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "POS";
             if (POSPanel.Visible == false)
             {
                 POSPanel.Visible = true;
@@ -541,7 +526,7 @@ namespace POS
                 ContentContainer_panel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 StaffPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                TablesPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -550,10 +535,10 @@ namespace POS
                 await Task.Delay(100);
                 LoadPOSProducts();
 
-                
+
                 if (CategoriesFlowLayoutPanel.Controls.Count > ControlsCount + 5)
                 {
-                    int position = CategoriesFlowLayoutPanel.Location.Y + CategoriesFlowLayoutPanel.Height ;
+                    int position = CategoriesFlowLayoutPanel.Location.Y + CategoriesFlowLayoutPanel.Height;
                     int height = ProductsFlowLayoutPanel.Location.Y;
                     ProductsFlowLayoutPanel.Location = new Point(ProductsFlowLayoutPanel.Location.X, position);
                     ProductsFlowLayoutPanel.Height = ProductsFlowLayoutPanel.Height - (position - height);
@@ -584,7 +569,7 @@ namespace POS
                 ContentContainer_panel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                TablesPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -628,90 +613,10 @@ namespace POS
         }
         #endregion
 
-        #region Chart Create Function
-
-        private void InitiateChart()
-        {
-
-            string[] monthLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-            double[] xValues = { 0, 2, 4, 6, 8, 9 };
-            double[] originalYValues = { 2, 4, 2, 6, 2, 10 };
-
-            var series = new Series();
-            series.ChartType = SeriesChartType.Spline;
-            series.Color = Color.FromArgb(161, 74, 222);
-
-            for (int i = 0; i < xValues.Length; i++)
-            {
-                series.Points.AddXY(xValues[i], originalYValues[i]);
-                series.Points[i].MarkerSize = 5;
-                series.Points[i].MarkerColor = Color.White;
-                series.Points[i].Tag = i;
-            }
-            chart1.Series.Add(series);
-
-
-            //chart1.ChartAreas[0].AxisY.Title = "Y-axis Label";
-            chart1.ChartAreas[0].AxisX.Minimum = 0;
-            chart1.ChartAreas[0].AxisY.Minimum = 0;
-
-            chart1.ChartAreas[0].AxisX.Maximum = xValues[xValues.Length - 1];
-            chart1.ChartAreas[0].AxisY.Maximum = originalYValues.Max() + 1;
-            chart1.ChartAreas[0].AxisY.Interval = 1;
-            chart1.ChartAreas[0].AxisX.Interval = 1;
-            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-
-            //chart1.ChartAreas[0].AxisX.Title = "Month";
-            chart1.ChartAreas[0].AxisX.CustomLabels.Clear();
-
-
-            var areaSeries = new Series();
-            areaSeries.ChartType = SeriesChartType.SplineArea;
-            areaSeries.Points.DataBindXY(xValues, originalYValues);
-            areaSeries.BackGradientStyle = GradientStyle.TopBottom;
-            areaSeries.Color = Color.FromArgb(73, 162, 215);
-            chart1.Series.Insert(0, areaSeries);
-
-
-            for (int i = 0; i < monthLabels.Length; i++)
-            {
-                chart1.ChartAreas[0].AxisX.CustomLabels.Add((double)(i + 1), (double)i, monthLabels[((int)i)]);
-            }
-
-
-            for (int i = 0; i < chart1.ChartAreas[0].AxisX.CustomLabels.Count - 1; i++)
-            {
-                if (i == 0)
-                {
-                    double intervalStart = i == 0 ? chart1.ChartAreas[0].AxisX.Minimum : chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
-                    double intervalEnd = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
-
-                    StripLine stripLine = new StripLine();
-                    stripLine.IntervalOffset = intervalStart;
-                    stripLine.StripWidth = intervalEnd - intervalStart;
-                    stripLine.BackColor = Color.FromArgb(249, 249, 249);
-                    chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
-                }
-
-                else
-                {
-                    StripLine stripLine = new StripLine();
-                    stripLine.IntervalOffset = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
-                    stripLine.StripWidth = chart1.ChartAreas[0].AxisX.CustomLabels[i + 1].FromPosition - chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
-                    stripLine.BackColor = (i % 2 != 0) ? Color.FromArgb(249, 249, 249) : Color.White; // Set color based on index
-                    chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
-                }
-            }
-
-
-        }
-
-
-
         #endregion
 
 
+        #region All Common Database Functions
 
         #region DatabaseInitialization
 
@@ -722,7 +627,6 @@ namespace POS
         }
 
         #endregion
-
 
         #region LoadDataGridViews Functions
         private void LoadDataAsync(DataGridView myDataGrid, string query, string method)
@@ -853,7 +757,6 @@ namespace POS
 
         #endregion
 
-
         #region Set Column Headers for Data Grid Views
 
 
@@ -861,15 +764,23 @@ namespace POS
         {
             if (dataGridView == ProductsDataGrid)
             {
+                if (dataGridView.Columns["product_name"] != null)
+                {
+                    dataGridView.Columns["or_image"].Visible = false;
+                    dataGridView.Columns["id"].Visible = false;
 
-                dataGridView.Columns["or_image"].Visible = false;
-                dataGridView.Columns["id"].Visible = false;
+                    dataGridView.Columns["product_name"].HeaderText = "Product Name";
+                    dataGridView.Columns["product_price"].HeaderText = "Product Price";
+                    dataGridView.Columns["category"].HeaderText = "Category";
+                    dataGridView.Columns["status"].HeaderText = "Status";
+                    dataGridView.Columns["image"].HeaderText = "Image";
+                }
+                else
+                {
+                    dataGridView.Columns["id"].Visible = false;
 
-                dataGridView.Columns["product_name"].HeaderText = "Product Name";
-                dataGridView.Columns["product_price"].HeaderText = "Product Price";
-                dataGridView.Columns["category"].HeaderText = "Category";
-                dataGridView.Columns["status"].HeaderText = "Status";
-                dataGridView.Columns["image"].HeaderText = "Image";
+                    dataGridView.Columns["types"].HeaderText = "Category Types";
+                }
             }
 
             else if (dataGridView == StaffDataGrid)
@@ -888,8 +799,17 @@ namespace POS
                 else
                 {
                     dataGridView.Columns["id"].Visible = false;
-                    dataGridView.Columns["types"].HeaderText = " Category Types";
+                    dataGridView.Columns["types"].HeaderText = "Category Types";
                 }
+            }
+
+            else if (dataGridView == TablesDataGrid)
+            {
+
+                dataGridView.Columns["id"].Visible = false;
+                dataGridView.Columns["table_name"].HeaderText = "Table Name";
+
+
             }
         }
 
@@ -931,58 +851,6 @@ namespace POS
 
         #endregion
 
-        #region Products Data Grid All Event Listeners
-        private void ProductsDataGrid_VisibleChanged(object sender, EventArgs e)
-        {
-
-            if (ProductsDataGrid.Visible == true)
-            {
-
-                string query = "select * from products";
-                LoadDataAsync(ProductsDataGrid, query, "Async");
-            }
-        }
-        private void ProductsDataGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.RowIndex < ProductsDataGrid.Rows.Count)
-            {
-                ProductsDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(247, 247, 247);
-            }
-        }
-
-        private void ProductsDataGrid_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.RowIndex < ProductsDataGrid.Rows.Count)
-            {
-                ProductsDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = ProductsDataGrid.DefaultCellStyle.BackColor;
-            }
-        }
-
-        private void ProductsDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
-                {
-                    ProductsForm productsForm = new ProductsForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
-                    productsForm.ShowDialog();
-                    LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
-
-                }
-
-                else if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
-                {
-                    if (MessageBox.Show("Are you sure you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                    {
-                        DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "products", ProductsDataGrid, e.RowIndex);
-                    }
-                }
-
-            }
-        }
-
-        #endregion
-
         #region Delete Function
         private void DeleteRowFromDatabase(int primaryKeyValue, string TableName, DataGridView dataGridView, int rowIndex)
         {
@@ -1018,24 +886,296 @@ namespace POS
         }
         #endregion
 
-        #region Products Add Button and Search TextBox Events Functions
-        private void button2_Click(object sender, EventArgs e)
+        #endregion
+
+
+        #region All Dashboard Screen Funtions
+
+        #region Dashboard Load Event
+        private void Dashboard_Load(object sender, EventArgs e)
         {
-            ProductsForm productsForm = new ProductsForm();
-            productsForm.ShowDialog();
-            LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
-        }
-
-
-
-        private void textBox1_KeyUp(object sender, KeyEventArgs e)
-        {
-            string query = $"select * from products where product_name like '%{textBox1.Text}%' OR status like '%{textBox1.Text}%' ";
-            LoadDataAsync(ProductsDataGrid, query, "Sync");
+            int CurrentUserInitialWidth = CurrentUser_label.Width;
+            CurrentUser_label.Text = $"User Name:  {Session.Username}";
+            CurrentUser_label.Location = new Point(CurrentUser_label.Location.X - (CurrentUser_label.Width - CurrentUserInitialWidth), CurrentUser_label.Location.Y);
+            Set_CardBox_Positions();
+            SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
+            SetLabelLocations(Menu_Products_label, new Point(55, 182));
+            SetLabelLocations(Menu_Tables_label, new Point(55, 252));
+            SetLabelLocations(Menu_Staff_label, new Point(55, 324));
+            SetLabelLocations(Menu_POS_label, new Point(55, 394));
+            SetLabelLocations(Menu_Kitchen_label, new Point(55, 464));
+            SetLabelLocations(Menu_Reports_label, new Point(55, 534));
+            SetLabelLocations(Menu_Settings_label, new Point(55, 604));
+            SetLabelColor(Menu_Dashboard_label, "#0077C3");
+            Menu_Dashboard_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Products_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Tables_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Staff_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_POS_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Kitchen_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Reports_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            Menu_Settings_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            InitiateChart();
         }
 
         #endregion
 
+        #region Card Box Positions Functions
+        private void Set_CardBox_Positions()
+        {
+            Total_Cost_CardBox.Location = new Point(Total_Sale_CardBox.Location.X + 240, Total_Cost_CardBox.Location.Y);
+            Total_Disc_CardBox.Location = new Point(Total_Cost_CardBox.Location.X + 240, Total_Disc_CardBox.Location.Y);
+            Total_Profit_CardBox.Location = new Point(Total_Disc_CardBox.Location.X + 240, Total_Profit_CardBox.Location.Y);
+            Total_Tax_CardBox.Location = new Point(Total_Cost_CardBox.Location.X, Total_Cost_CardBox.Location.Y + 100);
+            Total_Pay_CardBox.Location = new Point(Total_Disc_CardBox.Location.X, Total_Disc_CardBox.Location.Y + 100);
+        }
+        #endregion
+
+        #region Chart Create Function
+
+        private void InitiateChart()
+        {
+
+            string[] monthLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+            double[] xValues = { 0, 2, 4, 6, 8, 9 };
+            double[] originalYValues = { 2, 4, 2, 6, 2, 10 };
+
+            var series = new Series();
+            series.ChartType = SeriesChartType.Spline;
+            series.Color = Color.FromArgb(161, 74, 222);
+
+            for (int i = 0; i < xValues.Length; i++)
+            {
+                series.Points.AddXY(xValues[i], originalYValues[i]);
+                series.Points[i].MarkerSize = 5;
+                series.Points[i].MarkerColor = Color.White;
+                series.Points[i].Tag = i;
+            }
+            chart1.Series.Add(series);
+
+
+            //chart1.ChartAreas[0].AxisY.Title = "Y-axis Label";
+            chart1.ChartAreas[0].AxisX.Minimum = 0;
+            chart1.ChartAreas[0].AxisY.Minimum = 0;
+
+            chart1.ChartAreas[0].AxisX.Maximum = xValues[xValues.Length - 1];
+            chart1.ChartAreas[0].AxisY.Maximum = originalYValues.Max() + 1;
+            chart1.ChartAreas[0].AxisY.Interval = 1;
+            chart1.ChartAreas[0].AxisX.Interval = 1;
+            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+
+            //chart1.ChartAreas[0].AxisX.Title = "Month";
+            chart1.ChartAreas[0].AxisX.CustomLabels.Clear();
+
+
+            var areaSeries = new Series();
+            areaSeries.ChartType = SeriesChartType.SplineArea;
+            areaSeries.Points.DataBindXY(xValues, originalYValues);
+            areaSeries.BackGradientStyle = GradientStyle.TopBottom;
+            areaSeries.Color = Color.FromArgb(73, 162, 215);
+            chart1.Series.Insert(0, areaSeries);
+
+
+            for (int i = 0; i < monthLabels.Length; i++)
+            {
+                chart1.ChartAreas[0].AxisX.CustomLabels.Add((double)(i + 1), (double)i, monthLabels[((int)i)]);
+            }
+
+
+            for (int i = 0; i < chart1.ChartAreas[0].AxisX.CustomLabels.Count - 1; i++)
+            {
+                if (i == 0)
+                {
+                    double intervalStart = i == 0 ? chart1.ChartAreas[0].AxisX.Minimum : chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+                    double intervalEnd = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+
+                    StripLine stripLine = new StripLine();
+                    stripLine.IntervalOffset = intervalStart;
+                    stripLine.StripWidth = intervalEnd - intervalStart;
+                    stripLine.BackColor = Color.FromArgb(249, 249, 249);
+                    chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
+                }
+
+                else
+                {
+                    StripLine stripLine = new StripLine();
+                    stripLine.IntervalOffset = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+                    stripLine.StripWidth = chart1.ChartAreas[0].AxisX.CustomLabels[i + 1].FromPosition - chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+                    stripLine.BackColor = (i % 2 != 0) ? Color.FromArgb(249, 249, 249) : Color.White; // Set color based on index
+                    chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
+                }
+            }
+
+
+        }
+
+
+
+        #endregion
+
+
+        #endregion
+
+
+
+        #region All Products Screen Functions
+
+        #region Products Tab Button Functions
+
+        private void ProductsTabButton_Click(object sender, EventArgs e)
+        {
+            if (ProductsTabButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+
+                ProductsTabButton.BackColor = Color.FromArgb(37, 150, 190);
+                ProductsTabButton.ForeColor = Color.White;
+                ProductsCategoryTabButton.BackColor = Color.Transparent;
+                ProductsCategoryTabButton.ForeColor = SystemColors.GrayText;
+                string query = "select * from products";
+                LoadDataAsync(ProductsDataGrid, query, "Async");
+            }
+        }
+
+        private void ProductsCategoryTabButton_Click(object sender, EventArgs e)
+        {
+            if (ProductsCategoryTabButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+
+                ProductsCategoryTabButton.BackColor = Color.FromArgb(37, 150, 190);
+                ProductsCategoryTabButton.ForeColor = Color.White;
+                ProductsTabButton.BackColor = Color.Transparent;
+                ProductsTabButton.ForeColor = SystemColors.GrayText;
+                string query = "select * from product_category";
+                LoadDataAsync(ProductsDataGrid, query, "Async");
+            }
+        }
+
+
+        #endregion
+
+        #region Products Data Grid All Event Listeners
+        private void ProductsDataGrid_VisibleChanged(object sender, EventArgs e)
+        {
+
+            if (ProductsDataGrid.Visible == true)
+            {
+                if (ProductsTabButton.BackColor == Color.FromArgb(37, 150, 190))
+                {
+                    string query = "select * from products";
+                    LoadDataAsync(ProductsDataGrid, query, "Async");
+                }
+
+                else
+                {
+                    string query = "select * from product_category";
+                    LoadDataAsync(ProductsDataGrid, query, "Async");
+                }
+            }
+        }
+        private void ProductsDataGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < ProductsDataGrid.Rows.Count)
+            {
+                ProductsDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(247, 247, 247);
+            }
+        }
+
+        private void ProductsDataGrid_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < ProductsDataGrid.Rows.Count)
+            {
+                ProductsDataGrid.Rows[e.RowIndex].DefaultCellStyle.BackColor = ProductsDataGrid.DefaultCellStyle.BackColor;
+            }
+        }
+
+        private void ProductsDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+                    if (ProductsDataGrid.Columns["product_name"] != null)
+                    {
+                        ProductsForm productsForm = new ProductsForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                        productsForm.ShowDialog();
+                        LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
+                    }
+                    else
+                    {
+                        ProductsCategoryForm productsCatForm = new ProductsCategoryForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                        productsCatForm.ShowDialog();
+                        LoadDataAsync(ProductsDataGrid, "select * from product_category", "Sync");
+                    }
+
+                }
+
+                else if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+                    if (ProductsDataGrid.Columns["product_name"] != null)
+                    {
+                        if (MessageBox.Show("Are you sure you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "products", ProductsDataGrid, e.RowIndex);
+                        }
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Are you sure you want to delete this product category?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "product_category", ProductsDataGrid, e.RowIndex);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region Products Add Button and Search TextBox Events Functions
+
+        //Add Product Button
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (ProductsTabButton.BackColor == Color.FromArgb(37, 150, 190))
+            {
+                ProductsForm productsForm = new ProductsForm();
+                productsForm.ShowDialog();
+                LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
+            }
+
+            else
+            {
+                ProductsCategoryForm productCategory = new ProductsCategoryForm();
+                productCategory.ShowDialog();
+                string query = "select * from product_category";
+                LoadDataAsync(ProductsDataGrid, query, "Sync");
+            }
+        }
+
+
+        // Products Search TextBox
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (ProductsDataGrid.Columns["product_name"] != null)
+            {
+                string query = $"select * from products where product_name like '%{textBox1.Text}%' OR status like '%{textBox1.Text}%' ";
+                LoadDataAsync(ProductsDataGrid, query, "Sync");
+            }
+            else
+            {
+                string query = $"select * from product_category where types like '%{textBox1.Text}%'";
+                LoadDataAsync(ProductsDataGrid, query, "Sync");
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+
+        #region All Staff Screen Functions
 
         #region Staff Tabs Click Functions and StaffPanel VisibleChange Functions
         private void StaffCategoryTab_Click(object sender, EventArgs e)
@@ -1145,17 +1285,22 @@ namespace POS
 
                 else if (StaffDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
                 {
-                    if (MessageBox.Show("Are you sure you want to delete this staff detail?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+
+                    if (StaffDataGrid.Columns["staff_name"] != null)
                     {
-                        if (StaffDataGrid.Columns["staff_name"] != null)
+                        if (MessageBox.Show("Are you sure you want to delete this staff detail?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                         {
                             DeleteRowFromDatabase(Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value), "staff_details", StaffDataGrid, e.RowIndex);
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Are you sure you want to delete this staff category?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                         {
                             DeleteRowFromDatabase(Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value), "staff_category", StaffDataGrid, e.RowIndex);
                         }
                     }
+
 
                 }
 
@@ -1180,22 +1325,74 @@ namespace POS
 
         #endregion
 
+        #endregion
 
 
-        #region Byte Array to Image Function
-        private Image ByteArraytoImage(byte[] imageData)
+        #region All Tables Screen Functions
+
+        #region Tables Panel VisibleChanged and Tables Data Grid Functions
+        private void TablesPanel_VisibleChanged(object sender, EventArgs e)
         {
-            using (MemoryStream ms = new MemoryStream(imageData))
+            if (TablesPanel.Visible == true)
             {
-                Image image = new Bitmap(Image.FromStream(ms));
-                return image;
+                LoadDataAsync(TablesDataGrid, "select * from tables", "Async");
             }
+        }
+
+        private void TablesDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (TablesDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+                    TablesForm tablesForm = new TablesForm((int)TablesDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                    tablesForm.ShowDialog();
+                    LoadDataAsync(TablesDataGrid, "select * from tables", "Sync");
+                }
+
+                else if (TablesDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+
+                    if (MessageBox.Show("Are you sure you want to delete this table name?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        DeleteRowFromDatabase(Convert.ToInt32(TablesDataGrid.Rows[e.RowIndex].Cells["id"].Value), "tables", TablesDataGrid, e.RowIndex);
+                    }
+
+                }
+
+            }
+
+
         }
         #endregion
 
+        #region Tables Add Button and Search TextBox Functions
+        private void TablesAddButton_Click(object sender, EventArgs e)
+        {
+            TablesForm tablesForm = new TablesForm();
+            tablesForm.ShowDialog();
+            LoadDataAsync(TablesDataGrid, "select * from tables", "Sync");
+        }
+
+        private void TablesSearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string query = $"select * from tables where table_name like '%{TablesSearchTextBox.Text}%'";
+            LoadDataAsync(TablesDataGrid, query, "Sync");
+        }
+
+        #endregion
+
+        #endregion
+
+
+
+
+
         #region POS Add Category and Event Listener Functions 
 
-        private void AddPOSCategory() 
+        private void AddPOSCategory()
         {
             DataTable table = new DataTable();
             string qry = "select * from product_category";
@@ -1219,7 +1416,7 @@ namespace POS
                     AllCategoriesButton.Size = new Size(150, 35);
                     AllCategoriesButton.TabIndex = 1;
                     AllCategoriesButton.Text = "All Categories";
-                    AllCategoriesButton.Click += new EventHandler(Category_Click); 
+                    AllCategoriesButton.Click += new EventHandler(Category_Click);
                     AllCategoriesButton.UseVisualStyleBackColor = false;
                     CategoriesFlowLayoutPanel.Controls.Add(AllCategoriesButton);
                     foreach (DataRow row in table.Rows)
@@ -1240,7 +1437,7 @@ namespace POS
                         button2.UseVisualStyleBackColor = false;
                         CategoriesFlowLayoutPanel.Controls.Add(button2);
                     }
-                    
+
                 }
             }
             catch (Exception ex)
@@ -1260,13 +1457,13 @@ namespace POS
             b.ForeColor = Color.White;
             foreach (Button item in CategoriesFlowLayoutPanel.Controls)
             {
-                if (item.Text != b.Text ) 
+                if (item.Text != b.Text)
                 {
                     item.BackColor = Color.Transparent;
                     item.ForeColor = SystemColors.ControlText;
                 }
             }
-            if (b.Text == "All Categories") 
+            if (b.Text == "All Categories")
             {
                 foreach (var item in ProductsFlowLayoutPanel.Controls)
                 {
@@ -1275,7 +1472,7 @@ namespace POS
                 }
             }
             else
-            { 
+            {
                 foreach (var item in ProductsFlowLayoutPanel.Controls)
                 {
                     var pro = (ProductCard)item;
@@ -1360,7 +1557,7 @@ namespace POS
         {
             if (POSPanel.Visible == true)
             {
-                
+
             }
         }
 
@@ -1377,12 +1574,47 @@ namespace POS
         //POS Screen Search Box
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            foreach (var item in ProductsFlowLayoutPanel.Controls)
+            Button selectedCategoryButton = CategoriesFlowLayoutPanel.Controls.Cast<Button>().FirstOrDefault(b => b.BackColor == Color.FromArgb(37, 150, 190));
+
+            if (selectedCategoryButton.Text != "All Categories")
             {
-                var pro = (ProductCard)item;
-                pro.Visible = pro.product_name.ToLower().Contains(textBox2.Text.Trim().ToLower());
+                foreach (var item in ProductsFlowLayoutPanel.Controls)
+                {
+
+                    var pro = (ProductCard)item;
+                    bool product = pro.product_name.ToLower().Contains(textBox2.Text.Trim().ToLower());
+                    bool category = pro.product_category.ToLower().Contains(selectedCategoryButton.Text.Trim().ToLower());
+                    if (product && category)
+                    {
+                        pro.Visible = true;
+                    }
+                    else
+                    {
+                        pro.Visible = false;
+                    }
+
+                }
+            }
+            else
+            {
+                foreach (var item in ProductsFlowLayoutPanel.Controls)
+                {
+
+                    var pro = (ProductCard)item;
+                    pro.Visible = pro.product_name.ToLower().Contains(textBox2.Text.Trim().ToLower());
+                }
+            }
+
+        }
+
+        private void NewButton_Click(object sender, EventArgs e)
+        {
+            if (POSProductsDataGrid.Rows.Count > 0)
+            {
+                POSProductsDataGrid.Rows.Clear();
             }
         }
+
     }
 }
 

@@ -227,6 +227,17 @@ namespace POS
             return resizedImg;
         }
 
+        private void ClearFields()
+        {
+            StaffName_TextBox.Text = "";
+            Type_ComboBox.Text = "";
+            Phone_TextBox.Text = "";
+            Address_TextBox.Text = "";
+            Status_ComboBox.Text = "";
+
+        }
+
+
         private void cancel_button_Click(object sender, EventArgs e)
         {
             this.Close();
