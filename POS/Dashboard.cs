@@ -91,7 +91,7 @@ namespace POS
             #endregion
         }
 
-
+        #region Adjust Form Size Function
         private void AdjustFormSize()
         {
             var screenBounds = Screen.PrimaryScreen.Bounds;
@@ -111,7 +111,7 @@ namespace POS
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
-
+        #endregion
 
         #region Setting Label Fonts, Locations, Colors & Rounding Corners Functions
 
@@ -524,7 +524,7 @@ namespace POS
         }
 
         private int ControlsCount = 0;
-        private void Menu_POS_label_Click(object sender, EventArgs e)
+        private async void Menu_POS_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_POS_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
@@ -546,16 +546,26 @@ namespace POS
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 StartTransition(60, "Hide");
-                if (flowLayoutPanel1.Controls.Count > ControlsCount + 5) 
+                AddPOSCategory();
+                await Task.Delay(100);
+                LoadPOSProducts();
+
+                
+                if (CategoriesFlowLayoutPanel.Controls.Count > ControlsCount + 5)
                 {
-                    int position = flowLayoutPanel1.Location.Y + flowLayoutPanel1.Height - 20;
-                    int height = flowLayoutPanel2.Location.Y;
-                    flowLayoutPanel2.Location = new Point(flowLayoutPanel2.Location.X, position);
-                    flowLayoutPanel2.Height = flowLayoutPanel2.Height - (position - height);
+                    int position = CategoriesFlowLayoutPanel.Location.Y + CategoriesFlowLayoutPanel.Height ;
+                    int height = ProductsFlowLayoutPanel.Location.Y;
+                    ProductsFlowLayoutPanel.Location = new Point(ProductsFlowLayoutPanel.Location.X, position);
+                    ProductsFlowLayoutPanel.Height = ProductsFlowLayoutPanel.Height - (position - height);
                     ControlsCount += 5;
                 }
             }
+            //await Task.Delay(500);
+            ProductDataGrid_panel.Visible = true;
         }
+
+
+
         private void Menu_Staff_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Staff_label, "#0077C3");
@@ -841,19 +851,10 @@ namespace POS
             }
         }
 
-        #endregion 
+        #endregion
 
 
-        private void ProductsDataGrid_VisibleChanged(object sender, EventArgs e)
-        {
-
-            if (ProductsDataGrid.Visible == true)
-            {
-
-                string query = "select * from products";
-                LoadDataAsync(ProductsDataGrid, query, "Async");
-            }
-        }
+        #region Set Column Headers for Data Grid Views
 
 
         private void SetColumnHeaderText(DataGridView dataGridView)
@@ -865,6 +866,7 @@ namespace POS
                 dataGridView.Columns["id"].Visible = false;
 
                 dataGridView.Columns["product_name"].HeaderText = "Product Name";
+                dataGridView.Columns["product_price"].HeaderText = "Product Price";
                 dataGridView.Columns["category"].HeaderText = "Category";
                 dataGridView.Columns["status"].HeaderText = "Status";
                 dataGridView.Columns["image"].HeaderText = "Image";
@@ -891,6 +893,7 @@ namespace POS
             }
         }
 
+        #endregion
 
         #region Loading Edit and Delete Icons
         private void ImageEditDelLoad()
@@ -928,6 +931,17 @@ namespace POS
 
         #endregion
 
+        #region Products Data Grid All Event Listeners
+        private void ProductsDataGrid_VisibleChanged(object sender, EventArgs e)
+        {
+
+            if (ProductsDataGrid.Visible == true)
+            {
+
+                string query = "select * from products";
+                LoadDataAsync(ProductsDataGrid, query, "Async");
+            }
+        }
         private void ProductsDataGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.RowIndex < ProductsDataGrid.Rows.Count)
@@ -967,6 +981,9 @@ namespace POS
             }
         }
 
+        #endregion
+
+        #region Delete Function
         private void DeleteRowFromDatabase(int primaryKeyValue, string TableName, DataGridView dataGridView, int rowIndex)
         {
             string query = $"DELETE FROM {TableName} WHERE id = @PrimaryKeyValue";
@@ -999,7 +1016,9 @@ namespace POS
                 }
             }
         }
+        #endregion
 
+        #region Products Add Button and Search TextBox Events Functions
         private void button2_Click(object sender, EventArgs e)
         {
             ProductsForm productsForm = new ProductsForm();
@@ -1015,7 +1034,10 @@ namespace POS
             LoadDataAsync(ProductsDataGrid, query, "Sync");
         }
 
+        #endregion
 
+
+        #region Staff Tabs Click Functions and StaffPanel VisibleChange Functions
         private void StaffCategoryTab_Click(object sender, EventArgs e)
         {
             if (StaffCategoryTab.BackColor != Color.FromArgb(37, 150, 190))
@@ -1044,6 +1066,8 @@ namespace POS
             }
         }
 
+
+
         private void StaffPanel_VisibleChanged(object sender, EventArgs e)
         {
             if (StaffPanel.Visible == true)
@@ -1061,7 +1085,9 @@ namespace POS
                 }
             }
         }
+        #endregion
 
+        #region Staff Add Button And Seach TextBox Functions
         private void AddStaffButton_Click(object sender, EventArgs e)
         {
             if (StaffTab.BackColor == Color.FromArgb(37, 150, 190))
@@ -1080,6 +1106,23 @@ namespace POS
             }
         }
 
+        private void SearchStaff_TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (StaffDataGrid.Columns["staff_name"] != null)
+            {
+                string query = $"select * from staff_details where staff_name like '%{SearchStaff_TextBox.Text}%' OR status like '%{SearchStaff_TextBox.Text}%' ";
+                LoadDataAsync(StaffDataGrid, query, "Sync");
+            }
+            else
+            {
+                string query = $"select * from staff_category where types like '%{SearchStaff_TextBox.Text}%' ";
+                LoadDataAsync(StaffDataGrid, query, "Sync");
+            }
+        }
+
+        #endregion
+
+        #region Staff Data Grid Event Functions
         private void StaffDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
@@ -1135,21 +1178,211 @@ namespace POS
             }
         }
 
-        private void SearchStaff_TextBox_KeyUp(object sender, KeyEventArgs e)
+        #endregion
+
+
+
+        #region Byte Array to Image Function
+        private Image ByteArraytoImage(byte[] imageData)
         {
-            if (StaffDataGrid.Columns["staff_name"] != null)
+            using (MemoryStream ms = new MemoryStream(imageData))
             {
-                string query = $"select * from staff_details where staff_name like '%{SearchStaff_TextBox.Text}%' OR status like '%{SearchStaff_TextBox.Text}%' ";
-                LoadDataAsync(StaffDataGrid, query, "Sync");
+                Image image = new Bitmap(Image.FromStream(ms));
+                return image;
             }
-            else
+        }
+        #endregion
+
+        #region POS Add Category and Event Listener Functions 
+
+        private void AddPOSCategory() 
+        {
+            DataTable table = new DataTable();
+            string qry = "select * from product_category";
+            try
             {
-                string query = $"select * from staff_category where types like '%{SearchStaff_TextBox.Text}%' ";
-                LoadDataAsync(StaffDataGrid, query, "Sync");
+                connection.Open();
+                SqlDataAdapter sqladapter = new SqlDataAdapter(qry, connection);
+                sqladapter.Fill(table);
+                CategoriesFlowLayoutPanel.Controls.Clear();
+                if (table.Rows.Count > 0)
+                {
+                    Button AllCategoriesButton = new Button();
+                    AllCategoriesButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+                    AllCategoriesButton.BackColor = Color.FromArgb(37, 150, 190);
+                    AllCategoriesButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+                    AllCategoriesButton.FlatAppearance.BorderSize = 2;
+                    AllCategoriesButton.FlatStyle = FlatStyle.Flat;
+                    AllCategoriesButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+                    AllCategoriesButton.ForeColor = Color.White;
+                    AllCategoriesButton.Margin = new Padding(3, 3, 0, 3);
+                    AllCategoriesButton.Size = new Size(150, 35);
+                    AllCategoriesButton.TabIndex = 1;
+                    AllCategoriesButton.Text = "All Categories";
+                    AllCategoriesButton.Click += new EventHandler(Category_Click); 
+                    AllCategoriesButton.UseVisualStyleBackColor = false;
+                    CategoriesFlowLayoutPanel.Controls.Add(AllCategoriesButton);
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Button button2 = new Button();
+                        button2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+                        button2.BackColor = Color.Transparent;
+                        button2.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+                        button2.FlatAppearance.BorderSize = 2;
+                        button2.FlatStyle = FlatStyle.Flat;
+                        button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+                        button2.Location = new Point(156, 3);
+                        button2.Margin = new Padding(3, 3, 0, 3);
+                        button2.Size = new Size(150, 35);
+                        button2.TabIndex = 3;
+                        button2.Text = row["types"].ToString();
+                        button2.Click += new EventHandler(Category_Click);
+                        button2.UseVisualStyleBackColor = false;
+                        CategoriesFlowLayoutPanel.Controls.Add(button2);
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
             }
         }
 
-        
+        private void Category_Click(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            b.BackColor = Color.FromArgb(37, 150, 190);
+            b.ForeColor = Color.White;
+            foreach (Button item in CategoriesFlowLayoutPanel.Controls)
+            {
+                if (item.Text != b.Text ) 
+                {
+                    item.BackColor = Color.Transparent;
+                    item.ForeColor = SystemColors.ControlText;
+                }
+            }
+            if (b.Text == "All Categories") 
+            {
+                foreach (var item in ProductsFlowLayoutPanel.Controls)
+                {
+                    var pro = (ProductCard)item;
+                    pro.Visible = true;
+                }
+            }
+            else
+            { 
+                foreach (var item in ProductsFlowLayoutPanel.Controls)
+                {
+                    var pro = (ProductCard)item;
+                    pro.Visible = pro.product_category.ToLower().Contains(b.Text.Trim().ToLower());
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region Load POS Products and Add Products Functions
+
+        private void LoadPOSProducts()
+        {
+            DataTable table = new DataTable();
+            string qry = "select * from products";
+            try
+            {
+                connection.Open();
+                SqlDataAdapter sqladapter = new SqlDataAdapter(qry, connection);
+                sqladapter.Fill(table);
+                if (table.Rows.Count > 0)
+                {
+                    POSProductsDataGrid.Rows.Clear();
+                    ProductsFlowLayoutPanel.Controls.Clear();
+                    foreach (DataRow row in table.Rows)
+                    {
+                        Byte[] imageArray = (byte[])row["or_image"];
+                        byte[] imageByteArray = imageArray;
+                        AddPOSProducts(Convert.ToInt32(row["id"]), Convert.ToInt32(row["product_price"]), row["category"].ToString(), row["product_name"].ToString(), ByteArraytoImage(imageByteArray));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+
+        private void AddPOSProducts(int pid, int price, string category, string name, Image image)
+        {
+            var w = new ProductCard()
+            {
+                id = Convert.ToInt32(pid),
+                product_name = name,
+                product_category = category,
+                product_price = price,
+                product_image = image
+            };
+            ProductsFlowLayoutPanel.Controls.Add(w);
+
+            w.onSelect += (ss, ee) =>
+            {
+                var wdg = (ProductCard)ss;
+                foreach (DataGridViewRow item in POSProductsDataGrid.Rows)
+                {
+                    if (Convert.ToInt32(item.Cells["hidden_id"].Value) == wdg.id)
+                    {
+                        item.Cells["quantity"].Value = int.Parse(item.Cells["quantity"].Value.ToString()) + 1;
+                        item.Cells["total_amount"].Value = int.Parse(item.Cells["quantity"].Value.ToString()) *
+                                                           double.Parse(item.Cells["product_price"].Value.ToString());
+                        return;
+                    }
+
+                }
+
+                POSProductsDataGrid.Rows.Add(new object[] { 0, wdg.id, wdg.product_name, 1, wdg.product_price, wdg.product_price });
+
+            };
+        }
+
+        #endregion
+
+
+        private void POSPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (POSPanel.Visible == true)
+            {
+                
+            }
+        }
+
+        private void POSProductsDataGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            int count = 0;
+            foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
+            {
+                count++;
+                row.Cells[0].Value = count;
+            }
+        }
+
+        //POS Screen Search Box
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            foreach (var item in ProductsFlowLayoutPanel.Controls)
+            {
+                var pro = (ProductCard)item;
+                pro.Visible = pro.product_name.ToLower().Contains(textBox2.Text.Trim().ToLower());
+            }
+        }
     }
 }
 
