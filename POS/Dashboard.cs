@@ -453,7 +453,7 @@ namespace POS
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                KitchenPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
@@ -477,7 +477,7 @@ namespace POS
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                KitchenPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
@@ -501,7 +501,7 @@ namespace POS
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
                 ProductPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                KitchenPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
@@ -527,7 +527,7 @@ namespace POS
                 ContentContainer_panel.Visible = false;
                 StaffPanel.Visible = false;
                 TablesPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                KitchenPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 StartTransition(60, "Hide");
@@ -570,7 +570,7 @@ namespace POS
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                KitchenPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
@@ -586,6 +586,19 @@ namespace POS
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Kitchen";
+            if (KitchenPanel.Visible == false)
+            {
+                KitchenPanel.Visible = true;
+                ProductPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                POSPanel.Visible = false;
+                TablesPanel.Visible = false;
+                StaffPanel.Visible = false;
+                //ProductPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
         }
 
         private void Menu_Reports_label_Click(object sender, EventArgs e)
@@ -1615,6 +1628,43 @@ namespace POS
             }
         }
 
+        private void KitchenPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (KitchenPanel.Visible == true)
+            {
+                List<string> list = new List<string> { "Zinger Burger-2", "Chicken Kabab-4", "Chicken Kabab (2 pcs)-5", "Chicken Kabab-2", "Chicken Kabab-4", "Chicken Kabab (2 pcs)-5", "Chicken Kabab-2", "Chicken Kabab-4", "Chicken Kabab (2 pcs)-5", "Chicken Kabab-2" };
+                for (int i = 0; i < 10; i++)
+                {
+                    DateTime currentTime = DateTime.Now;
+                    string formattedTime = currentTime.ToString("h:mm tt");
+                    var w = new KitchenCard()
+                    {
+                        BillId = "Bill No: " + 11,
+                        Label2 = "Table No: Table1",
+                        Label3 = "Bill Timing: " + formattedTime,
+                        Label4 = "Bill Type: Dine In",
+                        Items = list,
+                    };
+
+
+                    KitchenFlowLayoutPanel.Controls.Add(w);
+                }
+                KitchenFlowLayoutPanel.Visible = true;
+
+            }
+            else
+            {
+                KitchenFlowLayoutPanel.Visible = false;
+
+            }
+        }
+
+        private void BillListButton_Click(object sender, EventArgs e)
+        {
+            this.Opacity = 20;
+            BillList billList = new BillList();
+            billList.ShowDialog();
+        }
     }
 }
 

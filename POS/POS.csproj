@@ -12,12 +12,16 @@
     <None Remove="MyriadProSemibold.ttf" />
     <None Remove="Resources\delete.png" />
     <None Remove="Resources\edit.png" />
+    <None Remove="Resources\radio_checked.png" />
+    <None Remove="Resources\radio_unchecked.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="MyriadProSemibold.ttf" />
     <EmbeddedResource Include="Resources\delete.png" />
     <EmbeddedResource Include="Resources\edit.png" />
+    <EmbeddedResource Include="Resources\radio_checked.png" />
+    <EmbeddedResource Include="Resources\radio_unchecked.png" />
   </ItemGroup>
 
   <ItemGroup>

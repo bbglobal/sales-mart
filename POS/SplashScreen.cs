@@ -9,13 +9,31 @@ namespace POS
         public SplashScreen()
         {
             InitializeComponent();
+            AdjustFormSize();
             progressThread = new Thread(ProgressSimulation);
             progressThread.Start();
 
 
         }
 
+        private void AdjustFormSize()
+        {
+            var screenBounds = Screen.PrimaryScreen.Bounds;
 
+            // Get the working area (excluding taskbars)
+            var workingArea = Screen.PrimaryScreen.WorkingArea;
+
+            // Calculate the taskbar height
+            int taskbarHeight = screenBounds.Height - workingArea.Height;
+
+            // Set form size to match the screen size excluding taskbar
+            this.Width = screenBounds.Width;
+            this.Height = screenBounds.Height - taskbarHeight;
+
+            // Set form location to top-left corner
+            //this.Location = new Point(0, 0);
+            this.StartPosition = FormStartPosition.CenterScreen;
+        }
 
         private void ProgressSimulation()
         {
