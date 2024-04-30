@@ -51,16 +51,16 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(206, 343);
+            panel1.Size = new Size(206, 371);
             panel1.TabIndex = 0;
             // 
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.AutoScroll = true;
             flowLayoutPanel2.Dock = DockStyle.Top;
-            flowLayoutPanel2.Location = new Point(0, 115);
+            flowLayoutPanel2.Location = new Point(0, 136);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(206, 130);
+            flowLayoutPanel2.Size = new Size(206, 126);
             flowLayoutPanel2.TabIndex = 5;
             // 
             // flowLayoutPanel1
@@ -73,7 +73,7 @@
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(206, 115);
+            flowLayoutPanel1.Size = new Size(206, 136);
             flowLayoutPanel1.TabIndex = 4;
             // 
             // label1
@@ -127,7 +127,7 @@
             button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(37, 150, 190);
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(32, 295);
+            button2.Location = new Point(32, 319);
             button2.Name = "button2";
             button2.Size = new Size(125, 32);
             button2.TabIndex = 2;
@@ -142,7 +142,7 @@
             button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(37, 150, 190);
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(32, 255);
+            button1.Location = new Point(32, 279);
             button1.Name = "button1";
             button1.Size = new Size(125, 32);
             button1.TabIndex = 1;
@@ -156,7 +156,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel1);
             Name = "KitchenCard";
-            Size = new Size(206, 343);
+            Size = new Size(206, 371);
             panel1.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();

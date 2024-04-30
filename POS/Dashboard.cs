@@ -11,6 +11,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -1570,7 +1571,7 @@ namespace POS
         {
             if (POSPanel.Visible == true)
             {
-
+                NewScreen();
             }
         }
 
@@ -1620,50 +1621,279 @@ namespace POS
 
         }
 
-        private void NewButton_Click(object sender, EventArgs e)
+        private void NewScreen() 
         {
             if (POSProductsDataGrid.Rows.Count > 0)
             {
                 POSProductsDataGrid.Rows.Clear();
+                BillID = -1;
+                JSONItems = "";
+                TotalItemsAmount = 0;
+                FastCashButton.Visible = false;
+                CheckOutButton.Visible = false;
+                TotalAmountLabel.Text = "Total Amount : ";
+                TotalAmountLabel.Visible = false;
             }
+        }
+
+        private void NewButton_Click(object sender, EventArgs e)
+        {
+            NewScreen();
         }
 
         private void KitchenPanel_VisibleChanged(object sender, EventArgs e)
         {
             if (KitchenPanel.Visible == true)
             {
-                List<string> list = new List<string> { "Zinger Burger-2", "Chicken Kabab-4", "Chicken Kabab (2 pcs)-5", "Chicken Kabab-2", "Chicken Kabab-4", "Chicken Kabab (2 pcs)-5", "Chicken Kabab-2", "Chicken Kabab-4", "Chicken Kabab (2 pcs)-5", "Chicken Kabab-2" };
-                for (int i = 0; i < 10; i++)
+                KitchenFlowLayoutPanel.Controls.Clear();
+                LoadKitchenCards();
+
+                
+
+            }
+            
+        }
+
+        private void LoadKitchenCards() 
+        {
+
+            try
+            {
+                if (connection.State != ConnectionState.Open)
                 {
-                    DateTime currentTime = DateTime.Now;
-                    string formattedTime = currentTime.ToString("h:mm tt");
-                    var w = new KitchenCard()
-                    {
-                        BillId = "Bill No: " + 11,
-                        Label2 = "Table No: Table1",
-                        Label3 = "Bill Timing: " + formattedTime,
-                        Label4 = "Bill Type: Dine In",
-                        Items = list,
-                    };
-
-
-                    KitchenFlowLayoutPanel.Controls.Add(w);
+                    connection.Open();
                 }
-                KitchenFlowLayoutPanel.Visible = true;
+
+                SqlCommand cmd = new SqlCommand("select * from bill_list where status ='In Complete'", connection);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (reader["type"].ToString() == "Dine In")
+                            {
+                                var w = new KitchenCard()
+                                {
+                                    BillId = "Bill No: " + reader["bill_id"].ToString(),
+                                    Label2 = "Table No: " + reader["table_name"].ToString(),
+                                    Label3 = "Bill Timing: " + reader["date"].ToString(),
+                                    Label4 = "Bill Type: " + reader["type"].ToString(),
+                                    Items = JsonConvert.DeserializeObject<List<string>>(reader["items"].ToString()),
+                                };
+
+                                KitchenFlowLayoutPanel.Controls.Add(w);
+                                w.onComplete += (ss, ee) =>
+                                {
+                                    var kitchenCard = (KitchenCard)ss;
+                                    try
+                                    {
+                                        connection.Open();
+                                        string[] parts = kitchenCard.BillId.Split(" ");
+                                        SqlCommand cmd = new SqlCommand($"update bill_list set status='Complete' where bill_id={parts[2]}", connection);
+                                        int rowsAffected = cmd.ExecuteNonQuery();
+                                        if (rowsAffected > 0)
+                                        {
+                                            MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            KitchenFlowLayoutPanel.Controls.Clear();
+                                            LoadKitchenCards();
+                                        }
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show(ex.Message);
+                                    }
+                                    
+                                };
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+
+        }
+      
+
+        private int BillID = -1;
+        private string JSONItems = "";
+
+        private void BillListButton_Click(object sender, EventArgs e)
+        {
+
+            using (BillList billList = new BillList())
+            {
+                if (billList.ShowDialog() != DialogResult.OK)
+                {
+                    if (billList.Status != "" && billList.BillID != -1 && billList.JSONData != "")
+                    {
+                        BillID = billList.BillID;
+                        JSONItems = billList.JSONData;
+                        AddDataToPOSDataGrid(JSONItems,billList.BillStatus);
+                        
+                    }
+                }
+            }
+        }
+
+        private int TotalItemsAmount = 0;
+        private void AddDataToPOSDataGrid(string json,string status)
+        {
+            List<string> jsonData = JsonConvert.DeserializeObject<List<string>>(json);
+            try
+            {
+                connection.Open();
+                POSProductsDataGrid.Rows.Clear();
+                int total = 0;
+                foreach (string item in jsonData)
+                {
+                    string[] parts = item.Split("-");
+                    SqlCommand cmd = new SqlCommand($"select * from products where product_name='{parts[0]}'", connection);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                
+                                POSProductsDataGrid.Rows.Add(new object[] { 0, (int)reader["id"], reader["product_name"].ToString(), Convert.ToInt32(parts[1]), (int)reader["product_price"], Convert.ToInt32(parts[1]) * (int)reader["product_price"] });
+                                total += Convert.ToInt32(parts[1]) * (int)reader["product_price"];
+
+                            }
+                        }
+                    }
+                }
+                if (status == "Paid")
+                {
+                    FastCashButton.Visible = false;
+                    CheckOutButton.Visible = false;
+                    TotalAmountLabel.Text = "Paid!";
+                    TotalAmountLabel.Visible = true;
+                }
+                else 
+                { 
+                    FastCashButton.Visible = true;
+                    CheckOutButton.Visible = true;
+                    TotalAmountLabel.Text = "Total Amount : " +total;
+                    TotalItemsAmount = total;
+                    TotalAmountLabel.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+
+
+
+        private void DinInButton_Click(object sender, EventArgs e)
+        {
+            if (BillID != -1)
+            {
+                MessageBox.Show("Complete the Selected Bill Payement First","Failed",MessageBoxButtons.OK,MessageBoxIcon.Hand);
+                return;
+            }
+            if (POSProductsDataGrid.Rows.Count > 0)
+            {
+                List<string> columnValues = new List<string>();
+                int total_amount = 0;
+
+                foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
+                {
+                    string ItemsValue = row.Cells["product_name"].Value.ToString();
+                    string QtyValue = row.Cells["quantity"].Value.ToString();
+                    columnValues.Add(ItemsValue + "-" + QtyValue);
+                    total_amount += Convert.ToInt32(row.Cells["total_amount"].Value.ToString());
+                }
+                string json = JsonConvert.SerializeObject(columnValues);
+                string Added = "";
+                using (SelectTable selectTable = new SelectTable(json, total_amount))
+                {
+                    if (selectTable.ShowDialog() != DialogResult.OK)
+                    {
+                        Added = selectTable.UpdatedString;
+                    }
+                }
+
+                if (Added != "")
+                {
+                    POSProductsDataGrid.Rows.Clear();
+                }
 
             }
             else
             {
-                KitchenFlowLayoutPanel.Visible = false;
-
+                MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
 
-        private void BillListButton_Click(object sender, EventArgs e)
+
+
+
+
+        private void FastCashButton_Click(object sender, EventArgs e)
         {
-            this.Opacity = 20;
-            BillList billList = new BillList();
-            billList.ShowDialog();
+            try
+            {
+                connection.Open();
+                string query = "UPDATE bill_list SET status=@Status WHERE bill_id=@Id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Status", "Paid");
+                    command.Parameters.AddWithValue("@Id", BillID);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        NewScreen();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Message : " + ex.Message);
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void CheckOutButton_Click(object sender, EventArgs e)
+        {
+
+            string updateStatus = "";
+            using (PaymentMethodScreen pms = new PaymentMethodScreen(TotalItemsAmount, BillID))
+            {
+                if (pms.ShowDialog() != DialogResult.OK)
+                {
+                    updateStatus = pms.StatusUpdated;
+                }
+            }
+            if (updateStatus == "Updated")
+            {
+                NewScreen();
+            }
         }
     }
 }

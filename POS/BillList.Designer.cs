@@ -99,6 +99,7 @@
             BillListDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
             BillListDataGrid.Size = new Size(938, 417);
             BillListDataGrid.TabIndex = 5;
+            BillListDataGrid.CellContentClick += BillListDataGrid_CellContentClick;
             // 
             // DineIn_label
             // 
@@ -216,6 +217,7 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "BillList";
+            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BillList";
             panel1.ResumeLayout(false);

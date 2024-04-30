@@ -12,6 +12,7 @@
     <None Remove="MyriadProSemibold.ttf" />
     <None Remove="Resources\delete.png" />
     <None Remove="Resources\edit.png" />
+    <None Remove="Resources\printIcon.png" />
     <None Remove="Resources\radio_checked.png" />
     <None Remove="Resources\radio_unchecked.png" />
   </ItemGroup>
@@ -20,17 +21,25 @@
     <EmbeddedResource Include="MyriadProSemibold.ttf" />
     <EmbeddedResource Include="Resources\delete.png" />
     <EmbeddedResource Include="Resources\edit.png" />
+    <EmbeddedResource Include="Resources\printIcon.png" />
     <EmbeddedResource Include="Resources\radio_checked.png" />
     <EmbeddedResource Include="Resources\radio_unchecked.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageReference Include="WinForms.DataVisualization" Version="1.9.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="SelectTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ProductsCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PaymentMethodScreen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="TablesForm.cs">

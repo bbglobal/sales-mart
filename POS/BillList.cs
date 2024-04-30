@@ -20,15 +20,39 @@ namespace POS
         SqlCommand command;
         DataGridView WorkingDataGridView;
         Image EditImage;
-        Image DeleteImage;
+        Image PrintImage;
+        int billID;
+        string jsonData;
+        string status = "";
+        string billStatus = "";
         public BillList()
         {
             InitializeComponent();
             InitializeDatabaseConnection();
             InitializeLabel(label2, (Image)resources.GetObject("label1.Image"), 45, 60);
             ImageEditDelLoad();
-            LoadDataAsync(BillListDataGrid, "select * from bill_list", "Async");
+            LoadDataAsync(BillListDataGrid, "select * from bill_list where status!='In Complete' order by bill_id DESC", "Async");
         }
+
+        public int BillID
+        {
+            get { return billID; }
+        }
+
+        public string JSONData
+        {
+            get { return jsonData; }
+        }
+        public string Status 
+        {
+            get { return status; }
+        }
+
+        public string BillStatus
+        {
+            get { return billStatus; }
+        }
+
 
         private void InitializeDatabaseConnection()
         {
@@ -139,26 +163,26 @@ namespace POS
         private void All_label_Click(object sender, EventArgs e)
         {
             RadioButtonSelect(All_label, DineIn_label, TakeAway_label, Delivery_label);
-            LoadDataAsync(BillListDataGrid,"select * from bill_list","Sync");
+            LoadDataAsync(BillListDataGrid, "select * from bill_list where status!='In Complete'", "Sync");
 
         }
 
         private void DineIn_label_Click(object sender, EventArgs e)
         {
             RadioButtonSelect(DineIn_label, All_label, TakeAway_label, Delivery_label);
-            LoadDataAsync(BillListDataGrid, "select * from bill_list where type='Dine In'", "Sync");
+            LoadDataAsync(BillListDataGrid, "select * from bill_list where type='Dine In' and status!='In Complete'", "Sync");
         }
 
         private void TakeAway_label_Click(object sender, EventArgs e)
         {
             RadioButtonSelect(TakeAway_label, DineIn_label, All_label, Delivery_label);
-            LoadDataAsync(BillListDataGrid, "select * from bill_list where type='Take Away'", "Sync");
+            LoadDataAsync(BillListDataGrid, "select * from bill_list where type='Take Away' and status!='In Complete'", "Sync");
         }
 
         private void Delivery_label_Click(object sender, EventArgs e)
         {
             RadioButtonSelect(Delivery_label, DineIn_label, TakeAway_label, All_label);
-            LoadDataAsync(BillListDataGrid, "select * from bill_list where type='Delivery'", "Sync");
+            LoadDataAsync(BillListDataGrid, "select * from bill_list where type='Delivery' and status!='In Complete'", "Sync");
         }
 
 
@@ -205,13 +229,13 @@ namespace POS
                             };
                             WorkingDataGridView.Columns.Add(EditBtn);
 
-                            DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
+                            DataGridViewImageColumn PrintBtn = new DataGridViewImageColumn
                             {
-                                HeaderText = "Delete",
-                                Image = ResizeImage((Image)DeleteImage, 15, 15),
+                                HeaderText = "Print",
+                                Image = ResizeImage((Image)PrintImage, 15, 15),
                                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                             };
-                            WorkingDataGridView.Columns.Add(DelBtn);
+                            WorkingDataGridView.Columns.Add(PrintBtn);
                             for (int i = 0; i < dataTable.Rows.Count; i++)
                             {
                                 WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
@@ -251,6 +275,7 @@ namespace POS
                         {
                             HeaderText = "SR#",
                             ValueType = typeof(string),
+                            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
                         };
                         WorkingDataGridView.Columns.Insert(0, SR);
@@ -264,13 +289,13 @@ namespace POS
                         };
                         WorkingDataGridView.Columns.Add(EditBtn);
 
-                        DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
+                        DataGridViewImageColumn PrintBtn = new DataGridViewImageColumn
                         {
-                            HeaderText = "Delete",
-                            Image = ResizeImage((Image)DeleteImage, 15, 15),
+                            HeaderText = "Print",
+                            Image = ResizeImage((Image)PrintImage, 15, 15),
                             AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         };
-                        WorkingDataGridView.Columns.Add(DelBtn);
+                        WorkingDataGridView.Columns.Add(PrintBtn);
                         for (int i = 0; i < dataTable.Rows.Count; i++)
                         {
                             WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
@@ -293,6 +318,8 @@ namespace POS
             if (dataGridView == BillListDataGrid)
             {
                 dataGridView.Columns["bill_id"].Visible = false;
+                dataGridView.Columns["items"].Visible = false;
+                dataGridView.Columns["total_amount"].Visible = false;
 
                 dataGridView.Columns["table_name"].HeaderText = "Table";
                 dataGridView.Columns["customer"].HeaderText = "Customer";
@@ -310,7 +337,7 @@ namespace POS
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             string resourceName = "POS.Resources.edit.png";
-            string resourceName1 = "POS.Resources.delete.png";
+            string resourceName1 = "POS.Resources.printIcon.png";
 
             using (Stream imageStream = assembly.GetManifestResourceStream(resourceName))
             {
@@ -330,7 +357,7 @@ namespace POS
                 if (imageStream != null)
                 {
                     Image image = Image.FromStream(imageStream);
-                    DeleteImage = image;
+                    PrintImage = image;
                 }
                 else
                 {
@@ -339,9 +366,21 @@ namespace POS
             }
         }
 
-        private void BillList_Load(object sender, EventArgs e)
+        private void BillListDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+            if (BillListDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+            {
+                billID = Convert.ToInt32(BillListDataGrid.Rows[e.RowIndex].Cells["bill_id"].Value);
+                jsonData = BillListDataGrid.Rows[e.RowIndex].Cells["items"].Value.ToString();
+                billStatus = BillListDataGrid.Rows[e.RowIndex].Cells["status"].Value.ToString();
+                status = "Edit";
+                this.Close();
+            }
+            else if (BillListDataGrid.Columns[e.ColumnIndex].HeaderText == "Print")
+            { 
+            
+            }
+
         }
     }
 }

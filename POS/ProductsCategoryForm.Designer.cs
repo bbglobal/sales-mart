@@ -176,6 +176,7 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ProductsCategoryForm";
+            ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StaffCategoryForm";
             panel3.ResumeLayout(false);
