@@ -678,6 +678,7 @@
             TakeAwayButton.TabIndex = 5;
             TakeAwayButton.Text = "TAKE AWAY";
             TakeAwayButton.UseVisualStyleBackColor = false;
+            TakeAwayButton.Click += TakeAwayButton_Click;
             // 
             // DeliveryButton
             // 
@@ -694,6 +695,7 @@
             DeliveryButton.TabIndex = 4;
             DeliveryButton.Text = "DELIVERY";
             DeliveryButton.UseVisualStyleBackColor = false;
+            DeliveryButton.Click += DeliveryButton_Click;
             // 
             // KOTButton
             // 

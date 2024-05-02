@@ -320,6 +320,10 @@ namespace POS
                 dataGridView.Columns["bill_id"].Visible = false;
                 dataGridView.Columns["items"].Visible = false;
                 dataGridView.Columns["total_amount"].Visible = false;
+                dataGridView.Columns["discount"].Visible = false;
+                dataGridView.Columns["net_total_amount"].Visible = false;
+                dataGridView.Columns["cash_received"].Visible = false;
+                dataGridView.Columns["change"].Visible = false;
 
                 dataGridView.Columns["table_name"].HeaderText = "Table";
                 dataGridView.Columns["customer"].HeaderText = "Customer";

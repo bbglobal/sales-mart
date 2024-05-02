@@ -71,6 +71,7 @@
             flowLayoutPanel1.Controls.Add(label3);
             flowLayoutPanel1.Controls.Add(label4);
             flowLayoutPanel1.Dock = DockStyle.Top;
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(206, 136);
@@ -92,7 +93,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
             label2.ForeColor = Color.FromArgb(65, 66, 68);
-            label2.Location = new Point(9, 5);
+            label2.Location = new Point(3, 30);
             label2.Margin = new Padding(3, 5, 3, 0);
             label2.Name = "label2";
             label2.Size = new Size(0, 20);
@@ -103,7 +104,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
             label3.ForeColor = Color.FromArgb(65, 66, 68);
-            label3.Location = new Point(15, 5);
+            label3.Location = new Point(3, 55);
             label3.Margin = new Padding(3, 5, 3, 0);
             label3.Name = "label3";
             label3.Size = new Size(0, 20);
@@ -114,7 +115,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold);
             label4.ForeColor = Color.FromArgb(65, 66, 68);
-            label4.Location = new Point(21, 5);
+            label4.Location = new Point(3, 80);
             label4.Margin = new Padding(3, 5, 3, 0);
             label4.Name = "label4";
             label4.Size = new Size(0, 20);

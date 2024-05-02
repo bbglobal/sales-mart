@@ -22,8 +22,8 @@ namespace POS
         SqlCommand command;
         System.Windows.Forms.TextBox targetTextBox;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
-        private int total_amount;
-        public PaymentMethodScreen(int total_amount, int rowIndex)
+        private double total_amount;
+        public PaymentMethodScreen(double total_amount, int rowIndex)
         {
 
             InitializeComponent();
@@ -109,7 +109,7 @@ namespace POS
 
 
 
-        private void SetFields(int rowNo)
+        private void SetFields(double rowNo)
         {
             BillAmount_TextBox.Text = rowNo.ToString();
             NetAmount_TextBox.Text = BillAmount_TextBox.Text;
@@ -204,47 +204,62 @@ namespace POS
 
         private void Nk_NumberButtonPressed(object sender, int number)
         {
-            if (number == -1)
+            if (targetTextBox == Discount_TextBox || targetTextBox == CashReceived_TextBox)
             {
-                if (targetTextBox.Text.Length > 0)
+                if (number == -1)
                 {
-                    targetTextBox.Text = targetTextBox.Text.Substring(0, targetTextBox.Text.Length - 1);
+                    if (targetTextBox.Text.Length > 0)
+                    {
+                        targetTextBox.Text = targetTextBox.Text.Substring(0, targetTextBox.Text.Length - 1);
+                        targetTextBox.SelectionStart = targetTextBox.Text.Length;
+                    }
+                }
+                else if (number == -2)
+                {
+                    targetTextBox.Text = "";
+                    targetTextBox.SelectionStart = targetTextBox.Text.Length;
+                }
+                else if (number == -3)
+                {
+                    targetTextBox.Text += ".";
+                    targetTextBox.SelectionStart = targetTextBox.Text.Length;
+                }
+                else
+                {
+                    targetTextBox.Text += number.ToString();
                     targetTextBox.SelectionStart = targetTextBox.Text.Length;
                 }
             }
-            else if (number == -2)
-            {
-                targetTextBox.Text = "";
-                targetTextBox.SelectionStart = targetTextBox.Text.Length;
-            }
-            else if (number == -3)
-            {
-                targetTextBox.Text += ".";
-                targetTextBox.SelectionStart = targetTextBox.Text.Length;
-            }
-            else
-            {
-                targetTextBox.Text += number.ToString();
-                targetTextBox.SelectionStart = targetTextBox.Text.Length;
-            }
+            
         }
 
+        //Percent Work
+        // Decimal places fix
         private void Discount_TextBox_TextChanged(object sender, EventArgs e)
         {
+            string text = Discount_TextBox.Text;
+            
             if (Discount_TextBox.Text != "")
             {
-                int bill = Convert.ToInt32(BillAmount_TextBox.Text);
-                int disc = Convert.ToInt32(Discount_TextBox.Text);
-                if (disc <= bill)
+                if (text[text.Length - 1] == Convert.ToChar("."))
                 {
-                    NetAmount_TextBox.Text = (bill - disc).ToString();
+                    return;
                 }
-                else 
+                if (Convert.ToDouble(Discount_TextBox.Text) > 100)
                 {
-                    MessageBox.Show("Discount can't be greater than the Bill Amount","Error",MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                    MessageBox.Show("Discount can't be greater than 100","Failed",MessageBoxButtons.OK,MessageBoxIcon.Hand);
                     Discount_TextBox.Text = "";
-                    NetAmount_TextBox.Text = BillAmount_TextBox.Text;
+                    return;
                 }
+            }
+            
+           
+            if (Discount_TextBox.Text != "")
+            {
+
+                double bill = Convert.ToDouble(BillAmount_TextBox.Text);
+                double disc = Convert.ToDouble(Discount_TextBox.Text);
+                NetAmount_TextBox.Text = (bill - ((disc / 100) * bill)).ToString(); 
 
             }
             else
@@ -267,15 +282,15 @@ namespace POS
         {
             if (CashReceived_TextBox.Text != "")
             {
-                int net = Convert.ToInt32(NetAmount_TextBox.Text);
-                int cash = Convert.ToInt32(CashReceived_TextBox.Text);
+                double net = Convert.ToDouble(NetAmount_TextBox.Text);
+                double cash = Convert.ToDouble(CashReceived_TextBox.Text);
                 if (cash > net)
                 {
                     Change_TextBox.Text = (cash - net).ToString();
                 }
                 else if (cash == net)
                 {
-                    Change_TextBox.Text = "0";
+                    Change_TextBox.Text = "0.00";
                 }
                 else
                 {

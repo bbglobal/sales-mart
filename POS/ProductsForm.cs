@@ -83,7 +83,7 @@ namespace POS
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ProductName", ProductName_TextBox.Text);
-                        command.Parameters.AddWithValue("@Price", Convert.ToInt32(ProductPrice_TextBox.Text));
+                        command.Parameters.AddWithValue("@Price", Convert.ToDouble(ProductPrice_TextBox.Text));
                         command.Parameters.AddWithValue("@Category", Category_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
 
@@ -111,7 +111,7 @@ namespace POS
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ProductName", ProductName_TextBox.Text);
-                        command.Parameters.AddWithValue("@Price", Convert.ToInt32(ProductPrice_TextBox.Text));
+                        command.Parameters.AddWithValue("@Price", Convert.ToDouble(ProductPrice_TextBox.Text));
                         command.Parameters.AddWithValue("@Category", Category_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Id", rowIndex);

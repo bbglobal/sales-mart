@@ -18,9 +18,9 @@ namespace POS
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
         SqlConnection connection;
         string json = "";
-        int total_amount = 0;
+        double total_amount = 0.00;
         string updatedString = "";
-        public SelectTable(string json,int total_amount)
+        public SelectTable(string json,double total_amount)
         {
             this.json = json;
             this.total_amount = total_amount;
