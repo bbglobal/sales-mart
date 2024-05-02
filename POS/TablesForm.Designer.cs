@@ -1,6 +1,6 @@
 ﻿namespace POS
 {
-    partial class StaffCategoryForm
+    partial class TablesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TablesForm));
             panel3 = new Panel();
             Title_label = new Label();
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            CategoryTypes_TextBox = new TextBox();
+            TableName_TextBox = new TextBox();
             label3 = new Label();
             panel4 = new Panel();
             save_button = new Button();
@@ -63,17 +63,17 @@
             Title_label.BackColor = Color.Transparent;
             Title_label.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Title_label.ForeColor = Color.White;
-            Title_label.Location = new Point(132, 33);
+            Title_label.Location = new Point(166, 33);
             Title_label.Name = "Title_label";
-            Title_label.Size = new Size(348, 40);
+            Title_label.Size = new Size(232, 40);
             Title_label.TabIndex = 1;
-            Title_label.Text = "Add Staff Category Types";
+            Title_label.Text = "Add Table Name";
             // 
             // label1
             // 
             label1.BackColor = Color.Transparent;
             label1.Image = (Image)resources.GetObject("label1.Image");
-            label1.Location = new Point(55, 26);
+            label1.Location = new Point(89, 26);
             label1.Name = "label1";
             label1.Size = new Size(60, 60);
             label1.TabIndex = 0;
@@ -94,7 +94,7 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Controls.Add(CategoryTypes_TextBox);
+            panel2.Controls.Add(TableName_TextBox);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
@@ -104,14 +104,14 @@
             panel2.Size = new Size(498, 422);
             panel2.TabIndex = 1;
             // 
-            // CategoryTypes_TextBox
+            // TableName_TextBox
             // 
-            CategoryTypes_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            CategoryTypes_TextBox.Location = new Point(144, 202);
-            CategoryTypes_TextBox.Multiline = true;
-            CategoryTypes_TextBox.Name = "CategoryTypes_TextBox";
-            CategoryTypes_TextBox.Size = new Size(181, 30);
-            CategoryTypes_TextBox.TabIndex = 3;
+            TableName_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TableName_TextBox.Location = new Point(144, 202);
+            TableName_TextBox.Multiline = true;
+            TableName_TextBox.Name = "TableName_TextBox";
+            TableName_TextBox.Size = new Size(181, 30);
+            TableName_TextBox.TabIndex = 3;
             // 
             // label3
             // 
@@ -119,9 +119,9 @@
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.Location = new Point(140, 175);
             label3.Name = "label3";
-            label3.Size = new Size(110, 20);
+            label3.Size = new Size(88, 20);
             label3.TabIndex = 2;
-            label3.Text = "Category Types";
+            label3.Text = "Table Name";
             // 
             // panel4
             // 
@@ -167,7 +167,7 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // StaffCategoryForm
+            // TablesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -175,7 +175,7 @@
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "StaffCategoryForm";
+            Name = "TablesForm";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StaffCategoryForm";
@@ -199,6 +199,6 @@
         private Button cancel_button;
         private Button save_button;
         private Label label3;
-        private TextBox CategoryTypes_TextBox;
+        private TextBox TableName_TextBox;
     }
 }

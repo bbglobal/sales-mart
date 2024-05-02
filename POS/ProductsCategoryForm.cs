@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace POS
 {
-    public partial class StaffCategoryForm : Form
+    public partial class ProductsCategoryForm : Form
     {
         private int rowIndex;
         SqlConnection connection;
         SqlCommand command;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
-        public StaffCategoryForm(int rowIndex = -1)
+        public ProductsCategoryForm(int rowIndex = -1)
         {
 
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace POS
             this.rowIndex = rowIndex;
             if (this.rowIndex != -1)
             {
-                Title_label.Text = "Edit Staff Category Types";
+                Title_label.Text = "Edit Product Category Types";
                 save_button.Text = "Save";
                 SetFields(this.rowIndex);
             }
@@ -54,7 +54,7 @@ namespace POS
                 connection.Open();
                 if (rowIndex == -1)
                 {
-                    string query = "INSERT INTO staff_category (types) VALUES (@Types)";
+                    string query = "INSERT INTO product_category (types) VALUES (@Types)";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Types", CategoryTypes_TextBox.Text);
@@ -62,7 +62,7 @@ namespace POS
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Staff Category Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Product Category Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ClearFields();
                         }
                     }
@@ -72,7 +72,7 @@ namespace POS
                 }
                 else
                 {
-                    string query = "UPDATE staff_category SET types=@Types WHERE id=@Id";
+                    string query = "UPDATE product_category SET types=@Types WHERE id=@Id";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Types", CategoryTypes_TextBox.Text);
@@ -81,7 +81,7 @@ namespace POS
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Staff Category Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Product Category Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
 
@@ -106,7 +106,7 @@ namespace POS
             try
             {
                 connection.Open();
-                string query = $"select * from staff_category where id={rowNo}";
+                string query = $"select * from product_category where id={rowNo}";
                 command = new SqlCommand(query, connection);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -153,12 +153,14 @@ namespace POS
             CategoryTypes_TextBox.Text = "";
 
         }
+
+
         private void cancel_button_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        string filepath;
+        
  
 
         private void save_button_Click(object sender, EventArgs e)

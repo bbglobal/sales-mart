@@ -1,6 +1,6 @@
 ﻿namespace POS
 {
-    partial class StaffCategoryForm
+    partial class ProductsCategoryForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductsCategoryForm));
             panel3 = new Panel();
             Title_label = new Label();
             label1 = new Label();
@@ -63,17 +63,17 @@
             Title_label.BackColor = Color.Transparent;
             Title_label.Font = new Font("Segoe UI Semibold", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Title_label.ForeColor = Color.White;
-            Title_label.Location = new Point(132, 33);
+            Title_label.Location = new Point(103, 33);
             Title_label.Name = "Title_label";
-            Title_label.Size = new Size(348, 40);
+            Title_label.Size = new Size(391, 40);
             Title_label.TabIndex = 1;
-            Title_label.Text = "Add Staff Category Types";
+            Title_label.Text = "Add Product Category Types";
             // 
             // label1
             // 
             label1.BackColor = Color.Transparent;
             label1.Image = (Image)resources.GetObject("label1.Image");
-            label1.Location = new Point(55, 26);
+            label1.Location = new Point(26, 26);
             label1.Name = "label1";
             label1.Size = new Size(60, 60);
             label1.TabIndex = 0;
@@ -167,7 +167,7 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // StaffCategoryForm
+            // ProductsCategoryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -175,7 +175,7 @@
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "StaffCategoryForm";
+            Name = "ProductsCategoryForm";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StaffCategoryForm";

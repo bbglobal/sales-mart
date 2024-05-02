@@ -23,6 +23,7 @@ namespace POS
 
             InitializeComponent();
             InitializeDatabaseConnection();
+            SetTypeComboBox();
             this.rowIndex = rowIndex;
             if (this.rowIndex != -1)
             {
@@ -41,6 +42,30 @@ namespace POS
             connection = new SqlConnection(connectionString);
         }
 
+        private void SetTypeComboBox()
+        {
+            try
+            {
+                string query = "select types from product_category";
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Category_ComboBox.Items.Add(reader["types"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Message : " + ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
 
         private void SaveData()
         {
@@ -54,10 +79,11 @@ namespace POS
                 connection.Open();
                 if (rowIndex == -1)
                 {
-                    string query = "INSERT INTO products (product_name, category, status, image, or_image) VALUES (@ProductName, @Category, @Status, @ImageData, @OR_ImageData)";
+                    string query = "INSERT INTO products (product_name,product_price, category, status, image, or_image) VALUES (@ProductName,@Price, @Category, @Status, @ImageData, @OR_ImageData)";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ProductName", ProductName_TextBox.Text);
+                        command.Parameters.AddWithValue("@Price", Convert.ToDouble(ProductPrice_TextBox.Text));
                         command.Parameters.AddWithValue("@Category", Category_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
 
@@ -72,7 +98,7 @@ namespace POS
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Product Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            
+                            ClearFields();
                         }
                     }
 
@@ -81,10 +107,11 @@ namespace POS
                 }
                 else
                 {
-                    string query = "UPDATE products SET product_name=@ProductName, category=@Category, status=@Status, image=@ImageData, or_image=@OR_ImageData WHERE id=@Id";
+                    string query = "UPDATE products SET product_name=@ProductName,product_price = @Price, category=@Category, status=@Status, image=@ImageData, or_image=@OR_ImageData WHERE id=@Id";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ProductName", ProductName_TextBox.Text);
+                        command.Parameters.AddWithValue("@Price", Convert.ToDouble(ProductPrice_TextBox.Text));
                         command.Parameters.AddWithValue("@Category", Category_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Id", rowIndex);
@@ -100,6 +127,7 @@ namespace POS
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Product Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            
                         }
                     }
 
@@ -163,6 +191,7 @@ namespace POS
                     while (reader.Read())
                     {
                         ProductName_TextBox.Text = (string)reader["product_name"];
+                        ProductPrice_TextBox.Text = reader["product_price"].ToString();
                         Category_ComboBox.Text = (string)reader["category"];
                         Status_ComboBox.Text = (string)reader["status"];
                         //ProductName_TextBox.Text = reader.GetString(reader.GetOrdinal("product_name"));
@@ -181,6 +210,17 @@ namespace POS
                 connection.Close();
             }
         }
+
+
+        private void ClearFields() 
+        {
+            ProductName_TextBox.Text = "";
+            ProductPrice_TextBox.Text = "";
+            Category_ComboBox.Text = "";
+            Status_ComboBox.Text = "";
+            pictureBox1.Image = null;
+        }
+
 
         private void InitializeLabel(Label label, Image image, int newWidth, int newHeight)
         {

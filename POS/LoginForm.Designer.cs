@@ -107,7 +107,7 @@
             linkLabel2.Text = "Create an account";
             linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
-            // loginform
+            // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -122,9 +122,8 @@
             Controls.Add(textBox1);
             DoubleBuffered = true;
             MaximizeBox = false;
-            Name = "loginform";
-            Text = "loginform";
-            WindowState = FormWindowState.Maximized;
+            Name = "LoginForm";
+            Text = "Login Form";
             ResumeLayout(false);
             PerformLayout();
         }

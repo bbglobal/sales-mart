@@ -62,7 +62,7 @@ namespace POS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Message : "+ ex)
+                MessageBox.Show("Error Message : "+ ex);
             }
             finally 
             {
@@ -112,7 +112,7 @@ namespace POS
                 }
                 else
                 {
-                    string query = "UPDATE staff_details SET staff_name=@StaffName, type=@Type, phone_number=@Phone,address=@Address,status=@Status, WHERE id=@Id";
+                    string query = "UPDATE staff_details SET staff_name=@StaffName, type=@Type, phone_number=@Phone,address=@Address,status=@Status WHERE id=@Id";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@StaffName", StaffName_TextBox.Text);
@@ -226,6 +226,17 @@ namespace POS
             }
             return resizedImg;
         }
+
+        private void ClearFields()
+        {
+            StaffName_TextBox.Text = "";
+            Type_ComboBox.Text = "";
+            Phone_TextBox.Text = "";
+            Address_TextBox.Text = "";
+            Status_ComboBox.Text = "";
+
+        }
+
 
         private void cancel_button_Click(object sender, EventArgs e)
         {

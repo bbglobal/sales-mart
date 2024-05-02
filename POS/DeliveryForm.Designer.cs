@@ -1,6 +1,6 @@
 ﻿namespace POS
 {
-    partial class StaffCategoryForm
+    partial class DeliveryForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeliveryForm));
             panel3 = new Panel();
             Title_label = new Label();
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            CategoryTypes_TextBox = new TextBox();
+            Name_TextBox = new TextBox();
             label3 = new Label();
             panel4 = new Panel();
             save_button = new Button();
             cancel_button = new Button();
+            Phone_TextBox = new TextBox();
+            label2 = new Label();
+            Address_TextBox = new TextBox();
+            label4 = new Label();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -65,9 +69,9 @@
             Title_label.ForeColor = Color.White;
             Title_label.Location = new Point(132, 33);
             Title_label.Name = "Title_label";
-            Title_label.Size = new Size(348, 40);
+            Title_label.Size = new Size(303, 40);
             Title_label.TabIndex = 1;
-            Title_label.Text = "Add Staff Category Types";
+            Title_label.Text = "Add Customer Details";
             // 
             // label1
             // 
@@ -94,7 +98,11 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Controls.Add(CategoryTypes_TextBox);
+            panel2.Controls.Add(Address_TextBox);
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(Phone_TextBox);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(Name_TextBox);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
@@ -104,24 +112,24 @@
             panel2.Size = new Size(498, 422);
             panel2.TabIndex = 1;
             // 
-            // CategoryTypes_TextBox
+            // Name_TextBox
             // 
-            CategoryTypes_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            CategoryTypes_TextBox.Location = new Point(144, 202);
-            CategoryTypes_TextBox.Multiline = true;
-            CategoryTypes_TextBox.Name = "CategoryTypes_TextBox";
-            CategoryTypes_TextBox.Size = new Size(181, 30);
-            CategoryTypes_TextBox.TabIndex = 3;
+            Name_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Name_TextBox.Location = new Point(32, 172);
+            Name_TextBox.Multiline = true;
+            Name_TextBox.Name = "Name_TextBox";
+            Name_TextBox.Size = new Size(181, 30);
+            Name_TextBox.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(140, 175);
+            label3.Location = new Point(28, 145);
             label3.Name = "label3";
-            label3.Size = new Size(110, 20);
+            label3.Size = new Size(49, 20);
             label3.TabIndex = 2;
-            label3.Text = "Category Types";
+            label3.Text = "Name";
             // 
             // panel4
             // 
@@ -136,7 +144,7 @@
             // 
             // save_button
             // 
-            save_button.BackColor = Color.Transparent;
+            save_button.BackColor = Color.White;
             save_button.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 194);
             save_button.FlatAppearance.BorderSize = 3;
             save_button.FlatAppearance.MouseDownBackColor = Color.White;
@@ -167,7 +175,45 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // StaffCategoryForm
+            // Phone_TextBox
+            // 
+            Phone_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Phone_TextBox.Location = new Point(32, 244);
+            Phone_TextBox.Multiline = true;
+            Phone_TextBox.Name = "Phone_TextBox";
+            Phone_TextBox.Size = new Size(181, 30);
+            Phone_TextBox.TabIndex = 5;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(28, 217);
+            label2.Name = "label2";
+            label2.Size = new Size(50, 20);
+            label2.TabIndex = 4;
+            label2.Text = "Phone";
+            // 
+            // Address_TextBox
+            // 
+            Address_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Address_TextBox.Location = new Point(268, 172);
+            Address_TextBox.Multiline = true;
+            Address_TextBox.Name = "Address_TextBox";
+            Address_TextBox.Size = new Size(181, 76);
+            Address_TextBox.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(264, 145);
+            label4.Name = "label4";
+            label4.Size = new Size(62, 20);
+            label4.TabIndex = 6;
+            label4.Text = "Address";
+            // 
+            // DeliveryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -175,7 +221,7 @@
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "StaffCategoryForm";
+            Name = "DeliveryForm";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StaffCategoryForm";
@@ -199,6 +245,10 @@
         private Button cancel_button;
         private Button save_button;
         private Label label3;
-        private TextBox CategoryTypes_TextBox;
+        private TextBox Name_TextBox;
+        private TextBox Address_TextBox;
+        private Label label4;
+        private TextBox Phone_TextBox;
+        private Label label2;
     }
 }

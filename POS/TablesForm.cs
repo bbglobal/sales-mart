@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace POS
 {
-    public partial class StaffCategoryForm : Form
+    public partial class TablesForm : Form
     {
         private int rowIndex;
         SqlConnection connection;
         SqlCommand command;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
-        public StaffCategoryForm(int rowIndex = -1)
+        public TablesForm(int rowIndex = -1)
         {
 
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace POS
             this.rowIndex = rowIndex;
             if (this.rowIndex != -1)
             {
-                Title_label.Text = "Edit Staff Category Types";
+                Title_label.Text = "Edit Table Name";
                 save_button.Text = "Save";
                 SetFields(this.rowIndex);
             }
@@ -44,7 +44,7 @@ namespace POS
 
         private void SaveData()
         {
-            if (CategoryTypes_TextBox.Text == "" )
+            if (TableName_TextBox.Text == "" )
             {
                 MessageBox.Show("Please fill the field","Error" ,MessageBoxButtons.OK,MessageBoxIcon.Stop);
                 return;
@@ -54,15 +54,15 @@ namespace POS
                 connection.Open();
                 if (rowIndex == -1)
                 {
-                    string query = "INSERT INTO staff_category (types) VALUES (@Types)";
+                    string query = "INSERT INTO tables (table_name) VALUES (@TableName)";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@Types", CategoryTypes_TextBox.Text);
+                        command.Parameters.AddWithValue("@TableName", TableName_TextBox.Text);
 
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Staff Category Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Table Name Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ClearFields();
                         }
                     }
@@ -72,16 +72,16 @@ namespace POS
                 }
                 else
                 {
-                    string query = "UPDATE staff_category SET types=@Types WHERE id=@Id";
+                    string query = "UPDATE tables SET table_name=@TableName WHERE id=@Id";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@Types", CategoryTypes_TextBox.Text);
-                        command.Parameters.AddWithValue("@Id", rowIndex);
+                        command.Parameters.AddWithValue("@TableName", TableName_TextBox.Text);
+                        command.Parameters.AddWithValue("@Id", rowIndex  );
 
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("Staff Category Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Table Name Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
 
@@ -106,14 +106,14 @@ namespace POS
             try
             {
                 connection.Open();
-                string query = $"select * from staff_category where id={rowNo}";
+                string query = $"select * from tables where id={rowNo}";
                 command = new SqlCommand(query, connection);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
 
                     while (reader.Read())
                     {
-                        CategoryTypes_TextBox.Text = (string)reader["types"];
+                        TableName_TextBox.Text = (string)reader["table_name"];
                     }
                 }
             }
@@ -148,17 +148,18 @@ namespace POS
             return resizedImg;
         }
 
-        private void ClearFields()
+        private void ClearFields() 
         {
-            CategoryTypes_TextBox.Text = "";
-
+            TableName_TextBox.Text = "";
         }
+
+
+
         private void cancel_button_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        string filepath;
  
 
         private void save_button_Click(object sender, EventArgs e)
