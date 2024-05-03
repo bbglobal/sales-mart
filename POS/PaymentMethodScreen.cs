@@ -22,8 +22,8 @@ namespace POS
         SqlCommand command;
         System.Windows.Forms.TextBox targetTextBox;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
-        private double total_amount;
-        public PaymentMethodScreen(double total_amount, int rowIndex)
+        private decimal total_amount;
+        public PaymentMethodScreen(decimal total_amount, int rowIndex)
         {
 
             InitializeComponent();
@@ -37,9 +37,22 @@ namespace POS
                 if (control is System.Windows.Forms.TextBox textBox)
                 {
                     textBox.Enter += TextBox_Enter;
+                    textBox.Click += TextBox_Click;
                 }
             }
 
+        }
+
+        private void TextBox_Click(object? sender, EventArgs e)
+        {
+            targetTextBox = (System.Windows.Forms.TextBox)sender;
+            if (targetTextBox == Discount_TextBox || targetTextBox == CashReceived_TextBox)
+            {
+                if (Nk.Visible == false)
+                {
+                    Nk.Show();
+                }
+            }
         }
 
         public string StatusUpdated
@@ -80,10 +93,14 @@ namespace POS
             try
             {
                 connection.Open();
-                string query = "UPDATE bill_list SET status=@Status WHERE bill_id=@Id";
+                string query = "UPDATE bill_list SET status=@Status,discount=@Discount,net_total_amount=@NetTotal,cash_received=@CashReceived,change=@Change WHERE bill_id=@Id";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Status", "Paid");
+                    command.Parameters.AddWithValue("@Discount", Convert.ToDecimal(Discount_TextBox.Text));
+                    command.Parameters.AddWithValue("@NetTotal", Convert.ToDecimal(NetAmount_TextBox.Text));
+                    command.Parameters.AddWithValue("@CashReceived", Convert.ToDecimal(CashReceived_TextBox.Text));
+                    command.Parameters.AddWithValue("@Change", Convert.ToDecimal(Change_TextBox.Text));
                     command.Parameters.AddWithValue("@Id", rowIndex);
 
                     int rowsAffected = command.ExecuteNonQuery();
@@ -109,7 +126,7 @@ namespace POS
 
 
 
-        private void SetFields(double rowNo)
+        private void SetFields(decimal rowNo)
         {
             BillAmount_TextBox.Text = rowNo.ToString();
             NetAmount_TextBox.Text = BillAmount_TextBox.Text;
@@ -245,7 +262,7 @@ namespace POS
                 {
                     return;
                 }
-                if (Convert.ToDouble(Discount_TextBox.Text) > 100)
+                if (Convert.ToDecimal(Discount_TextBox.Text) > 100)
                 {
                     MessageBox.Show("Discount can't be greater than 100","Failed",MessageBoxButtons.OK,MessageBoxIcon.Hand);
                     Discount_TextBox.Text = "";
@@ -257,9 +274,9 @@ namespace POS
             if (Discount_TextBox.Text != "")
             {
 
-                double bill = Convert.ToDouble(BillAmount_TextBox.Text);
-                double disc = Convert.ToDouble(Discount_TextBox.Text);
-                NetAmount_TextBox.Text = (bill - ((disc / 100) * bill)).ToString(); 
+                decimal bill = Convert.ToDecimal(BillAmount_TextBox.Text);
+                decimal disc = Convert.ToDecimal(Discount_TextBox.Text);
+                NetAmount_TextBox.Text = (bill - ((disc / 100) * bill)).ToString("F2"); 
 
             }
             else
@@ -282,11 +299,11 @@ namespace POS
         {
             if (CashReceived_TextBox.Text != "")
             {
-                double net = Convert.ToDouble(NetAmount_TextBox.Text);
-                double cash = Convert.ToDouble(CashReceived_TextBox.Text);
+                decimal net = Convert.ToDecimal(NetAmount_TextBox.Text);
+                decimal cash = Convert.ToDecimal(CashReceived_TextBox.Text);
                 if (cash > net)
                 {
-                    Change_TextBox.Text = (cash - net).ToString();
+                    Change_TextBox.Text = (cash - net).ToString("F2");
                 }
                 else if (cash == net)
                 {

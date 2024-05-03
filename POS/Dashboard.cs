@@ -1517,7 +1517,7 @@ namespace POS
                     {
                         Byte[] imageArray = (byte[])row["or_image"];
                         byte[] imageByteArray = imageArray;
-                        AddPOSProducts(Convert.ToInt32(row["id"]), Convert.ToInt32(row["product_price"]), row["category"].ToString(), row["product_name"].ToString(), ByteArraytoImage(imageByteArray));
+                        AddPOSProducts(Convert.ToInt32(row["id"]), Convert.ToDecimal(row["product_price"]), row["category"].ToString(), row["product_name"].ToString(), ByteArraytoImage(imageByteArray));
                     }
                 }
             }
@@ -1532,7 +1532,7 @@ namespace POS
 
         }
 
-        private void AddPOSProducts(int pid, int price, string category, string name, Image image)
+        private void AddPOSProducts(int pid, decimal price, string category, string name, Image image)
         {
             var w = new ProductCard()
             {
@@ -1546,20 +1546,28 @@ namespace POS
 
             w.onSelect += (ss, ee) =>
             {
-                var wdg = (ProductCard)ss;
-                foreach (DataGridViewRow item in POSProductsDataGrid.Rows)
+                if (BillID == -1)
                 {
-                    if (Convert.ToInt32(item.Cells["hidden_id"].Value) == wdg.id)
+                    var wdg = (ProductCard)ss;
+                    foreach (DataGridViewRow item in POSProductsDataGrid.Rows)
                     {
-                        item.Cells["quantity"].Value = int.Parse(item.Cells["quantity"].Value.ToString()) + 1;
-                        item.Cells["total_amount"].Value = int.Parse(item.Cells["quantity"].Value.ToString()) *
-                                                           double.Parse(item.Cells["product_price"].Value.ToString());
-                        return;
+                        if (Convert.ToInt32(item.Cells["hidden_id"].Value) == wdg.id)
+                        {
+                            item.Cells["quantity"].Value = int.Parse(item.Cells["quantity"].Value.ToString()) + 1;
+                            item.Cells["total_amount"].Value = decimal.Parse(item.Cells["quantity"].Value.ToString()) *
+                                                               decimal.Parse(item.Cells["product_price"].Value.ToString());
+                            return;
+                        }
+
                     }
 
+                    POSProductsDataGrid.Rows.Add(new object[] { 0, wdg.id, wdg.product_name, 1, wdg.product_price, wdg.product_price });
                 }
-
-                POSProductsDataGrid.Rows.Add(new object[] { 0, wdg.id, wdg.product_name, 1, wdg.product_price, wdg.product_price });
+                else
+                {
+                    MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+                
 
             };
         }
@@ -1818,7 +1826,7 @@ namespace POS
             }
         }
 
-        private double TotalItemsAmount = 0.00;
+        private decimal TotalItemsAmount = 0;
         private void AddDataToPOSDataGrid(string json, string status)
         {
             List<string> jsonData = JsonConvert.DeserializeObject<List<string>>(json);
@@ -1826,7 +1834,7 @@ namespace POS
             {
                 connection.Open();
                 POSProductsDataGrid.Rows.Clear();
-                double total = 0.00;
+                decimal total = 0;
                 foreach (string item in jsonData)
                 {
                     string[] parts = item.Split("-");
@@ -1838,8 +1846,8 @@ namespace POS
                             while (reader.Read())
                             {
 
-                                POSProductsDataGrid.Rows.Add(new object[] { 0, (int)reader["id"], reader["product_name"].ToString(), Convert.ToInt32(parts[1]), Convert.ToDouble(reader["product_price"]), Convert.ToDouble(parts[1]) * Convert.ToDouble(reader["product_price"]) });
-                                total += Convert.ToDouble(parts[1]) * Convert.ToDouble(reader["product_price"]);  
+                                POSProductsDataGrid.Rows.Add(new object[] { 0, (int)reader["id"], reader["product_name"].ToString(), Convert.ToInt32(parts[1]), Convert.ToDecimal(reader["product_price"]), Convert.ToDecimal(parts[1]) * Convert.ToDecimal(reader["product_price"]) });
+                                total += Convert.ToDecimal(parts[1]) * Convert.ToDecimal(reader["product_price"]);  
 
                             }
                         }

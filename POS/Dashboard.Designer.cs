@@ -70,12 +70,6 @@
             FastCashButton = new Button();
             TotalAmountLabel = new Label();
             POSProductsDataGrid = new DataGridView();
-            id = new DataGridViewTextBoxColumn();
-            hidden_id = new DataGridViewTextBoxColumn();
-            product_name = new DataGridViewTextBoxColumn();
-            quantity = new DataGridViewTextBoxColumn();
-            product_price = new DataGridViewTextBoxColumn();
-            total_amount = new DataGridViewTextBoxColumn();
             tableLayoutPanel1 = new TableLayoutPanel();
             DinInButton = new Button();
             TakeAwayButton = new Button();
@@ -148,6 +142,12 @@
             T_Sale_Amount_label = new Label();
             TS_line = new Label();
             Total_Sale_label = new Label();
+            id = new DataGridViewTextBoxColumn();
+            hidden_id = new DataGridViewTextBoxColumn();
+            product_name = new DataGridViewTextBoxColumn();
+            quantity = new DataGridViewTextBoxColumn();
+            product_price = new DataGridViewTextBoxColumn();
+            total_amount = new DataGridViewTextBoxColumn();
             Main_panel.SuspendLayout();
             Sidebar_panel.SuspendLayout();
             ScreenContainer_panel.SuspendLayout();
@@ -477,9 +477,9 @@
             Calculator_panel.Controls.Add(CheckOutButton);
             Calculator_panel.Controls.Add(FastCashButton);
             Calculator_panel.Controls.Add(TotalAmountLabel);
-            Calculator_panel.Location = new Point(1, 266);
+            Calculator_panel.Location = new Point(1, 330);
             Calculator_panel.Name = "Calculator_panel";
-            Calculator_panel.Size = new Size(343, 330);
+            Calculator_panel.Size = new Size(343, 266);
             Calculator_panel.TabIndex = 1;
             // 
             // CheckOutButton
@@ -490,7 +490,7 @@
             CheckOutButton.FlatStyle = FlatStyle.Flat;
             CheckOutButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             CheckOutButton.ForeColor = Color.White;
-            CheckOutButton.Location = new Point(175, 238);
+            CheckOutButton.Location = new Point(175, 174);
             CheckOutButton.Name = "CheckOutButton";
             CheckOutButton.Size = new Size(163, 41);
             CheckOutButton.TabIndex = 2;
@@ -507,7 +507,7 @@
             FastCashButton.FlatStyle = FlatStyle.Flat;
             FastCashButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             FastCashButton.ForeColor = Color.White;
-            FastCashButton.Location = new Point(3, 238);
+            FastCashButton.Location = new Point(3, 174);
             FastCashButton.Name = "FastCashButton";
             FastCashButton.Size = new Size(166, 41);
             FastCashButton.TabIndex = 1;
@@ -520,7 +520,7 @@
             // 
             TotalAmountLabel.Dock = DockStyle.Bottom;
             TotalAmountLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TotalAmountLabel.Location = new Point(0, 282);
+            TotalAmountLabel.Location = new Point(0, 218);
             TotalAmountLabel.Name = "TotalAmountLabel";
             TotalAmountLabel.Size = new Size(343, 48);
             TotalAmountLabel.TabIndex = 0;
@@ -562,61 +562,9 @@
             POSProductsDataGrid.ReadOnly = true;
             POSProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             POSProductsDataGrid.RowHeadersVisible = false;
-            POSProductsDataGrid.Size = new Size(343, 269);
+            POSProductsDataGrid.Size = new Size(343, 334);
             POSProductsDataGrid.TabIndex = 0;
             POSProductsDataGrid.CellFormatting += POSProductsDataGrid_CellFormatting;
-            // 
-            // id
-            // 
-            id.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            id.FillWeight = 72.74293F;
-            id.HeaderText = "SR#";
-            id.Name = "id";
-            id.ReadOnly = true;
-            id.Width = 30;
-            // 
-            // hidden_id
-            // 
-            hidden_id.HeaderText = "id";
-            hidden_id.Name = "hidden_id";
-            hidden_id.ReadOnly = true;
-            hidden_id.Visible = false;
-            // 
-            // product_name
-            // 
-            product_name.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            product_name.FillWeight = 129.391479F;
-            product_name.HeaderText = "Product Name";
-            product_name.Name = "product_name";
-            product_name.ReadOnly = true;
-            product_name.Width = 150;
-            // 
-            // quantity
-            // 
-            quantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            quantity.FillWeight = 14.1705494F;
-            quantity.HeaderText = "Qty";
-            quantity.Name = "quantity";
-            quantity.ReadOnly = true;
-            quantity.Width = 30;
-            // 
-            // product_price
-            // 
-            product_price.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            product_price.FillWeight = 55.26863F;
-            product_price.HeaderText = "Price";
-            product_price.Name = "product_price";
-            product_price.ReadOnly = true;
-            product_price.Width = 55;
-            // 
-            // total_amount
-            // 
-            total_amount.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            total_amount.FillWeight = 228.426392F;
-            total_amount.HeaderText = "T Amount";
-            total_amount.Name = "total_amount";
-            total_amount.ReadOnly = true;
-            total_amount.Width = 74;
             // 
             // tableLayoutPanel1
             // 
@@ -1740,6 +1688,58 @@
             Total_Sale_label.Text = "Total Sale Amount";
             Total_Sale_label.TextAlign = ContentAlignment.TopCenter;
             // 
+            // id
+            // 
+            id.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            id.FillWeight = 72.74293F;
+            id.HeaderText = "SR#";
+            id.Name = "id";
+            id.ReadOnly = true;
+            id.Width = 30;
+            // 
+            // hidden_id
+            // 
+            hidden_id.HeaderText = "id";
+            hidden_id.Name = "hidden_id";
+            hidden_id.ReadOnly = true;
+            hidden_id.Visible = false;
+            // 
+            // product_name
+            // 
+            product_name.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            product_name.FillWeight = 129.391479F;
+            product_name.HeaderText = "Product Name";
+            product_name.Name = "product_name";
+            product_name.ReadOnly = true;
+            product_name.Width = 140;
+            // 
+            // quantity
+            // 
+            quantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            quantity.FillWeight = 14.1705494F;
+            quantity.HeaderText = "Qty";
+            quantity.Name = "quantity";
+            quantity.ReadOnly = true;
+            quantity.Width = 30;
+            // 
+            // product_price
+            // 
+            product_price.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            product_price.FillWeight = 55.26863F;
+            product_price.HeaderText = "Price";
+            product_price.Name = "product_price";
+            product_price.ReadOnly = true;
+            product_price.Width = 60;
+            // 
+            // total_amount
+            // 
+            total_amount.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            total_amount.FillWeight = 228.426392F;
+            total_amount.HeaderText = "T Amount";
+            total_amount.Name = "total_amount";
+            total_amount.ReadOnly = true;
+            total_amount.Width = 79;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1880,12 +1880,6 @@
         private FlowLayoutPanel CategoriesFlowLayoutPanel;
         private Panel Calculator_panel;
         private FlowLayoutPanel ProductsFlowLayoutPanel;
-        private DataGridViewTextBoxColumn id;
-        private DataGridViewTextBoxColumn hidden_id;
-        private DataGridViewTextBoxColumn product_name;
-        private DataGridViewTextBoxColumn quantity;
-        private DataGridViewTextBoxColumn product_price;
-        private DataGridViewTextBoxColumn total_amount;
         private Button ProductsCategoryTabButton;
         private Button ProductsTabButton;
         private Panel TablesPanel;
@@ -1901,5 +1895,11 @@
         private Button CheckOutButton;
         private Button FastCashButton;
         private Label TotalAmountLabel;
+        private DataGridViewTextBoxColumn id;
+        private DataGridViewTextBoxColumn hidden_id;
+        private DataGridViewTextBoxColumn product_name;
+        private DataGridViewTextBoxColumn quantity;
+        private DataGridViewTextBoxColumn product_price;
+        private DataGridViewTextBoxColumn total_amount;
     }
 }

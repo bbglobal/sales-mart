@@ -21,7 +21,7 @@ namespace POS
         public event EventHandler onSelect = null;
 
         public int id { get; set; }
-        public int product_price { get; set; }
+        public decimal product_price { get; set; }
         public string product_category { get; set; }
         public string product_name
         {
