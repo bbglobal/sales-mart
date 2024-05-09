@@ -89,6 +89,7 @@
             linkLabel1.TabIndex = 3;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Forgot Password?";
+            linkLabel1.Visible = false;
             // 
             // linkLabel2
             // 
@@ -105,10 +106,12 @@
             linkLabel2.TabIndex = 4;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "Create an account";
+            linkLabel2.Visible = false;
             linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
             // LoginForm
             // 
+            AcceptButton = button1;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;

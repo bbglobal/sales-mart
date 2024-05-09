@@ -88,7 +88,7 @@ namespace POS
             RoundCorners(Menu_Reports_label, 20);
             RoundCorners(Menu_Settings_label, 20);
             InitializeTimer();
-            LoadCustomFont("POS.MyriadProSemibold.ttf");
+            //LoadCustomFont("POS.MyriadProSemibold.ttf");
             #endregion
         }
 
@@ -455,7 +455,7 @@ namespace POS
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
                 KitchenPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
         }
@@ -479,7 +479,7 @@ namespace POS
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
                 KitchenPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
         }
@@ -503,7 +503,7 @@ namespace POS
                 POSPanel.Visible = false;
                 ProductPanel.Visible = false;
                 KitchenPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
         }
@@ -529,7 +529,7 @@ namespace POS
                 StaffPanel.Visible = false;
                 TablesPanel.Visible = false;
                 KitchenPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 StartTransition(60, "Hide");
                 AddPOSCategory();
@@ -572,7 +572,7 @@ namespace POS
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
                 KitchenPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
         }
@@ -597,7 +597,7 @@ namespace POS
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
                 StaffPanel.Visible = false;
-                //ProductPanel.Visible = false;
+                ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
         }
@@ -612,6 +612,19 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Reports";
+            if (ReportsPanel.Visible == false)
+            {
+                ReportsPanel.Visible = true;
+                ProductPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                POSPanel.Visible = false;
+                TablesPanel.Visible = false;
+                StaffPanel.Visible = false;
+                KitchenPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
         }
 
         private void Menu_Settings_label_Click(object sender, EventArgs e)
@@ -825,6 +838,10 @@ namespace POS
 
 
             }
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         #endregion
@@ -900,14 +917,15 @@ namespace POS
         }
         #endregion
 
-        #endregion
+        #endregion 
 
 
         #region All Dashboard Screen Funtions
 
         #region Dashboard Load Event
-        private void Dashboard_Load(object sender, EventArgs e)
+        private async void Dashboard_Load(object sender, EventArgs e)
         {
+            
             int CurrentUserInitialWidth = CurrentUser_label.Width;
             CurrentUser_label.Text = $"User Name:  {Session.Username}";
             CurrentUser_label.Location = new Point(CurrentUser_label.Location.X - (CurrentUser_label.Width - CurrentUserInitialWidth), CurrentUser_label.Location.Y);
@@ -921,15 +939,19 @@ namespace POS
             SetLabelLocations(Menu_Reports_label, new Point(55, 534));
             SetLabelLocations(Menu_Settings_label, new Point(55, 604));
             SetLabelColor(Menu_Dashboard_label, "#0077C3");
-            Menu_Dashboard_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Products_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Tables_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Staff_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_POS_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Kitchen_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Reports_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            Menu_Settings_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            
+            //Menu_Dashboard_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            //Menu_Products_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            //Menu_Tables_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            //Menu_Staff_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            //Menu_POS_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            //Menu_Kitchen_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            //Menu_Reports_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            //Menu_Settings_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
+            //Thread.Sleep(10000);
             InitiateChart();
+            await Task.Delay(10);
+            ContentContainer_panel.Visible = true;
         }
 
         #endregion
@@ -1030,7 +1052,6 @@ namespace POS
 
 
         #endregion
-
 
 
         #region All Products Screen Functions
@@ -1401,7 +1422,7 @@ namespace POS
         #endregion
 
 
-
+        #region All POS Screen Functions
 
 
         #region POS Add Category and Event Listener Functions 
@@ -1567,13 +1588,15 @@ namespace POS
                 {
                     MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
-                
+
 
             };
         }
 
         #endregion
 
+
+        #region POSPanel Visibilty,POSProductDataGrid CellFormat & SearchBox Event Functions
 
         private void POSPanel_VisibleChanged(object sender, EventArgs e)
         {
@@ -1629,6 +1652,10 @@ namespace POS
 
         }
 
+        #endregion
+
+        #region NewScreen Function & Add Data to POSProduct DataGrid Function
+
         private void NewScreen()
         {
             if (POSProductsDataGrid.Rows.Count > 0)
@@ -1644,10 +1671,327 @@ namespace POS
             }
         }
 
+        private decimal TotalItemsAmount = 0;
+        private void AddDataToPOSDataGrid(string json, string status)
+        {
+            List<string> jsonData = JsonConvert.DeserializeObject<List<string>>(json);
+            try
+            {
+                connection.Open();
+                POSProductsDataGrid.Rows.Clear();
+                decimal total = 0;
+                foreach (string item in jsonData)
+                {
+                    string[] parts = item.Split("-");
+                    SqlCommand cmd = new SqlCommand($"select * from products where product_name='{parts[0]}'", connection);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+
+                                POSProductsDataGrid.Rows.Add(new object[] { 0, (int)reader["id"], reader["product_name"].ToString(), Convert.ToInt32(parts[1]), Convert.ToDecimal(reader["product_price"]), Convert.ToDecimal(parts[1]) * Convert.ToDecimal(reader["product_price"]) });
+                                total += Convert.ToDecimal(parts[1]) * Convert.ToDecimal(reader["product_price"]);
+
+                            }
+                        }
+                    }
+                }
+                if (status == "Paid")
+                {
+                    FastCashButton.Visible = false;
+                    CheckOutButton.Visible = false;
+                    TotalAmountLabel.Text = "Paid!";
+                    TotalAmountLabel.Visible = true;
+                }
+                else
+                {
+                    FastCashButton.Visible = true;
+                    CheckOutButton.Visible = true;
+                    TotalAmountLabel.Text = "Total Amount : " + total;
+                    TotalItemsAmount = total;
+                    TotalAmountLabel.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+
+        #endregion
+
+        #region All POS Menu Buttons Event Functions
+
         private void NewButton_Click(object sender, EventArgs e)
         {
             NewScreen();
         }
+
+
+
+
+        private int BillID = -1;
+        private string JSONItems = "";
+
+        private void BillListButton_Click(object sender, EventArgs e)
+        {
+
+            using (BillList billList = new BillList())
+            {
+                if (billList.ShowDialog() != DialogResult.OK)
+                {
+                    if (billList.Status != "" && billList.BillID != -1 && billList.JSONData != "")
+                    {
+                        BillID = billList.BillID;
+                        JSONItems = billList.JSONData;
+                        AddDataToPOSDataGrid(JSONItems, billList.BillStatus);
+
+                    }
+                }
+            }
+        }
+
+
+        private void KOTButton_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Kitchen_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Kitchen";
+            if (KitchenPanel.Visible == false)
+            {
+                KitchenPanel.Visible = true;
+                ProductPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                POSPanel.Visible = false;
+                TablesPanel.Visible = false;
+                StaffPanel.Visible = false;
+                ReportsPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
+        }
+
+
+
+
+
+
+        private void DinInButton_Click(object sender, EventArgs e)
+        {
+            if (BillID != -1)
+            {
+                MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
+            if (POSProductsDataGrid.Rows.Count > 0)
+            {
+                List<string> columnValues = new List<string>();
+                decimal total_amount = 0;
+
+                foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
+                {
+                    string ItemsValue = row.Cells["product_name"].Value.ToString();
+                    string QtyValue = row.Cells["quantity"].Value.ToString();
+                    columnValues.Add(ItemsValue + "-" + QtyValue);
+                    total_amount += Convert.ToDecimal(row.Cells["total_amount"].Value.ToString());
+                }
+                string json = JsonConvert.SerializeObject(columnValues);
+                string Added = "";
+                using (SelectTable selectTable = new SelectTable(json, total_amount))
+                {
+                    if (selectTable.ShowDialog() != DialogResult.OK)
+                    {
+                        Added = selectTable.UpdatedString;
+                    }
+                }
+
+                if (Added != "")
+                {
+                    POSProductsDataGrid.Rows.Clear();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+
+
+
+
+
+
+        private void TakeAwayButton_Click(object sender, EventArgs e)
+        {
+            if (BillID != -1)
+            {
+                MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
+            if (POSProductsDataGrid.Rows.Count > 0)
+            {
+                List<string> columnValues = new List<string>();
+                decimal total_amount = 0;
+
+                foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
+                {
+                    string ItemsValue = row.Cells["product_name"].Value.ToString();
+                    string QtyValue = row.Cells["quantity"].Value.ToString();
+                    columnValues.Add(ItemsValue + "-" + QtyValue);
+                    total_amount += Convert.ToDecimal(row.Cells["total_amount"].Value.ToString());
+                }
+                string json = JsonConvert.SerializeObject(columnValues);
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("insert into bill_list(items,date,type,status,total_amount) values(@Items,@Date,@Type,@Status,@Total)", connection);
+                    command.Parameters.AddWithValue("@Items", json);
+                    command.Parameters.AddWithValue("@Date", DateTime.Now);
+                    command.Parameters.AddWithValue("@Type", "Take Away");
+                    command.Parameters.AddWithValue("@Status", "In Complete");
+                    command.Parameters.AddWithValue("@Total", total_amount);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Saved Successfully");
+                        POSProductsDataGrid.Rows.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("There was a problem saving");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+
+        private void DeliveryButton_Click(object sender, EventArgs e)
+        {
+            if (BillID != -1)
+            {
+                MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
+            if (POSProductsDataGrid.Rows.Count > 0)
+            {
+                List<string> columnValues = new List<string>();
+                decimal total_amount = 0;
+
+                foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
+                {
+                    string ItemsValue = row.Cells["product_name"].Value.ToString();
+                    string QtyValue = row.Cells["quantity"].Value.ToString();
+                    columnValues.Add(ItemsValue + "-" + QtyValue);
+                    total_amount += Convert.ToDecimal(row.Cells["total_amount"].Value.ToString());
+                }
+                string json = JsonConvert.SerializeObject(columnValues);
+                string Added = "";
+                using (DeliveryForm DF = new DeliveryForm(json, total_amount))
+                {
+                    if (DF.ShowDialog() != DialogResult.OK)
+                    {
+                        Added = DF.InsertStatus;
+                    }
+                }
+
+                if (Added != "")
+                {
+                    POSProductsDataGrid.Rows.Clear();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+
+        }
+
+        #endregion
+
+        #region Fast Cash and Checkout Buttons Event Functions
+
+        private void FastCashButton_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                connection.Open();
+                string query = "UPDATE bill_list SET status=@Status WHERE bill_id=@Id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Status", "Paid");
+                    command.Parameters.AddWithValue("@Id", BillID);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        NewScreen();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Message : " + ex.Message);
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        private void CheckOutButton_Click(object sender, EventArgs e)
+        {
+
+            string updateStatus = "";
+            using (PaymentMethodScreen pms = new PaymentMethodScreen(TotalItemsAmount, BillID))
+            {
+                if (pms.ShowDialog() != DialogResult.OK)
+                {
+                    updateStatus = pms.StatusUpdated;
+                }
+            }
+            if (updateStatus == "Updated")
+            {
+                NewScreen();
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+
+        #region All Kitchen Screen Functions
 
         private void KitchenPanel_VisibleChanged(object sender, EventArgs e)
         {
@@ -1804,215 +2148,116 @@ namespace POS
 
         }
 
+        #endregion
 
-        private int BillID = -1;
-        private string JSONItems = "";
+        #region All Reports Screen Functions
 
-        private void BillListButton_Click(object sender, EventArgs e)
+        private void SalesReportsByCatButton_Click(object sender, EventArgs e)
         {
+            SalesReportsByCatButton.BackColor = Color.FromArgb(0, 119, 195);
+            StaffListButton.BackColor = Color.White;
+            SalesReportItemWiseButton.BackColor = Color.White;
+            MenuListButton.BackColor = Color.White;
 
-            using (BillList billList = new BillList())
-            {
-                if (billList.ShowDialog() != DialogResult.OK)
-                {
-                    if (billList.Status != "" && billList.BillID != -1 && billList.JSONData != "")
-                    {
-                        BillID = billList.BillID;
-                        JSONItems = billList.JSONData;
-                        AddDataToPOSDataGrid(JSONItems, billList.BillStatus);
+            SalesReportsByCatButton.ForeColor = Color.White;
+            StaffListButton.ForeColor = SystemColors.GrayText;
+            SalesReportItemWiseButton.ForeColor = SystemColors.GrayText;
+            MenuListButton.ForeColor = SystemColors.GrayText;
 
-                    }
-                }
-            }
         }
 
-        private decimal TotalItemsAmount = 0;
-        private void AddDataToPOSDataGrid(string json, string status)
+        private void StaffListButton_Click(object sender, EventArgs e)
         {
-            List<string> jsonData = JsonConvert.DeserializeObject<List<string>>(json);
-            try
-            {
-                connection.Open();
-                POSProductsDataGrid.Rows.Clear();
-                decimal total = 0;
-                foreach (string item in jsonData)
-                {
-                    string[] parts = item.Split("-");
-                    SqlCommand cmd = new SqlCommand($"select * from products where product_name='{parts[0]}'", connection);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
+            StaffListButton.BackColor = Color.FromArgb(0, 119, 195);
+            SalesReportsByCatButton.BackColor = Color.White;
+            SalesReportItemWiseButton.BackColor = Color.White;
+            MenuListButton.BackColor = Color.White;
 
-                                POSProductsDataGrid.Rows.Add(new object[] { 0, (int)reader["id"], reader["product_name"].ToString(), Convert.ToInt32(parts[1]), Convert.ToDecimal(reader["product_price"]), Convert.ToDecimal(parts[1]) * Convert.ToDecimal(reader["product_price"]) });
-                                total += Convert.ToDecimal(parts[1]) * Convert.ToDecimal(reader["product_price"]);  
+            StaffListButton.ForeColor = Color.White;
+            SalesReportsByCatButton.ForeColor = SystemColors.GrayText;
+            SalesReportItemWiseButton.ForeColor = SystemColors.GrayText;
+            MenuListButton.ForeColor = SystemColors.GrayText;
+        }
 
-                            }
-                        }
-                    }
-                }
-                if (status == "Paid")
-                {
-                    FastCashButton.Visible = false;
-                    CheckOutButton.Visible = false;
-                    TotalAmountLabel.Text = "Paid!";
-                    TotalAmountLabel.Visible = true;
-                }
-                else
-                {
-                    FastCashButton.Visible = true;
-                    CheckOutButton.Visible = true;
-                    TotalAmountLabel.Text = "Total Amount : " + total;
-                    TotalItemsAmount = total;
-                    TotalAmountLabel.Visible = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
+        private void SalesReportItemWiseButton_Click(object sender, EventArgs e)
+        {
+            SalesReportItemWiseButton.BackColor = Color.FromArgb(0, 119, 195);
+            SalesReportsByCatButton.BackColor = Color.White;
+            StaffListButton.BackColor = Color.White;
+            MenuListButton.BackColor = Color.White;
 
+            SalesReportItemWiseButton.ForeColor = Color.White;
+            SalesReportsByCatButton.ForeColor = SystemColors.GrayText;
+            StaffListButton.ForeColor = SystemColors.GrayText;
+            MenuListButton.ForeColor = SystemColors.GrayText;
+        }
+
+        private void MenuListButton_Click(object sender, EventArgs e)
+        {
+            MenuListButton.BackColor = Color.FromArgb(0, 119, 195);
+            SalesReportsByCatButton.BackColor = Color.White;
+            StaffListButton.BackColor = Color.White;
+            SalesReportItemWiseButton.BackColor = Color.White;
+
+            MenuListButton.ForeColor = Color.White;
+            SalesReportsByCatButton.ForeColor = SystemColors.GrayText;
+            StaffListButton.ForeColor = SystemColors.GrayText;
+            SalesReportItemWiseButton.ForeColor = SystemColors.GrayText;
         }
 
 
 
-        private void DinInButton_Click(object sender, EventArgs e)
+        #endregion
+
+        #region KeyBoard Shortcuts Logic Functions
+        private void Dashboard_KeyDown(object sender, KeyEventArgs e)
         {
-            if (BillID != -1)
+            if (ProductPanel.Visible)
             {
-                MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                return;
-            }
-            if (POSProductsDataGrid.Rows.Count > 0)
-            {
-                List<string> columnValues = new List<string>();
-                double total_amount = 0;
-
-                foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
-                {
-                    string ItemsValue = row.Cells["product_name"].Value.ToString();
-                    string QtyValue = row.Cells["quantity"].Value.ToString();
-                    columnValues.Add(ItemsValue + "-" + QtyValue);
-                    total_amount += Convert.ToDouble(row.Cells["total_amount"].Value.ToString());
-                }   
-                string json = JsonConvert.SerializeObject(columnValues);
-                string Added = "";
-                using (SelectTable selectTable = new SelectTable(json, total_amount))
-                {
-                    if (selectTable.ShowDialog() != DialogResult.OK)
-                    {
-                        Added = selectTable.UpdatedString;
-                    }
-                }
-
-                if (Added != "")
-                {
-                    POSProductsDataGrid.Rows.Clear();
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                ProductsPanel_KeyDown(sender, e);
             }
         }
-
-
-
-
-
-        private void FastCashButton_Click(object sender, EventArgs e)
+        private void ProductsPanel_KeyDown(object sender, KeyEventArgs e)
         {
-
-            try
+            // Handle keyboard shortcuts specific to products panel
+            if (e.Control && e.KeyCode == Keys.P)
             {
-                connection.Open();
-                string query = "UPDATE bill_list SET status=@Status WHERE bill_id=@Id";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Status", "Paid");
-                    command.Parameters.AddWithValue("@Id", BillID);
-
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        NewScreen();
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error Message : " + ex.Message);
-
-            }
-            finally
-            {
-                connection.Close();
+                AddProductsButton.PerformClick();
             }
         }
+        #endregion
 
-        private void CheckOutButton_Click(object sender, EventArgs e)
+        #region Notfication Logic (if necessary)
+        //private void button2_Click_1(object sender, EventArgs e)
+        //{
+        //    ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+        //    contextMenuStrip.Items.Add("Exit", null, ExitMenuItem_Click);
+        //    notifyIcon1.ContextMenuStrip = contextMenuStrip;
+        //    notifyIcon1.ShowBalloonTip(3000, "Task Completed", "The task has been completed successfully.", ToolTipIcon.Info);
+        //}
+
+        //private void ExitMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    notifyIcon1.Visible = false;
+
+        //}
+        #endregion
+
+
+        private void ReportsPanel_VisibleChanged(object sender, EventArgs e)
         {
-
-            string updateStatus = "";
-            using (PaymentMethodScreen pms = new PaymentMethodScreen(TotalItemsAmount, BillID))
+            if (ReportsPanel.Visible)
             {
-                if (pms.ShowDialog() != DialogResult.OK)
-                {
-                    updateStatus = pms.StatusUpdated;
-                }
-            }
-            if (updateStatus == "Updated")
-            {
-                NewScreen();
-            }
-        }
-        private void TakeAwayButton_Click(object sender, EventArgs e)
-        {
-            if (BillID != -1)
-            {
-                MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                return;
-            }
-            if (POSProductsDataGrid.Rows.Count > 0)
-            {
-                List<string> columnValues = new List<string>();
-                int total_amount = 0;
-
-                foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
-                {
-                    string ItemsValue = row.Cells["product_name"].Value.ToString();
-                    string QtyValue = row.Cells["quantity"].Value.ToString();
-                    columnValues.Add(ItemsValue + "-" + QtyValue);
-                    total_amount += Convert.ToInt32(row.Cells["total_amount"].Value.ToString());
-                }
-                string json = JsonConvert.SerializeObject(columnValues);
                 try
                 {
                     connection.Open();
-                    SqlCommand command = new SqlCommand("insert into bill_list(items,date,type,status,total_amount) values(@Items,@Date,@Type,@Status,@Total)", connection);
-                    command.Parameters.AddWithValue("@Items", json);
-                    command.Parameters.AddWithValue("@Date", DateTime.Now);
-                    command.Parameters.AddWithValue("@Type", "Take Away");
-                    command.Parameters.AddWithValue("@Status", "In Complete");
-                    command.Parameters.AddWithValue("@Total", total_amount);
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
+                    command = new SqlCommand("select types from product_category", connection);
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        MessageBox.Show("Saved Successfully");
-                        POSProductsDataGrid.Rows.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("There was a problem saving");
+                        while (reader.Read())
+                        {
+                            ReportsCategoryComboBox.Items.Add(reader["types"].ToString());
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -2023,54 +2268,20 @@ namespace POS
                 {
                     connection.Close();
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
 
-        private void DeliveryButton_Click(object sender, EventArgs e)
+        private void GenerateReportByCatButton_Click(object sender, EventArgs e)
         {
-            if (BillID != -1)
+            if (ReportsCatFromDateTextBox.Text != "" && ReportsCatToDateTextBox.Text != "" && ReportsCategoryComboBox.Text != "")
             {
-                MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                return;
-            }
-            if (POSProductsDataGrid.Rows.Count > 0)
-            {
-                List<string> columnValues = new List<string>();
-                int total_amount = 0;
-
-                foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
-                {
-                    string ItemsValue = row.Cells["product_name"].Value.ToString();
-                    string QtyValue = row.Cells["quantity"].Value.ToString();
-                    columnValues.Add(ItemsValue + "-" + QtyValue);
-                    total_amount += Convert.ToInt32(row.Cells["total_amount"].Value.ToString());
-                }
-                string json = JsonConvert.SerializeObject(columnValues);
-                string Added = "";
-                using (DeliveryForm DF = new DeliveryForm(json, total_amount))
-                {
-                    if (DF.ShowDialog() != DialogResult.OK)
-                    {
-                        Added = DF.InsertStatus;
-                    }
-                }
-
-                if (Added != "")
-                {
-                    POSProductsDataGrid.Rows.Clear();
-                }
-
+                Reports reports = new Reports(ReportsCatFromDateTextBox.Value,ReportsCatToDateTextBox.Value,ReportsCategoryComboBox.Text);
+                reports.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Please Fill All Fields");
             }
-
         }
     }
 }

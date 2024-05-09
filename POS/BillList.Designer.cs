@@ -33,6 +33,7 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BillList));
             panel1 = new Panel();
+            StatusComboBox = new ComboBox();
             BillListDataGrid = new DataGridView();
             DineIn_label = new Label();
             TakeAway_label = new Label();
@@ -50,6 +51,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.Control;
+            panel1.Controls.Add(StatusComboBox);
             panel1.Controls.Add(BillListDataGrid);
             panel1.Controls.Add(DineIn_label);
             panel1.Controls.Add(TakeAway_label);
@@ -60,6 +62,18 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(961, 572);
             panel1.TabIndex = 0;
+            // 
+            // StatusComboBox
+            // 
+            StatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            StatusComboBox.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            StatusComboBox.FormattingEnabled = true;
+            StatusComboBox.Items.AddRange(new object[] { "Complete", "Paid" });
+            StatusComboBox.Location = new Point(847, 102);
+            StatusComboBox.Name = "StatusComboBox";
+            StatusComboBox.Size = new Size(94, 25);
+            StatusComboBox.TabIndex = 6;
+            
             // 
             // BillListDataGrid
             // 
@@ -239,5 +253,6 @@
         private Label TakeAway_label;
         private Label Delivery_label;
         private DataGridView BillListDataGrid;
+        private ComboBox StatusComboBox;
     }
 }

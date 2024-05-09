@@ -15,7 +15,7 @@ namespace POS
 {
     public partial class BillList : Form
     {
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
+        ComponentResourceManager resources = new ComponentResourceManager(typeof(StaffCategoryForm));
         SqlConnection connection;
         SqlCommand command;
         DataGridView WorkingDataGridView;
@@ -31,7 +31,9 @@ namespace POS
             InitializeDatabaseConnection();
             InitializeLabel(label2, (Image)resources.GetObject("label1.Image"), 45, 60);
             ImageEditDelLoad();
-            LoadDataAsync(BillListDataGrid, "select * from bill_list where status!='In Complete' order by bill_id DESC", "Async");
+            LoadDataAsync(BillListDataGrid, "select * from bill_list where status='Complete' order by bill_id DESC", "Async");
+            StatusComboBox.SelectedIndex = 0;
+            StatusComboBox.SelectedIndexChanged += StatusComboBox_SelectedIndexChanged;
         }
 
         public int BillID
@@ -43,7 +45,7 @@ namespace POS
         {
             get { return jsonData; }
         }
-        public string Status 
+        public string Status
         {
             get { return status; }
         }
@@ -85,6 +87,10 @@ namespace POS
             this.Close();
         }
 
+
+        #region Radio Button Select Function
+
+        private string RadioButtonSelected = "";
 
         private void RadioButtonSelect(Label label, Label label2, Label label3, Label label4)
         {
@@ -153,39 +159,50 @@ namespace POS
             }
 
 
-
-
-
         }
 
+        #endregion
 
+
+        #region Labels Click Event Handler Functions
 
         private void All_label_Click(object sender, EventArgs e)
         {
             RadioButtonSelect(All_label, DineIn_label, TakeAway_label, Delivery_label);
-            LoadDataAsync(BillListDataGrid, "select * from bill_list where status!='In Complete'", "Sync");
+            RadioButtonSelected = "";
+            string SelectedItem = StatusComboBox.SelectedItem.ToString();
+            LoadDataAsync(BillListDataGrid, $"select * from bill_list where status='{SelectedItem}' order by bill_id DESC", "Sync");
 
         }
 
         private void DineIn_label_Click(object sender, EventArgs e)
         {
             RadioButtonSelect(DineIn_label, All_label, TakeAway_label, Delivery_label);
-            LoadDataAsync(BillListDataGrid, "select * from bill_list where type='Dine In' and status!='In Complete'", "Sync");
+            RadioButtonSelected = "Dine In";
+            string SelectedItem = StatusComboBox.SelectedItem.ToString();
+            LoadDataAsync(BillListDataGrid, $"select * from bill_list where type='Dine In' and status='{SelectedItem}' order by bill_id DESC", "Sync");
         }
 
         private void TakeAway_label_Click(object sender, EventArgs e)
         {
             RadioButtonSelect(TakeAway_label, DineIn_label, All_label, Delivery_label);
-            LoadDataAsync(BillListDataGrid, "select * from bill_list where type='Take Away' and status!='In Complete'", "Sync");
+            RadioButtonSelected = "Take Away";
+            string SelectedItem = StatusComboBox.SelectedItem.ToString();
+            LoadDataAsync(BillListDataGrid, $"select * from bill_list where type='Take Away' and status='{SelectedItem}' order by bill_id DESC", "Sync");
         }
 
         private void Delivery_label_Click(object sender, EventArgs e)
         {
             RadioButtonSelect(Delivery_label, DineIn_label, TakeAway_label, All_label);
-            LoadDataAsync(BillListDataGrid, "select * from bill_list where type='Delivery' and status!='In Complete'", "Sync");
+            RadioButtonSelected = "Delivery";
+            string SelectedItem = StatusComboBox.SelectedItem.ToString();
+            LoadDataAsync(BillListDataGrid, $"select * from bill_list where type='Delivery' and status='{SelectedItem}' order by bill_id DESC", "Sync");
         }
 
+        #endregion
 
+
+        #region All Database Related Functions
         private void LoadDataAsync(DataGridView myDataGrid, string query, string method)
         {
             command = new SqlCommand(query, connection);
@@ -210,14 +227,14 @@ namespace POS
                         {
                             DataTable dataTable = new DataTable();
                             dataTable.Load(reader);
-                            DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
-                            {
-                                HeaderText = "SR#",
-                                ValueType = typeof(string),
+                            //DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
+                            //{
+                            //    HeaderText = "SR#",
+                            //    ValueType = typeof(string),
+                            //    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
 
-                            };
-                            WorkingDataGridView.Columns.Insert(0, SR);
-
+                            //};
+                            //WorkingDataGridView.Columns.Insert(0, SR);
 
                             WorkingDataGridView.DataSource = dataTable;
                             SetColumnHeaderText(WorkingDataGridView);
@@ -236,10 +253,10 @@ namespace POS
                                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                             };
                             WorkingDataGridView.Columns.Add(PrintBtn);
-                            for (int i = 0; i < dataTable.Rows.Count; i++)
-                            {
-                                WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
-                            }
+                            //for (int i = 0; i < dataTable.Rows.Count; i++)
+                            //{
+                            //    WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
+                            //}
                         }
                     }
 
@@ -271,14 +288,14 @@ namespace POS
 
                     BeginInvoke(new Action(() =>
                     {
-                        DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
-                        {
-                            HeaderText = "SR#",
-                            ValueType = typeof(string),
-                            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                        //DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
+                        //{
+                        //    HeaderText = "SR#",
+                        //    ValueType = typeof(string),
+                        //    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
-                        };
-                        WorkingDataGridView.Columns.Insert(0, SR);
+                        //};
+                        //WorkingDataGridView.Columns.Insert(0, SR);
                         WorkingDataGridView.DataSource = dataTable;
                         SetColumnHeaderText(WorkingDataGridView);
                         DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
@@ -296,10 +313,10 @@ namespace POS
                             AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         };
                         WorkingDataGridView.Columns.Add(PrintBtn);
-                        for (int i = 0; i < dataTable.Rows.Count; i++)
-                        {
-                            WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
-                        }
+                        //for (int i = 0; i < dataTable.Rows.Count; i++)
+                        //{
+                        //    WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
+                        //}
                     }));
                 }
             }
@@ -313,11 +330,15 @@ namespace POS
             }
         }
 
+
+        #region Set Column Headers Function
+
         private void SetColumnHeaderText(DataGridView dataGridView)
         {
             if (dataGridView == BillListDataGrid)
             {
-                dataGridView.Columns["bill_id"].Visible = false;
+
+                //dataGridView.Columns["bill_id"].Visible = false;
                 dataGridView.Columns["items"].Visible = false;
                 dataGridView.Columns["total_amount"].Visible = false;
                 dataGridView.Columns["discount"].Visible = false;
@@ -325,6 +346,7 @@ namespace POS
                 dataGridView.Columns["cash_received"].Visible = false;
                 dataGridView.Columns["change"].Visible = false;
 
+                dataGridView.Columns["bill_id"].HeaderText = "Bill ID";
                 dataGridView.Columns["table_name"].HeaderText = "Table";
                 dataGridView.Columns["customer"].HeaderText = "Customer";
                 dataGridView.Columns["phone"].HeaderText = "Phone";
@@ -334,8 +356,99 @@ namespace POS
                 dataGridView.Columns["status"].HeaderText = "Status";
 
 
+                //if (RadioButtonSelected == "")
+                //{
+                //    //dataGridView.Columns["bill_id"].Visible = false;
+                //    dataGridView.Columns["items"].Visible = false;
+                //    dataGridView.Columns["total_amount"].Visible = false;
+                //    dataGridView.Columns["discount"].Visible = false;
+                //    dataGridView.Columns["net_total_amount"].Visible = false;
+                //    dataGridView.Columns["cash_received"].Visible = false;
+                //    dataGridView.Columns["change"].Visible = false;
+
+                //    dataGridView.Columns["bill_id"].HeaderText = "Bill ID";
+                //    dataGridView.Columns["table_name"].HeaderText = "Table";
+                //    dataGridView.Columns["customer"].HeaderText = "Customer";
+                //    dataGridView.Columns["phone"].HeaderText = "Phone";
+                //    dataGridView.Columns["address"].HeaderText = "Address";
+                //    dataGridView.Columns["date"].HeaderText = "Date";
+                //    dataGridView.Columns["type"].HeaderText = "Type";
+                //    dataGridView.Columns["status"].HeaderText = "Status";
+                //}
+                //else if (RadioButtonSelected == "Dine In")
+                //{
+                //    //dataGridView.Columns["bill_id"].Visible = false;
+                //    dataGridView.Columns["items"].Visible = false;
+                //    dataGridView.Columns["total_amount"].Visible = false;
+                //    dataGridView.Columns["discount"].Visible = false;
+                //    dataGridView.Columns["net_total_amount"].Visible = false;
+                //    dataGridView.Columns["cash_received"].Visible = false;
+                //    dataGridView.Columns["change"].Visible = false;
+                //    dataGridView.Columns["customer"].Visible = false;
+                //    dataGridView.Columns["phone"].Visible = false;
+                //    dataGridView.Columns["address"].Visible = false;
+
+                //    dataGridView.Columns["bill_id"].HeaderText = "Bill ID";
+                //    dataGridView.Columns["table_name"].HeaderText = "Table";
+                //    //dataGridView.Columns["customer"].HeaderText = "Customer";
+                //    //dataGridView.Columns["phone"].HeaderText = "Phone";
+                //    //dataGridView.Columns["address"].HeaderText = "Address";
+                //    dataGridView.Columns["date"].HeaderText = "Date";
+                //    dataGridView.Columns["type"].HeaderText = "Type";
+                //    dataGridView.Columns["status"].HeaderText = "Status";
+                //}
+                //else if (RadioButtonSelected == "Take Away")
+                //{
+                //    //dataGridView.Columns["bill_id"].Visible = false;
+                //    dataGridView.Columns["items"].Visible = false;
+                //    dataGridView.Columns["total_amount"].Visible = false;
+                //    dataGridView.Columns["discount"].Visible = false;
+                //    dataGridView.Columns["net_total_amount"].Visible = false;
+                //    dataGridView.Columns["cash_received"].Visible = false;
+                //    dataGridView.Columns["change"].Visible = false;
+                //    dataGridView.Columns["table_name"].Visible = false;
+                //    dataGridView.Columns["customer"].Visible = false;
+                //    dataGridView.Columns["phone"].Visible = false;
+                //    dataGridView.Columns["address"].Visible = false;
+
+                //    dataGridView.Columns["bill_id"].HeaderText = "Bill ID";
+                //    //dataGridView.Columns["table_name"].HeaderText = "Table";
+                //    //dataGridView.Columns["customer"].HeaderText = "Customer";
+                //    //dataGridView.Columns["phone"].HeaderText = "Phone";
+                //    //dataGridView.Columns["address"].HeaderText = "Address";
+                //    dataGridView.Columns["date"].HeaderText = "Date";
+                //    dataGridView.Columns["type"].HeaderText = "Type";
+                //    dataGridView.Columns["status"].HeaderText = "Status";
+                //}
+                //else if (RadioButtonSelected == "Delivery")
+                //{
+                //    //dataGridView.Columns["bill_id"].Visible = false;
+                //    dataGridView.Columns["items"].Visible = false;
+                //    dataGridView.Columns["total_amount"].Visible = false;
+                //    dataGridView.Columns["discount"].Visible = false;
+                //    dataGridView.Columns["net_total_amount"].Visible = false;
+                //    dataGridView.Columns["cash_received"].Visible = false;
+                //    dataGridView.Columns["change"].Visible = false;
+                //    dataGridView.Columns["table_name"].Visible = false;
+
+                //    dataGridView.Columns["bill_id"].HeaderText = "Bill ID";
+                //    //dataGridView.Columns["table_name"].HeaderText = "Table";
+                //    dataGridView.Columns["customer"].HeaderText = "Customer";
+                //    dataGridView.Columns["phone"].HeaderText = "Phone";
+                //    dataGridView.Columns["address"].HeaderText = "Address";
+                //    dataGridView.Columns["date"].HeaderText = "Date";
+                //    dataGridView.Columns["type"].HeaderText = "Type";
+                //    dataGridView.Columns["status"].HeaderText = "Status";
+                //}
+
             }
         }
+
+        #endregion
+
+        #endregion
+
+
 
         private void ImageEditDelLoad()
         {
@@ -381,10 +494,24 @@ namespace POS
                 this.Close();
             }
             else if (BillListDataGrid.Columns[e.ColumnIndex].HeaderText == "Print")
-            { 
-            
+            {
+
             }
 
+        }
+
+        private void StatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (RadioButtonSelected == "")
+            {
+                string SelectedItem = StatusComboBox.SelectedItem.ToString();
+                LoadDataAsync(BillListDataGrid, $"select * from bill_list where status='{SelectedItem}' order by bill_id DESC", "Sync");
+            }
+            else 
+            {
+                string SelectedItem = StatusComboBox.SelectedItem.ToString();
+                LoadDataAsync(BillListDataGrid, $"select * from bill_list where type='{RadioButtonSelected}' and status='{SelectedItem}' order by bill_id DESC", "Sync");
+            }
         }
     }
 }

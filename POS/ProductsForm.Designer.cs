@@ -142,6 +142,7 @@
             // 
             // Status_ComboBox
             // 
+            Status_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             Status_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Status_ComboBox.FormattingEnabled = true;
             Status_ComboBox.IntegralHeight = false;
@@ -165,6 +166,7 @@
             // 
             Category_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
             Category_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            Category_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             Category_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Category_ComboBox.FormattingEnabled = true;
             Category_ComboBox.IntegralHeight = false;

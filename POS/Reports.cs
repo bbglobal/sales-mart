@@ -1,4 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
+using POS.DataSet;
+using POS.DataSet.GetItemsByCatDataSetTableAdapters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +15,17 @@ namespace POS
 {
     public partial class Reports : Form
     {
-        public Reports()
+        private DateTime fromDate ;
+        private DateTime toDate ;
+        string category;
+        public Reports(DateTime fromDate, DateTime toDate, string category)
         {
             InitializeComponent();
+            this.fromDate = fromDate;
+            this.toDate = toDate;
+            this.category = category;
+            TableAdapter adapter = new TableAdapter();
+            adapter.Fill(dt, fromDate, toDate, category);
         }
 
 
@@ -25,7 +35,19 @@ namespace POS
 
         private void Reports_Load(object sender, EventArgs e)
         {
-           
+            this.Cursor = Cursors.WaitCursor;
+            
+            ReportDataSource rt = new ReportDataSource("DataSet1", (DataTable)dt);
+            List<ReportParameter> parameters = new List<ReportParameter>();
+            parameters.Add(new ReportParameter("fromDate", fromDate.ToString("dd MMMM yyyy")));
+            parameters.Add(new ReportParameter("toDate", toDate.ToString("dd MMMM yyyy")));
+            parameters.Add(new ReportParameter("category", category));
+            reportViewer1.LocalReport.DataSources.Clear();
+            reportViewer1.LocalReport.DataSources.Add(rt);
+            reportViewer1.LocalReport.ReportEmbeddedResource = "POS.Reports.SRByCategory.rdlc";
+            reportViewer1.LocalReport.SetParameters(parameters);
+            reportViewer1.RefreshReport();
+            this.Cursor = Cursors.Default;
             //table.Columns.Add("id", typeof(int));
             //table.Columns.Add("name", typeof(string));
             //table.Columns.Add("age", typeof(int));
@@ -45,25 +67,12 @@ namespace POS
             //reportViewer1.RefreshReport();
 
 
-           
-           
+
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            POSDataSetTableAdapters.bill_listTableAdapter adapter = new POSDataSetTableAdapters.bill_listTableAdapter();
-            POSDataSet.bill_listDataTable dt = new POSDataSet.bill_listDataTable();
-            adapter.FillByCategory(dt, fromDate.Value, toDate.Value);
-            ReportDataSource rt = new ReportDataSource("DataSet1", (DataTable)dt);
-            List<ReportParameter> parameters = new List<ReportParameter>();
-            parameters.Add(new ReportParameter("fromDate", fromDate.Value.ToString("d MMM yyyy")));
-            parameters.Add(new ReportParameter("toDate", toDate.Value.ToString("d MMM yyyy")));
-            reportViewer1.LocalReport.DataSources.Clear();
-            reportViewer1.LocalReport.DataSources.Add(rt);
-            reportViewer1.LocalReport.ReportEmbeddedResource = "POS.Reports.SRByCategory.rdlc";
-            reportViewer1.LocalReport.SetParameters(parameters);
-            reportViewer1.RefreshReport();
-        }
+        GetItemsByCatDataSet.GetItemDetailsByCategoryAndDateRangeDataTable dt = new GetItemsByCatDataSet.GetItemDetailsByCategoryAndDateRangeDataTable();
+       
     }
 
 }

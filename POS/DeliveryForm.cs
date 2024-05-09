@@ -16,11 +16,11 @@ namespace POS
     {
         private string json;
         private string insertStatus = "";
-        private int total = 0;
+        private decimal total = 0;
         SqlConnection connection;
         SqlCommand command;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
-        public DeliveryForm(string json,int total)
+        public DeliveryForm(string json,decimal total)
         {
 
             InitializeComponent();

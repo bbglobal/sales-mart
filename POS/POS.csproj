@@ -39,10 +39,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="POSDataSet.Designer.cs">
+    <Compile Update="DataSet1.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>POSDataSet.xsd</DependentUpon>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="DataSets\DataSet1.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="DataSets\GetItemByCatDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GetItemByCatDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="DataSet\GetItemsByCatDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GetItemsByCatDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Update="POSDataSet1.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -85,18 +100,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="POSDataSet.xsd">
+    <None Update="DataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>POSDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="DataSets\DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="DataSets\GetItemByCatDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GetItemByCatDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="DataSet\GetItemsByCatDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GetItemsByCatDataSet.Designer.cs</LastGenOutput>
     </None>
     <None Update="POSDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>POSDataSet1.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DataSets\" />
   </ItemGroup>
 
 </Project>

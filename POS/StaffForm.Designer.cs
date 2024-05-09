@@ -133,6 +133,7 @@
             // 
             Status_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
             Status_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            Status_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             Status_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Status_ComboBox.FormattingEnabled = true;
             Status_ComboBox.IntegralHeight = false;
@@ -185,6 +186,7 @@
             // 
             Type_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
             Type_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            Type_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             Type_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Type_ComboBox.FormattingEnabled = true;
             Type_ComboBox.IntegralHeight = false;
