@@ -39,6 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="GSDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="DataSet1.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -63,6 +66,12 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>POSDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="ItemsCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ItemsForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="SelectTable.cs">
       <SubType>Form</SubType>

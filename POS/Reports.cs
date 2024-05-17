@@ -18,7 +18,7 @@ namespace POS
         private DateTime fromDate ;
         private DateTime toDate ;
         string category;
-        public Reports(DateTime fromDate, DateTime toDate, string category)
+         public Reports(DateTime fromDate, DateTime toDate, string category)
         {
             InitializeComponent();
             this.fromDate = fromDate;
@@ -36,7 +36,7 @@ namespace POS
         private void Reports_Load(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            
+
             ReportDataSource rt = new ReportDataSource("DataSet1", (DataTable)dt);
             List<ReportParameter> parameters = new List<ReportParameter>();
             parameters.Add(new ReportParameter("fromDate", fromDate.ToString("dd MMMM yyyy")));
@@ -48,6 +48,8 @@ namespace POS
             reportViewer1.LocalReport.SetParameters(parameters);
             reportViewer1.RefreshReport();
             this.Cursor = Cursors.Default;
+
+
             //table.Columns.Add("id", typeof(int));
             //table.Columns.Add("name", typeof(string));
             //table.Columns.Add("age", typeof(int));
@@ -58,12 +60,12 @@ namespace POS
             //table.Rows.Add(3, "Mike Brown", 42);
             //rt.Name = "DataSet1";
             //rt.Value = table;
-            ////List<ReportParameter> parameters = new List<ReportParameter>();
-            ////parameters.Add(new ReportParameter("BillId", "648"));
-            //reportViewer1.LocalReport.DataSources.Clear();
-            //reportViewer1.LocalReport.DataSources.Add(rt);
-            //reportViewer1.LocalReport.ReportEmbeddedResource = "POS.Report1.rdlc";
-            ////reportViewer1.LocalReport.SetParameters(parameters);
+            //List<ReportParameter> parameters = new List<ReportParameter>();
+            //parameters.Add(new ReportParameter("BillId", "648"));
+            ////reportViewer1.LocalReport.DataSources.Clear();
+            ////reportViewer1.LocalReport.DataSources.Add(rt);
+            //reportViewer1.LocalReport.ReportEmbeddedResource = "POS.Reports.Receipt.rdlc";
+            //reportViewer1.LocalReport.SetParameters(parameters);
             //reportViewer1.RefreshReport();
 
 

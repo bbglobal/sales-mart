@@ -925,21 +925,21 @@ namespace POS
         #region Dashboard Load Event
         private async void Dashboard_Load(object sender, EventArgs e)
         {
-            
+
             int CurrentUserInitialWidth = CurrentUser_label.Width;
             CurrentUser_label.Text = $"User Name:  {Session.Username}";
             CurrentUser_label.Location = new Point(CurrentUser_label.Location.X - (CurrentUser_label.Width - CurrentUserInitialWidth), CurrentUser_label.Location.Y);
             Set_CardBox_Positions();
             SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
-            SetLabelLocations(Menu_Products_label, new Point(55, 182));
-            SetLabelLocations(Menu_Tables_label, new Point(55, 252));
-            SetLabelLocations(Menu_Staff_label, new Point(55, 324));
-            SetLabelLocations(Menu_POS_label, new Point(55, 394));
-            SetLabelLocations(Menu_Kitchen_label, new Point(55, 464));
-            SetLabelLocations(Menu_Reports_label, new Point(55, 534));
-            SetLabelLocations(Menu_Settings_label, new Point(55, 604));
+            SetLabelLocations(Menu_Products_label, new Point(55, 172));
+            SetLabelLocations(Menu_Tables_label, new Point(55, 232));
+            SetLabelLocations(Menu_Staff_label, new Point(55, 292));
+            SetLabelLocations(Menu_POS_label, new Point(55, 352));
+            SetLabelLocations(Menu_Kitchen_label, new Point(55, 412));
+            SetLabelLocations(Menu_Reports_label, new Point(55, 472));
+            SetLabelLocations(Menu_Settings_label, new Point(55, 532));
             SetLabelColor(Menu_Dashboard_label, "#0077C3");
-            
+
             //Menu_Dashboard_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
             //Menu_Products_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
             //Menu_Tables_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
@@ -2150,6 +2150,7 @@ namespace POS
 
         #endregion
 
+
         #region All Reports Screen Functions
 
         private void SalesReportsByCatButton_Click(object sender, EventArgs e)
@@ -2209,6 +2210,7 @@ namespace POS
 
         #endregion
 
+
         #region KeyBoard Shortcuts Logic Functions
         private void Dashboard_KeyDown(object sender, KeyEventArgs e)
         {
@@ -2226,6 +2228,7 @@ namespace POS
             }
         }
         #endregion
+
 
         #region Notfication Logic (if necessary)
         //private void button2_Click_1(object sender, EventArgs e)
@@ -2275,7 +2278,7 @@ namespace POS
         {
             if (ReportsCatFromDateTextBox.Text != "" && ReportsCatToDateTextBox.Text != "" && ReportsCategoryComboBox.Text != "")
             {
-                Reports reports = new Reports(ReportsCatFromDateTextBox.Value,ReportsCatToDateTextBox.Value,ReportsCategoryComboBox.Text);
+                Reports reports = new Reports(ReportsCatFromDateTextBox.Value, ReportsCatToDateTextBox.Value, ReportsCategoryComboBox.Text);
                 reports.ShowDialog();
             }
             else
@@ -2283,6 +2286,76 @@ namespace POS
                 MessageBox.Show("Please Fill All Fields");
             }
         }
+
+
+
+        private void POSProductsDataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && POSProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Qty")
+            {
+                POSProductsDataGrid.ReadOnly = false;
+                POSProductsDataGrid.BeginEdit(true);
+            }
+        }
+
+        private void POSProductsDataGrid_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void POSProductsDataGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            TextBox tb = e.Control as TextBox;
+            if (tb != null)
+            {
+                tb.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
+                tb.KeyPress += new KeyPressEventHandler(tb_KeyPress);
+                tb.PreviewKeyDown += new PreviewKeyDownEventHandler(tb_PreviewKeyPress);
+            }
+
+        }
+
+        private void tb_PreviewKeyPress(object? sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                POSProductsDataGrid.ReadOnly = true;
+                POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+                POSProductsDataGrid.AllowUserToDeleteRows = false;
+            }
+
+        }
+
+        private void tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void POSProductsDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                POSProductsDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                POSProductsDataGrid.Rows[e.RowIndex].Selected = true;
+                POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
+                POSProductsDataGrid.AllowUserToDeleteRows = true;
+            }
+        }
+
+        private void POSProductsDataGrid_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+            POSProductsDataGrid.AllowUserToDeleteRows = false;
+        }
+
+
+
+
     }
 }
 

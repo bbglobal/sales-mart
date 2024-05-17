@@ -14,7 +14,7 @@
                   <TextRun>
                     <Value>="Bill ID: "&amp;Parameters!BillId.Value</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>5pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -24,7 +24,7 @@
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.14584in</Top>
             <Left>0.14458in</Left>
-            <Height>0.19792in</Height>
+            <Height>0.12847in</Height>
             <Width>1in</Width>
             <Style>
               <Border>
@@ -45,7 +45,7 @@
                   <TextRun>
                     <Value>Bill Type: Dine In</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>5pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -53,9 +53,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.55208in</Top>
+            <Top>0.41319in</Top>
             <Left>0.14458in</Left>
-            <Height>0.19792in</Height>
+            <Height>0.13542in</Height>
             <Width>1.13542in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -77,7 +77,7 @@
                   <TextRun>
                     <Value>Bill Timing: 27/9/2022 5:03:22 AM</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>5pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -85,10 +85,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.34375in</Top>
+            <Top>0.27431in</Top>
             <Left>0.14458in</Left>
-            <Height>0.20833in</Height>
-            <Width>2.17361in</Width>
+            <Height>0.13889in</Height>
+            <Width>2.02778in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -101,13 +101,13 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>3.29167in</Height>
+        <Height>3.125in</Height>
         <Style />
       </Body>
-      <Width>2.74875in</Width>
+      <Width>2.31819in</Width>
       <Page>
         <PageHeader>
-          <Height>0.57166in</Height>
+          <Height>0.46749in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -116,9 +116,9 @@
               <Value>BlueLogo</Value>
               <Sizing>FitProportional</Sizing>
               <Top>0.14458in</Top>
-              <Left>0.56125in</Left>
-              <Height>0.3125in</Height>
-              <Width>0.2743in</Width>
+              <Left>0.43625in</Left>
+              <Height>0.22917in</Height>
+              <Width>0.19097in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -129,10 +129,10 @@
               <Source>Embedded</Source>
               <Value>BlueTextLogo</Value>
               <Sizing>FitProportional</Sizing>
-              <Top>0.19808in</Top>
-              <Left>0.84944in</Left>
-              <Height>0.259in</Height>
-              <Width>1.32292in</Width>
+              <Top>0.17808in</Top>
+              <Left>0.66666in</Left>
+              <Height>0.17567in</Height>
+              <Width>1.26042in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -147,10 +147,12 @@
             </Border>
           </Style>
         </PageHeader>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <PageHeight>6in</PageHeight>
+        <PageWidth>2.25in</PageWidth>
+        <LeftMargin>0.01in</LeftMargin>
+        <RightMargin>0.01in</RightMargin>
+        <TopMargin>0.01in</TopMargin>
+        <BottomMargin>0.01in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>

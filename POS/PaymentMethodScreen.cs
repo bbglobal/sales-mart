@@ -155,6 +155,11 @@ namespace POS
             SaveData();
         }
 
+
+
+        #region All KeyPress Events Functions for Allowing only numbers
+
+
         private void BillAmount_TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
@@ -199,6 +204,10 @@ namespace POS
                 e.Handled = true;
             }
         }
+
+        #endregion
+
+
 
 
         NumberKeypad Nk;
@@ -281,10 +290,10 @@ namespace POS
             
         }
 
-            private void CashReceived_TextBox_TextChanged(object sender, EventArgs e)
-            {
-                UpdateCashAndChangeTextBox();
-            }
+        private void CashReceived_TextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateCashAndChangeTextBox();
+        }
 
         private void UpdateCashAndChangeTextBox() 
         {
