@@ -499,9 +499,9 @@
             Calculator_panel.Controls.Add(CheckOutButton);
             Calculator_panel.Controls.Add(FastCashButton);
             Calculator_panel.Controls.Add(TotalAmountLabel);
-            Calculator_panel.Location = new Point(1, 330);
+            Calculator_panel.Location = new Point(1, 287);
             Calculator_panel.Name = "Calculator_panel";
-            Calculator_panel.Size = new Size(343, 266);
+            Calculator_panel.Size = new Size(343, 309);
             Calculator_panel.TabIndex = 1;
             // 
             // CheckOutButton
@@ -512,7 +512,7 @@
             CheckOutButton.FlatStyle = FlatStyle.Flat;
             CheckOutButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             CheckOutButton.ForeColor = Color.White;
-            CheckOutButton.Location = new Point(175, 174);
+            CheckOutButton.Location = new Point(175, 217);
             CheckOutButton.Name = "CheckOutButton";
             CheckOutButton.Size = new Size(163, 41);
             CheckOutButton.TabIndex = 2;
@@ -529,7 +529,7 @@
             FastCashButton.FlatStyle = FlatStyle.Flat;
             FastCashButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             FastCashButton.ForeColor = Color.White;
-            FastCashButton.Location = new Point(3, 174);
+            FastCashButton.Location = new Point(3, 217);
             FastCashButton.Name = "FastCashButton";
             FastCashButton.Size = new Size(166, 41);
             FastCashButton.TabIndex = 1;
@@ -542,7 +542,7 @@
             // 
             TotalAmountLabel.Dock = DockStyle.Bottom;
             TotalAmountLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TotalAmountLabel.Location = new Point(0, 218);
+            TotalAmountLabel.Location = new Point(0, 261);
             TotalAmountLabel.Name = "TotalAmountLabel";
             TotalAmountLabel.Size = new Size(343, 48);
             TotalAmountLabel.TabIndex = 0;
@@ -584,14 +584,14 @@
             POSProductsDataGrid.ReadOnly = true;
             POSProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             POSProductsDataGrid.RowHeadersVisible = false;
-            POSProductsDataGrid.Size = new Size(343, 334);
+            POSProductsDataGrid.Size = new Size(343, 297);
             POSProductsDataGrid.TabIndex = 0;
             POSProductsDataGrid.CellClick += POSProductsDataGrid_CellClick;
             POSProductsDataGrid.CellDoubleClick += POSProductsDataGrid_CellDoubleClick;
+            POSProductsDataGrid.CellEndEdit += POSProductsDataGrid_CellEndEdit;
             POSProductsDataGrid.CellFormatting += POSProductsDataGrid_CellFormatting;
             POSProductsDataGrid.EditingControlShowing += POSProductsDataGrid_EditingControlShowing;
             POSProductsDataGrid.UserDeletedRow += POSProductsDataGrid_UserDeletedRow;
-            POSProductsDataGrid.KeyPress += POSProductsDataGrid_KeyPress;
             // 
             // id
             // 

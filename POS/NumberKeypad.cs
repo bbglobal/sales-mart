@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace POS
 {
@@ -125,6 +126,7 @@ namespace POS
 
         private void Enter_Click(object sender, EventArgs e)
         {
+            OnNumberButtonPressed(-5);
             this.Hide();
         }
     }

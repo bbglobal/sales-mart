@@ -81,13 +81,15 @@ namespace POS
             //    MessageBox.Show("Please fill the field", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             //    return;
             //}
+
+
             try
             {
                 connection.Open();
                 string query = "UPDATE bill_list SET status=@Status,discount=@Discount,net_total_amount=@NetTotal,cash_received=@CashReceived,change=@Change WHERE bill_id=@Id";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Status", "Paid");
+                    command.Parameters.AddWithValue("@Status", "Paid"); 
                     command.Parameters.AddWithValue("@Discount", Convert.ToDecimal(Discount_TextBox.Text));
                     command.Parameters.AddWithValue("@NetTotal", Convert.ToDecimal(NetAmount_TextBox.Text));
                     command.Parameters.AddWithValue("@CashReceived", Convert.ToDecimal(CashReceived_TextBox.Text));
@@ -240,6 +242,10 @@ namespace POS
                 {
                     targetTextBox.Text += ".";
                     targetTextBox.SelectionStart = targetTextBox.Text.Length;
+                }
+                else if (number == -5)
+                {
+
                 }
                 else
                 {
