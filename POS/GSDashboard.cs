@@ -480,8 +480,8 @@ namespace POS
                 ProductPanel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
-                TablesPanel.Visible = false;
-                KitchenPanel.Visible = false;
+                SupplierPanel.Visible = false;
+                
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
@@ -506,14 +506,14 @@ namespace POS
                 ContentContainer_panel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
-                TablesPanel.Visible = false;
-                KitchenPanel.Visible = false;
+                SupplierPanel.Visible = false;
+                
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
         }
 
-        
+
 
         private int ControlsCount = 0;
         private async void Menu_POS_label_Click(object sender, EventArgs e)
@@ -534,10 +534,9 @@ namespace POS
                 POSPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
-                ContentContainer_panel.Visible = false;
                 StaffPanel.Visible = false;
-                TablesPanel.Visible = false;
-                KitchenPanel.Visible = false;
+                SupplierPanel.Visible = false;
+                
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 StartTransition(60, "Hide");
@@ -579,10 +578,9 @@ namespace POS
                 StaffPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
-                ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
-                TablesPanel.Visible = false;
-                KitchenPanel.Visible = false;
+                SupplierPanel.Visible = false;
+                
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
@@ -600,14 +598,13 @@ namespace POS
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Kitchen";
-            if (KitchenPanel.Visible == false)
+            if (ProductPanel.Visible == false)
             {
-                KitchenPanel.Visible = true;
+                ProductPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
-                ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
-                TablesPanel.Visible = false;
+                SupplierPanel.Visible = false;
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -628,19 +625,18 @@ namespace POS
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
-            Current_ScreenName_label.Text = "Kitchen";
-            //if (KitchenPanel.Visible == false)
-            //{
-            //    KitchenPanel.Visible = true;
-            //    ProductPanel.Visible = false;
-            //    ContentContainer_panel.Visible = false;
-            //    ContentContainer_panel.Visible = false;
-            //    POSPanel.Visible = false;
-            //    TablesPanel.Visible = false;
-            //    StaffPanel.Visible = false;
-            //    ReportsPanel.Visible = false;
-            //    //ProductPanel.Visible = false;
-            //}
+            Current_ScreenName_label.Text = "Suppliers";
+            if (SupplierPanel.Visible == false)
+            {
+                SupplierPanel.Visible = true;
+                ProductPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                POSPanel.Visible = false;
+                ClientsPanel.Visible = false;
+                StaffPanel.Visible = false;
+                ReportsPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
 
 
         }
@@ -658,19 +654,18 @@ namespace POS
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
-            Current_ScreenName_label.Text = "Kitchen";
-            //if (KitchenPanel.Visible == false)
-            //{
-            //    KitchenPanel.Visible = true;
-            //    ProductPanel.Visible = false;
-            //    ContentContainer_panel.Visible = false;
-            //    ContentContainer_panel.Visible = false;
-            //    POSPanel.Visible = false;
-            //    TablesPanel.Visible = false;
-            //    StaffPanel.Visible = false;
-            //    ReportsPanel.Visible = false;
-            //    //ProductPanel.Visible = false;
-            //}
+            Current_ScreenName_label.Text = "Clients";
+            if (ClientsPanel.Visible == false)
+            {
+                ClientsPanel.Visible = true;
+                ProductPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                POSPanel.Visible = false;
+                SupplierPanel.Visible = false;
+                StaffPanel.Visible = false;
+                ReportsPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
 
 
         }
@@ -695,11 +690,10 @@ namespace POS
                 ReportsPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
-                ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
-                TablesPanel.Visible = false;
+                SupplierPanel.Visible = false;
                 StaffPanel.Visible = false;
-                KitchenPanel.Visible = false;
+                
                 //ProductPanel.Visible = false;
             }
         }
@@ -763,7 +757,7 @@ namespace POS
                             {
                                 HeaderText = "SR#",
                                 ValueType = typeof(string),
-
+                                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                             };
                             WorkingDataGridView.Columns.Insert(0, SR);
 
@@ -824,7 +818,7 @@ namespace POS
                         {
                             HeaderText = "SR#",
                             ValueType = typeof(string),
-
+                            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         };
                         WorkingDataGridView.Columns.Insert(0, SR);
                         WorkingDataGridView.DataSource = dataTable;
@@ -901,6 +895,7 @@ namespace POS
                     dataGridView.Columns["phone_number"].HeaderText = "Phone";
                     dataGridView.Columns["address"].HeaderText = "Address";
                     dataGridView.Columns["status"].HeaderText = "Status";
+                    dataGridView.Columns["shifts"].HeaderText = "Shifts";
                 }
                 else
                 {
@@ -909,11 +904,30 @@ namespace POS
                 }
             }
 
-            else if (dataGridView == TablesDataGrid)
+            else if (dataGridView == SupplierDataGrid)
             {
 
                 dataGridView.Columns["id"].Visible = false;
-                dataGridView.Columns["table_name"].HeaderText = "Table Name";
+                dataGridView.Columns["or_image"].Visible = false;
+                dataGridView.Columns["image"].HeaderText = "Image";
+                dataGridView.Columns["supplier_name"].HeaderText = "Supplier Name";
+                dataGridView.Columns["email"].HeaderText = "Email";
+                dataGridView.Columns["phone"].HeaderText = "Phone";
+                dataGridView.Columns["address"].HeaderText = "Address";
+
+
+            }
+            
+            else if (dataGridView == ClientsDataGrid)
+            {
+
+                dataGridView.Columns["id"].Visible = false;
+                dataGridView.Columns["or_image"].Visible = false;
+                dataGridView.Columns["image"].HeaderText = "Image";
+                dataGridView.Columns["client_name"].HeaderText = "Client Name";
+                dataGridView.Columns["email"].HeaderText = "Email";
+                dataGridView.Columns["phone"].HeaderText = "Phone";
+                dataGridView.Columns["address"].HeaderText = "Address";
 
 
             }
@@ -1169,7 +1183,7 @@ namespace POS
 
         #endregion
 
-         #region Products Data Grid All Event Listeners
+        #region Products Data Grid All Event Listeners
         private void ProductsDataGrid_VisibleChanged(object sender, EventArgs e)
         {
 
@@ -1342,19 +1356,19 @@ namespace POS
         }
         #endregion
 
-        #region Staff Add Button And Seach TextBox Functions
+        #region Staff Add Button And Search TextBox Functions
         private void AddStaffButton_Click(object sender, EventArgs e)
         {
             if (StaffTab.BackColor == Color.FromArgb(37, 150, 190))
             {
-                StaffForm staffForm = new StaffForm();
+                GSStaffForm staffForm = new GSStaffForm();
                 staffForm.ShowDialog();
                 LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
             }
 
             else
             {
-                StaffCategoryForm staffCategory = new StaffCategoryForm();
+                GSStaffCategoryForm staffCategory = new GSStaffCategoryForm();
                 staffCategory.ShowDialog();
                 string query = "select * from staff_category";
                 LoadDataAsync(StaffDataGrid, query, "Sync");
@@ -1386,13 +1400,13 @@ namespace POS
                 {
                     if (StaffDataGrid.Columns["staff_name"] != null)
                     {
-                        StaffForm staffForm = new StaffForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                        GSStaffForm staffForm = new GSStaffForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
                         staffForm.ShowDialog();
                         LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
                     }
                     else
                     {
-                        StaffCategoryForm staffcategory = new StaffCategoryForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                        GSStaffCategoryForm staffcategory = new GSStaffCategoryForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
                         staffcategory.ShowDialog();
                         LoadDataAsync(StaffDataGrid, "select * from staff_category", "Sync");
                     }
@@ -1443,59 +1457,123 @@ namespace POS
         #endregion
 
 
-        #region All Tables Screen Functions
+        #region All Supplier Screen Functions
 
-        #region Tables Panel VisibleChanged and Tables Data Grid Functions
-        //private void TablesPanel_VisibleChanged(object sender, EventArgs e)
-        //{
-        //    if (TablesPanel.Visible == true)
-        //    {
-        //        LoadDataAsync(TablesDataGrid, "select * from tables", "Async");
-        //    }
-        //}
+        #region Supplier Panel VisibleChanged and Supplier Data Grid Functions
 
-        //private void TablesDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
+        private void SupplierPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (SupplierPanel.Visible == true)
+            {
+                LoadDataAsync(SupplierDataGrid, "select * from suppliers", "Async");
+            }
+        }
+
+        private void SupplierDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (SupplierDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+                    SupplierForm supplierForm = new SupplierForm((int)SupplierDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                    supplierForm.ShowDialog();
+                    LoadDataAsync(SupplierDataGrid, "select * from suppliers", "Sync");
+                }
+
+                else if (SupplierDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+
+                    if (MessageBox.Show("Are you sure you want to delete this supplier?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        DeleteRowFromDatabase(Convert.ToInt32(SupplierDataGrid.Rows[e.RowIndex].Cells["id"].Value), "suppliers", SupplierDataGrid, e.RowIndex);
+                    }
+
+                }
+
+            }
+        }
 
 
-        //    if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-        //    {
-        //        if (TablesDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
-        //        {
-        //            TablesForm tablesForm = new TablesForm((int)TablesDataGrid.Rows[e.RowIndex].Cells["id"].Value);
-        //            tablesForm.ShowDialog();
-        //            LoadDataAsync(TablesDataGrid, "select * from tables", "Sync");
-        //        }
-
-        //        else if (TablesDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
-        //        {
-
-        //            if (MessageBox.Show("Are you sure you want to delete this table name?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-        //            {
-        //                DeleteRowFromDatabase(Convert.ToInt32(TablesDataGrid.Rows[e.RowIndex].Cells["id"].Value), "tables", TablesDataGrid, e.RowIndex);
-        //            }
-
-        //        }
-
-        //    }
-
-
-        //}
         #endregion
 
-        #region Tables Add Button and Search TextBox Functions
-        //private void TablesAddButton_Click(object sender, EventArgs e)
-        //{
-        //    TablesForm tablesForm = new TablesForm();
-        //    tablesForm.ShowDialog();
-        //    LoadDataAsync(TablesDataGrid, "select * from tables", "Sync");
-        //}
+        #region Supplier Add Button and Search TextBox Functions
 
-        //private void TablesSearchTextBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    string query = $"select * from tables where table_name like '%{TablesSearchTextBox.Text}%'";
-        //    LoadDataAsync(TablesDataGrid, query, "Sync");
-        //}
+        private void SupplierAddButton_Click(object sender, EventArgs e)
+        {
+            SupplierForm supplierForm = new SupplierForm();
+            supplierForm.ShowDialog();
+            LoadDataAsync(SupplierDataGrid, "select * from suppliers", "Sync");
+        }
+
+        private void SupplierSearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string query = $"select * from suppliers where supplier_name like '%{SupplierSearchTextBox.Text}%'";
+            LoadDataAsync(SupplierDataGrid, query, "Sync");
+        }
+
+
+        #endregion
+
+        #endregion
+
+
+        #region All Client Screen Functions
+
+        #region Client Panel VisibleChanged and Client Data Grid Functions
+
+
+        private void ClientsPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (ClientsPanel.Visible == true)
+            {
+                LoadDataAsync(ClientsDataGrid, "select * from clients", "Async");
+            }
+        }
+
+        private void ClientsDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (ClientsDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+                    ClientForm clientForm = new ClientForm((int)ClientsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                    clientForm.ShowDialog();
+                    LoadDataAsync(ClientsDataGrid, "select * from clients", "Sync");
+                }
+
+                else if (SupplierDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+
+                    if (MessageBox.Show("Are you sure you want to delete this client?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        DeleteRowFromDatabase(Convert.ToInt32(ClientsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "clients", ClientsDataGrid, e.RowIndex);
+                    }
+
+                }
+
+            }
+        }
+
+
+
+        #endregion
+
+        #region Client Add Button and Search TextBox Functions
+
+        private void AddClientsButton_Click(object sender, EventArgs e)
+        {
+            ClientForm clientForm = new ClientForm();
+            clientForm.ShowDialog();
+            LoadDataAsync(ClientsDataGrid, "select * from clients", "Sync");
+        }
+
+        private void Clients_SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string query = $"select * from clients where client_name like '%{Clients_SearchTextBox.Text}%'";
+            LoadDataAsync(ClientsDataGrid, query, "Sync");
+        }
+
+
 
         #endregion
 
@@ -1839,76 +1917,53 @@ namespace POS
         }
 
 
-        private void KOTButton_Click(object sender, EventArgs e)
-        {
-            SetLabelColor(Menu_Purchase_label, "#0077C3");
-            Menu_Products_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
-            Menu_Dashboard_label.BackColor = Color.Transparent;
-            Menu_POS_label.BackColor = Color.Transparent;
-            Menu_Staff_label.BackColor = Color.Transparent;
-            Menu_Reports_label.BackColor = Color.Transparent;
-            Menu_Settings_label.BackColor = Color.Transparent;
-            Current_ScreenName_label.Text = "Kitchen";
-            if (KitchenPanel.Visible == false)
-            {
-                KitchenPanel.Visible = true;
-                ProductPanel.Visible = false;
-                ContentContainer_panel.Visible = false;
-                ContentContainer_panel.Visible = false;
-                POSPanel.Visible = false;
-                TablesPanel.Visible = false;
-                StaffPanel.Visible = false;
-                ReportsPanel.Visible = false;
-                //ProductPanel.Visible = false;
-            }
-        }
 
 
 
 
 
 
-        private void DinInButton_Click(object sender, EventArgs e)
-        {
-            if (BillID != -1)
-            {
-                MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                return;
-            }
-            if (POSProductsDataGrid.Rows.Count > 0)
-            {
-                List<string> columnValues = new List<string>();
-                decimal total_amount = 0;
 
-                foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
-                {
-                    string ItemsValue = row.Cells["product_name"].Value.ToString();
-                    string QtyValue = row.Cells["quantity"].Value.ToString();
-                    columnValues.Add(ItemsValue + "-" + QtyValue);
-                    total_amount += Convert.ToDecimal(row.Cells["total_amount"].Value.ToString());
-                }
-                string json = JsonConvert.SerializeObject(columnValues);
-                string Added = "";
-                using (SelectTable selectTable = new SelectTable(json, total_amount))
-                {
-                    if (selectTable.ShowDialog() != DialogResult.OK)
-                    {
-                        Added = selectTable.UpdatedString;
-                    }
-                }
+        //private void DinInButton_Click(object sender, EventArgs e)
+        //{
+        //    if (BillID != -1)
+        //    {
+        //        MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+        //        return;
+        //    }
+        //    if (POSProductsDataGrid.Rows.Count > 0)
+        //    {
+        //        List<string> columnValues = new List<string>();
+        //        decimal total_amount = 0;
 
-                if (Added != "")
-                {
-                    POSProductsDataGrid.Rows.Clear();
-                }
+        //        foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
+        //        {
+        //            string ItemsValue = row.Cells["product_name"].Value.ToString();
+        //            string QtyValue = row.Cells["quantity"].Value.ToString();
+        //            columnValues.Add(ItemsValue + "-" + QtyValue);
+        //            total_amount += Convert.ToDecimal(row.Cells["total_amount"].Value.ToString());
+        //        }
+        //        string json = JsonConvert.SerializeObject(columnValues);
+        //        string Added = "";
+        //        using (SelectTable selectTable = new SelectTable(json, total_amount))
+        //        {
+        //            if (selectTable.ShowDialog() != DialogResult.OK)
+        //            {
+        //                Added = selectTable.UpdatedString;
+        //            }
+        //        }
 
-            }
-            else
-            {
-                MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            }
-        }
+        //        if (Added != "")
+        //        {
+        //            POSProductsDataGrid.Rows.Clear();
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        //    }
+        //}
 
 
 
@@ -2071,7 +2126,7 @@ namespace POS
         #endregion
 
 
-        #region All Kitchen Screen Functions
+        #region All Kitchen Screen Functions (to be deleted NO USE HERE)
 
         //private void KitchenPanel_VisibleChanged(object sender, EventArgs e)
         //{
@@ -2367,7 +2422,11 @@ namespace POS
             }
         }
 
-        
+
+
+  
+
+       
     }
 }
 

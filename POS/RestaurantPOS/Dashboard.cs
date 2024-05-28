@@ -822,6 +822,7 @@ namespace POS
                     dataGridView.Columns["phone_number"].HeaderText = "Phone";
                     dataGridView.Columns["address"].HeaderText = "Address";
                     dataGridView.Columns["status"].HeaderText = "Status";
+                    dataGridView.Columns["shifts"].HeaderText = "Shifts";
                 }
                 else
                 {

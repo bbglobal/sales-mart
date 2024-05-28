@@ -62,6 +62,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>GetItemsByCatDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Update="ClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SupplierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="POSDataSet1.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -83,6 +89,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="DeliveryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GSStaffCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GSStaffForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="TablesForm.cs">
