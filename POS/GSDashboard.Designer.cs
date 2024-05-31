@@ -30,6 +30,8 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GSDashboard));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
@@ -46,10 +48,12 @@
             DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             Main_panel = new Panel();
             Sidebar_panel = new Panel();
             Menu_Client_label = new Label();
@@ -67,6 +71,53 @@
             CurrentUser_label = new Label();
             Current_ScreenName_label = new Label();
             Splitter_label = new Label();
+            POSPanel = new Panel();
+            ProductsFlowLayoutPanel = new FlowLayoutPanel();
+            CategoriesFlowLayoutPanel = new FlowLayoutPanel();
+            ProductDataGrid_panel = new Panel();
+            Calculator_panel = new Panel();
+            CheckOutButton = new Button();
+            FastCashButton = new Button();
+            TotalAmountLabel = new Label();
+            POSProductsDataGrid = new DataGridView();
+            id = new DataGridViewTextBoxColumn();
+            hidden_id = new DataGridViewTextBoxColumn();
+            product_name = new DataGridViewTextBoxColumn();
+            quantity = new DataGridViewTextBoxColumn();
+            product_price = new DataGridViewTextBoxColumn();
+            Unit = new DataGridViewTextBoxColumn();
+            total_amount = new DataGridViewTextBoxColumn();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            TakeAwayButton = new Button();
+            DeliveryButton = new Button();
+            BillListButton = new Button();
+            NewButton = new Button();
+            panel2 = new Panel();
+            textBox2 = new TextBox();
+            button1 = new Button();
+            ReportsPanel = new Panel();
+            panel4 = new Panel();
+            panel6 = new Panel();
+            GenerateReportByCatButton = new Button();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            ReportsCatToDateTextBox = new DateTimePicker();
+            ReportsCategoryComboBox = new ComboBox();
+            ReportsCatFromDateTextBox = new DateTimePicker();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            SalesReportsByCatButton = new Button();
+            StaffListButton = new Button();
+            SalesReportItemWiseButton = new Button();
+            MenuListButton = new Button();
+            PurchasePanel = new Panel();
+            PurchaseDataGrid = new DataGridView();
+            Purchase_TablePanelLayout = new TableLayoutPanel();
+            PurchaseAddButton = new Button();
+            comboBox5 = new ComboBox();
+            panel9 = new Panel();
+            Purchase_SearchTextBox = new TextBox();
+            button4 = new Button();
             ClientsPanel = new Panel();
             ClientsDataGrid = new DataGridView();
             tableLayoutPanel3 = new TableLayoutPanel();
@@ -134,48 +185,24 @@
             T_Sale_Amount_label = new Label();
             TS_line = new Label();
             Total_Sale_label = new Label();
-            POSPanel = new Panel();
-            ProductsFlowLayoutPanel = new FlowLayoutPanel();
-            CategoriesFlowLayoutPanel = new FlowLayoutPanel();
-            ProductDataGrid_panel = new Panel();
-            Calculator_panel = new Panel();
-            CheckOutButton = new Button();
-            FastCashButton = new Button();
-            TotalAmountLabel = new Label();
-            POSProductsDataGrid = new DataGridView();
-            id = new DataGridViewTextBoxColumn();
-            hidden_id = new DataGridViewTextBoxColumn();
-            product_name = new DataGridViewTextBoxColumn();
-            quantity = new DataGridViewTextBoxColumn();
-            product_price = new DataGridViewTextBoxColumn();
-            total_amount = new DataGridViewTextBoxColumn();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            TakeAwayButton = new Button();
-            DeliveryButton = new Button();
-            BillListButton = new Button();
-            NewButton = new Button();
-            panel2 = new Panel();
-            textBox2 = new TextBox();
-            button1 = new Button();
-            ReportsPanel = new Panel();
-            panel4 = new Panel();
-            panel6 = new Panel();
-            GenerateReportByCatButton = new Button();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
-            ReportsCatToDateTextBox = new DateTimePicker();
-            ReportsCategoryComboBox = new ComboBox();
-            ReportsCatFromDateTextBox = new DateTimePicker();
-            tableLayoutPanel2 = new TableLayoutPanel();
-            SalesReportsByCatButton = new Button();
-            StaffListButton = new Button();
-            SalesReportItemWiseButton = new Button();
-            MenuListButton = new Button();
             notifyIcon1 = new NotifyIcon(components);
             Main_panel.SuspendLayout();
             Sidebar_panel.SuspendLayout();
             ScreenContainer_panel.SuspendLayout();
+            POSPanel.SuspendLayout();
+            ProductDataGrid_panel.SuspendLayout();
+            Calculator_panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)POSProductsDataGrid).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
+            panel2.SuspendLayout();
+            ReportsPanel.SuspendLayout();
+            panel4.SuspendLayout();
+            panel6.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            PurchasePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)PurchaseDataGrid).BeginInit();
+            Purchase_TablePanelLayout.SuspendLayout();
+            panel9.SuspendLayout();
             ClientsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ClientsDataGrid).BeginInit();
             tableLayoutPanel3.SuspendLayout();
@@ -203,16 +230,6 @@
             Total_Disc_CardBox.SuspendLayout();
             Total_Cost_CardBox.SuspendLayout();
             Total_Sale_CardBox.SuspendLayout();
-            POSPanel.SuspendLayout();
-            ProductDataGrid_panel.SuspendLayout();
-            Calculator_panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)POSProductsDataGrid).BeginInit();
-            tableLayoutPanel1.SuspendLayout();
-            panel2.SuspendLayout();
-            ReportsPanel.SuspendLayout();
-            panel4.SuspendLayout();
-            panel6.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // Main_panel
@@ -429,6 +446,7 @@
             ScreenContainer_panel.Controls.Add(Splitter_label);
             ScreenContainer_panel.Controls.Add(POSPanel);
             ScreenContainer_panel.Controls.Add(ReportsPanel);
+            ScreenContainer_panel.Controls.Add(PurchasePanel);
             ScreenContainer_panel.Controls.Add(ClientsPanel);
             ScreenContainer_panel.Controls.Add(SupplierPanel);
             ScreenContainer_panel.Controls.Add(StaffPanel);
@@ -476,6 +494,682 @@
             Splitter_label.Size = new Size(1017, 1);
             Splitter_label.TabIndex = 5;
             // 
+            // POSPanel
+            // 
+            POSPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            POSPanel.BackColor = Color.White;
+            POSPanel.Controls.Add(ProductsFlowLayoutPanel);
+            POSPanel.Controls.Add(CategoriesFlowLayoutPanel);
+            POSPanel.Controls.Add(ProductDataGrid_panel);
+            POSPanel.Controls.Add(tableLayoutPanel1);
+            POSPanel.Location = new Point(21, 95);
+            POSPanel.Name = "POSPanel";
+            POSPanel.Size = new Size(978, 701);
+            POSPanel.TabIndex = 8;
+            POSPanel.Visible = false;
+            POSPanel.VisibleChanged += POSPanel_VisibleChanged;
+            // 
+            // ProductsFlowLayoutPanel
+            // 
+            ProductsFlowLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ProductsFlowLayoutPanel.AutoScroll = true;
+            ProductsFlowLayoutPanel.Location = new Point(5, 144);
+            ProductsFlowLayoutPanel.Name = "ProductsFlowLayoutPanel";
+            ProductsFlowLayoutPanel.Size = new Size(617, 546);
+            ProductsFlowLayoutPanel.TabIndex = 4;
+            // 
+            // CategoriesFlowLayoutPanel
+            // 
+            CategoriesFlowLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            CategoriesFlowLayoutPanel.AutoSize = true;
+            CategoriesFlowLayoutPanel.Location = new Point(5, 92);
+            CategoriesFlowLayoutPanel.Name = "CategoriesFlowLayoutPanel";
+            CategoriesFlowLayoutPanel.Size = new Size(617, 95);
+            CategoriesFlowLayoutPanel.TabIndex = 3;
+            // 
+            // ProductDataGrid_panel
+            // 
+            ProductDataGrid_panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            ProductDataGrid_panel.BackColor = Color.FromArgb(37, 150, 190);
+            ProductDataGrid_panel.Controls.Add(Calculator_panel);
+            ProductDataGrid_panel.Controls.Add(POSProductsDataGrid);
+            ProductDataGrid_panel.Location = new Point(628, 92);
+            ProductDataGrid_panel.Name = "ProductDataGrid_panel";
+            ProductDataGrid_panel.Size = new Size(345, 598);
+            ProductDataGrid_panel.TabIndex = 2;
+            ProductDataGrid_panel.Visible = false;
+            // 
+            // Calculator_panel
+            // 
+            Calculator_panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            Calculator_panel.BackColor = Color.White;
+            Calculator_panel.Controls.Add(CheckOutButton);
+            Calculator_panel.Controls.Add(FastCashButton);
+            Calculator_panel.Controls.Add(TotalAmountLabel);
+            Calculator_panel.Location = new Point(1, 330);
+            Calculator_panel.Name = "Calculator_panel";
+            Calculator_panel.Size = new Size(343, 266);
+            Calculator_panel.TabIndex = 1;
+            // 
+            // CheckOutButton
+            // 
+            CheckOutButton.Anchor = AnchorStyles.Bottom;
+            CheckOutButton.BackColor = Color.FromArgb(0, 119, 195);
+            CheckOutButton.FlatAppearance.BorderSize = 0;
+            CheckOutButton.FlatStyle = FlatStyle.Flat;
+            CheckOutButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            CheckOutButton.ForeColor = Color.White;
+            CheckOutButton.Location = new Point(175, 174);
+            CheckOutButton.Name = "CheckOutButton";
+            CheckOutButton.Size = new Size(163, 41);
+            CheckOutButton.TabIndex = 2;
+            CheckOutButton.Text = "Check Out";
+            CheckOutButton.UseVisualStyleBackColor = false;
+            CheckOutButton.Visible = false;
+            CheckOutButton.Click += CheckOutButton_Click;
+            // 
+            // FastCashButton
+            // 
+            FastCashButton.Anchor = AnchorStyles.Bottom;
+            FastCashButton.BackColor = Color.FromArgb(0, 119, 195);
+            FastCashButton.FlatAppearance.BorderSize = 0;
+            FastCashButton.FlatStyle = FlatStyle.Flat;
+            FastCashButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            FastCashButton.ForeColor = Color.White;
+            FastCashButton.Location = new Point(3, 174);
+            FastCashButton.Name = "FastCashButton";
+            FastCashButton.Size = new Size(166, 41);
+            FastCashButton.TabIndex = 1;
+            FastCashButton.Text = "Fast Cash";
+            FastCashButton.UseVisualStyleBackColor = false;
+            FastCashButton.Visible = false;
+            FastCashButton.Click += FastCashButton_Click;
+            // 
+            // TotalAmountLabel
+            // 
+            TotalAmountLabel.Dock = DockStyle.Bottom;
+            TotalAmountLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TotalAmountLabel.Location = new Point(0, 218);
+            TotalAmountLabel.Name = "TotalAmountLabel";
+            TotalAmountLabel.Size = new Size(343, 48);
+            TotalAmountLabel.TabIndex = 0;
+            TotalAmountLabel.Text = "Total Amount : ";
+            TotalAmountLabel.TextAlign = ContentAlignment.MiddleCenter;
+            TotalAmountLabel.Visible = false;
+            // 
+            // POSProductsDataGrid
+            // 
+            POSProductsDataGrid.AllowUserToAddRows = false;
+            POSProductsDataGrid.AllowUserToDeleteRows = false;
+            POSProductsDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            POSProductsDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            POSProductsDataGrid.BackgroundColor = Color.White;
+            POSProductsDataGrid.BorderStyle = BorderStyle.None;
+            POSProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            POSProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            POSProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            POSProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            POSProductsDataGrid.Columns.AddRange(new DataGridViewColumn[] { id, hidden_id, product_name, quantity, product_price, Unit, total_amount });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Window;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            POSProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            POSProductsDataGrid.EnableHeadersVisualStyles = false;
+            POSProductsDataGrid.Location = new Point(1, 1);
+            POSProductsDataGrid.Name = "POSProductsDataGrid";
+            POSProductsDataGrid.ReadOnly = true;
+            POSProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            POSProductsDataGrid.RowHeadersVisible = false;
+            POSProductsDataGrid.Size = new Size(343, 334);
+            POSProductsDataGrid.TabIndex = 0;
+            POSProductsDataGrid.CellClick += POSProductsDataGrid_CellClick;
+            POSProductsDataGrid.CellDoubleClick += POSProductsDataGrid_CellDoubleClick;
+            POSProductsDataGrid.CellEndEdit += POSProductsDataGrid_CellEndEdit;
+            POSProductsDataGrid.CellFormatting += POSProductsDataGrid_CellFormatting;
+            POSProductsDataGrid.EditingControlShowing += POSProductsDataGrid_EditingControlShowing;
+            POSProductsDataGrid.UserDeletedRow += POSProductsDataGrid_UserDeletedRow;
+            // 
+            // id
+            // 
+            id.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            id.FillWeight = 72.74293F;
+            id.HeaderText = "SR#";
+            id.Name = "id";
+            id.ReadOnly = true;
+            id.Width = 30;
+            // 
+            // hidden_id
+            // 
+            hidden_id.HeaderText = "id";
+            hidden_id.Name = "hidden_id";
+            hidden_id.ReadOnly = true;
+            hidden_id.Visible = false;
+            // 
+            // product_name
+            // 
+            product_name.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            product_name.FillWeight = 129.391479F;
+            product_name.HeaderText = "Product Name";
+            product_name.Name = "product_name";
+            product_name.ReadOnly = true;
+            product_name.Width = 140;
+            // 
+            // quantity
+            // 
+            quantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            quantity.FillWeight = 14.1705494F;
+            quantity.HeaderText = "Qty";
+            quantity.Name = "quantity";
+            quantity.ReadOnly = true;
+            quantity.Width = 30;
+            // 
+            // product_price
+            // 
+            product_price.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            product_price.FillWeight = 55.26863F;
+            product_price.HeaderText = "Price";
+            product_price.Name = "product_price";
+            product_price.ReadOnly = true;
+            product_price.Visible = false;
+            product_price.Width = 60;
+            // 
+            // Unit
+            // 
+            Unit.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            Unit.HeaderText = "Unit";
+            Unit.Name = "Unit";
+            Unit.ReadOnly = true;
+            Unit.Width = 60;
+            // 
+            // total_amount
+            // 
+            total_amount.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            total_amount.FillWeight = 228.426392F;
+            total_amount.HeaderText = "T Amount";
+            total_amount.Name = "total_amount";
+            total_amount.ReadOnly = true;
+            total_amount.Width = 79;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.ColumnCount = 9;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
+            tableLayoutPanel1.Controls.Add(TakeAwayButton, 5, 0);
+            tableLayoutPanel1.Controls.Add(DeliveryButton, 4, 0);
+            tableLayoutPanel1.Controls.Add(BillListButton, 2, 0);
+            tableLayoutPanel1.Controls.Add(NewButton, 0, 0);
+            tableLayoutPanel1.Controls.Add(panel2, 8, 0);
+            tableLayoutPanel1.Location = new Point(3, 6);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(972, 52);
+            tableLayoutPanel1.TabIndex = 0;
+            // 
+            // TakeAwayButton
+            // 
+            TakeAwayButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            TakeAwayButton.BackColor = Color.Transparent;
+            TakeAwayButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            TakeAwayButton.FlatAppearance.BorderSize = 2;
+            TakeAwayButton.FlatStyle = FlatStyle.Flat;
+            TakeAwayButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            TakeAwayButton.Location = new Point(259, 10);
+            TakeAwayButton.Margin = new Padding(3, 10, 0, 3);
+            TakeAwayButton.Name = "TakeAwayButton";
+            TakeAwayButton.Size = new Size(106, 35);
+            TakeAwayButton.TabIndex = 5;
+            TakeAwayButton.Text = "TAKE AWAY";
+            TakeAwayButton.UseVisualStyleBackColor = false;
+            TakeAwayButton.Click += TakeAwayButton_Click;
+            // 
+            // DeliveryButton
+            // 
+            DeliveryButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            DeliveryButton.BackColor = Color.Transparent;
+            DeliveryButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            DeliveryButton.FlatAppearance.BorderSize = 2;
+            DeliveryButton.FlatStyle = FlatStyle.Flat;
+            DeliveryButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            DeliveryButton.Location = new Point(165, 10);
+            DeliveryButton.Margin = new Padding(3, 10, 0, 3);
+            DeliveryButton.Name = "DeliveryButton";
+            DeliveryButton.Size = new Size(91, 35);
+            DeliveryButton.TabIndex = 4;
+            DeliveryButton.Text = "DELIVERY";
+            DeliveryButton.UseVisualStyleBackColor = false;
+            DeliveryButton.Click += DeliveryButton_Click;
+            // 
+            // BillListButton
+            // 
+            BillListButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            BillListButton.BackColor = Color.Transparent;
+            BillListButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            BillListButton.FlatAppearance.BorderSize = 2;
+            BillListButton.FlatStyle = FlatStyle.Flat;
+            BillListButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            BillListButton.Location = new Point(72, 10);
+            BillListButton.Margin = new Padding(3, 10, 0, 3);
+            BillListButton.Name = "BillListButton";
+            BillListButton.Size = new Size(90, 35);
+            BillListButton.TabIndex = 2;
+            BillListButton.Text = "BILL LIST";
+            BillListButton.UseVisualStyleBackColor = false;
+            BillListButton.Click += BillListButton_Click;
+            // 
+            // NewButton
+            // 
+            NewButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            NewButton.BackColor = Color.Transparent;
+            NewButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            NewButton.FlatAppearance.BorderSize = 2;
+            NewButton.FlatStyle = FlatStyle.Flat;
+            NewButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            NewButton.Location = new Point(10, 10);
+            NewButton.Margin = new Padding(10, 10, 0, 3);
+            NewButton.Name = "NewButton";
+            NewButton.Size = new Size(59, 35);
+            NewButton.TabIndex = 0;
+            NewButton.Text = "NEW";
+            NewButton.UseVisualStyleBackColor = false;
+            NewButton.Click += NewButton_Click;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(textBox2);
+            panel2.Controls.Add(button1);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(610, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(359, 46);
+            panel2.TabIndex = 7;
+            // 
+            // textBox2
+            // 
+            textBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox2.Location = new Point(34, 11);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.PlaceholderText = "Search..";
+            textBox2.Size = new Size(150, 29);
+            textBox2.TabIndex = 7;
+            textBox2.WordWrap = false;
+            textBox2.TextChanged += textBox2_TextChanged;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.White;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Image = (Image)resources.GetObject("button1.Image");
+            button1.Location = new Point(8, 11);
+            button1.Name = "button1";
+            button1.Size = new Size(29, 29);
+            button1.TabIndex = 8;
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // ReportsPanel
+            // 
+            ReportsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ReportsPanel.BackColor = Color.White;
+            ReportsPanel.Controls.Add(panel4);
+            ReportsPanel.Controls.Add(tableLayoutPanel2);
+            ReportsPanel.Location = new Point(21, 95);
+            ReportsPanel.Name = "ReportsPanel";
+            ReportsPanel.Size = new Size(978, 701);
+            ReportsPanel.TabIndex = 11;
+            ReportsPanel.Visible = false;
+            ReportsPanel.VisibleChanged += ReportsPanel_VisibleChanged;
+            // 
+            // panel4
+            // 
+            panel4.Anchor = AnchorStyles.None;
+            panel4.BackColor = Color.FromArgb(0, 119, 195);
+            panel4.Controls.Add(panel6);
+            panel4.Location = new Point(276, 219);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(479, 268);
+            panel4.TabIndex = 1;
+            // 
+            // panel6
+            // 
+            panel6.Anchor = AnchorStyles.None;
+            panel6.BackColor = Color.White;
+            panel6.Controls.Add(GenerateReportByCatButton);
+            panel6.Controls.Add(label3);
+            panel6.Controls.Add(label2);
+            panel6.Controls.Add(label1);
+            panel6.Controls.Add(ReportsCatToDateTextBox);
+            panel6.Controls.Add(ReportsCategoryComboBox);
+            panel6.Controls.Add(ReportsCatFromDateTextBox);
+            panel6.Location = new Point(1, 1);
+            panel6.Margin = new Padding(1);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(477, 266);
+            panel6.TabIndex = 0;
+            // 
+            // GenerateReportByCatButton
+            // 
+            GenerateReportByCatButton.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 195);
+            GenerateReportByCatButton.FlatStyle = FlatStyle.Flat;
+            GenerateReportByCatButton.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            GenerateReportByCatButton.Location = new Point(164, 180);
+            GenerateReportByCatButton.Name = "GenerateReportByCatButton";
+            GenerateReportByCatButton.Size = new Size(158, 36);
+            GenerateReportByCatButton.TabIndex = 7;
+            GenerateReportByCatButton.Text = "Generate Report";
+            GenerateReportByCatButton.UseVisualStyleBackColor = true;
+            GenerateReportByCatButton.Click += GenerateReportByCatButton_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(323, 48);
+            label3.Name = "label3";
+            label3.Size = new Size(57, 17);
+            label3.TabIndex = 6;
+            label3.Text = "To Date:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(178, 48);
+            label2.Name = "label2";
+            label2.Size = new Size(75, 17);
+            label2.TabIndex = 5;
+            label2.Text = "From Date:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(28, 48);
+            label1.Name = "label1";
+            label1.Size = new Size(67, 17);
+            label1.TabIndex = 4;
+            label1.Text = "Category:";
+            // 
+            // ReportsCatToDateTextBox
+            // 
+            ReportsCatToDateTextBox.CustomFormat = "dd/MM/yyyy";
+            ReportsCatToDateTextBox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ReportsCatToDateTextBox.Format = DateTimePickerFormat.Custom;
+            ReportsCatToDateTextBox.Location = new Point(323, 76);
+            ReportsCatToDateTextBox.Name = "ReportsCatToDateTextBox";
+            ReportsCatToDateTextBox.Size = new Size(124, 25);
+            ReportsCatToDateTextBox.TabIndex = 3;
+            // 
+            // ReportsCategoryComboBox
+            // 
+            ReportsCategoryComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            ReportsCategoryComboBox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ReportsCategoryComboBox.FormattingEnabled = true;
+            ReportsCategoryComboBox.Location = new Point(28, 76);
+            ReportsCategoryComboBox.Name = "ReportsCategoryComboBox";
+            ReportsCategoryComboBox.Size = new Size(124, 25);
+            ReportsCategoryComboBox.TabIndex = 2;
+            // 
+            // ReportsCatFromDateTextBox
+            // 
+            ReportsCatFromDateTextBox.CustomFormat = "dd/MM/yyyy";
+            ReportsCatFromDateTextBox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ReportsCatFromDateTextBox.Format = DateTimePickerFormat.Custom;
+            ReportsCatFromDateTextBox.Location = new Point(178, 76);
+            ReportsCatFromDateTextBox.Name = "ReportsCatFromDateTextBox";
+            ReportsCatFromDateTextBox.Size = new Size(124, 25);
+            ReportsCatFromDateTextBox.TabIndex = 1;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel2.ColumnCount = 6;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tableLayoutPanel2.Controls.Add(SalesReportsByCatButton, 1, 0);
+            tableLayoutPanel2.Controls.Add(StaffListButton, 2, 0);
+            tableLayoutPanel2.Controls.Add(SalesReportItemWiseButton, 3, 0);
+            tableLayoutPanel2.Controls.Add(MenuListButton, 4, 0);
+            tableLayoutPanel2.Location = new Point(3, 27);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Size = new Size(972, 59);
+            tableLayoutPanel2.TabIndex = 0;
+            // 
+            // SalesReportsByCatButton
+            // 
+            SalesReportsByCatButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            SalesReportsByCatButton.BackColor = Color.FromArgb(0, 119, 195);
+            SalesReportsByCatButton.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 195);
+            SalesReportsByCatButton.FlatStyle = FlatStyle.Flat;
+            SalesReportsByCatButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            SalesReportsByCatButton.ForeColor = Color.White;
+            SalesReportsByCatButton.Location = new Point(101, 8);
+            SalesReportsByCatButton.Margin = new Padding(4, 8, 4, 8);
+            SalesReportsByCatButton.Name = "SalesReportsByCatButton";
+            SalesReportsByCatButton.Size = new Size(235, 43);
+            SalesReportsByCatButton.TabIndex = 0;
+            SalesReportsByCatButton.Text = "Sales Reports By Category";
+            SalesReportsByCatButton.UseVisualStyleBackColor = false;
+            SalesReportsByCatButton.Click += SalesReportsByCatButton_Click;
+            // 
+            // StaffListButton
+            // 
+            StaffListButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            StaffListButton.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 195);
+            StaffListButton.FlatStyle = FlatStyle.Flat;
+            StaffListButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            StaffListButton.ForeColor = SystemColors.GrayText;
+            StaffListButton.Location = new Point(344, 8);
+            StaffListButton.Margin = new Padding(4, 8, 4, 8);
+            StaffListButton.Name = "StaffListButton";
+            StaffListButton.Size = new Size(137, 43);
+            StaffListButton.TabIndex = 1;
+            StaffListButton.Text = "Staff List";
+            StaffListButton.UseVisualStyleBackColor = true;
+            StaffListButton.Click += StaffListButton_Click;
+            // 
+            // SalesReportItemWiseButton
+            // 
+            SalesReportItemWiseButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            SalesReportItemWiseButton.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 195);
+            SalesReportItemWiseButton.FlatStyle = FlatStyle.Flat;
+            SalesReportItemWiseButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            SalesReportItemWiseButton.ForeColor = SystemColors.GrayText;
+            SalesReportItemWiseButton.Location = new Point(489, 8);
+            SalesReportItemWiseButton.Margin = new Padding(4, 8, 4, 8);
+            SalesReportItemWiseButton.Name = "SalesReportItemWiseButton";
+            SalesReportItemWiseButton.Size = new Size(235, 43);
+            SalesReportItemWiseButton.TabIndex = 2;
+            SalesReportItemWiseButton.Text = "Sales Report Item Wise";
+            SalesReportItemWiseButton.UseVisualStyleBackColor = true;
+            SalesReportItemWiseButton.Click += SalesReportItemWiseButton_Click;
+            // 
+            // MenuListButton
+            // 
+            MenuListButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            MenuListButton.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 195);
+            MenuListButton.FlatStyle = FlatStyle.Flat;
+            MenuListButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            MenuListButton.ForeColor = SystemColors.GrayText;
+            MenuListButton.Location = new Point(732, 8);
+            MenuListButton.Margin = new Padding(4, 8, 4, 8);
+            MenuListButton.Name = "MenuListButton";
+            MenuListButton.Size = new Size(137, 43);
+            MenuListButton.TabIndex = 2;
+            MenuListButton.Text = "Menu LIst";
+            MenuListButton.UseVisualStyleBackColor = true;
+            MenuListButton.Click += MenuListButton_Click;
+            // 
+            // PurchasePanel
+            // 
+            PurchasePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PurchasePanel.BackColor = Color.White;
+            PurchasePanel.Controls.Add(PurchaseDataGrid);
+            PurchasePanel.Controls.Add(Purchase_TablePanelLayout);
+            PurchasePanel.Location = new Point(21, 95);
+            PurchasePanel.Name = "PurchasePanel";
+            PurchasePanel.Size = new Size(978, 701);
+            PurchasePanel.TabIndex = 13;
+            PurchasePanel.Visible = false;
+            PurchasePanel.VisibleChanged += PurchasePanel_VisibleChanged;
+            // 
+            // PurchaseDataGrid
+            // 
+            PurchaseDataGrid.AllowUserToAddRows = false;
+            PurchaseDataGrid.AllowUserToDeleteRows = false;
+            PurchaseDataGrid.AllowUserToResizeColumns = false;
+            PurchaseDataGrid.AllowUserToResizeRows = false;
+            PurchaseDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PurchaseDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            PurchaseDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            PurchaseDataGrid.BackgroundColor = Color.White;
+            PurchaseDataGrid.BorderStyle = BorderStyle.None;
+            PurchaseDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            PurchaseDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            PurchaseDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            PurchaseDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            PurchaseDataGrid.DefaultCellStyle = dataGridViewCellStyle4;
+            PurchaseDataGrid.EnableHeadersVisualStyles = false;
+            PurchaseDataGrid.Location = new Point(3, 121);
+            PurchaseDataGrid.Margin = new Padding(0);
+            PurchaseDataGrid.Name = "PurchaseDataGrid";
+            PurchaseDataGrid.ReadOnly = true;
+            PurchaseDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Control;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle5.Padding = new Padding(3);
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            PurchaseDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            PurchaseDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle6.Padding = new Padding(3);
+            PurchaseDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            PurchaseDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            PurchaseDataGrid.Size = new Size(970, 570);
+            PurchaseDataGrid.TabIndex = 1;
+            PurchaseDataGrid.CellContentClick += PurchaseDataGrid_CellContentClick;
+            // 
+            // Purchase_TablePanelLayout
+            // 
+            Purchase_TablePanelLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            Purchase_TablePanelLayout.ColumnCount = 4;
+            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            Purchase_TablePanelLayout.Controls.Add(PurchaseAddButton, 0, 0);
+            Purchase_TablePanelLayout.Controls.Add(comboBox5, 2, 0);
+            Purchase_TablePanelLayout.Controls.Add(panel9, 3, 0);
+            Purchase_TablePanelLayout.Location = new Point(3, 37);
+            Purchase_TablePanelLayout.Name = "Purchase_TablePanelLayout";
+            Purchase_TablePanelLayout.RowCount = 1;
+            Purchase_TablePanelLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            Purchase_TablePanelLayout.Size = new Size(970, 80);
+            Purchase_TablePanelLayout.TabIndex = 0;
+            // 
+            // PurchaseAddButton
+            // 
+            PurchaseAddButton.BackColor = Color.FromArgb(37, 150, 190);
+            PurchaseAddButton.FlatAppearance.BorderSize = 0;
+            PurchaseAddButton.FlatStyle = FlatStyle.Flat;
+            PurchaseAddButton.Image = (Image)resources.GetObject("PurchaseAddButton.Image");
+            PurchaseAddButton.Location = new Point(15, 15);
+            PurchaseAddButton.Margin = new Padding(15, 15, 3, 3);
+            PurchaseAddButton.Name = "PurchaseAddButton";
+            PurchaseAddButton.Size = new Size(40, 40);
+            PurchaseAddButton.TabIndex = 0;
+            PurchaseAddButton.UseVisualStyleBackColor = false;
+            PurchaseAddButton.Click += PurchaseAddButton_Click;
+            // 
+            // comboBox5
+            // 
+            comboBox5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox5.FormattingEnabled = true;
+            comboBox5.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox5.Location = new Point(597, 25);
+            comboBox5.Margin = new Padding(15, 25, 3, 3);
+            comboBox5.Name = "comboBox5";
+            comboBox5.Size = new Size(79, 29);
+            comboBox5.TabIndex = 1;
+            comboBox5.Text = "100";
+            comboBox5.Visible = false;
+            // 
+            // panel9
+            // 
+            panel9.Controls.Add(Purchase_SearchTextBox);
+            panel9.Controls.Add(button4);
+            panel9.Location = new Point(679, 0);
+            panel9.Margin = new Padding(0);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(291, 80);
+            panel9.TabIndex = 4;
+            // 
+            // Purchase_SearchTextBox
+            // 
+            Purchase_SearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Purchase_SearchTextBox.Location = new Point(33, 25);
+            Purchase_SearchTextBox.Multiline = true;
+            Purchase_SearchTextBox.Name = "Purchase_SearchTextBox";
+            Purchase_SearchTextBox.PlaceholderText = "Search..";
+            Purchase_SearchTextBox.Size = new Size(150, 29);
+            Purchase_SearchTextBox.TabIndex = 0;
+            Purchase_SearchTextBox.WordWrap = false;
+            Purchase_SearchTextBox.TextChanged += Purchase_SearchTextBox_TextChanged;
+            // 
+            // button4
+            // 
+            button4.BackColor = Color.White;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Image = (Image)resources.GetObject("button4.Image");
+            button4.Location = new Point(5, 25);
+            button4.Name = "button4";
+            button4.Size = new Size(29, 29);
+            button4.TabIndex = 3;
+            button4.UseVisualStyleBackColor = false;
+            // 
             // ClientsPanel
             // 
             ClientsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -502,41 +1196,41 @@
             ClientsDataGrid.BorderStyle = BorderStyle.None;
             ClientsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             ClientsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            ClientsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle7.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            ClientsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             ClientsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            ClientsDataGrid.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.White;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle8.ForeColor = Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = Color.White;
+            dataGridViewCellStyle8.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            ClientsDataGrid.DefaultCellStyle = dataGridViewCellStyle8;
             ClientsDataGrid.EnableHeadersVisualStyles = false;
             ClientsDataGrid.Location = new Point(3, 121);
             ClientsDataGrid.Margin = new Padding(0);
             ClientsDataGrid.Name = "ClientsDataGrid";
             ClientsDataGrid.ReadOnly = true;
             ClientsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = SystemColors.Control;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle5.Padding = new Padding(3);
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            ClientsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = SystemColors.Control;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.Padding = new Padding(3);
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            ClientsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             ClientsDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle6.Padding = new Padding(3);
-            ClientsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.Padding = new Padding(3);
+            ClientsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle10;
             ClientsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             ClientsDataGrid.Size = new Size(970, 570);
             ClientsDataGrid.TabIndex = 1;
@@ -646,41 +1340,41 @@
             SupplierDataGrid.BorderStyle = BorderStyle.None;
             SupplierDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             SupplierDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            SupplierDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            SupplierDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             SupplierDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.White;
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle8.ForeColor = Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            SupplierDataGrid.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.White;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle12.ForeColor = Color.Black;
+            dataGridViewCellStyle12.SelectionBackColor = Color.White;
+            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            SupplierDataGrid.DefaultCellStyle = dataGridViewCellStyle12;
             SupplierDataGrid.EnableHeadersVisualStyles = false;
             SupplierDataGrid.Location = new Point(3, 121);
             SupplierDataGrid.Margin = new Padding(0);
             SupplierDataGrid.Name = "SupplierDataGrid";
             SupplierDataGrid.ReadOnly = true;
             SupplierDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = SystemColors.Control;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle9.Padding = new Padding(3);
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            SupplierDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = SystemColors.Control;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle13.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle13.Padding = new Padding(3);
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            SupplierDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             SupplierDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle10.Padding = new Padding(3);
-            SupplierDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle14.Padding = new Padding(3);
+            SupplierDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle14;
             SupplierDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             SupplierDataGrid.Size = new Size(970, 570);
             SupplierDataGrid.TabIndex = 1;
@@ -824,41 +1518,41 @@
             StaffDataGrid.BorderStyle = BorderStyle.None;
             StaffDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             StaffDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle15.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             StaffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle12.ForeColor = Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = Color.White;
-            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = Color.White;
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle16.ForeColor = Color.Black;
+            dataGridViewCellStyle16.SelectionBackColor = Color.White;
+            dataGridViewCellStyle16.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.DefaultCellStyle = dataGridViewCellStyle16;
             StaffDataGrid.EnableHeadersVisualStyles = false;
             StaffDataGrid.Location = new Point(3, 161);
             StaffDataGrid.Margin = new Padding(0);
             StaffDataGrid.Name = "StaffDataGrid";
             StaffDataGrid.ReadOnly = true;
             StaffDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = SystemColors.Control;
-            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle13.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle13.Padding = new Padding(3);
-            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = SystemColors.Control;
+            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle17.Padding = new Padding(3);
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
             StaffDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle14.Padding = new Padding(3);
-            StaffDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle18.Padding = new Padding(3);
+            StaffDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle18;
             StaffDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             StaffDataGrid.Size = new Size(970, 530);
             StaffDataGrid.TabIndex = 1;
@@ -1003,41 +1697,41 @@
             ProductsDataGrid.BorderStyle = BorderStyle.None;
             ProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             ProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle15.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle19.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle19.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             ProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = Color.White;
-            dataGridViewCellStyle16.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle16.ForeColor = Color.Black;
-            dataGridViewCellStyle16.SelectionBackColor = Color.White;
-            dataGridViewCellStyle16.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = Color.White;
+            dataGridViewCellStyle20.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle20.ForeColor = Color.Black;
+            dataGridViewCellStyle20.SelectionBackColor = Color.White;
+            dataGridViewCellStyle20.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle20.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle20;
             ProductsDataGrid.EnableHeadersVisualStyles = false;
             ProductsDataGrid.Location = new Point(3, 161);
             ProductsDataGrid.Margin = new Padding(0);
             ProductsDataGrid.Name = "ProductsDataGrid";
             ProductsDataGrid.ReadOnly = true;
             ProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = SystemColors.Control;
-            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle17.Padding = new Padding(3);
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = SystemColors.Control;
+            dataGridViewCellStyle21.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle21.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle21.Padding = new Padding(3);
+            dataGridViewCellStyle21.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
             ProductsDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle18.Padding = new Padding(3);
-            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle22.Padding = new Padding(3);
+            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle22;
             ProductsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             ProductsDataGrid.Size = new Size(970, 530);
             ProductsDataGrid.TabIndex = 1;
@@ -1547,524 +2241,6 @@
             Total_Sale_label.Text = "Total Sale Amount";
             Total_Sale_label.TextAlign = ContentAlignment.TopCenter;
             // 
-            // POSPanel
-            // 
-            POSPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            POSPanel.BackColor = Color.White;
-            POSPanel.Controls.Add(ProductsFlowLayoutPanel);
-            POSPanel.Controls.Add(CategoriesFlowLayoutPanel);
-            POSPanel.Controls.Add(ProductDataGrid_panel);
-            POSPanel.Controls.Add(tableLayoutPanel1);
-            POSPanel.Location = new Point(21, 95);
-            POSPanel.Name = "POSPanel";
-            POSPanel.Size = new Size(978, 701);
-            POSPanel.TabIndex = 8;
-            POSPanel.Visible = false;
-            POSPanel.VisibleChanged += POSPanel_VisibleChanged;
-            // 
-            // ProductsFlowLayoutPanel
-            // 
-            ProductsFlowLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ProductsFlowLayoutPanel.AutoScroll = true;
-            ProductsFlowLayoutPanel.Location = new Point(5, 144);
-            ProductsFlowLayoutPanel.Name = "ProductsFlowLayoutPanel";
-            ProductsFlowLayoutPanel.Size = new Size(617, 546);
-            ProductsFlowLayoutPanel.TabIndex = 4;
-            // 
-            // CategoriesFlowLayoutPanel
-            // 
-            CategoriesFlowLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            CategoriesFlowLayoutPanel.AutoSize = true;
-            CategoriesFlowLayoutPanel.Location = new Point(5, 92);
-            CategoriesFlowLayoutPanel.Name = "CategoriesFlowLayoutPanel";
-            CategoriesFlowLayoutPanel.Size = new Size(617, 95);
-            CategoriesFlowLayoutPanel.TabIndex = 3;
-            // 
-            // ProductDataGrid_panel
-            // 
-            ProductDataGrid_panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            ProductDataGrid_panel.BackColor = Color.FromArgb(37, 150, 190);
-            ProductDataGrid_panel.Controls.Add(Calculator_panel);
-            ProductDataGrid_panel.Controls.Add(POSProductsDataGrid);
-            ProductDataGrid_panel.Location = new Point(628, 92);
-            ProductDataGrid_panel.Name = "ProductDataGrid_panel";
-            ProductDataGrid_panel.Size = new Size(345, 598);
-            ProductDataGrid_panel.TabIndex = 2;
-            ProductDataGrid_panel.Visible = false;
-            // 
-            // Calculator_panel
-            // 
-            Calculator_panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            Calculator_panel.BackColor = Color.White;
-            Calculator_panel.Controls.Add(CheckOutButton);
-            Calculator_panel.Controls.Add(FastCashButton);
-            Calculator_panel.Controls.Add(TotalAmountLabel);
-            Calculator_panel.Location = new Point(1, 330);
-            Calculator_panel.Name = "Calculator_panel";
-            Calculator_panel.Size = new Size(343, 266);
-            Calculator_panel.TabIndex = 1;
-            // 
-            // CheckOutButton
-            // 
-            CheckOutButton.Anchor = AnchorStyles.Bottom;
-            CheckOutButton.BackColor = Color.FromArgb(0, 119, 195);
-            CheckOutButton.FlatAppearance.BorderSize = 0;
-            CheckOutButton.FlatStyle = FlatStyle.Flat;
-            CheckOutButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            CheckOutButton.ForeColor = Color.White;
-            CheckOutButton.Location = new Point(175, 174);
-            CheckOutButton.Name = "CheckOutButton";
-            CheckOutButton.Size = new Size(163, 41);
-            CheckOutButton.TabIndex = 2;
-            CheckOutButton.Text = "Check Out";
-            CheckOutButton.UseVisualStyleBackColor = false;
-            CheckOutButton.Visible = false;
-            CheckOutButton.Click += CheckOutButton_Click;
-            // 
-            // FastCashButton
-            // 
-            FastCashButton.Anchor = AnchorStyles.Bottom;
-            FastCashButton.BackColor = Color.FromArgb(0, 119, 195);
-            FastCashButton.FlatAppearance.BorderSize = 0;
-            FastCashButton.FlatStyle = FlatStyle.Flat;
-            FastCashButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            FastCashButton.ForeColor = Color.White;
-            FastCashButton.Location = new Point(3, 174);
-            FastCashButton.Name = "FastCashButton";
-            FastCashButton.Size = new Size(166, 41);
-            FastCashButton.TabIndex = 1;
-            FastCashButton.Text = "Fast Cash";
-            FastCashButton.UseVisualStyleBackColor = false;
-            FastCashButton.Visible = false;
-            FastCashButton.Click += FastCashButton_Click;
-            // 
-            // TotalAmountLabel
-            // 
-            TotalAmountLabel.Dock = DockStyle.Bottom;
-            TotalAmountLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TotalAmountLabel.Location = new Point(0, 218);
-            TotalAmountLabel.Name = "TotalAmountLabel";
-            TotalAmountLabel.Size = new Size(343, 48);
-            TotalAmountLabel.TabIndex = 0;
-            TotalAmountLabel.Text = "Total Amount : ";
-            TotalAmountLabel.TextAlign = ContentAlignment.MiddleCenter;
-            TotalAmountLabel.Visible = false;
-            // 
-            // POSProductsDataGrid
-            // 
-            POSProductsDataGrid.AllowUserToAddRows = false;
-            POSProductsDataGrid.AllowUserToDeleteRows = false;
-            POSProductsDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            POSProductsDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            POSProductsDataGrid.BackgroundColor = Color.White;
-            POSProductsDataGrid.BorderStyle = BorderStyle.None;
-            POSProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            POSProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            POSProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            POSProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            POSProductsDataGrid.Columns.AddRange(new DataGridViewColumn[] { id, hidden_id, product_name, quantity, product_price, total_amount });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Window;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            POSProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            POSProductsDataGrid.EnableHeadersVisualStyles = false;
-            POSProductsDataGrid.Location = new Point(1, 1);
-            POSProductsDataGrid.Name = "POSProductsDataGrid";
-            POSProductsDataGrid.ReadOnly = true;
-            POSProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            POSProductsDataGrid.RowHeadersVisible = false;
-            POSProductsDataGrid.Size = new Size(343, 334);
-            POSProductsDataGrid.TabIndex = 0;
-            POSProductsDataGrid.CellFormatting += POSProductsDataGrid_CellFormatting;
-            // 
-            // id
-            // 
-            id.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            id.FillWeight = 72.74293F;
-            id.HeaderText = "SR#";
-            id.Name = "id";
-            id.ReadOnly = true;
-            id.Width = 30;
-            // 
-            // hidden_id
-            // 
-            hidden_id.HeaderText = "id";
-            hidden_id.Name = "hidden_id";
-            hidden_id.ReadOnly = true;
-            hidden_id.Visible = false;
-            // 
-            // product_name
-            // 
-            product_name.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            product_name.FillWeight = 129.391479F;
-            product_name.HeaderText = "Product Name";
-            product_name.Name = "product_name";
-            product_name.ReadOnly = true;
-            product_name.Width = 140;
-            // 
-            // quantity
-            // 
-            quantity.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            quantity.FillWeight = 14.1705494F;
-            quantity.HeaderText = "Qty";
-            quantity.Name = "quantity";
-            quantity.ReadOnly = true;
-            quantity.Width = 30;
-            // 
-            // product_price
-            // 
-            product_price.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            product_price.FillWeight = 55.26863F;
-            product_price.HeaderText = "Price";
-            product_price.Name = "product_price";
-            product_price.ReadOnly = true;
-            product_price.Width = 60;
-            // 
-            // total_amount
-            // 
-            total_amount.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            total_amount.FillWeight = 228.426392F;
-            total_amount.HeaderText = "T Amount";
-            total_amount.Name = "total_amount";
-            total_amount.ReadOnly = true;
-            total_amount.Width = 79;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel1.ColumnCount = 9;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
-            tableLayoutPanel1.Controls.Add(TakeAwayButton, 5, 0);
-            tableLayoutPanel1.Controls.Add(DeliveryButton, 4, 0);
-            tableLayoutPanel1.Controls.Add(BillListButton, 2, 0);
-            tableLayoutPanel1.Controls.Add(NewButton, 0, 0);
-            tableLayoutPanel1.Controls.Add(panel2, 8, 0);
-            tableLayoutPanel1.Location = new Point(3, 6);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(972, 52);
-            tableLayoutPanel1.TabIndex = 0;
-            // 
-            // TakeAwayButton
-            // 
-            TakeAwayButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            TakeAwayButton.BackColor = Color.Transparent;
-            TakeAwayButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
-            TakeAwayButton.FlatAppearance.BorderSize = 2;
-            TakeAwayButton.FlatStyle = FlatStyle.Flat;
-            TakeAwayButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            TakeAwayButton.Location = new Point(259, 10);
-            TakeAwayButton.Margin = new Padding(3, 10, 0, 3);
-            TakeAwayButton.Name = "TakeAwayButton";
-            TakeAwayButton.Size = new Size(106, 35);
-            TakeAwayButton.TabIndex = 5;
-            TakeAwayButton.Text = "TAKE AWAY";
-            TakeAwayButton.UseVisualStyleBackColor = false;
-            TakeAwayButton.Click += TakeAwayButton_Click;
-            // 
-            // DeliveryButton
-            // 
-            DeliveryButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            DeliveryButton.BackColor = Color.Transparent;
-            DeliveryButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
-            DeliveryButton.FlatAppearance.BorderSize = 2;
-            DeliveryButton.FlatStyle = FlatStyle.Flat;
-            DeliveryButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            DeliveryButton.Location = new Point(165, 10);
-            DeliveryButton.Margin = new Padding(3, 10, 0, 3);
-            DeliveryButton.Name = "DeliveryButton";
-            DeliveryButton.Size = new Size(91, 35);
-            DeliveryButton.TabIndex = 4;
-            DeliveryButton.Text = "DELIVERY";
-            DeliveryButton.UseVisualStyleBackColor = false;
-            DeliveryButton.Click += DeliveryButton_Click;
-            // 
-            // BillListButton
-            // 
-            BillListButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            BillListButton.BackColor = Color.Transparent;
-            BillListButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
-            BillListButton.FlatAppearance.BorderSize = 2;
-            BillListButton.FlatStyle = FlatStyle.Flat;
-            BillListButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            BillListButton.Location = new Point(72, 10);
-            BillListButton.Margin = new Padding(3, 10, 0, 3);
-            BillListButton.Name = "BillListButton";
-            BillListButton.Size = new Size(90, 35);
-            BillListButton.TabIndex = 2;
-            BillListButton.Text = "BILL LIST";
-            BillListButton.UseVisualStyleBackColor = false;
-            BillListButton.Click += BillListButton_Click;
-            // 
-            // NewButton
-            // 
-            NewButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            NewButton.BackColor = Color.Transparent;
-            NewButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
-            NewButton.FlatAppearance.BorderSize = 2;
-            NewButton.FlatStyle = FlatStyle.Flat;
-            NewButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            NewButton.Location = new Point(10, 10);
-            NewButton.Margin = new Padding(10, 10, 0, 3);
-            NewButton.Name = "NewButton";
-            NewButton.Size = new Size(59, 35);
-            NewButton.TabIndex = 0;
-            NewButton.Text = "NEW";
-            NewButton.UseVisualStyleBackColor = false;
-            NewButton.Click += NewButton_Click;
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(textBox2);
-            panel2.Controls.Add(button1);
-            panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(610, 3);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(359, 46);
-            panel2.TabIndex = 7;
-            // 
-            // textBox2
-            // 
-            textBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(34, 11);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = "Search..";
-            textBox2.Size = new Size(150, 29);
-            textBox2.TabIndex = 7;
-            textBox2.WordWrap = false;
-            textBox2.TextChanged += textBox2_TextChanged;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.White;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(8, 11);
-            button1.Name = "button1";
-            button1.Size = new Size(29, 29);
-            button1.TabIndex = 8;
-            button1.UseVisualStyleBackColor = false;
-            // 
-            // ReportsPanel
-            // 
-            ReportsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ReportsPanel.BackColor = Color.White;
-            ReportsPanel.Controls.Add(panel4);
-            ReportsPanel.Controls.Add(tableLayoutPanel2);
-            ReportsPanel.Location = new Point(21, 95);
-            ReportsPanel.Name = "ReportsPanel";
-            ReportsPanel.Size = new Size(978, 701);
-            ReportsPanel.TabIndex = 11;
-            ReportsPanel.Visible = false;
-            ReportsPanel.VisibleChanged += ReportsPanel_VisibleChanged;
-            // 
-            // panel4
-            // 
-            panel4.Anchor = AnchorStyles.None;
-            panel4.BackColor = Color.FromArgb(0, 119, 195);
-            panel4.Controls.Add(panel6);
-            panel4.Location = new Point(276, 219);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(479, 268);
-            panel4.TabIndex = 1;
-            // 
-            // panel6
-            // 
-            panel6.Anchor = AnchorStyles.None;
-            panel6.BackColor = Color.White;
-            panel6.Controls.Add(GenerateReportByCatButton);
-            panel6.Controls.Add(label3);
-            panel6.Controls.Add(label2);
-            panel6.Controls.Add(label1);
-            panel6.Controls.Add(ReportsCatToDateTextBox);
-            panel6.Controls.Add(ReportsCategoryComboBox);
-            panel6.Controls.Add(ReportsCatFromDateTextBox);
-            panel6.Location = new Point(1, 1);
-            panel6.Margin = new Padding(1);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(477, 266);
-            panel6.TabIndex = 0;
-            // 
-            // GenerateReportByCatButton
-            // 
-            GenerateReportByCatButton.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 195);
-            GenerateReportByCatButton.FlatStyle = FlatStyle.Flat;
-            GenerateReportByCatButton.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            GenerateReportByCatButton.Location = new Point(164, 180);
-            GenerateReportByCatButton.Name = "GenerateReportByCatButton";
-            GenerateReportByCatButton.Size = new Size(158, 36);
-            GenerateReportByCatButton.TabIndex = 7;
-            GenerateReportByCatButton.Text = "Generate Report";
-            GenerateReportByCatButton.UseVisualStyleBackColor = true;
-            GenerateReportByCatButton.Click += GenerateReportByCatButton_Click;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(323, 48);
-            label3.Name = "label3";
-            label3.Size = new Size(57, 17);
-            label3.TabIndex = 6;
-            label3.Text = "To Date:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(178, 48);
-            label2.Name = "label2";
-            label2.Size = new Size(75, 17);
-            label2.TabIndex = 5;
-            label2.Text = "From Date:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(28, 48);
-            label1.Name = "label1";
-            label1.Size = new Size(67, 17);
-            label1.TabIndex = 4;
-            label1.Text = "Category:";
-            // 
-            // ReportsCatToDateTextBox
-            // 
-            ReportsCatToDateTextBox.CustomFormat = "dd/MM/yyyy";
-            ReportsCatToDateTextBox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ReportsCatToDateTextBox.Format = DateTimePickerFormat.Custom;
-            ReportsCatToDateTextBox.Location = new Point(323, 76);
-            ReportsCatToDateTextBox.Name = "ReportsCatToDateTextBox";
-            ReportsCatToDateTextBox.Size = new Size(124, 25);
-            ReportsCatToDateTextBox.TabIndex = 3;
-            // 
-            // ReportsCategoryComboBox
-            // 
-            ReportsCategoryComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            ReportsCategoryComboBox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ReportsCategoryComboBox.FormattingEnabled = true;
-            ReportsCategoryComboBox.Location = new Point(28, 76);
-            ReportsCategoryComboBox.Name = "ReportsCategoryComboBox";
-            ReportsCategoryComboBox.Size = new Size(124, 25);
-            ReportsCategoryComboBox.TabIndex = 2;
-            // 
-            // ReportsCatFromDateTextBox
-            // 
-            ReportsCatFromDateTextBox.CustomFormat = "dd/MM/yyyy";
-            ReportsCatFromDateTextBox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ReportsCatFromDateTextBox.Format = DateTimePickerFormat.Custom;
-            ReportsCatFromDateTextBox.Location = new Point(178, 76);
-            ReportsCatFromDateTextBox.Name = "ReportsCatFromDateTextBox";
-            ReportsCatFromDateTextBox.Size = new Size(124, 25);
-            ReportsCatFromDateTextBox.TabIndex = 1;
-            // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel2.ColumnCount = 6;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            tableLayoutPanel2.Controls.Add(SalesReportsByCatButton, 1, 0);
-            tableLayoutPanel2.Controls.Add(StaffListButton, 2, 0);
-            tableLayoutPanel2.Controls.Add(SalesReportItemWiseButton, 3, 0);
-            tableLayoutPanel2.Controls.Add(MenuListButton, 4, 0);
-            tableLayoutPanel2.Location = new Point(3, 27);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(972, 59);
-            tableLayoutPanel2.TabIndex = 0;
-            // 
-            // SalesReportsByCatButton
-            // 
-            SalesReportsByCatButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            SalesReportsByCatButton.BackColor = Color.FromArgb(0, 119, 195);
-            SalesReportsByCatButton.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 195);
-            SalesReportsByCatButton.FlatStyle = FlatStyle.Flat;
-            SalesReportsByCatButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            SalesReportsByCatButton.ForeColor = Color.White;
-            SalesReportsByCatButton.Location = new Point(101, 8);
-            SalesReportsByCatButton.Margin = new Padding(4, 8, 4, 8);
-            SalesReportsByCatButton.Name = "SalesReportsByCatButton";
-            SalesReportsByCatButton.Size = new Size(235, 43);
-            SalesReportsByCatButton.TabIndex = 0;
-            SalesReportsByCatButton.Text = "Sales Reports By Category";
-            SalesReportsByCatButton.UseVisualStyleBackColor = false;
-            SalesReportsByCatButton.Click += SalesReportsByCatButton_Click;
-            // 
-            // StaffListButton
-            // 
-            StaffListButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            StaffListButton.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 195);
-            StaffListButton.FlatStyle = FlatStyle.Flat;
-            StaffListButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            StaffListButton.ForeColor = SystemColors.GrayText;
-            StaffListButton.Location = new Point(344, 8);
-            StaffListButton.Margin = new Padding(4, 8, 4, 8);
-            StaffListButton.Name = "StaffListButton";
-            StaffListButton.Size = new Size(137, 43);
-            StaffListButton.TabIndex = 1;
-            StaffListButton.Text = "Staff List";
-            StaffListButton.UseVisualStyleBackColor = true;
-            StaffListButton.Click += StaffListButton_Click;
-            // 
-            // SalesReportItemWiseButton
-            // 
-            SalesReportItemWiseButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            SalesReportItemWiseButton.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 195);
-            SalesReportItemWiseButton.FlatStyle = FlatStyle.Flat;
-            SalesReportItemWiseButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            SalesReportItemWiseButton.ForeColor = SystemColors.GrayText;
-            SalesReportItemWiseButton.Location = new Point(489, 8);
-            SalesReportItemWiseButton.Margin = new Padding(4, 8, 4, 8);
-            SalesReportItemWiseButton.Name = "SalesReportItemWiseButton";
-            SalesReportItemWiseButton.Size = new Size(235, 43);
-            SalesReportItemWiseButton.TabIndex = 2;
-            SalesReportItemWiseButton.Text = "Sales Report Item Wise";
-            SalesReportItemWiseButton.UseVisualStyleBackColor = true;
-            SalesReportItemWiseButton.Click += SalesReportItemWiseButton_Click;
-            // 
-            // MenuListButton
-            // 
-            MenuListButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            MenuListButton.FlatAppearance.BorderColor = Color.FromArgb(0, 119, 195);
-            MenuListButton.FlatStyle = FlatStyle.Flat;
-            MenuListButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            MenuListButton.ForeColor = SystemColors.GrayText;
-            MenuListButton.Location = new Point(732, 8);
-            MenuListButton.Margin = new Padding(4, 8, 4, 8);
-            MenuListButton.Name = "MenuListButton";
-            MenuListButton.Size = new Size(137, 43);
-            MenuListButton.TabIndex = 2;
-            MenuListButton.Text = "Menu LIst";
-            MenuListButton.UseVisualStyleBackColor = true;
-            MenuListButton.Click += MenuListButton_Click;
-            // 
             // notifyIcon1
             // 
             notifyIcon1.Icon = (Icon)resources.GetObject("notifyIcon1.Icon");
@@ -2089,6 +2265,24 @@
             Sidebar_panel.ResumeLayout(false);
             ScreenContainer_panel.ResumeLayout(false);
             ScreenContainer_panel.PerformLayout();
+            POSPanel.ResumeLayout(false);
+            POSPanel.PerformLayout();
+            ProductDataGrid_panel.ResumeLayout(false);
+            Calculator_panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)POSProductsDataGrid).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ReportsPanel.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
+            PurchasePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)PurchaseDataGrid).EndInit();
+            Purchase_TablePanelLayout.ResumeLayout(false);
+            panel9.ResumeLayout(false);
+            panel9.PerformLayout();
             ClientsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ClientsDataGrid).EndInit();
             tableLayoutPanel3.ResumeLayout(false);
@@ -2122,19 +2316,6 @@
             Total_Disc_CardBox.ResumeLayout(false);
             Total_Cost_CardBox.ResumeLayout(false);
             Total_Sale_CardBox.ResumeLayout(false);
-            POSPanel.ResumeLayout(false);
-            POSPanel.PerformLayout();
-            ProductDataGrid_panel.ResumeLayout(false);
-            Calculator_panel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)POSProductsDataGrid).EndInit();
-            tableLayoutPanel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ReportsPanel.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
-            tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -2231,12 +2412,6 @@
         private Button CheckOutButton;
         private Button FastCashButton;
         private Label TotalAmountLabel;
-        private DataGridViewTextBoxColumn id;
-        private DataGridViewTextBoxColumn hidden_id;
-        private DataGridViewTextBoxColumn product_name;
-        private DataGridViewTextBoxColumn quantity;
-        private DataGridViewTextBoxColumn product_price;
-        private DataGridViewTextBoxColumn total_amount;
         private Panel ReportsPanel;
         private TableLayoutPanel tableLayoutPanel2;
         private Button SalesReportsByCatButton;
@@ -2263,5 +2438,20 @@
         private Panel panel8;
         private TextBox Clients_SearchTextBox;
         private Button button3;
+        private Panel PurchasePanel;
+        private DataGridView PurchaseDataGrid;
+        private TableLayoutPanel Purchase_TablePanelLayout;
+        private Button PurchaseAddButton;
+        private ComboBox comboBox5;
+        private Panel panel9;
+        private TextBox Purchase_SearchTextBox;
+        private Button button4;
+        private DataGridViewTextBoxColumn id;
+        private DataGridViewTextBoxColumn hidden_id;
+        private DataGridViewTextBoxColumn product_name;
+        private DataGridViewTextBoxColumn quantity;
+        private DataGridViewTextBoxColumn product_price;
+        private DataGridViewTextBoxColumn Unit;
+        private DataGridViewTextBoxColumn total_amount;
     }
 }

@@ -34,6 +34,10 @@
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
+            label5 = new Label();
+            label4 = new Label();
+            Unit_ComboBox = new ComboBox();
+            Quantity_TextBox = new TextBox();
             ProductPrice_TextBox = new TextBox();
             label2 = new Label();
             Status_ComboBox = new ComboBox();
@@ -103,6 +107,10 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(label5);
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(Unit_ComboBox);
+            panel2.Controls.Add(Quantity_TextBox);
             panel2.Controls.Add(ProductPrice_TextBox);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(Status_ComboBox);
@@ -121,20 +129,64 @@
             panel2.Size = new Size(655, 504);
             panel2.TabIndex = 1;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(136, 202);
+            label5.Name = "label5";
+            label5.Size = new Size(36, 20);
+            label5.TabIndex = 19;
+            label5.Text = "Unit";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(98, 201);
+            label4.Name = "label4";
+            label4.Size = new Size(32, 20);
+            label4.TabIndex = 18;
+            label4.Text = "Qty";
+            // 
+            // Unit_ComboBox
+            // 
+            Unit_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
+            Unit_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            Unit_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            Unit_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Unit_ComboBox.FormattingEnabled = true;
+            Unit_ComboBox.IntegralHeight = false;
+            Unit_ComboBox.Items.AddRange(new object[] { "kg", "litres", "piece", "dozen" });
+            Unit_ComboBox.Location = new Point(134, 229);
+            Unit_ComboBox.Name = "Unit_ComboBox";
+            Unit_ComboBox.Size = new Size(70, 28);
+            Unit_ComboBox.TabIndex = 17;
+            // 
+            // Quantity_TextBox
+            // 
+            Quantity_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Quantity_TextBox.Location = new Point(104, 228);
+            Quantity_TextBox.Multiline = true;
+            Quantity_TextBox.Name = "Quantity_TextBox";
+            Quantity_TextBox.Size = new Size(28, 30);
+            Quantity_TextBox.TabIndex = 15;
+            Quantity_TextBox.Text = "1";
+            // 
             // ProductPrice_TextBox
             // 
             ProductPrice_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ProductPrice_TextBox.Location = new Point(104, 228);
+            ProductPrice_TextBox.Location = new Point(206, 228);
             ProductPrice_TextBox.Multiline = true;
             ProductPrice_TextBox.Name = "ProductPrice_TextBox";
-            ProductPrice_TextBox.Size = new Size(181, 30);
+            ProductPrice_TextBox.Size = new Size(79, 30);
             ProductPrice_TextBox.TabIndex = 14;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(100, 201);
+            label2.Location = new Point(201, 201);
             label2.Name = "label2";
             label2.Size = new Size(75, 20);
             label2.TabIndex = 13;
@@ -314,5 +366,9 @@
         private Label status_label;
         private TextBox ProductPrice_TextBox;
         private Label label2;
+        private Label label5;
+        private Label label4;
+        private ComboBox Unit_ComboBox;
+        private TextBox Quantity_TextBox;
     }
 }

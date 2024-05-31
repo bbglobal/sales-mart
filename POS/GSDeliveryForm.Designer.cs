@@ -1,6 +1,6 @@
 ﻿namespace POS
 {
-    partial class DeliveryForm
+    partial class GSDeliveryForm
     {
         /// <summary>
         /// Required designer variable.

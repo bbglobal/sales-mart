@@ -479,9 +479,11 @@ namespace POS
                 ContentContainer_panel.Visible = true;
                 ProductPanel.Visible = false;
                 StaffPanel.Visible = false;
+                StaffPanel.Visible = false;
                 POSPanel.Visible = false;
                 SupplierPanel.Visible = false;
-                
+                ClientsPanel.Visible = false;
+                PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
@@ -507,7 +509,8 @@ namespace POS
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
                 SupplierPanel.Visible = false;
-                
+                ClientsPanel.Visible = false;
+                PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
@@ -536,7 +539,8 @@ namespace POS
                 ContentContainer_panel.Visible = false;
                 StaffPanel.Visible = false;
                 SupplierPanel.Visible = false;
-                
+                ClientsPanel.Visible = false;
+                PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 StartTransition(60, "Hide");
@@ -580,7 +584,8 @@ namespace POS
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
                 SupplierPanel.Visible = false;
-                
+                ClientsPanel.Visible = false;
+                PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
@@ -597,14 +602,15 @@ namespace POS
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
-            Current_ScreenName_label.Text = "Kitchen";
-            if (ProductPanel.Visible == false)
+            Current_ScreenName_label.Text = "Purchase";
+            if (PurchasePanel.Visible == false)
             {
-                ProductPanel.Visible = true;
+                PurchasePanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
                 SupplierPanel.Visible = false;
+                ClientsPanel.Visible = false;
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -633,6 +639,7 @@ namespace POS
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
                 ClientsPanel.Visible = false;
+                PurchasePanel.Visible = false;
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -662,6 +669,7 @@ namespace POS
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
                 SupplierPanel.Visible = false;
+                PurchasePanel.Visible = false;
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
@@ -693,7 +701,8 @@ namespace POS
                 POSPanel.Visible = false;
                 SupplierPanel.Visible = false;
                 StaffPanel.Visible = false;
-                
+                ClientsPanel.Visible = false;
+                PurchasePanel.Visible = false;
                 //ProductPanel.Visible = false;
             }
         }
@@ -755,6 +764,7 @@ namespace POS
                             dataTable.Load(reader);
                             DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
                             {
+                                Name = "sr",
                                 HeaderText = "SR#",
                                 ValueType = typeof(string),
                                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
@@ -816,6 +826,7 @@ namespace POS
                     {
                         DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
                         {
+                            Name = "sr",
                             HeaderText = "SR#",
                             ValueType = typeof(string),
                             AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
@@ -868,10 +879,14 @@ namespace POS
                 {
                     dataGridView.Columns["or_image"].Visible = false;
                     dataGridView.Columns["id"].Visible = false;
+                    dataGridView.Columns["quantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    dataGridView.Columns["unit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-                    dataGridView.Columns["item_name"].HeaderText = "Item Name";
-                    dataGridView.Columns["item_price"].HeaderText = "Item Price";
+                    dataGridView.Columns["item_name"].HeaderText = "Name";
+                    dataGridView.Columns["item_price"].HeaderText = "Price";
                     dataGridView.Columns["category"].HeaderText = "Category";
+                    dataGridView.Columns["quantity"].HeaderText = "Qty";
+                    dataGridView.Columns["unit"].HeaderText = "Unit";
                     dataGridView.Columns["status"].HeaderText = "Status";
                     dataGridView.Columns["image"].HeaderText = "Image";
                 }
@@ -917,7 +932,7 @@ namespace POS
 
 
             }
-            
+
             else if (dataGridView == ClientsDataGrid)
             {
 
@@ -931,6 +946,30 @@ namespace POS
 
 
             }
+
+            else if (dataGridView == PurchaseDataGrid)
+            {
+
+                dataGridView.Columns["id"].Visible = false;
+                dataGridView.Columns["sr"].Visible = false;
+                dataGridView.Columns["quantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView.Columns["unit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+
+                dataGridView.Columns["date"].HeaderText = "Date";
+                dataGridView.Columns["supplier"].HeaderText = "Supplier Name";
+                dataGridView.Columns["product"].HeaderText = "Product";
+                dataGridView.Columns["quantity"].HeaderText = "Qty";
+                dataGridView.Columns["unit"].HeaderText = "Unit";
+                dataGridView.Columns["total_amount"].HeaderText = "Total Amount";
+                dataGridView.Columns["paid_amount"].HeaderText = "Paid Amount";
+                dataGridView.Columns["due_amount"].HeaderText = "Due Amount";
+                dataGridView.Columns["purchase_status"].HeaderText = "Purchase Status";
+                dataGridView.Columns["payment_status"].HeaderText = "Payment Status";
+
+            }
+
+
             foreach (DataGridViewColumn column in dataGridView.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -1148,7 +1187,7 @@ namespace POS
         #endregion
 
 
-        #region All Products Screen Functions
+        #region All Items Screen Functions
 
         #region Products Tab Button Functions
 
@@ -1197,7 +1236,7 @@ namespace POS
 
                 else
                 {
-                    string query = "select * from items_category";
+                    string query = "select * from item_category";
                     LoadDataAsync(ProductsDataGrid, query, "Async");
                 }
             }
@@ -1457,6 +1496,67 @@ namespace POS
         #endregion
 
 
+        #region All Purchase Screen Functions
+
+
+        #region PurchasePanel Visibility and DataGrid Event Functions
+
+
+        private void PurchasePanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (PurchasePanel.Visible == true)
+            {
+                LoadDataAsync(PurchaseDataGrid, "select * from purchases", "Async");
+            }
+        }
+
+        private void PurchaseDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (PurchaseDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+                    PurchaseForm purchaseForm = new PurchaseForm((int)PurchaseDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                    purchaseForm.ShowDialog();
+                    LoadDataAsync(PurchaseDataGrid, "select * from purchases", "Sync");
+                }
+
+                else if (PurchaseDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+
+                    if (MessageBox.Show("Are you sure you want to delete this purchase?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        DeleteRowFromDatabase(Convert.ToInt32(PurchaseDataGrid.Rows[e.RowIndex].Cells["id"].Value), "purchases", PurchaseDataGrid, e.RowIndex);
+                    }
+
+                }
+
+            }
+        }
+
+
+        #endregion
+
+        #region Purchase Add Button and Search TextBox Event Functions
+
+        private void PurchaseAddButton_Click(object sender, EventArgs e)
+        {
+            PurchaseForm purchaseForm = new PurchaseForm();
+            purchaseForm.ShowDialog();
+            LoadDataAsync(PurchaseDataGrid, "select * from purchases", "Sync");
+        }
+
+        private void Purchase_SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string query = $"select * from purchases where supplier like '%{Purchase_SearchTextBox.Text}%'";
+            LoadDataAsync(PurchaseDataGrid, query, "Sync");
+        }
+
+        #endregion
+
+        #endregion
+
+
         #region All Supplier Screen Functions
 
         #region Supplier Panel VisibleChanged and Supplier Data Grid Functions
@@ -1588,7 +1688,7 @@ namespace POS
         private void AddPOSCategory()
         {
             DataTable table = new DataTable();
-            string qry = "select * from product_category";
+            string qry = "select * from item_category";
             try
             {
                 connection.Open();
@@ -1682,7 +1782,7 @@ namespace POS
         private void LoadPOSProducts()
         {
             DataTable table = new DataTable();
-            string qry = "select * from products";
+            string qry = "select * from items";
             try
             {
                 connection.Open();
@@ -1696,7 +1796,7 @@ namespace POS
                     {
                         Byte[] imageArray = (byte[])row["or_image"];
                         byte[] imageByteArray = imageArray;
-                        AddPOSProducts(Convert.ToInt32(row["id"]), Convert.ToDecimal(row["product_price"]), row["category"].ToString(), row["product_name"].ToString(), ByteArraytoImage(imageByteArray));
+                        AddPOSProducts(Convert.ToInt32(row["id"]), Convert.ToDecimal(row["item_price"]), row["unit"].ToString(), row["category"].ToString(), row["item_name"].ToString(), ByteArraytoImage(imageByteArray));
                     }
                 }
             }
@@ -1711,14 +1811,15 @@ namespace POS
 
         }
 
-        private void AddPOSProducts(int pid, decimal price, string category, string name, Image image)
+        private void AddPOSProducts(int pid, decimal product_price, string unit, string category, string name, Image image)
         {
             var w = new ProductCard()
             {
                 id = Convert.ToInt32(pid),
                 product_name = name,
                 product_category = category,
-                product_price = price,
+                product_price = product_price,
+                unit = unit,
                 product_image = image
             };
             ProductsFlowLayoutPanel.Controls.Add(w);
@@ -1732,7 +1833,7 @@ namespace POS
                     {
                         if (Convert.ToInt32(item.Cells["hidden_id"].Value) == wdg.id)
                         {
-                            item.Cells["quantity"].Value = int.Parse(item.Cells["quantity"].Value.ToString()) + 1;
+                            item.Cells["quantity"].Value = decimal.Parse(item.Cells["quantity"].Value.ToString()) + 1;
                             item.Cells["total_amount"].Value = decimal.Parse(item.Cells["quantity"].Value.ToString()) *
                                                                decimal.Parse(item.Cells["product_price"].Value.ToString());
                             return;
@@ -1740,7 +1841,7 @@ namespace POS
 
                     }
 
-                    POSProductsDataGrid.Rows.Add(new object[] { 0, wdg.id, wdg.product_name, 1, wdg.product_price, wdg.product_price });
+                    POSProductsDataGrid.Rows.Add(new object[] { 0, wdg.id, wdg.product_name, 1, wdg.product_price, wdg.unit, wdg.product_price });
                 }
                 else
                 {
@@ -1760,6 +1861,9 @@ namespace POS
         {
             if (POSPanel.Visible == true)
             {
+                Point location = ProductDataGrid_panel.PointToScreen(new Point(0, POSProductsDataGrid.Height));
+                nk = new NumberKeypad(location.X + 40, location.Y);
+                nk.NumberButtonPressed += Nk_NumberButtonPressed;
                 NewScreen();
             }
         }
@@ -1812,6 +1916,7 @@ namespace POS
 
         #endregion
 
+
         #region NewScreen Function & Add Data to POSProduct DataGrid Function
 
         private void NewScreen()
@@ -1841,7 +1946,7 @@ namespace POS
                 foreach (string item in jsonData)
                 {
                     string[] parts = item.Split("-");
-                    SqlCommand cmd = new SqlCommand($"select * from products where product_name='{parts[0]}'", connection);
+                    SqlCommand cmd = new SqlCommand($"select * from items where item_name='{parts[0]}'", connection);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -1849,8 +1954,8 @@ namespace POS
                             while (reader.Read())
                             {
 
-                                POSProductsDataGrid.Rows.Add(new object[] { 0, (int)reader["id"], reader["product_name"].ToString(), Convert.ToInt32(parts[1]), Convert.ToDecimal(reader["product_price"]), Convert.ToDecimal(parts[1]) * Convert.ToDecimal(reader["product_price"]) });
-                                total += Convert.ToDecimal(parts[1]) * Convert.ToDecimal(reader["product_price"]);
+                                POSProductsDataGrid.Rows.Add(new object[] { 0, (int)reader["id"], reader["item_name"].ToString(), Convert.ToDecimal(parts[1]), Convert.ToDecimal(reader["item_price"]), reader["unit"].ToString(), Convert.ToDecimal(parts[1]) * Convert.ToDecimal(reader["item_price"]) });
+                                total += Convert.ToDecimal(parts[1]) * Convert.ToDecimal(reader["item_price"]);
 
                             }
                         }
@@ -1885,6 +1990,7 @@ namespace POS
 
         #endregion
 
+
         #region All POS Menu Buttons Event Functions
 
         private void NewButton_Click(object sender, EventArgs e)
@@ -1901,7 +2007,7 @@ namespace POS
         private void BillListButton_Click(object sender, EventArgs e)
         {
 
-            using (BillList billList = new BillList())
+            using (GSBillList billList = new GSBillList())
             {
                 if (billList.ShowDialog() != DialogResult.OK)
                 {
@@ -1915,57 +2021,6 @@ namespace POS
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-        //private void DinInButton_Click(object sender, EventArgs e)
-        //{
-        //    if (BillID != -1)
-        //    {
-        //        MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-        //        return;
-        //    }
-        //    if (POSProductsDataGrid.Rows.Count > 0)
-        //    {
-        //        List<string> columnValues = new List<string>();
-        //        decimal total_amount = 0;
-
-        //        foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
-        //        {
-        //            string ItemsValue = row.Cells["product_name"].Value.ToString();
-        //            string QtyValue = row.Cells["quantity"].Value.ToString();
-        //            columnValues.Add(ItemsValue + "-" + QtyValue);
-        //            total_amount += Convert.ToDecimal(row.Cells["total_amount"].Value.ToString());
-        //        }
-        //        string json = JsonConvert.SerializeObject(columnValues);
-        //        string Added = "";
-        //        using (SelectTable selectTable = new SelectTable(json, total_amount))
-        //        {
-        //            if (selectTable.ShowDialog() != DialogResult.OK)
-        //            {
-        //                Added = selectTable.UpdatedString;
-        //            }
-        //        }
-
-        //        if (Added != "")
-        //        {
-        //            POSProductsDataGrid.Rows.Clear();
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-        //    }
-        //}
-
-
 
 
 
@@ -1997,7 +2052,7 @@ namespace POS
                     command.Parameters.AddWithValue("@Items", json);
                     command.Parameters.AddWithValue("@Date", DateTime.Now);
                     command.Parameters.AddWithValue("@Type", "Take Away");
-                    command.Parameters.AddWithValue("@Status", "In Complete");
+                    command.Parameters.AddWithValue("@Status", "Complete");
                     command.Parameters.AddWithValue("@Total", total_amount);
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected > 0)
@@ -2047,7 +2102,7 @@ namespace POS
                 }
                 string json = JsonConvert.SerializeObject(columnValues);
                 string Added = "";
-                using (DeliveryForm DF = new DeliveryForm(json, total_amount))
+                using (GSDeliveryForm DF = new GSDeliveryForm(json, total_amount))
                 {
                     if (DF.ShowDialog() != DialogResult.OK)
                     {
@@ -2069,6 +2124,154 @@ namespace POS
         }
 
         #endregion
+
+
+        #region POS DataGrid All Event Listener for Edit Functionality
+
+
+        private NumberKeypad nk;
+        private TextBox SelectedCell;
+        private void POSProductsDataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (BillID == -1)
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && POSProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Qty")
+                {
+                    POSProductsDataGrid.ReadOnly = false;
+                    POSProductsDataGrid.BeginEdit(true);
+
+                    nk.Show();
+                    SelectedCell.Focus();
+
+                }
+            }
+        }
+
+        // Nk_NumberButtonPressed added to nk form which is initialized in the POSPanel Visible Function
+
+        private void Nk_NumberButtonPressed(object sender, int number)
+        {
+            if (number == -1)
+            {
+                if (SelectedCell.Text.Length > 0)
+                {
+                    SelectedCell.Text = SelectedCell.Text.Substring(0, SelectedCell.Text.Length - 1);
+                    SelectedCell.SelectionStart = SelectedCell.Text.Length;
+                }
+            }
+            else if (number == -2)
+            {
+                SelectedCell.Text = "";
+                SelectedCell.SelectionStart = SelectedCell.Text.Length;
+            }
+            else if (number == -3)
+            {
+                SelectedCell.Text += ".";
+                SelectedCell.SelectionStart = SelectedCell.Text.Length;
+            }
+            else if (number == -5)
+            {
+                POSProductsDataGrid.ReadOnly = true;
+                POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+                POSProductsDataGrid.AllowUserToDeleteRows = false;
+            }
+            else
+            {
+                SelectedCell.Text += number.ToString();
+                SelectedCell.SelectionStart = SelectedCell.Text.Length;
+            }
+
+        }
+
+        private void POSProductsDataGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (BillID == -1)
+            {
+                TextBox tb = e.Control as TextBox;
+                tb.Text = "";
+                SelectedCell = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
+                    tb.KeyPress += new KeyPressEventHandler(tb_KeyPress);
+                    tb.PreviewKeyDown += new PreviewKeyDownEventHandler(tb_PreviewKeyPress);
+                }
+            }
+        }
+
+        private void tb_PreviewKeyPress(object? sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (nk.Visible == true)
+                {
+                    nk.Hide();
+                }
+                POSProductsDataGrid.ReadOnly = true;
+                POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+                POSProductsDataGrid.AllowUserToDeleteRows = false;
+            }
+
+        }
+
+        private void tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void POSProductsDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (BillID == -1)
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {
+                    POSProductsDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    POSProductsDataGrid.Rows[e.RowIndex].Selected = true;
+                    POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
+                    POSProductsDataGrid.AllowUserToDeleteRows = true;
+                }
+            }
+        }
+
+        private void POSProductsDataGrid_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+            POSProductsDataGrid.AllowUserToDeleteRows = false;
+        }
+
+        private void POSProductsDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            POSProductsDataGrid.ReadOnly = true;
+            POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+            POSProductsDataGrid.AllowUserToDeleteRows = false;
+            if (POSProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Qty")
+            {
+                nk.Hide();
+                if (POSProductsDataGrid.Rows[e.RowIndex].Cells["quantity"].Value == null)
+                {
+                    POSProductsDataGrid.Rows[e.RowIndex].Cells["quantity"].Value = 1;
+                    return;
+                }
+                decimal qty = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+
+                if (qty > 0)
+                {
+                    POSProductsDataGrid.Rows[e.RowIndex].Cells["total_amount"].Value = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells["product_price"].Value) * qty;
+                }
+                else
+                {
+                    POSProductsDataGrid.Rows.RemoveAt(e.RowIndex);
+                }
+
+            }
+        }
+
+        #endregion
+
 
         #region Fast Cash and Checkout Buttons Event Functions
 
@@ -2108,7 +2311,7 @@ namespace POS
         {
 
             string updateStatus = "";
-            using (PaymentMethodScreen pms = new PaymentMethodScreen(TotalItemsAmount, BillID))
+            using (GSPaymentMethodScreen pms = new GSPaymentMethodScreen(TotalItemsAmount, BillID))
             {
                 if (pms.ShowDialog() != DialogResult.OK)
                 {
@@ -2123,165 +2326,6 @@ namespace POS
 
         #endregion
 
-        #endregion
-
-
-        #region All Kitchen Screen Functions (to be deleted NO USE HERE)
-
-        //private void KitchenPanel_VisibleChanged(object sender, EventArgs e)
-        //{
-        //    if (KitchenPanel.Visible == true)
-        //    {
-        //        KitchenFlowLayoutPanel.Controls.Clear();
-        //        LoadKitchenCards();
-
-
-
-        //    }
-
-        //}
-
-        //private void LoadKitchenCards()
-        //{
-
-        //    try
-        //    {
-        //        if (connection.State != ConnectionState.Open)
-        //        {
-        //            connection.Open();
-        //        }
-
-        //        SqlCommand cmd = new SqlCommand("select * from bill_list where status ='In Complete'", connection);
-        //        using (SqlDataReader reader = cmd.ExecuteReader())
-        //        {
-        //            if (reader.HasRows)
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    if (reader["type"].ToString() == "Dine In")
-        //                    {
-        //                        var w = new KitchenCard()
-        //                        {
-        //                            BillId = "Bill No: " + reader["bill_id"].ToString(),
-        //                            Label2 = "Table No: " + reader["table_name"].ToString(),
-        //                            Label3 = "Bill Timing: " + reader["date"].ToString(),
-        //                            Label4 = "Bill Type: " + reader["type"].ToString(),
-        //                            Items = JsonConvert.DeserializeObject<List<string>>(reader["items"].ToString()),
-        //                        };
-
-        //                        KitchenFlowLayoutPanel.Controls.Add(w);
-        //                        w.onComplete += (ss, ee) =>
-        //                        {
-        //                            var kitchenCard = (KitchenCard)ss;
-        //                            try
-        //                            {
-        //                                connection.Open();
-        //                                string[] parts = kitchenCard.BillId.Split(" ");
-        //                                SqlCommand cmd = new SqlCommand($"update bill_list set status='Complete' where bill_id={parts[2]}", connection);
-        //                                int rowsAffected = cmd.ExecuteNonQuery();
-        //                                if (rowsAffected > 0)
-        //                                {
-        //                                    MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                                    KitchenFlowLayoutPanel.Controls.Clear();
-        //                                    LoadKitchenCards();
-        //                                }
-
-        //                            }
-        //                            catch (Exception ex)
-        //                            {
-        //                                MessageBox.Show(ex.Message);
-        //                            }
-
-        //                        };
-        //                    }
-        //                    else if (reader["type"].ToString() == "Take Away")
-        //                    {
-        //                        var w = new KitchenCard()
-        //                        {
-        //                            BillId = "Bill No: " + reader["bill_id"].ToString(),
-        //                            Label2 = "Bill Timing: " + reader["date"].ToString(),
-        //                            Label3 = "Bill Type: " + reader["type"].ToString(),
-        //                            Items = JsonConvert.DeserializeObject<List<string>>(reader["items"].ToString()),
-        //                        };
-
-        //                        KitchenFlowLayoutPanel.Controls.Add(w);
-        //                        w.onComplete += (ss, ee) =>
-        //                        {
-        //                            var kitchenCard = (KitchenCard)ss;
-        //                            try
-        //                            {
-        //                                connection.Open();
-        //                                string[] parts = kitchenCard.BillId.Split(" ");
-        //                                SqlCommand cmd = new SqlCommand($"update bill_list set status='Complete' where bill_id={parts[2]}", connection);
-        //                                int rowsAffected = cmd.ExecuteNonQuery();
-        //                                if (rowsAffected > 0)
-        //                                {
-        //                                    MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                                    KitchenFlowLayoutPanel.Controls.Clear();
-        //                                    LoadKitchenCards();
-        //                                }
-
-        //                            }
-        //                            catch (Exception ex)
-        //                            {
-        //                                MessageBox.Show(ex.Message);
-        //                            }
-
-        //                        };
-        //                    }
-        //                    else
-        //                    {
-        //                        var w = new KitchenCard()
-        //                        {
-        //                            BillId = "Bill No: " + reader["bill_id"].ToString(),
-        //                            Label2 = "Customer: " + reader["customer"].ToString(),
-        //                            Label3 = "Bill Timing: " + reader["date"].ToString(),
-        //                            Label4 = "Bill Type: " + reader["type"].ToString(),
-        //                            Items = JsonConvert.DeserializeObject<List<string>>(reader["items"].ToString()),
-        //                        };
-
-        //                        KitchenFlowLayoutPanel.Controls.Add(w);
-        //                        w.onComplete += (ss, ee) =>
-        //                        {
-        //                            var kitchenCard = (KitchenCard)ss;
-        //                            try
-        //                            {
-        //                                connection.Open();
-        //                                string[] parts = kitchenCard.BillId.Split(" ");
-        //                                SqlCommand cmd = new SqlCommand($"update bill_list set status='Complete' where bill_id={parts[2]}", connection);
-        //                                int rowsAffected = cmd.ExecuteNonQuery();
-        //                                if (rowsAffected > 0)
-        //                                {
-        //                                    MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                                    KitchenFlowLayoutPanel.Controls.Clear();
-        //                                    LoadKitchenCards();
-        //                                }
-
-        //                            }
-        //                            catch (Exception ex)
-        //                            {
-        //                                MessageBox.Show(ex.Message);
-        //                            }
-
-        //                        };
-        //                    }
-
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-
-
-
-        //}
 
         #endregion
 
@@ -2424,9 +2468,8 @@ namespace POS
 
 
 
-  
 
-       
+        
     }
 }
 

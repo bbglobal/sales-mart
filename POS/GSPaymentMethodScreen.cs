@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace POS
 {
-    public partial class PaymentMethodScreen : Form
+    public partial class GSPaymentMethodScreen : Form
     {
         private string statusUpdated = "";
         private int rowIndex;
@@ -14,7 +14,7 @@ namespace POS
         System.Windows.Forms.TextBox targetTextBox;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
         private decimal total_amount;
-        public PaymentMethodScreen(decimal total_amount, int rowIndex)
+        public GSPaymentMethodScreen(decimal total_amount, int rowIndex)
         {
 
             InitializeComponent();
@@ -69,7 +69,7 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
             connection = new SqlConnection(connectionString);
         }
 
@@ -84,7 +84,7 @@ namespace POS
 
 
             try
-             {
+            {
                 connection.Open();
                 string query = "UPDATE bill_list SET status=@Status,discount=@Discount,net_total_amount=@NetTotal,cash_received=@CashReceived,change=@Change WHERE bill_id=@Id";
                 using (SqlCommand command = new SqlCommand(query, connection))

@@ -22,6 +22,7 @@ namespace POS
 
         public int id { get; set; }
         public decimal product_price { get; set; }
+        public string unit { get; set; }
         public string product_category { get; set; }
         public string product_name
         {

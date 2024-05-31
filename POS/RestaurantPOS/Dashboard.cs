@@ -684,6 +684,7 @@ namespace POS
                             {
                                 HeaderText = "SR#",
                                 ValueType = typeof(string),
+                                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
                             };
                             WorkingDataGridView.Columns.Insert(0, SR);
@@ -745,6 +746,7 @@ namespace POS
                         {
                             HeaderText = "SR#",
                             ValueType = typeof(string),
+                            AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
                         };
                         WorkingDataGridView.Columns.Insert(0, SR);
@@ -796,8 +798,8 @@ namespace POS
                     dataGridView.Columns["or_image"].Visible = false;
                     dataGridView.Columns["id"].Visible = false;
 
-                    dataGridView.Columns["product_name"].HeaderText = "Product Name";
-                    dataGridView.Columns["product_price"].HeaderText = "Product Price";
+                    dataGridView.Columns["product_name"].HeaderText = "Name";
+                    dataGridView.Columns["product_price"].HeaderText = "Price";
                     dataGridView.Columns["category"].HeaderText = "Category";
                     dataGridView.Columns["status"].HeaderText = "Status";
                     dataGridView.Columns["image"].HeaderText = "Image";
@@ -817,7 +819,7 @@ namespace POS
                 {
 
                     dataGridView.Columns["id"].Visible = false;
-                    dataGridView.Columns["staff_name"].HeaderText = "Staff Name";
+                    dataGridView.Columns["staff_name"].HeaderText = "Name";
                     dataGridView.Columns["type"].HeaderText = "Type";
                     dataGridView.Columns["phone_number"].HeaderText = "Phone";
                     dataGridView.Columns["address"].HeaderText = "Address";
@@ -1196,7 +1198,7 @@ namespace POS
         {
             if (ProductsDataGrid.Columns["product_name"] != null)
             {
-                string query = $"select * from products where product_name like '%{textBox1.Text}%' OR status like '%{textBox1.Text}%' ";
+                string query = $"select * from products where product_name like '%{textBox1.Text}%' ";
                 LoadDataAsync(ProductsDataGrid, query, "Sync");
             }
             else
@@ -1286,7 +1288,7 @@ namespace POS
         {
             if (StaffDataGrid.Columns["staff_name"] != null)
             {
-                string query = $"select * from staff_details where staff_name like '%{SearchStaff_TextBox.Text}%' OR status like '%{SearchStaff_TextBox.Text}%' ";
+                string query = $"select * from staff_details where staff_name like '%{SearchStaff_TextBox.Text}%' ";
                 LoadDataAsync(StaffDataGrid, query, "Sync");
             }
             else
@@ -1658,6 +1660,7 @@ namespace POS
 
         #endregion
 
+
         #region NewScreen Function & Add Data to POSProduct DataGrid Function
 
         private void NewScreen()
@@ -1730,6 +1733,7 @@ namespace POS
         }
 
         #endregion
+
 
         #region All POS Menu Buttons Event Functions
 
@@ -1938,6 +1942,165 @@ namespace POS
         }
 
         #endregion
+
+
+        #region POS DataGrid All Event Listener for Edit Functionality
+
+        private NumberKeypad nk;
+        private TextBox SelectedCell;
+
+
+        private void POSProductsDataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (BillID == -1)
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && POSProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Qty")
+                {
+                    POSProductsDataGrid.ReadOnly = false;
+                    POSProductsDataGrid.BeginEdit(true);
+
+                    nk.Show();
+                    SelectedCell.Focus();
+
+                }
+            }
+
+        }
+
+
+        // Nk_NumberButtonPressed added to nk form which is initialized in the POSPanel Visible Function
+
+        private void Nk_NumberButtonPressed(object sender, int number)
+        {
+            if (number == -1)
+            {
+                if (SelectedCell.Text.Length > 0)
+                {
+                    SelectedCell.Text = SelectedCell.Text.Substring(0, SelectedCell.Text.Length - 1);
+                    SelectedCell.SelectionStart = SelectedCell.Text.Length;
+                }
+            }
+            else if (number == -2)
+            {
+                SelectedCell.Text = "";
+                SelectedCell.SelectionStart = SelectedCell.Text.Length;
+            }
+            else if (number == -3)
+            {
+
+            }
+            else if (number == -5)
+            {
+                POSProductsDataGrid.ReadOnly = true;
+                POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+                POSProductsDataGrid.AllowUserToDeleteRows = false;
+            }
+            else
+            {
+                SelectedCell.Text += number.ToString();
+                SelectedCell.SelectionStart = SelectedCell.Text.Length;
+            }
+
+        }
+
+
+
+
+
+        private void POSProductsDataGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (BillID == -1)
+            {
+                TextBox tb = e.Control as TextBox;
+                tb.Text = "";
+                SelectedCell = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
+                    tb.KeyPress += new KeyPressEventHandler(tb_KeyPress);
+                    tb.PreviewKeyDown += new PreviewKeyDownEventHandler(tb_PreviewKeyPress);
+                }
+            }
+        }
+
+
+
+        private void tb_PreviewKeyPress(object? sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (nk.Visible == true)
+                {
+                    nk.Hide();
+                }
+                POSProductsDataGrid.ReadOnly = true;
+                POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+                POSProductsDataGrid.AllowUserToDeleteRows = false;
+            }
+
+        }
+
+        private void tb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void POSProductsDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (BillID == -1)
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {
+                    POSProductsDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    POSProductsDataGrid.Rows[e.RowIndex].Selected = true;
+                    POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
+                    POSProductsDataGrid.AllowUserToDeleteRows = true;
+                }
+            }
+        }
+
+        private void POSProductsDataGrid_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+            POSProductsDataGrid.AllowUserToDeleteRows = false;
+        }
+
+
+
+        private void POSProductsDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            POSProductsDataGrid.ReadOnly = true;
+            POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
+            POSProductsDataGrid.AllowUserToDeleteRows = false;
+            if (POSProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Qty")
+            {
+                nk.Hide();
+                if (POSProductsDataGrid.Rows[e.RowIndex].Cells["quantity"].Value == null)
+                {
+                    POSProductsDataGrid.Rows[e.RowIndex].Cells["quantity"].Value = 1;
+                    return;
+                }
+                decimal qty = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+
+                if (qty > 0)
+                {
+                    POSProductsDataGrid.Rows[e.RowIndex].Cells["total_amount"].Value = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells["product_price"].Value) * qty;
+                }
+                else
+                {
+                    POSProductsDataGrid.Rows.RemoveAt(e.RowIndex);
+                }
+
+            }
+
+        }
+
+        #endregion
+
 
         #region Fast Cash and Checkout Buttons Event Functions
 
@@ -2293,157 +2456,7 @@ namespace POS
 
 
 
-
-
-        private NumberKeypad nk;
-        private TextBox SelectedCell;
         
-
-        private void POSProductsDataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (BillID == -1)
-            {
-                if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && POSProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Qty")
-                {
-                    POSProductsDataGrid.ReadOnly = false;
-                    POSProductsDataGrid.BeginEdit(true);
-                    
-                    nk.Show();
-                    SelectedCell.Focus();
-                    
-                }
-            }
-            
-        }
-
-        private void Nk_NumberButtonPressed(object sender, int number)
-        {
-            if (number == -1)
-            {
-                if (SelectedCell.Text.Length > 0)
-                {
-                    SelectedCell.Text = SelectedCell.Text.Substring(0, SelectedCell.Text.Length - 1);
-                    SelectedCell.SelectionStart = SelectedCell.Text.Length;
-                }
-            }
-            else if (number == -2)
-            {
-                SelectedCell.Text = "";
-                SelectedCell.SelectionStart = SelectedCell.Text.Length;
-            }
-            else if (number == -3)
-            {
-                
-            }
-            else if (number == -5)
-            {
-                POSProductsDataGrid.ReadOnly = true;
-                POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
-                POSProductsDataGrid.AllowUserToDeleteRows = false;
-            }
-            else
-            {
-                SelectedCell.Text += number.ToString();
-                SelectedCell.SelectionStart = SelectedCell.Text.Length;
-            }
-
-        }
-
-        
-
-
-
-        private void POSProductsDataGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            if (BillID == -1)
-            { 
-                TextBox tb = e.Control as TextBox;
-                tb.Text = "";
-                SelectedCell = e.Control as TextBox;
-                if (tb != null)
-                {
-                    tb.KeyPress -= new KeyPressEventHandler(tb_KeyPress);
-                    tb.KeyPress += new KeyPressEventHandler(tb_KeyPress);
-                    tb.PreviewKeyDown += new PreviewKeyDownEventHandler(tb_PreviewKeyPress);
-                }
-            }
-        }
-
-
-
-        private void tb_PreviewKeyPress(object? sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                if (nk.Visible == true)
-                {
-                    nk.Hide();
-                }
-                POSProductsDataGrid.ReadOnly = true;
-                POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
-                POSProductsDataGrid.AllowUserToDeleteRows = false;
-            }
-
-        }
-
-        private void tb_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char ch = e.KeyChar;
-            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void POSProductsDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (BillID == -1)
-            { 
-                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-                {
-                POSProductsDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                POSProductsDataGrid.Rows[e.RowIndex].Selected = true;
-                POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
-                POSProductsDataGrid.AllowUserToDeleteRows = true;
-                }
-            }
-        }
-
-        private void POSProductsDataGrid_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
-            POSProductsDataGrid.AllowUserToDeleteRows = false;
-        }
-
-
-
-        private void POSProductsDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            POSProductsDataGrid.ReadOnly = true;
-            POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
-            POSProductsDataGrid.AllowUserToDeleteRows = false;
-            if (POSProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Qty")
-            {
-                nk.Hide();
-                if (POSProductsDataGrid.Rows[e.RowIndex].Cells["quantity"].Value == null)
-                {
-                    POSProductsDataGrid.Rows[e.RowIndex].Cells["quantity"].Value = 1;
-                    return;
-                }
-                decimal qty = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-
-                if (qty > 0)
-                {
-                    POSProductsDataGrid.Rows[e.RowIndex].Cells["total_amount"].Value = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells["product_price"].Value) * qty;
-                }
-                else
-                {
-                    POSProductsDataGrid.Rows.RemoveAt(e.RowIndex);
-                }
-
-            }
-            
-        }
     }
 }
 

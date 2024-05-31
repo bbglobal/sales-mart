@@ -69,7 +69,7 @@ namespace POS
 
         private void SaveData()
         {
-            if (ProductName_TextBox.Text == "" || Category_ComboBox.SelectedItem == null || Status_ComboBox.SelectedItem == null || pictureBox1.Image == null)
+            if (ProductName_TextBox.Text == "" || Category_ComboBox.SelectedItem == null || Unit_ComboBox.SelectedItem == null || Status_ComboBox.SelectedItem == null || pictureBox1.Image == null)
             {
                 MessageBox.Show("Please fill all fields","Error" ,MessageBoxButtons.OK,MessageBoxIcon.Stop);
                 return;
@@ -79,10 +79,12 @@ namespace POS
                 connection.Open();
                 if (rowIndex == -1)
                 {
-                    string query = "INSERT INTO items (item_name,item_price, category, status, image, or_image) VALUES (@ProductName,@Price, @Category, @Status, @ImageData, @OR_ImageData)";
+                    string query = "INSERT INTO items (item_name,quantity,unit,item_price, category, status, image, or_image) VALUES (@ProductName,@Quantity,@Unit,@Price, @Category, @Status, @ImageData, @OR_ImageData)";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ProductName", ProductName_TextBox.Text);
+                        command.Parameters.AddWithValue("@Quantity", Convert.ToDouble(Quantity_TextBox.Text));
+                        command.Parameters.AddWithValue("@Unit", Unit_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Price", Convert.ToDouble(ProductPrice_TextBox.Text));
                         command.Parameters.AddWithValue("@Category", Category_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
@@ -107,10 +109,12 @@ namespace POS
                 }
                 else
                 {
-                    string query = "UPDATE items SET item_name=@ProductName,item_price = @Price, category=@Category, status=@Status, image=@ImageData, or_image=@OR_ImageData WHERE id=@Id";
+                    string query = "UPDATE items SET item_name=@ProductName,quantity=@Quantity,unit=@Unit,item_price = @Price, category=@Category, status=@Status, image=@ImageData, or_image=@OR_ImageData WHERE id=@Id";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ProductName", ProductName_TextBox.Text);
+                        command.Parameters.AddWithValue("@Quantity", Convert.ToDouble(Quantity_TextBox.Text));
+                        command.Parameters.AddWithValue("@Unit", Unit_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Price", Convert.ToDouble(ProductPrice_TextBox.Text));
                         command.Parameters.AddWithValue("@Category", Category_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
@@ -194,6 +198,8 @@ namespace POS
                         ProductPrice_TextBox.Text = reader["item_price"].ToString();
                         Category_ComboBox.Text = (string)reader["category"];
                         Status_ComboBox.Text = (string)reader["status"];
+                        Quantity_TextBox.Text = reader["quantity"].ToString();
+                        Unit_ComboBox.Text = (string)reader["unit"];
                         //ProductName_TextBox.Text = reader.GetString(reader.GetOrdinal("product_name"));
                         //Category_ComboBox.Text = reader.GetString(reader.GetOrdinal("category"));
                         //Status_ComboBox.Text = reader.GetString(reader.GetOrdinal("status"));
@@ -217,6 +223,7 @@ namespace POS
             ProductName_TextBox.Text = "";
             ProductPrice_TextBox.Text = "";
             Category_ComboBox.Text = "";
+            Unit_ComboBox.Text = "";
             Status_ComboBox.Text = "";
             pictureBox1.Image = null;
         }
