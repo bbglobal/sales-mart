@@ -68,6 +68,7 @@ namespace POS
             AdjustFormSize();
             InitializeDatabaseConnection();
             ImageEditDelLoad();
+
             #region Calling Image Resize and Rounded Corner,Timer & Font Functions 
             InitializeLabel(Menu_Dashboard_label, (Image)resources.GetObject("Menu_Dashboard_label.Image"), 25, 25);
             InitializeLabel(Menu_Products_label, (Image)resources.GetObject("Menu_Products_label.Image"), 25, 25);
@@ -804,11 +805,18 @@ namespace POS
                     dataGridView.Columns["status"].HeaderText = "Status";
                     dataGridView.Columns["image"].HeaderText = "Image";
                 }
-                else
+                else if (dataGridView.Columns["types"] != null)
                 {
                     dataGridView.Columns["id"].Visible = false;
 
                     dataGridView.Columns["types"].HeaderText = "Category Types";
+                }
+                else
+                {
+                    dataGridView.Columns["id"].Visible = false;
+
+                    dataGridView.Columns["product"].HeaderText = "Product";
+                    dataGridView.Columns["ingredients"].HeaderText = "Ingredients";
                 }
             }
 
@@ -1070,6 +1078,8 @@ namespace POS
                 ProductsTabButton.ForeColor = Color.White;
                 ProductsCategoryTabButton.BackColor = Color.Transparent;
                 ProductsCategoryTabButton.ForeColor = SystemColors.GrayText;
+                IngrediantsTabButton.BackColor = Color.Transparent;
+                IngrediantsTabButton.ForeColor = SystemColors.GrayText;
                 string query = "select * from products";
                 LoadDataAsync(ProductsDataGrid, query, "Async");
             }
@@ -1084,11 +1094,28 @@ namespace POS
                 ProductsCategoryTabButton.ForeColor = Color.White;
                 ProductsTabButton.BackColor = Color.Transparent;
                 ProductsTabButton.ForeColor = SystemColors.GrayText;
+                IngrediantsTabButton.BackColor = Color.Transparent;
+                IngrediantsTabButton.ForeColor = SystemColors.GrayText;
                 string query = "select * from product_category";
                 LoadDataAsync(ProductsDataGrid, query, "Async");
             }
         }
 
+        private void IngrediantsTabButton_Click(object sender, EventArgs e)
+        {
+            if (IngrediantsTabButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+
+                IngrediantsTabButton.BackColor = Color.FromArgb(37, 150, 190);
+                IngrediantsTabButton.ForeColor = Color.White;
+                ProductsTabButton.BackColor = Color.Transparent;
+                ProductsTabButton.ForeColor = SystemColors.GrayText;
+                ProductsCategoryTabButton.BackColor = Color.Transparent;
+                ProductsCategoryTabButton.ForeColor = SystemColors.GrayText;
+                string query = "select * from ingredients";
+                LoadDataAsync(ProductsDataGrid, query, "Async");
+            }
+        }
 
         #endregion
 
@@ -1104,9 +1131,14 @@ namespace POS
                     LoadDataAsync(ProductsDataGrid, query, "Async");
                 }
 
-                else
+                else if(ProductsCategoryTabButton.BackColor == Color.FromArgb(37, 150, 190))
                 {
                     string query = "select * from product_category";
+                    LoadDataAsync(ProductsDataGrid, query, "Async");
+                }
+                else
+                {
+                    string query = "select * from ingredients";
                     LoadDataAsync(ProductsDataGrid, query, "Async");
                 }
             }
@@ -1139,11 +1171,17 @@ namespace POS
                         productsForm.ShowDialog();
                         LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
                     }
-                    else
+                    else if(ProductsDataGrid.Columns["types"] != null)
                     {
                         ProductsCategoryForm productsCatForm = new ProductsCategoryForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
                         productsCatForm.ShowDialog();
                         LoadDataAsync(ProductsDataGrid, "select * from product_category", "Sync");
+                    }
+                    else
+                    {
+                        IngredientsForm IngForm = new IngredientsForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                        IngForm.ShowDialog();
+                        LoadDataAsync(ProductsDataGrid, "select * from ingredients", "Sync");
                     }
 
                 }
@@ -1157,11 +1195,18 @@ namespace POS
                             DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "products", ProductsDataGrid, e.RowIndex);
                         }
                     }
-                    else
+                    else if (ProductsDataGrid.Columns["types"] != null)
                     {
                         if (MessageBox.Show("Are you sure you want to delete this product category?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                         {
                             DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "product_category", ProductsDataGrid, e.RowIndex);
+                        }
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Are you sure you want to delete this Ingredient?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "ingredients", ProductsDataGrid, e.RowIndex);
                         }
                     }
                 }
@@ -1183,11 +1228,18 @@ namespace POS
                 LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
             }
 
-            else
+            else if(ProductsCategoryTabButton.BackColor == Color.FromArgb(37, 150, 190))
             {
                 ProductsCategoryForm productCategory = new ProductsCategoryForm();
                 productCategory.ShowDialog();
                 string query = "select * from product_category";
+                LoadDataAsync(ProductsDataGrid, query, "Sync");
+            }
+            else
+            {
+                IngredientsForm IngForm = new IngredientsForm();
+                IngForm.ShowDialog();
+                string query = "select * from ingredients";
                 LoadDataAsync(ProductsDataGrid, query, "Sync");
             }
         }
@@ -1201,12 +1253,18 @@ namespace POS
                 string query = $"select * from products where product_name like '%{textBox1.Text}%' ";
                 LoadDataAsync(ProductsDataGrid, query, "Sync");
             }
-            else
+            else if (ProductsDataGrid.Columns["types"] != null)
             {
                 string query = $"select * from product_category where types like '%{textBox1.Text}%'";
                 LoadDataAsync(ProductsDataGrid, query, "Sync");
             }
+            else
+            {
+                string query = $"select * from ingredients where product like '%{textBox1.Text}%'";
+                LoadDataAsync(ProductsDataGrid, query, "Sync");
+            }
         }
+
 
         #endregion
 
@@ -1593,6 +1651,13 @@ namespace POS
                 }
 
 
+            };
+
+            w.onProductDetailsClick += (ss, ee) =>
+            {
+                var wdg = (ProductCard)ss;
+                POSIngredientScreen IngForm = new POSIngredientScreen(wdg.product_name,wdg.product_category,(wdg.product_price).ToString(),wdg.product_image);
+                IngForm.Show();
             };
         }
 
@@ -2454,9 +2519,7 @@ namespace POS
             }
         }
 
-
-
-        
+       
     }
 }
 

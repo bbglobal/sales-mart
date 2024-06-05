@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
 
 namespace POS
 {
@@ -16,9 +18,18 @@ namespace POS
         public ProductCard()
         {
             InitializeComponent();
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+            ToolStripMenuItem productDetailsItem = new ToolStripMenuItem("Product Details");
+            productDetailsItem.Click += (sender, e) =>
+            {
+                onProductDetailsClick?.Invoke(this, e);
+            };
+            contextMenuStrip.Items.Add(productDetailsItem);
+            pictureBox1.ContextMenuStrip = contextMenuStrip;
         }
 
         public event EventHandler onSelect = null;
+        public event EventHandler onProductDetailsClick = null;
 
         public int id { get; set; }
         public decimal product_price { get; set; }
@@ -37,7 +48,20 @@ namespace POS
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            onSelect?.Invoke(this, e);
+            //onSelect?.Invoke(this, e);
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                onSelect?.Invoke(this, e);
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+
+                //onProductDetailsClick?.Invoke(this, e);
+            }
         }
     }
 }
