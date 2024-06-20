@@ -52,8 +52,8 @@
             DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
             Main_panel = new Panel();
             Sidebar_panel = new Panel();
             Menu_Client_label = new Label();
@@ -64,13 +64,44 @@
             Menu_Reports_label = new Label();
             Menu_POS_label = new Label();
             Menu_Staff_label = new Label();
-            Menu_Purchase_label = new Label();
+            Menu_Transactions_label = new Label();
             Menu_Products_label = new Label();
             Menu_Dashboard_label = new Label();
             ScreenContainer_panel = new Panel();
             CurrentUser_label = new Label();
             Current_ScreenName_label = new Label();
             Splitter_label = new Label();
+            ContentContainer_panel = new Panel();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            SupplierDashboardDataGrid = new DataGridView();
+            label4 = new Label();
+            PrintButton = new Button();
+            CardBoxes2_TabPanel = new TableLayoutPanel();
+            Total_Pay_CardBox = new Panel();
+            T_Pay_Amount_label = new Label();
+            TPay_line = new Label();
+            Total_Pay_label = new Label();
+            Total_Tax_CardBox = new Panel();
+            T_Tax_Amout_label = new Label();
+            TT_line = new Label();
+            Total_Tax_label = new Label();
+            CardBoxes1_TabPanel = new TableLayoutPanel();
+            Expense_CardBox = new Panel();
+            Expense_Amount_label = new Label();
+            TP_line = new Label();
+            Expense_label = new Label();
+            Sale_CardBox = new Panel();
+            Sale_Amount_label = new Label();
+            TD_line = new Label();
+            Sale_label = new Label();
+            Purchase_CardBox = new Panel();
+            Purchase_Amount_label = new Label();
+            TC_line = new Label();
+            Purchase_label = new Label();
+            Product_CardBox = new Panel();
+            Product_Amount_label = new Label();
+            TS_line = new Label();
+            Product_label = new Label();
             POSPanel = new Panel();
             ProductsFlowLayoutPanel = new FlowLayoutPanel();
             CategoriesFlowLayoutPanel = new FlowLayoutPanel();
@@ -154,41 +185,21 @@
             panel1 = new Panel();
             textBox1 = new TextBox();
             search_button = new Button();
-            ContentContainer_panel = new Panel();
-            Month_ComboBox = new ComboBox();
-            PrintButton = new Button();
-            ChartContainer = new TableLayoutPanel();
-            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            CardBoxes2_TabPanel = new TableLayoutPanel();
-            Total_Pay_CardBox = new Panel();
-            T_Pay_Amount_label = new Label();
-            TPay_line = new Label();
-            Total_Pay_label = new Label();
-            Total_Tax_CardBox = new Panel();
-            T_Tax_Amout_label = new Label();
-            TT_line = new Label();
-            Total_Tax_label = new Label();
-            CardBoxes1_TabPanel = new TableLayoutPanel();
-            Total_Profit_CardBox = new Panel();
-            T_Profit_Amount_label = new Label();
-            TP_line = new Label();
-            Total_Profit_label = new Label();
-            Total_Disc_CardBox = new Panel();
-            T_Disc_Amount_label = new Label();
-            TD_line = new Label();
-            Total_Disc_label = new Label();
-            Total_Cost_CardBox = new Panel();
-            T_Cost_Amount_label = new Label();
-            TC_line = new Label();
-            Total_Cost_label = new Label();
-            Total_Sale_CardBox = new Panel();
-            T_Sale_Amount_label = new Label();
-            TS_line = new Label();
-            Total_Sale_label = new Label();
             notifyIcon1 = new NotifyIcon(components);
             Main_panel.SuspendLayout();
             Sidebar_panel.SuspendLayout();
             ScreenContainer_panel.SuspendLayout();
+            ContentContainer_panel.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SupplierDashboardDataGrid).BeginInit();
+            CardBoxes2_TabPanel.SuspendLayout();
+            Total_Pay_CardBox.SuspendLayout();
+            Total_Tax_CardBox.SuspendLayout();
+            CardBoxes1_TabPanel.SuspendLayout();
+            Expense_CardBox.SuspendLayout();
+            Sale_CardBox.SuspendLayout();
+            Purchase_CardBox.SuspendLayout();
+            Product_CardBox.SuspendLayout();
             POSPanel.SuspendLayout();
             ProductDataGrid_panel.SuspendLayout();
             Calculator_panel.SuspendLayout();
@@ -219,17 +230,6 @@
             ((System.ComponentModel.ISupportInitialize)ProductsDataGrid).BeginInit();
             ProductButtonsLayout.SuspendLayout();
             panel1.SuspendLayout();
-            ContentContainer_panel.SuspendLayout();
-            ChartContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
-            CardBoxes2_TabPanel.SuspendLayout();
-            Total_Pay_CardBox.SuspendLayout();
-            Total_Tax_CardBox.SuspendLayout();
-            CardBoxes1_TabPanel.SuspendLayout();
-            Total_Profit_CardBox.SuspendLayout();
-            Total_Disc_CardBox.SuspendLayout();
-            Total_Cost_CardBox.SuspendLayout();
-            Total_Sale_CardBox.SuspendLayout();
             SuspendLayout();
             // 
             // Main_panel
@@ -256,7 +256,7 @@
             Sidebar_panel.Controls.Add(Menu_Reports_label);
             Sidebar_panel.Controls.Add(Menu_POS_label);
             Sidebar_panel.Controls.Add(Menu_Staff_label);
-            Sidebar_panel.Controls.Add(Menu_Purchase_label);
+            Sidebar_panel.Controls.Add(Menu_Transactions_label);
             Sidebar_panel.Controls.Add(Menu_Products_label);
             Sidebar_panel.Controls.Add(Menu_Dashboard_label);
             Sidebar_panel.Dock = DockStyle.Left;
@@ -387,22 +387,22 @@
             Menu_Staff_label.TextAlign = ContentAlignment.MiddleLeft;
             Menu_Staff_label.Click += Menu_Staff_label_Click;
             // 
-            // Menu_Purchase_label
+            // Menu_Transactions_label
             // 
-            Menu_Purchase_label.Anchor = AnchorStyles.None;
-            Menu_Purchase_label.Font = new Font("Arial", 12F);
-            Menu_Purchase_label.ForeColor = SystemColors.HighlightText;
-            Menu_Purchase_label.Image = (Image)resources.GetObject("Menu_Purchase_label.Image");
-            Menu_Purchase_label.ImageAlign = ContentAlignment.MiddleLeft;
-            Menu_Purchase_label.Location = new Point(55, 366);
-            Menu_Purchase_label.Margin = new Padding(0);
-            Menu_Purchase_label.Name = "Menu_Purchase_label";
-            Menu_Purchase_label.Padding = new Padding(10, 0, 0, 0);
-            Menu_Purchase_label.Size = new Size(211, 39);
-            Menu_Purchase_label.TabIndex = 2;
-            Menu_Purchase_label.Text = "           Purchase";
-            Menu_Purchase_label.TextAlign = ContentAlignment.MiddleLeft;
-            Menu_Purchase_label.Click += Menu_Purchase_label_Click;
+            Menu_Transactions_label.Anchor = AnchorStyles.None;
+            Menu_Transactions_label.Font = new Font("Arial", 12F);
+            Menu_Transactions_label.ForeColor = SystemColors.HighlightText;
+            Menu_Transactions_label.Image = (Image)resources.GetObject("Menu_Transactions_label.Image");
+            Menu_Transactions_label.ImageAlign = ContentAlignment.MiddleLeft;
+            Menu_Transactions_label.Location = new Point(55, 366);
+            Menu_Transactions_label.Margin = new Padding(0);
+            Menu_Transactions_label.Name = "Menu_Transactions_label";
+            Menu_Transactions_label.Padding = new Padding(10, 0, 0, 0);
+            Menu_Transactions_label.Size = new Size(211, 39);
+            Menu_Transactions_label.TabIndex = 2;
+            Menu_Transactions_label.Text = "           Purchase";
+            Menu_Transactions_label.TextAlign = ContentAlignment.MiddleLeft;
+            Menu_Transactions_label.Click += Menu_Purchase_label_Click;
             // 
             // Menu_Products_label
             // 
@@ -444,6 +444,7 @@
             ScreenContainer_panel.Controls.Add(CurrentUser_label);
             ScreenContainer_panel.Controls.Add(Current_ScreenName_label);
             ScreenContainer_panel.Controls.Add(Splitter_label);
+            ScreenContainer_panel.Controls.Add(ContentContainer_panel);
             ScreenContainer_panel.Controls.Add(POSPanel);
             ScreenContainer_panel.Controls.Add(ReportsPanel);
             ScreenContainer_panel.Controls.Add(PurchasePanel);
@@ -451,7 +452,6 @@
             ScreenContainer_panel.Controls.Add(SupplierPanel);
             ScreenContainer_panel.Controls.Add(StaffPanel);
             ScreenContainer_panel.Controls.Add(ProductPanel);
-            ScreenContainer_panel.Controls.Add(ContentContainer_panel);
             ScreenContainer_panel.Location = new Point(264, 3);
             ScreenContainer_panel.Name = "ScreenContainer_panel";
             ScreenContainer_panel.Size = new Size(1020, 812);
@@ -493,6 +493,450 @@
             Splitter_label.Name = "Splitter_label";
             Splitter_label.Size = new Size(1017, 1);
             Splitter_label.TabIndex = 5;
+            // 
+            // ContentContainer_panel
+            // 
+            ContentContainer_panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ContentContainer_panel.BackColor = Color.White;
+            ContentContainer_panel.Controls.Add(tableLayoutPanel4);
+            ContentContainer_panel.Controls.Add(PrintButton);
+            ContentContainer_panel.Controls.Add(CardBoxes2_TabPanel);
+            ContentContainer_panel.Controls.Add(CardBoxes1_TabPanel);
+            ContentContainer_panel.Location = new Point(21, 95);
+            ContentContainer_panel.Name = "ContentContainer_panel";
+            ContentContainer_panel.Size = new Size(978, 701);
+            ContentContainer_panel.TabIndex = 4;
+            ContentContainer_panel.Visible = false;
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel4.ColumnCount = 1;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(SupplierDashboardDataGrid, 0, 1);
+            tableLayoutPanel4.Controls.Add(label4, 0, 0);
+            tableLayoutPanel4.Location = new Point(3, 297);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 2;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
+            tableLayoutPanel4.Size = new Size(970, 374);
+            tableLayoutPanel4.TabIndex = 8;
+            // 
+            // SupplierDashboardDataGrid
+            // 
+            SupplierDashboardDataGrid.AllowUserToAddRows = false;
+            SupplierDashboardDataGrid.AllowUserToDeleteRows = false;
+            SupplierDashboardDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            SupplierDashboardDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            SupplierDashboardDataGrid.BackgroundColor = Color.White;
+            SupplierDashboardDataGrid.BorderStyle = BorderStyle.None;
+            SupplierDashboardDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            SupplierDashboardDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowFrame;
+            dataGridViewCellStyle1.Padding = new Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            SupplierDashboardDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            SupplierDashboardDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Window;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            SupplierDashboardDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            SupplierDashboardDataGrid.EnableHeadersVisualStyles = false;
+            SupplierDashboardDataGrid.Location = new Point(3, 59);
+            SupplierDashboardDataGrid.Name = "SupplierDashboardDataGrid";
+            SupplierDashboardDataGrid.ReadOnly = true;
+            SupplierDashboardDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            SupplierDashboardDataGrid.RowHeadersVisible = false;
+            SupplierDashboardDataGrid.ScrollBars = ScrollBars.None;
+            SupplierDashboardDataGrid.Size = new Size(964, 312);
+            SupplierDashboardDataGrid.TabIndex = 11;
+            // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label4.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.FromArgb(0, 119, 194);
+            label4.Location = new Point(3, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(964, 32);
+            label4.TabIndex = 7;
+            label4.Text = "Supplier Details";
+            label4.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // PrintButton
+            // 
+            PrintButton.Anchor = AnchorStyles.Top;
+            PrintButton.BackColor = Color.Transparent;
+            PrintButton.FlatAppearance.BorderColor = Color.FromArgb(209, 211, 212);
+            PrintButton.FlatAppearance.BorderSize = 3;
+            PrintButton.FlatStyle = FlatStyle.Flat;
+            PrintButton.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            PrintButton.Location = new Point(800, 24);
+            PrintButton.Name = "PrintButton";
+            PrintButton.Size = new Size(150, 34);
+            PrintButton.TabIndex = 4;
+            PrintButton.Text = "Print Sales Report";
+            PrintButton.UseVisualStyleBackColor = false;
+            // 
+            // CardBoxes2_TabPanel
+            // 
+            CardBoxes2_TabPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            CardBoxes2_TabPanel.ColumnCount = 4;
+            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes2_TabPanel.Controls.Add(Total_Pay_CardBox, 2, 0);
+            CardBoxes2_TabPanel.Controls.Add(Total_Tax_CardBox, 1, 0);
+            CardBoxes2_TabPanel.Location = new Point(3, 160);
+            CardBoxes2_TabPanel.Margin = new Padding(0);
+            CardBoxes2_TabPanel.Name = "CardBoxes2_TabPanel";
+            CardBoxes2_TabPanel.RowCount = 1;
+            CardBoxes2_TabPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            CardBoxes2_TabPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            CardBoxes2_TabPanel.Size = new Size(972, 80);
+            CardBoxes2_TabPanel.TabIndex = 2;
+            // 
+            // Total_Pay_CardBox
+            // 
+            Total_Pay_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Total_Pay_CardBox.AutoSize = true;
+            Total_Pay_CardBox.BackColor = Color.FromArgb(0, 148, 68);
+            Total_Pay_CardBox.Controls.Add(T_Pay_Amount_label);
+            Total_Pay_CardBox.Controls.Add(TPay_line);
+            Total_Pay_CardBox.Controls.Add(Total_Pay_label);
+            Total_Pay_CardBox.Location = new Point(491, 5);
+            Total_Pay_CardBox.Margin = new Padding(5, 5, 5, 0);
+            Total_Pay_CardBox.Name = "Total_Pay_CardBox";
+            Total_Pay_CardBox.Size = new Size(233, 75);
+            Total_Pay_CardBox.TabIndex = 4;
+            // 
+            // T_Pay_Amount_label
+            // 
+            T_Pay_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            T_Pay_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            T_Pay_Amount_label.ForeColor = Color.White;
+            T_Pay_Amount_label.Location = new Point(3, 42);
+            T_Pay_Amount_label.Margin = new Padding(0);
+            T_Pay_Amount_label.Name = "T_Pay_Amount_label";
+            T_Pay_Amount_label.Size = new Size(225, 30);
+            T_Pay_Amount_label.TabIndex = 2;
+            T_Pay_Amount_label.Text = "47.00$";
+            T_Pay_Amount_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // TPay_line
+            // 
+            TPay_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TPay_line.BackColor = Color.White;
+            TPay_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TPay_line.ForeColor = Color.White;
+            TPay_line.Location = new Point(10, 37);
+            TPay_line.Name = "TPay_line";
+            TPay_line.Size = new Size(210, 1);
+            TPay_line.TabIndex = 1;
+            TPay_line.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Total_Pay_label
+            // 
+            Total_Pay_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Total_Pay_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Total_Pay_label.ForeColor = Color.White;
+            Total_Pay_label.Location = new Point(0, 2);
+            Total_Pay_label.Margin = new Padding(0);
+            Total_Pay_label.Name = "Total_Pay_label";
+            Total_Pay_label.Size = new Size(225, 30);
+            Total_Pay_label.TabIndex = 0;
+            Total_Pay_label.Text = "Total Payable Amount";
+            Total_Pay_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Total_Tax_CardBox
+            // 
+            Total_Tax_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Total_Tax_CardBox.AutoSize = true;
+            Total_Tax_CardBox.BackColor = Color.FromArgb(102, 45, 145);
+            Total_Tax_CardBox.Controls.Add(T_Tax_Amout_label);
+            Total_Tax_CardBox.Controls.Add(TT_line);
+            Total_Tax_CardBox.Controls.Add(Total_Tax_label);
+            Total_Tax_CardBox.Location = new Point(248, 5);
+            Total_Tax_CardBox.Margin = new Padding(5, 5, 5, 0);
+            Total_Tax_CardBox.Name = "Total_Tax_CardBox";
+            Total_Tax_CardBox.Size = new Size(233, 75);
+            Total_Tax_CardBox.TabIndex = 3;
+            // 
+            // T_Tax_Amout_label
+            // 
+            T_Tax_Amout_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            T_Tax_Amout_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            T_Tax_Amout_label.ForeColor = Color.White;
+            T_Tax_Amout_label.Location = new Point(3, 46);
+            T_Tax_Amout_label.Margin = new Padding(0);
+            T_Tax_Amout_label.Name = "T_Tax_Amout_label";
+            T_Tax_Amout_label.Size = new Size(225, 30);
+            T_Tax_Amout_label.TabIndex = 3;
+            T_Tax_Amout_label.Text = "47.00$";
+            T_Tax_Amout_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // TT_line
+            // 
+            TT_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TT_line.BackColor = Color.White;
+            TT_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TT_line.ForeColor = Color.White;
+            TT_line.Location = new Point(10, 40);
+            TT_line.Name = "TT_line";
+            TT_line.Size = new Size(210, 1);
+            TT_line.TabIndex = 1;
+            TT_line.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Total_Tax_label
+            // 
+            Total_Tax_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Total_Tax_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Total_Tax_label.ForeColor = Color.White;
+            Total_Tax_label.Location = new Point(0, 4);
+            Total_Tax_label.Margin = new Padding(0);
+            Total_Tax_label.Name = "Total_Tax_label";
+            Total_Tax_label.Size = new Size(225, 30);
+            Total_Tax_label.TabIndex = 0;
+            Total_Tax_label.Text = "Total Tax Amount";
+            Total_Tax_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // CardBoxes1_TabPanel
+            // 
+            CardBoxes1_TabPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            CardBoxes1_TabPanel.ColumnCount = 4;
+            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            CardBoxes1_TabPanel.Controls.Add(Expense_CardBox, 3, 0);
+            CardBoxes1_TabPanel.Controls.Add(Sale_CardBox, 2, 0);
+            CardBoxes1_TabPanel.Controls.Add(Purchase_CardBox, 1, 0);
+            CardBoxes1_TabPanel.Controls.Add(Product_CardBox, 0, 0);
+            CardBoxes1_TabPanel.Location = new Point(3, 75);
+            CardBoxes1_TabPanel.Margin = new Padding(0);
+            CardBoxes1_TabPanel.Name = "CardBoxes1_TabPanel";
+            CardBoxes1_TabPanel.RowCount = 1;
+            CardBoxes1_TabPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            CardBoxes1_TabPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            CardBoxes1_TabPanel.Size = new Size(972, 80);
+            CardBoxes1_TabPanel.TabIndex = 1;
+            // 
+            // Expense_CardBox
+            // 
+            Expense_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Expense_CardBox.AutoSize = true;
+            Expense_CardBox.BackColor = Color.FromArgb(243, 156, 18);
+            Expense_CardBox.Controls.Add(Expense_Amount_label);
+            Expense_CardBox.Controls.Add(TP_line);
+            Expense_CardBox.Controls.Add(Expense_label);
+            Expense_CardBox.Location = new Point(734, 0);
+            Expense_CardBox.Margin = new Padding(5, 0, 5, 0);
+            Expense_CardBox.Name = "Expense_CardBox";
+            Expense_CardBox.Size = new Size(233, 80);
+            Expense_CardBox.TabIndex = 3;
+            // 
+            // Expense_Amount_label
+            // 
+            Expense_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Expense_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Expense_Amount_label.ForeColor = Color.White;
+            Expense_Amount_label.Location = new Point(3, 45);
+            Expense_Amount_label.Margin = new Padding(0);
+            Expense_Amount_label.Name = "Expense_Amount_label";
+            Expense_Amount_label.Size = new Size(225, 30);
+            Expense_Amount_label.TabIndex = 4;
+            Expense_Amount_label.Text = "47.00$";
+            Expense_Amount_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // TP_line
+            // 
+            TP_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TP_line.BackColor = Color.White;
+            TP_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TP_line.ForeColor = Color.White;
+            TP_line.Location = new Point(10, 40);
+            TP_line.Name = "TP_line";
+            TP_line.Size = new Size(210, 1);
+            TP_line.TabIndex = 1;
+            TP_line.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Expense_label
+            // 
+            Expense_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Expense_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Expense_label.ForeColor = Color.White;
+            Expense_label.Location = new Point(0, 5);
+            Expense_label.Name = "Expense_label";
+            Expense_label.Size = new Size(225, 30);
+            Expense_label.TabIndex = 0;
+            Expense_label.Text = "Expense";
+            Expense_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Sale_CardBox
+            // 
+            Sale_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Sale_CardBox.AutoSize = true;
+            Sale_CardBox.BackColor = Color.FromArgb(231, 76, 60);
+            Sale_CardBox.Controls.Add(Sale_Amount_label);
+            Sale_CardBox.Controls.Add(TD_line);
+            Sale_CardBox.Controls.Add(Sale_label);
+            Sale_CardBox.Location = new Point(491, 0);
+            Sale_CardBox.Margin = new Padding(5, 0, 5, 0);
+            Sale_CardBox.Name = "Sale_CardBox";
+            Sale_CardBox.Size = new Size(233, 80);
+            Sale_CardBox.TabIndex = 2;
+            // 
+            // Sale_Amount_label
+            // 
+            Sale_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Sale_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Sale_Amount_label.ForeColor = Color.White;
+            Sale_Amount_label.Location = new Point(3, 45);
+            Sale_Amount_label.Margin = new Padding(0);
+            Sale_Amount_label.Name = "Sale_Amount_label";
+            Sale_Amount_label.Size = new Size(225, 30);
+            Sale_Amount_label.TabIndex = 5;
+            Sale_Amount_label.Text = "47.00$";
+            Sale_Amount_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // TD_line
+            // 
+            TD_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TD_line.BackColor = Color.White;
+            TD_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TD_line.ForeColor = Color.White;
+            TD_line.Location = new Point(10, 40);
+            TD_line.Name = "TD_line";
+            TD_line.Size = new Size(210, 1);
+            TD_line.TabIndex = 1;
+            TD_line.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Sale_label
+            // 
+            Sale_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Sale_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Sale_label.ForeColor = Color.White;
+            Sale_label.Location = new Point(0, 5);
+            Sale_label.Margin = new Padding(0);
+            Sale_label.Name = "Sale_label";
+            Sale_label.Size = new Size(225, 30);
+            Sale_label.TabIndex = 0;
+            Sale_label.Text = "Sale";
+            Sale_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Purchase_CardBox
+            // 
+            Purchase_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Purchase_CardBox.AutoSize = true;
+            Purchase_CardBox.BackColor = Color.FromArgb(3, 169, 244);
+            Purchase_CardBox.Controls.Add(Purchase_Amount_label);
+            Purchase_CardBox.Controls.Add(TC_line);
+            Purchase_CardBox.Controls.Add(Purchase_label);
+            Purchase_CardBox.ForeColor = Color.White;
+            Purchase_CardBox.Location = new Point(248, 0);
+            Purchase_CardBox.Margin = new Padding(5, 0, 5, 0);
+            Purchase_CardBox.Name = "Purchase_CardBox";
+            Purchase_CardBox.Size = new Size(233, 80);
+            Purchase_CardBox.TabIndex = 1;
+            // 
+            // Purchase_Amount_label
+            // 
+            Purchase_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Purchase_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Purchase_Amount_label.ForeColor = Color.White;
+            Purchase_Amount_label.Location = new Point(3, 45);
+            Purchase_Amount_label.Margin = new Padding(0);
+            Purchase_Amount_label.Name = "Purchase_Amount_label";
+            Purchase_Amount_label.Size = new Size(225, 30);
+            Purchase_Amount_label.TabIndex = 6;
+            Purchase_Amount_label.Text = "47.00$";
+            Purchase_Amount_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // TC_line
+            // 
+            TC_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TC_line.BackColor = Color.White;
+            TC_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TC_line.ForeColor = Color.White;
+            TC_line.Location = new Point(10, 40);
+            TC_line.Name = "TC_line";
+            TC_line.Size = new Size(210, 1);
+            TC_line.TabIndex = 1;
+            TC_line.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Purchase_label
+            // 
+            Purchase_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Purchase_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Purchase_label.ForeColor = Color.White;
+            Purchase_label.Location = new Point(0, 5);
+            Purchase_label.Name = "Purchase_label";
+            Purchase_label.Size = new Size(225, 30);
+            Purchase_label.TabIndex = 0;
+            Purchase_label.Text = "Purchase";
+            Purchase_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Product_CardBox
+            // 
+            Product_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Product_CardBox.BackColor = Color.FromArgb(46, 52, 80);
+            Product_CardBox.Controls.Add(Product_Amount_label);
+            Product_CardBox.Controls.Add(TS_line);
+            Product_CardBox.Controls.Add(Product_label);
+            Product_CardBox.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
+            Product_CardBox.ForeColor = Color.White;
+            Product_CardBox.Location = new Point(10, 0);
+            Product_CardBox.Margin = new Padding(10, 0, 5, 0);
+            Product_CardBox.Name = "Product_CardBox";
+            Product_CardBox.Size = new Size(228, 80);
+            Product_CardBox.TabIndex = 0;
+            // 
+            // Product_Amount_label
+            // 
+            Product_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Product_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Product_Amount_label.ForeColor = Color.White;
+            Product_Amount_label.Location = new Point(3, 45);
+            Product_Amount_label.Margin = new Padding(0);
+            Product_Amount_label.Name = "Product_Amount_label";
+            Product_Amount_label.Size = new Size(225, 30);
+            Product_Amount_label.TabIndex = 7;
+            Product_Amount_label.Text = "47.00$";
+            Product_Amount_label.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // TS_line
+            // 
+            TS_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TS_line.BackColor = Color.White;
+            TS_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TS_line.ForeColor = Color.White;
+            TS_line.Location = new Point(10, 40);
+            TS_line.Name = "TS_line";
+            TS_line.Size = new Size(210, 1);
+            TS_line.TabIndex = 1;
+            TS_line.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Product_label
+            // 
+            Product_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Product_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Product_label.Location = new Point(0, 5);
+            Product_label.Name = "Product_label";
+            Product_label.Size = new Size(225, 30);
+            Product_label.TabIndex = 0;
+            Product_label.Text = "Product";
+            Product_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // POSPanel
             // 
@@ -607,24 +1051,24 @@
             POSProductsDataGrid.BorderStyle = BorderStyle.None;
             POSProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             POSProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Control;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            POSProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Control;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            POSProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             POSProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             POSProductsDataGrid.Columns.AddRange(new DataGridViewColumn[] { id, hidden_id, product_name, quantity, product_price, Unit, total_amount });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Window;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            POSProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Window;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            POSProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle4;
             POSProductsDataGrid.EnableHeadersVisualStyles = false;
             POSProductsDataGrid.Location = new Point(1, 1);
             POSProductsDataGrid.Name = "POSProductsDataGrid";
@@ -1052,43 +1496,43 @@
             PurchaseDataGrid.BorderStyle = BorderStyle.None;
             PurchaseDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             PurchaseDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            PurchaseDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            PurchaseDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             PurchaseDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            PurchaseDataGrid.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            PurchaseDataGrid.DefaultCellStyle = dataGridViewCellStyle6;
             PurchaseDataGrid.EnableHeadersVisualStyles = false;
-            PurchaseDataGrid.Location = new Point(3, 121);
+            PurchaseDataGrid.Location = new Point(3, 123);
             PurchaseDataGrid.Margin = new Padding(0);
             PurchaseDataGrid.Name = "PurchaseDataGrid";
             PurchaseDataGrid.ReadOnly = true;
             PurchaseDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = SystemColors.Control;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle5.Padding = new Padding(3);
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            PurchaseDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = SystemColors.Control;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.Padding = new Padding(3);
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            PurchaseDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             PurchaseDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle6.Padding = new Padding(3);
-            PurchaseDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle8.Padding = new Padding(3);
+            PurchaseDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle8;
             PurchaseDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            PurchaseDataGrid.Size = new Size(970, 570);
+            PurchaseDataGrid.Size = new Size(970, 568);
             PurchaseDataGrid.TabIndex = 1;
             PurchaseDataGrid.CellContentClick += PurchaseDataGrid_CellContentClick;
             // 
@@ -1103,7 +1547,7 @@
             Purchase_TablePanelLayout.Controls.Add(PurchaseAddButton, 0, 0);
             Purchase_TablePanelLayout.Controls.Add(comboBox5, 2, 0);
             Purchase_TablePanelLayout.Controls.Add(panel9, 3, 0);
-            Purchase_TablePanelLayout.Location = new Point(3, 37);
+            Purchase_TablePanelLayout.Location = new Point(3, 40);
             Purchase_TablePanelLayout.Name = "Purchase_TablePanelLayout";
             Purchase_TablePanelLayout.RowCount = 1;
             Purchase_TablePanelLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
@@ -1196,41 +1640,41 @@
             ClientsDataGrid.BorderStyle = BorderStyle.None;
             ClientsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             ClientsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            ClientsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle9.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            ClientsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             ClientsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.White;
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle8.ForeColor = Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            ClientsDataGrid.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = Color.White;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle10.ForeColor = Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = Color.White;
+            dataGridViewCellStyle10.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            ClientsDataGrid.DefaultCellStyle = dataGridViewCellStyle10;
             ClientsDataGrid.EnableHeadersVisualStyles = false;
             ClientsDataGrid.Location = new Point(3, 121);
             ClientsDataGrid.Margin = new Padding(0);
             ClientsDataGrid.Name = "ClientsDataGrid";
             ClientsDataGrid.ReadOnly = true;
             ClientsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = SystemColors.Control;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle9.Padding = new Padding(3);
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            ClientsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = SystemColors.Control;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle11.Padding = new Padding(3);
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            ClientsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             ClientsDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle10.Padding = new Padding(3);
-            ClientsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle12.Padding = new Padding(3);
+            ClientsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle12;
             ClientsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             ClientsDataGrid.Size = new Size(970, 570);
             ClientsDataGrid.TabIndex = 1;
@@ -1340,41 +1784,41 @@
             SupplierDataGrid.BorderStyle = BorderStyle.None;
             SupplierDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             SupplierDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            SupplierDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle13.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle13.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            SupplierDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             SupplierDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle12.ForeColor = Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = Color.White;
-            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            SupplierDataGrid.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.White;
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle14.ForeColor = Color.Black;
+            dataGridViewCellStyle14.SelectionBackColor = Color.White;
+            dataGridViewCellStyle14.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
+            SupplierDataGrid.DefaultCellStyle = dataGridViewCellStyle14;
             SupplierDataGrid.EnableHeadersVisualStyles = false;
             SupplierDataGrid.Location = new Point(3, 121);
             SupplierDataGrid.Margin = new Padding(0);
             SupplierDataGrid.Name = "SupplierDataGrid";
             SupplierDataGrid.ReadOnly = true;
             SupplierDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = SystemColors.Control;
-            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle13.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle13.Padding = new Padding(3);
-            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
-            SupplierDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = SystemColors.Control;
+            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle15.Padding = new Padding(3);
+            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
+            SupplierDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             SupplierDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle14.Padding = new Padding(3);
-            SupplierDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle16.Padding = new Padding(3);
+            SupplierDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle16;
             SupplierDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             SupplierDataGrid.Size = new Size(970, 570);
             SupplierDataGrid.TabIndex = 1;
@@ -1518,41 +1962,41 @@
             StaffDataGrid.BorderStyle = BorderStyle.None;
             StaffDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             StaffDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle15.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle17.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             StaffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = Color.White;
-            dataGridViewCellStyle16.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle16.ForeColor = Color.Black;
-            dataGridViewCellStyle16.SelectionBackColor = Color.White;
-            dataGridViewCellStyle16.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = Color.White;
+            dataGridViewCellStyle18.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle18.ForeColor = Color.Black;
+            dataGridViewCellStyle18.SelectionBackColor = Color.White;
+            dataGridViewCellStyle18.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.DefaultCellStyle = dataGridViewCellStyle18;
             StaffDataGrid.EnableHeadersVisualStyles = false;
             StaffDataGrid.Location = new Point(3, 161);
             StaffDataGrid.Margin = new Padding(0);
             StaffDataGrid.Name = "StaffDataGrid";
             StaffDataGrid.ReadOnly = true;
             StaffDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = SystemColors.Control;
-            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle17.Padding = new Padding(3);
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = SystemColors.Control;
+            dataGridViewCellStyle19.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle19.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle19.Padding = new Padding(3);
+            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
             StaffDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle18.Padding = new Padding(3);
-            StaffDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle20.Padding = new Padding(3);
+            StaffDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle20;
             StaffDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             StaffDataGrid.Size = new Size(970, 530);
             StaffDataGrid.TabIndex = 1;
@@ -1697,41 +2141,41 @@
             ProductsDataGrid.BorderStyle = BorderStyle.None;
             ProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             ProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle19.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle19.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle21.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle21.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
             ProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = Color.White;
-            dataGridViewCellStyle20.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle20.ForeColor = Color.Black;
-            dataGridViewCellStyle20.SelectionBackColor = Color.White;
-            dataGridViewCellStyle20.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle20.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = Color.White;
+            dataGridViewCellStyle22.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle22.ForeColor = Color.Black;
+            dataGridViewCellStyle22.SelectionBackColor = Color.White;
+            dataGridViewCellStyle22.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle22.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle22;
             ProductsDataGrid.EnableHeadersVisualStyles = false;
             ProductsDataGrid.Location = new Point(3, 161);
             ProductsDataGrid.Margin = new Padding(0);
             ProductsDataGrid.Name = "ProductsDataGrid";
             ProductsDataGrid.ReadOnly = true;
             ProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = SystemColors.Control;
-            dataGridViewCellStyle21.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle21.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle21.Padding = new Padding(3);
-            dataGridViewCellStyle21.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle21.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle23.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = SystemColors.Control;
+            dataGridViewCellStyle23.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle23.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle23.Padding = new Padding(3);
+            dataGridViewCellStyle23.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle23;
             ProductsDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle22.Padding = new Padding(3);
-            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle24.Padding = new Padding(3);
+            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle24;
             ProductsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             ProductsDataGrid.Size = new Size(970, 530);
             ProductsDataGrid.TabIndex = 1;
@@ -1818,429 +2262,6 @@
             search_button.TabIndex = 3;
             search_button.UseVisualStyleBackColor = false;
             // 
-            // ContentContainer_panel
-            // 
-            ContentContainer_panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ContentContainer_panel.BackColor = Color.White;
-            ContentContainer_panel.Controls.Add(Month_ComboBox);
-            ContentContainer_panel.Controls.Add(PrintButton);
-            ContentContainer_panel.Controls.Add(ChartContainer);
-            ContentContainer_panel.Controls.Add(CardBoxes2_TabPanel);
-            ContentContainer_panel.Controls.Add(CardBoxes1_TabPanel);
-            ContentContainer_panel.Location = new Point(21, 95);
-            ContentContainer_panel.Name = "ContentContainer_panel";
-            ContentContainer_panel.Size = new Size(978, 701);
-            ContentContainer_panel.TabIndex = 4;
-            ContentContainer_panel.Visible = false;
-            // 
-            // Month_ComboBox
-            // 
-            Month_ComboBox.Anchor = AnchorStyles.Top;
-            Month_ComboBox.DropDownWidth = 150;
-            Month_ComboBox.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Month_ComboBox.IntegralHeight = false;
-            Month_ComboBox.ItemHeight = 20;
-            Month_ComboBox.Items.AddRange(new object[] { "All", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" });
-            Month_ComboBox.Location = new Point(441, 290);
-            Month_ComboBox.Name = "Month_ComboBox";
-            Month_ComboBox.Size = new Size(150, 28);
-            Month_ComboBox.TabIndex = 5;
-            Month_ComboBox.Text = " Month";
-            // 
-            // PrintButton
-            // 
-            PrintButton.Anchor = AnchorStyles.Top;
-            PrintButton.BackColor = Color.Transparent;
-            PrintButton.FlatAppearance.BorderColor = Color.FromArgb(209, 211, 212);
-            PrintButton.FlatAppearance.BorderSize = 3;
-            PrintButton.FlatStyle = FlatStyle.Flat;
-            PrintButton.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            PrintButton.Location = new Point(800, 24);
-            PrintButton.Name = "PrintButton";
-            PrintButton.Size = new Size(150, 34);
-            PrintButton.TabIndex = 4;
-            PrintButton.Text = "Print Sales Report";
-            PrintButton.UseVisualStyleBackColor = false;
-            // 
-            // ChartContainer
-            // 
-            ChartContainer.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            ChartContainer.ColumnCount = 1;
-            ChartContainer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            ChartContainer.Controls.Add(chart1, 0, 0);
-            ChartContainer.Location = new Point(3, 340);
-            ChartContainer.Name = "ChartContainer";
-            ChartContainer.RowCount = 1;
-            ChartContainer.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            ChartContainer.Size = new Size(972, 350);
-            ChartContainer.TabIndex = 3;
-            // 
-            // chart1
-            // 
-            chart1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            chart1.BorderlineWidth = 0;
-            chartArea1.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea1);
-            chart1.Location = new Point(3, 28);
-            chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.IsVisibleInLegend = false;
-            series1.Name = "Series1";
-            chart1.Series.Add(series1);
-            chart1.Size = new Size(966, 294);
-            chart1.TabIndex = 0;
-            chart1.Text = "chart1";
-            // 
-            // CardBoxes2_TabPanel
-            // 
-            CardBoxes2_TabPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            CardBoxes2_TabPanel.ColumnCount = 4;
-            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            CardBoxes2_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            CardBoxes2_TabPanel.Controls.Add(Total_Pay_CardBox, 2, 0);
-            CardBoxes2_TabPanel.Controls.Add(Total_Tax_CardBox, 1, 0);
-            CardBoxes2_TabPanel.Location = new Point(3, 160);
-            CardBoxes2_TabPanel.Margin = new Padding(0);
-            CardBoxes2_TabPanel.Name = "CardBoxes2_TabPanel";
-            CardBoxes2_TabPanel.RowCount = 1;
-            CardBoxes2_TabPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            CardBoxes2_TabPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            CardBoxes2_TabPanel.Size = new Size(972, 80);
-            CardBoxes2_TabPanel.TabIndex = 2;
-            // 
-            // Total_Pay_CardBox
-            // 
-            Total_Pay_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            Total_Pay_CardBox.AutoSize = true;
-            Total_Pay_CardBox.BackColor = Color.FromArgb(0, 148, 68);
-            Total_Pay_CardBox.Controls.Add(T_Pay_Amount_label);
-            Total_Pay_CardBox.Controls.Add(TPay_line);
-            Total_Pay_CardBox.Controls.Add(Total_Pay_label);
-            Total_Pay_CardBox.Location = new Point(491, 5);
-            Total_Pay_CardBox.Margin = new Padding(5, 5, 5, 0);
-            Total_Pay_CardBox.Name = "Total_Pay_CardBox";
-            Total_Pay_CardBox.Size = new Size(233, 75);
-            Total_Pay_CardBox.TabIndex = 4;
-            // 
-            // T_Pay_Amount_label
-            // 
-            T_Pay_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            T_Pay_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            T_Pay_Amount_label.ForeColor = Color.White;
-            T_Pay_Amount_label.Location = new Point(3, 42);
-            T_Pay_Amount_label.Margin = new Padding(0);
-            T_Pay_Amount_label.Name = "T_Pay_Amount_label";
-            T_Pay_Amount_label.Size = new Size(225, 30);
-            T_Pay_Amount_label.TabIndex = 2;
-            T_Pay_Amount_label.Text = "47.00$";
-            T_Pay_Amount_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // TPay_line
-            // 
-            TPay_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TPay_line.BackColor = Color.White;
-            TPay_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TPay_line.ForeColor = Color.White;
-            TPay_line.Location = new Point(10, 37);
-            TPay_line.Name = "TPay_line";
-            TPay_line.Size = new Size(210, 1);
-            TPay_line.TabIndex = 1;
-            TPay_line.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Total_Pay_label
-            // 
-            Total_Pay_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            Total_Pay_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Total_Pay_label.ForeColor = Color.White;
-            Total_Pay_label.Location = new Point(0, 2);
-            Total_Pay_label.Margin = new Padding(0);
-            Total_Pay_label.Name = "Total_Pay_label";
-            Total_Pay_label.Size = new Size(225, 30);
-            Total_Pay_label.TabIndex = 0;
-            Total_Pay_label.Text = "Total Payable Amount";
-            Total_Pay_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Total_Tax_CardBox
-            // 
-            Total_Tax_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            Total_Tax_CardBox.AutoSize = true;
-            Total_Tax_CardBox.BackColor = Color.FromArgb(102, 45, 145);
-            Total_Tax_CardBox.Controls.Add(T_Tax_Amout_label);
-            Total_Tax_CardBox.Controls.Add(TT_line);
-            Total_Tax_CardBox.Controls.Add(Total_Tax_label);
-            Total_Tax_CardBox.Location = new Point(248, 5);
-            Total_Tax_CardBox.Margin = new Padding(5, 5, 5, 0);
-            Total_Tax_CardBox.Name = "Total_Tax_CardBox";
-            Total_Tax_CardBox.Size = new Size(233, 75);
-            Total_Tax_CardBox.TabIndex = 3;
-            // 
-            // T_Tax_Amout_label
-            // 
-            T_Tax_Amout_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            T_Tax_Amout_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            T_Tax_Amout_label.ForeColor = Color.White;
-            T_Tax_Amout_label.Location = new Point(3, 46);
-            T_Tax_Amout_label.Margin = new Padding(0);
-            T_Tax_Amout_label.Name = "T_Tax_Amout_label";
-            T_Tax_Amout_label.Size = new Size(225, 30);
-            T_Tax_Amout_label.TabIndex = 3;
-            T_Tax_Amout_label.Text = "47.00$";
-            T_Tax_Amout_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // TT_line
-            // 
-            TT_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TT_line.BackColor = Color.White;
-            TT_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TT_line.ForeColor = Color.White;
-            TT_line.Location = new Point(10, 40);
-            TT_line.Name = "TT_line";
-            TT_line.Size = new Size(210, 1);
-            TT_line.TabIndex = 1;
-            TT_line.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Total_Tax_label
-            // 
-            Total_Tax_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            Total_Tax_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Total_Tax_label.ForeColor = Color.White;
-            Total_Tax_label.Location = new Point(0, 4);
-            Total_Tax_label.Margin = new Padding(0);
-            Total_Tax_label.Name = "Total_Tax_label";
-            Total_Tax_label.Size = new Size(225, 30);
-            Total_Tax_label.TabIndex = 0;
-            Total_Tax_label.Text = "Total Tax Amount";
-            Total_Tax_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // CardBoxes1_TabPanel
-            // 
-            CardBoxes1_TabPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            CardBoxes1_TabPanel.ColumnCount = 4;
-            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            CardBoxes1_TabPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            CardBoxes1_TabPanel.Controls.Add(Total_Profit_CardBox, 3, 0);
-            CardBoxes1_TabPanel.Controls.Add(Total_Disc_CardBox, 2, 0);
-            CardBoxes1_TabPanel.Controls.Add(Total_Cost_CardBox, 1, 0);
-            CardBoxes1_TabPanel.Controls.Add(Total_Sale_CardBox, 0, 0);
-            CardBoxes1_TabPanel.Location = new Point(3, 75);
-            CardBoxes1_TabPanel.Margin = new Padding(0);
-            CardBoxes1_TabPanel.Name = "CardBoxes1_TabPanel";
-            CardBoxes1_TabPanel.RowCount = 1;
-            CardBoxes1_TabPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            CardBoxes1_TabPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            CardBoxes1_TabPanel.Size = new Size(972, 80);
-            CardBoxes1_TabPanel.TabIndex = 1;
-            // 
-            // Total_Profit_CardBox
-            // 
-            Total_Profit_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            Total_Profit_CardBox.AutoSize = true;
-            Total_Profit_CardBox.BackColor = Color.FromArgb(243, 156, 18);
-            Total_Profit_CardBox.Controls.Add(T_Profit_Amount_label);
-            Total_Profit_CardBox.Controls.Add(TP_line);
-            Total_Profit_CardBox.Controls.Add(Total_Profit_label);
-            Total_Profit_CardBox.Location = new Point(734, 0);
-            Total_Profit_CardBox.Margin = new Padding(5, 0, 5, 0);
-            Total_Profit_CardBox.Name = "Total_Profit_CardBox";
-            Total_Profit_CardBox.Size = new Size(233, 80);
-            Total_Profit_CardBox.TabIndex = 3;
-            // 
-            // T_Profit_Amount_label
-            // 
-            T_Profit_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            T_Profit_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            T_Profit_Amount_label.ForeColor = Color.White;
-            T_Profit_Amount_label.Location = new Point(3, 45);
-            T_Profit_Amount_label.Margin = new Padding(0);
-            T_Profit_Amount_label.Name = "T_Profit_Amount_label";
-            T_Profit_Amount_label.Size = new Size(225, 30);
-            T_Profit_Amount_label.TabIndex = 4;
-            T_Profit_Amount_label.Text = "47.00$";
-            T_Profit_Amount_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // TP_line
-            // 
-            TP_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TP_line.BackColor = Color.White;
-            TP_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TP_line.ForeColor = Color.White;
-            TP_line.Location = new Point(10, 40);
-            TP_line.Name = "TP_line";
-            TP_line.Size = new Size(210, 1);
-            TP_line.TabIndex = 1;
-            TP_line.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Total_Profit_label
-            // 
-            Total_Profit_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            Total_Profit_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Total_Profit_label.ForeColor = Color.White;
-            Total_Profit_label.Location = new Point(0, 5);
-            Total_Profit_label.Name = "Total_Profit_label";
-            Total_Profit_label.Size = new Size(225, 30);
-            Total_Profit_label.TabIndex = 0;
-            Total_Profit_label.Text = "Total Profit Amount";
-            Total_Profit_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Total_Disc_CardBox
-            // 
-            Total_Disc_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            Total_Disc_CardBox.AutoSize = true;
-            Total_Disc_CardBox.BackColor = Color.FromArgb(231, 76, 60);
-            Total_Disc_CardBox.Controls.Add(T_Disc_Amount_label);
-            Total_Disc_CardBox.Controls.Add(TD_line);
-            Total_Disc_CardBox.Controls.Add(Total_Disc_label);
-            Total_Disc_CardBox.Location = new Point(491, 0);
-            Total_Disc_CardBox.Margin = new Padding(5, 0, 5, 0);
-            Total_Disc_CardBox.Name = "Total_Disc_CardBox";
-            Total_Disc_CardBox.Size = new Size(233, 80);
-            Total_Disc_CardBox.TabIndex = 2;
-            // 
-            // T_Disc_Amount_label
-            // 
-            T_Disc_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            T_Disc_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            T_Disc_Amount_label.ForeColor = Color.White;
-            T_Disc_Amount_label.Location = new Point(3, 45);
-            T_Disc_Amount_label.Margin = new Padding(0);
-            T_Disc_Amount_label.Name = "T_Disc_Amount_label";
-            T_Disc_Amount_label.Size = new Size(225, 30);
-            T_Disc_Amount_label.TabIndex = 5;
-            T_Disc_Amount_label.Text = "47.00$";
-            T_Disc_Amount_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // TD_line
-            // 
-            TD_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TD_line.BackColor = Color.White;
-            TD_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TD_line.ForeColor = Color.White;
-            TD_line.Location = new Point(10, 40);
-            TD_line.Name = "TD_line";
-            TD_line.Size = new Size(210, 1);
-            TD_line.TabIndex = 1;
-            TD_line.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Total_Disc_label
-            // 
-            Total_Disc_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            Total_Disc_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Total_Disc_label.ForeColor = Color.White;
-            Total_Disc_label.Location = new Point(0, 5);
-            Total_Disc_label.Margin = new Padding(0);
-            Total_Disc_label.Name = "Total_Disc_label";
-            Total_Disc_label.Size = new Size(225, 30);
-            Total_Disc_label.TabIndex = 0;
-            Total_Disc_label.Text = "Total Discount Amount";
-            Total_Disc_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Total_Cost_CardBox
-            // 
-            Total_Cost_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            Total_Cost_CardBox.AutoSize = true;
-            Total_Cost_CardBox.BackColor = Color.FromArgb(3, 169, 244);
-            Total_Cost_CardBox.Controls.Add(T_Cost_Amount_label);
-            Total_Cost_CardBox.Controls.Add(TC_line);
-            Total_Cost_CardBox.Controls.Add(Total_Cost_label);
-            Total_Cost_CardBox.ForeColor = Color.White;
-            Total_Cost_CardBox.Location = new Point(248, 0);
-            Total_Cost_CardBox.Margin = new Padding(5, 0, 5, 0);
-            Total_Cost_CardBox.Name = "Total_Cost_CardBox";
-            Total_Cost_CardBox.Size = new Size(233, 80);
-            Total_Cost_CardBox.TabIndex = 1;
-            // 
-            // T_Cost_Amount_label
-            // 
-            T_Cost_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            T_Cost_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            T_Cost_Amount_label.ForeColor = Color.White;
-            T_Cost_Amount_label.Location = new Point(3, 45);
-            T_Cost_Amount_label.Margin = new Padding(0);
-            T_Cost_Amount_label.Name = "T_Cost_Amount_label";
-            T_Cost_Amount_label.Size = new Size(225, 30);
-            T_Cost_Amount_label.TabIndex = 6;
-            T_Cost_Amount_label.Text = "47.00$";
-            T_Cost_Amount_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // TC_line
-            // 
-            TC_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TC_line.BackColor = Color.White;
-            TC_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TC_line.ForeColor = Color.White;
-            TC_line.Location = new Point(10, 40);
-            TC_line.Name = "TC_line";
-            TC_line.Size = new Size(210, 1);
-            TC_line.TabIndex = 1;
-            TC_line.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Total_Cost_label
-            // 
-            Total_Cost_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            Total_Cost_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Total_Cost_label.ForeColor = Color.White;
-            Total_Cost_label.Location = new Point(0, 5);
-            Total_Cost_label.Name = "Total_Cost_label";
-            Total_Cost_label.Size = new Size(225, 30);
-            Total_Cost_label.TabIndex = 0;
-            Total_Cost_label.Text = "Total Cost Amount";
-            Total_Cost_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Total_Sale_CardBox
-            // 
-            Total_Sale_CardBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            Total_Sale_CardBox.BackColor = Color.FromArgb(46, 52, 80);
-            Total_Sale_CardBox.Controls.Add(T_Sale_Amount_label);
-            Total_Sale_CardBox.Controls.Add(TS_line);
-            Total_Sale_CardBox.Controls.Add(Total_Sale_label);
-            Total_Sale_CardBox.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
-            Total_Sale_CardBox.ForeColor = Color.White;
-            Total_Sale_CardBox.Location = new Point(10, 0);
-            Total_Sale_CardBox.Margin = new Padding(10, 0, 5, 0);
-            Total_Sale_CardBox.Name = "Total_Sale_CardBox";
-            Total_Sale_CardBox.Size = new Size(228, 80);
-            Total_Sale_CardBox.TabIndex = 0;
-            // 
-            // T_Sale_Amount_label
-            // 
-            T_Sale_Amount_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            T_Sale_Amount_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            T_Sale_Amount_label.ForeColor = Color.White;
-            T_Sale_Amount_label.Location = new Point(3, 45);
-            T_Sale_Amount_label.Margin = new Padding(0);
-            T_Sale_Amount_label.Name = "T_Sale_Amount_label";
-            T_Sale_Amount_label.Size = new Size(225, 30);
-            T_Sale_Amount_label.TabIndex = 7;
-            T_Sale_Amount_label.Text = "47.00$";
-            T_Sale_Amount_label.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // TS_line
-            // 
-            TS_line.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TS_line.BackColor = Color.White;
-            TS_line.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TS_line.ForeColor = Color.White;
-            TS_line.Location = new Point(10, 40);
-            TS_line.Name = "TS_line";
-            TS_line.Size = new Size(210, 1);
-            TS_line.TabIndex = 1;
-            TS_line.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Total_Sale_label
-            // 
-            Total_Sale_label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            Total_Sale_label.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Total_Sale_label.Location = new Point(0, 5);
-            Total_Sale_label.Name = "Total_Sale_label";
-            Total_Sale_label.Size = new Size(225, 30);
-            Total_Sale_label.TabIndex = 0;
-            Total_Sale_label.Text = "Total Sale Amount";
-            Total_Sale_label.TextAlign = ContentAlignment.TopCenter;
-            // 
             // notifyIcon1
             // 
             notifyIcon1.Icon = (Icon)resources.GetObject("notifyIcon1.Icon");
@@ -2265,6 +2286,19 @@
             Sidebar_panel.ResumeLayout(false);
             ScreenContainer_panel.ResumeLayout(false);
             ScreenContainer_panel.PerformLayout();
+            ContentContainer_panel.ResumeLayout(false);
+            tableLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)SupplierDashboardDataGrid).EndInit();
+            CardBoxes2_TabPanel.ResumeLayout(false);
+            CardBoxes2_TabPanel.PerformLayout();
+            Total_Pay_CardBox.ResumeLayout(false);
+            Total_Tax_CardBox.ResumeLayout(false);
+            CardBoxes1_TabPanel.ResumeLayout(false);
+            CardBoxes1_TabPanel.PerformLayout();
+            Expense_CardBox.ResumeLayout(false);
+            Sale_CardBox.ResumeLayout(false);
+            Purchase_CardBox.ResumeLayout(false);
+            Product_CardBox.ResumeLayout(false);
             POSPanel.ResumeLayout(false);
             POSPanel.PerformLayout();
             ProductDataGrid_panel.ResumeLayout(false);
@@ -2303,19 +2337,6 @@
             ProductButtonsLayout.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ContentContainer_panel.ResumeLayout(false);
-            ChartContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
-            CardBoxes2_TabPanel.ResumeLayout(false);
-            CardBoxes2_TabPanel.PerformLayout();
-            Total_Pay_CardBox.ResumeLayout(false);
-            Total_Tax_CardBox.ResumeLayout(false);
-            CardBoxes1_TabPanel.ResumeLayout(false);
-            CardBoxes1_TabPanel.PerformLayout();
-            Total_Profit_CardBox.ResumeLayout(false);
-            Total_Disc_CardBox.ResumeLayout(false);
-            Total_Cost_CardBox.ResumeLayout(false);
-            Total_Sale_CardBox.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -2329,7 +2350,7 @@
         private Label Menu_Reports_label;
         private Label Menu_POS_label;
         private Label Menu_Staff_label;
-        private Label Menu_Purchase_label;
+        private Label Menu_Transactions_label;
         private Label Current_ScreenName_label;
         private Label CurrentUser_label;
         private Panel ContentContainer_panel;
@@ -2337,14 +2358,14 @@
         private Panel ScreenContainer_panel;
         private Label Logo;
         private Label LogoText;
-        private Panel Total_Sale_CardBox;
-        private Label Total_Sale_label;
-        private Panel Total_Disc_CardBox;
-        private Label Total_Disc_label;
-        private Panel Total_Cost_CardBox;
-        private Label Total_Cost_label;
-        private Panel Total_Profit_CardBox;
-        private Label Total_Profit_label;
+        private Panel Product_CardBox;
+        private Label Product_label;
+        private Panel Sale_CardBox;
+        private Label Sale_label;
+        private Panel Purchase_CardBox;
+        private Label Purchase_label;
+        private Panel Expense_CardBox;
+        private Label Expense_label;
         private Label TP_line;
         private Label TC_line;
         private Label TD_line;
@@ -2357,16 +2378,13 @@
         private Label Total_Tax_label;
         private Label T_Pay_Amount_label;
         private Label T_Tax_Amout_label;
-        private Label T_Sale_Amount_label;
-        private Label T_Cost_Amount_label;
-        private Label T_Disc_Amount_label;
-        private Label T_Profit_Amount_label;
+        private Label Product_Amount_label;
+        private Label Purchase_Amount_label;
+        private Label Sale_Amount_label;
+        private Label Expense_Amount_label;
         private TableLayoutPanel CardBoxes1_TabPanel;
         private TableLayoutPanel CardBoxes2_TabPanel;
-        private TableLayoutPanel ChartContainer;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private Button PrintButton;
-        private ComboBox Month_ComboBox;
         private Panel ProductPanel;
         private TableLayoutPanel ProductButtonsLayout;
         private Button AddProductsButton;
@@ -2453,5 +2471,8 @@
         private DataGridViewTextBoxColumn product_price;
         private DataGridViewTextBoxColumn Unit;
         private DataGridViewTextBoxColumn total_amount;
+        private Label label4;
+        private TableLayoutPanel tableLayoutPanel4;
+        private DataGridView SupplierDashboardDataGrid;
     }
 }

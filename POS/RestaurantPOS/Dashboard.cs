@@ -1065,6 +1065,7 @@ namespace POS
         #endregion
 
 
+
         #region All Products Screen Functions
 
         #region Products Tab Button Functions
@@ -1131,7 +1132,7 @@ namespace POS
                     LoadDataAsync(ProductsDataGrid, query, "Async");
                 }
 
-                else if(ProductsCategoryTabButton.BackColor == Color.FromArgb(37, 150, 190))
+                else if (ProductsCategoryTabButton.BackColor == Color.FromArgb(37, 150, 190))
                 {
                     string query = "select * from product_category";
                     LoadDataAsync(ProductsDataGrid, query, "Async");
@@ -1171,7 +1172,7 @@ namespace POS
                         productsForm.ShowDialog();
                         LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
                     }
-                    else if(ProductsDataGrid.Columns["types"] != null)
+                    else if (ProductsDataGrid.Columns["types"] != null)
                     {
                         ProductsCategoryForm productsCatForm = new ProductsCategoryForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
                         productsCatForm.ShowDialog();
@@ -1228,7 +1229,7 @@ namespace POS
                 LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
             }
 
-            else if(ProductsCategoryTabButton.BackColor == Color.FromArgb(37, 150, 190))
+            else if (ProductsCategoryTabButton.BackColor == Color.FromArgb(37, 150, 190))
             {
                 ProductsCategoryForm productCategory = new ProductsCategoryForm();
                 productCategory.ShowDialog();
@@ -1285,7 +1286,7 @@ namespace POS
                 StaffTab.ForeColor = SystemColors.GrayText;
                 string query = "select * from staff_category";
                 LoadDataAsync(StaffDataGrid, query, "Async");
-            }
+            }   
         }
 
         private void StaffTab_Click(object sender, EventArgs e)
@@ -1628,37 +1629,48 @@ namespace POS
 
             w.onSelect += (ss, ee) =>
             {
-                if (BillID == -1)
+                var wdg = (ProductCard)ss;
+                if (SelectMode_ComboBox.SelectedItem.ToString() == "Select Products")
                 {
-                    var wdg = (ProductCard)ss;
-                    foreach (DataGridViewRow item in POSProductsDataGrid.Rows)
+                    if (BillID == -1)
                     {
-                        if (Convert.ToInt32(item.Cells["hidden_id"].Value) == wdg.id)
+
+                        foreach (DataGridViewRow item in POSProductsDataGrid.Rows)
                         {
-                            item.Cells["quantity"].Value = int.Parse(item.Cells["quantity"].Value.ToString()) + 1;
-                            item.Cells["total_amount"].Value = decimal.Parse(item.Cells["quantity"].Value.ToString()) *
-                                                               decimal.Parse(item.Cells["product_price"].Value.ToString());
-                            return;
+                            if (Convert.ToInt32(item.Cells["hidden_id"].Value) == wdg.id)
+                            {
+                                item.Cells["quantity"].Value = int.Parse(item.Cells["quantity"].Value.ToString()) + 1;
+                                item.Cells["total_amount"].Value = decimal.Parse(item.Cells["quantity"].Value.ToString()) *
+                                                                   decimal.Parse(item.Cells["product_price"].Value.ToString());
+                                return;
+                            }
+
                         }
 
+                        POSProductsDataGrid.Rows.Add(new object[] { 0, wdg.id, wdg.product_name, 1, wdg.product_price, wdg.product_price });
                     }
-
-                    POSProductsDataGrid.Rows.Add(new object[] { 0, wdg.id, wdg.product_name, 1, wdg.product_price, wdg.product_price });
+                    else
+                    {
+                        MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
                 }
+
                 else
                 {
-                    MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    POSIngredientScreen IngForm = new POSIngredientScreen(wdg.product_name, wdg.product_category, (wdg.product_price).ToString(), wdg.product_image);
+                    IngForm.Show();
                 }
 
 
+
             };
 
-            w.onProductDetailsClick += (ss, ee) =>
-            {
-                var wdg = (ProductCard)ss;
-                POSIngredientScreen IngForm = new POSIngredientScreen(wdg.product_name,wdg.product_category,(wdg.product_price).ToString(),wdg.product_image);
-                IngForm.Show();
-            };
+            //w.onProductDetailsClick += (ss, ee) =>
+            //{
+            //    var wdg = (ProductCard)ss;
+            //    POSIngredientScreen IngForm = new POSIngredientScreen(wdg.product_name,wdg.product_category,(wdg.product_price).ToString(),wdg.product_image);
+            //    IngForm.Show();
+            //};
         }
 
         #endregion
@@ -1670,6 +1682,7 @@ namespace POS
         {
             if (POSPanel.Visible == true)
             {
+                SelectMode_ComboBox.SelectedIndex = 0;
                 Point location = ProductDataGrid_panel.PointToScreen(new Point(0, POSProductsDataGrid.Height));
                 nk = new NumberKeypad(location.X + 40, location.Y);
                 nk.NumberButtonPressed += Nk_NumberButtonPressed;
@@ -2519,7 +2532,7 @@ namespace POS
             }
         }
 
-       
+        
     }
 }
 

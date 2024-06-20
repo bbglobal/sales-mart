@@ -54,7 +54,9 @@ namespace POS
                         while (r.Read()) { 
                         Session.Username = r.GetString(r.GetOrdinal("username"));
                         }
-                        Dashboard dashboard = new Dashboard();
+                        //Dashboard dashboard = new Dashboard();
+                        //dashboard.Show();
+                        GSDashboard dashboard = new GSDashboard();
                         dashboard.Show();
                         this.Hide();
                     }   

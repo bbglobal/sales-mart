@@ -92,14 +92,7 @@ namespace POS
             return resizedImg;
         }
 
-        private Image ByteArraytoImage(byte[] imageData)
-        {
-            using (MemoryStream ms = new MemoryStream(imageData))
-            {
-                Image image = new Bitmap(Image.FromStream(ms));
-                return image;
-            }
-        }
+        
 
 
 

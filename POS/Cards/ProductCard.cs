@@ -18,18 +18,18 @@ namespace POS
         public ProductCard()
         {
             InitializeComponent();
-            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
-            ToolStripMenuItem productDetailsItem = new ToolStripMenuItem("Product Details");
-            productDetailsItem.Click += (sender, e) =>
-            {
-                onProductDetailsClick?.Invoke(this, e);
-            };
-            contextMenuStrip.Items.Add(productDetailsItem);
-            pictureBox1.ContextMenuStrip = contextMenuStrip;
+            //ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+            //ToolStripMenuItem productDetailsItem = new ToolStripMenuItem("Product Details");
+            //productDetailsItem.Click += (sender, e) =>
+            //{
+            //    onProductDetailsClick?.Invoke(this, e);
+            //};
+            //contextMenuStrip.Items.Add(productDetailsItem);
+            //pictureBox1.ContextMenuStrip = contextMenuStrip;
         }
 
         public event EventHandler onSelect = null;
-        public event EventHandler onProductDetailsClick = null;
+        //public event EventHandler onProductDetailsClick = null;
 
         public int id { get; set; }
         public decimal product_price { get; set; }

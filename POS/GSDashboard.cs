@@ -70,12 +70,12 @@ namespace POS
             AdjustFormSize();
             InitializeDatabaseConnection();
             ImageEditDelLoad();
-
+            SupplierDashboardData();
             #region Calling Image Resize and Rounded Corner,Timer & Font Functions 
 
             InitializeLabel(Menu_Dashboard_label, (Image)resources.GetObject("Menu_Dashboard_label.Image"), 25, 25);
             InitializeLabel(Menu_Products_label, (Image)resources.GetObject("Menu_Products_label.Image"), 25, 25);
-            InitializeLabel(Menu_Purchase_label, (Image)resources.GetObject("Menu_Purchase_label.Image"), 25, 27);
+            InitializeLabel(Menu_Transactions_label, (Image)resources.GetObject("Menu_Transactions_label.Image"), 25, 27);
             InitializeLabel(Menu_Supplier_label, (Image)resources.GetObject("Menu_Supplier_label.Image"), 25, 27);
             InitializeLabel(Menu_Client_label, (Image)resources.GetObject("Menu_Client_label.Image"), 25, 27);
             InitializeLabel(Menu_Staff_label, (Image)resources.GetObject("Menu_Staff_label.Image"), 25, 25);
@@ -86,10 +86,10 @@ namespace POS
             InitializeLabel(LogoText, (Image)resources.GetObject("LogoText.Image"), 150, 25);
             RoundCorners(Menu_Dashboard_label, 20);
             RoundCorners(Menu_Products_label, 20);
-            RoundCorners(Menu_Purchase_label, 20);
+            RoundCorners(Menu_Transactions_label, 20);
             RoundCorners(Menu_Staff_label, 20);
             RoundCorners(Menu_POS_label, 20);
-            RoundCorners(Menu_Purchase_label, 20);
+            RoundCorners(Menu_Transactions_label, 20);
             RoundCorners(Menu_Supplier_label, 20);
             RoundCorners(Menu_Client_label, 20);
             RoundCorners(Menu_Reports_label, 20);
@@ -247,7 +247,7 @@ namespace POS
                 Menu_Staff_label_initialPosition = Menu_Staff_label.Location;
                 Menu_Staff_label_targetPosition = new Point(10, 232);
 
-                Menu_Purchase_label_initialPosition = Menu_Purchase_label.Location;
+                Menu_Purchase_label_initialPosition = Menu_Transactions_label.Location;
                 Menu_Purchase_label_targetPosition = new Point(10, 292);
 
                 Menu_Supplier_label_initialPosition = Menu_Supplier_label.Location;
@@ -293,7 +293,7 @@ namespace POS
                 Menu_Staff_label_initialPosition = Menu_Staff_label.Location;
                 Menu_Staff_label_targetPosition = new Point(55, 232);
 
-                Menu_Purchase_label_initialPosition = Menu_Purchase_label.Location;
+                Menu_Purchase_label_initialPosition = Menu_Transactions_label.Location;
                 Menu_Purchase_label_targetPosition = new Point(55, 292);
 
                 Menu_Supplier_label_initialPosition = Menu_Supplier_label.Location;
@@ -343,7 +343,7 @@ namespace POS
                 Menu_Dashboard_label.Location = Menu_Dashboard_label_targetPosition;
                 Menu_Products_label.Location = Menu_Products_label_targetPosition;
                 Menu_Staff_label.Location = Menu_Staff_label_targetPosition;
-                Menu_Purchase_label.Location = Menu_Purchase_label_targetPosition;
+                Menu_Transactions_label.Location = Menu_Purchase_label_targetPosition;
                 Menu_Supplier_label.Location = Menu_Supplier_label_targetPosition;
                 Menu_Client_label.Location = Menu_Client_label_targetPosition;
                 Menu_POS_label.Location = Menu_POS_label_targetPosition;
@@ -364,7 +364,7 @@ namespace POS
 
                 int Menu_Purchase_label_newX = (int)(Menu_Purchase_label_initialPosition.X + (Menu_Purchase_label_targetPosition.X - Menu_Purchase_label_initialPosition.X) * progress);
                 int Menu_Purchase_label_newY = (int)Menu_Purchase_label_targetPosition.Y;
-                Menu_Purchase_label.Location = new Point(Menu_Purchase_label_newX, Menu_Purchase_label_newY);
+                Menu_Transactions_label.Location = new Point(Menu_Purchase_label_newX, Menu_Purchase_label_newY);
 
 
                 int Menu_Supplier_label_newX = (int)(Menu_Supplier_label_initialPosition.X + (Menu_Supplier_label_targetPosition.X - Menu_Supplier_label_initialPosition.X) * progress);
@@ -465,10 +465,10 @@ namespace POS
         {
             SetLabelColor(Menu_Dashboard_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Supplier_label.BackColor = Color.Transparent;
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
@@ -493,12 +493,12 @@ namespace POS
         {
             SetLabelColor(Menu_Products_label, "#0077C3");
             Menu_Staff_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
             Menu_Supplier_label.BackColor = Color.Transparent;
             Menu_Client_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Products/Restaurant";
@@ -523,12 +523,12 @@ namespace POS
         {
             SetLabelColor(Menu_POS_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Supplier_label.BackColor = Color.Transparent;
             Menu_Client_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "POS";
@@ -568,12 +568,12 @@ namespace POS
         {
             SetLabelColor(Menu_Staff_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
             Menu_Supplier_label.BackColor = Color.Transparent;
             Menu_Client_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Staff";
@@ -593,7 +593,7 @@ namespace POS
 
         private void Menu_Purchase_label_Click(object sender, EventArgs e)
         {
-            SetLabelColor(Menu_Purchase_label, "#0077C3");
+            SetLabelColor(Menu_Transactions_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
@@ -602,7 +602,7 @@ namespace POS
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
-            Current_ScreenName_label.Text = "Purchase";
+            Current_ScreenName_label.Text = "Transactions";
             if (PurchasePanel.Visible == false)
             {
                 PurchasePanel.Visible = true;
@@ -626,7 +626,7 @@ namespace POS
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
@@ -657,7 +657,7 @@ namespace POS
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
             Menu_Supplier_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
@@ -684,10 +684,10 @@ namespace POS
         {
             SetLabelColor(Menu_Reports_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Supplier_label.BackColor = Color.Transparent;
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
@@ -711,12 +711,12 @@ namespace POS
         {
             SetLabelColor(Menu_Settings_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
             Menu_Supplier_label.BackColor = Color.Transparent;
             Menu_Client_label.BackColor = Color.Transparent;
-            Menu_Purchase_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
         }
@@ -1065,7 +1065,7 @@ namespace POS
             SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
             SetLabelLocations(Menu_Products_label, new Point(55, 172));
             SetLabelLocations(Menu_Staff_label, new Point(55, 232));
-            SetLabelLocations(Menu_Purchase_label, new Point(55, 292));
+            SetLabelLocations(Menu_Transactions_label, new Point(55, 292));
             SetLabelLocations(Menu_Supplier_label, new Point(55, 352));
             SetLabelLocations(Menu_Client_label, new Point(55, 412));
             SetLabelLocations(Menu_POS_label, new Point(55, 472));
@@ -1085,6 +1085,35 @@ namespace POS
             InitiateChart();
             await Task.Delay(10);
             ContentContainer_panel.Visible = true;
+
+
+        }
+
+        private async void SupplierDashboardData()
+        {
+            try
+            {
+                connection.Open();
+                command = new SqlCommand("select top 10 supplier,total_amount,paid_amount,due_amount from purchases", connection);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable.Load(reader);
+                    SupplierDashboardDataGrid.DataSource = dataTable;
+                    SupplierDashboardDataGrid.Columns["supplier"].HeaderText = "Supplier";
+                    SupplierDashboardDataGrid.Columns["total_amount"].HeaderText = "Payable";
+                    SupplierDashboardDataGrid.Columns["paid_amount"].HeaderText = "Paid";
+                    SupplierDashboardDataGrid.Columns["due_amount"].HeaderText = "Due";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         #endregion
@@ -1092,11 +1121,11 @@ namespace POS
         #region Card Box Positions Functions
         private void Set_CardBox_Positions()
         {
-            Total_Cost_CardBox.Location = new Point(Total_Sale_CardBox.Location.X + 240, Total_Cost_CardBox.Location.Y);
-            Total_Disc_CardBox.Location = new Point(Total_Cost_CardBox.Location.X + 240, Total_Disc_CardBox.Location.Y);
-            Total_Profit_CardBox.Location = new Point(Total_Disc_CardBox.Location.X + 240, Total_Profit_CardBox.Location.Y);
-            Total_Tax_CardBox.Location = new Point(Total_Cost_CardBox.Location.X, Total_Cost_CardBox.Location.Y + 100);
-            Total_Pay_CardBox.Location = new Point(Total_Disc_CardBox.Location.X, Total_Disc_CardBox.Location.Y + 100);
+            Purchase_CardBox.Location = new Point(Product_CardBox.Location.X + 240, Purchase_CardBox.Location.Y);
+            Sale_CardBox.Location = new Point(Purchase_CardBox.Location.X + 240, Sale_CardBox.Location.Y);
+            Expense_CardBox.Location = new Point(Sale_CardBox.Location.X + 240, Expense_CardBox.Location.Y);
+            Total_Tax_CardBox.Location = new Point(Purchase_CardBox.Location.X, Purchase_CardBox.Location.Y + 100);
+            Total_Pay_CardBox.Location = new Point(Sale_CardBox.Location.X, Sale_CardBox.Location.Y + 100);
         }
         #endregion
 
@@ -1105,76 +1134,76 @@ namespace POS
         private void InitiateChart()
         {
 
-            string[] monthLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-            double[] xValues = { 0, 2, 4, 6, 8, 9 };
-            double[] originalYValues = { 2, 4, 2, 6, 2, 10 };
+            //string[] monthLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+            //double[] xValues = { 0, 2, 4, 6, 8, 9 };
+            //double[] originalYValues = { 2, 4, 2, 6, 2, 10 };
 
-            var series = new Series();
-            series.ChartType = SeriesChartType.Spline;
-            series.Color = Color.FromArgb(161, 74, 222);
+            //var series = new Series();
+            //series.ChartType = SeriesChartType.Spline;
+            //series.Color = Color.FromArgb(161, 74, 222);
 
-            for (int i = 0; i < xValues.Length; i++)
-            {
-                series.Points.AddXY(xValues[i], originalYValues[i]);
-                series.Points[i].MarkerSize = 5;
-                series.Points[i].MarkerColor = Color.White;
-                series.Points[i].Tag = i;
-            }
-            chart1.Series.Add(series);
-
-
-            //chart1.ChartAreas[0].AxisY.Title = "Y-axis Label";
-            chart1.ChartAreas[0].AxisX.Minimum = 0;
-            chart1.ChartAreas[0].AxisY.Minimum = 0;
-
-            chart1.ChartAreas[0].AxisX.Maximum = xValues[xValues.Length - 1];
-            chart1.ChartAreas[0].AxisY.Maximum = originalYValues.Max() + 1;
-            chart1.ChartAreas[0].AxisY.Interval = 1;
-            chart1.ChartAreas[0].AxisX.Interval = 1;
-            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-
-            //chart1.ChartAreas[0].AxisX.Title = "Month";
-            chart1.ChartAreas[0].AxisX.CustomLabels.Clear();
+            //for (int i = 0; i < xValues.Length; i++)
+            //{
+            //    series.Points.AddXY(xValues[i], originalYValues[i]);
+            //    series.Points[i].MarkerSize = 5;
+            //    series.Points[i].MarkerColor = Color.White;
+            //    series.Points[i].Tag = i;
+            //}
+            //chart1.Series.Add(series);
 
 
-            var areaSeries = new Series();
-            areaSeries.ChartType = SeriesChartType.SplineArea;
-            areaSeries.Points.DataBindXY(xValues, originalYValues);
-            areaSeries.BackGradientStyle = GradientStyle.TopBottom;
-            areaSeries.Color = Color.FromArgb(73, 162, 215);
-            chart1.Series.Insert(0, areaSeries);
+            ////chart1.ChartAreas[0].AxisY.Title = "Y-axis Label";
+            //chart1.ChartAreas[0].AxisX.Minimum = 0;
+            //chart1.ChartAreas[0].AxisY.Minimum = 0;
+
+            //chart1.ChartAreas[0].AxisX.Maximum = xValues[xValues.Length - 1];
+            //chart1.ChartAreas[0].AxisY.Maximum = originalYValues.Max() + 1;
+            //chart1.ChartAreas[0].AxisY.Interval = 1;
+            //chart1.ChartAreas[0].AxisX.Interval = 1;
+            //chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            //chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+
+            ////chart1.ChartAreas[0].AxisX.Title = "Month";
+            //chart1.ChartAreas[0].AxisX.CustomLabels.Clear();
 
 
-            for (int i = 0; i < monthLabels.Length; i++)
-            {
-                chart1.ChartAreas[0].AxisX.CustomLabels.Add((double)(i + 1), (double)i, monthLabels[((int)i)]);
-            }
+            //var areaSeries = new Series();
+            //areaSeries.ChartType = SeriesChartType.SplineArea;
+            //areaSeries.Points.DataBindXY(xValues, originalYValues);
+            //areaSeries.BackGradientStyle = GradientStyle.TopBottom;
+            //areaSeries.Color = Color.FromArgb(73, 162, 215);
+            //chart1.Series.Insert(0, areaSeries);
 
 
-            for (int i = 0; i < chart1.ChartAreas[0].AxisX.CustomLabels.Count - 1; i++)
-            {
-                if (i == 0)
-                {
-                    double intervalStart = i == 0 ? chart1.ChartAreas[0].AxisX.Minimum : chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
-                    double intervalEnd = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+            //for (int i = 0; i < monthLabels.Length; i++)
+            //{
+            //    chart1.ChartAreas[0].AxisX.CustomLabels.Add((double)(i + 1), (double)i, monthLabels[((int)i)]);
+            //}
 
-                    StripLine stripLine = new StripLine();
-                    stripLine.IntervalOffset = intervalStart;
-                    stripLine.StripWidth = intervalEnd - intervalStart;
-                    stripLine.BackColor = Color.FromArgb(249, 249, 249);
-                    chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
-                }
 
-                else
-                {
-                    StripLine stripLine = new StripLine();
-                    stripLine.IntervalOffset = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
-                    stripLine.StripWidth = chart1.ChartAreas[0].AxisX.CustomLabels[i + 1].FromPosition - chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
-                    stripLine.BackColor = (i % 2 != 0) ? Color.FromArgb(249, 249, 249) : Color.White; // Set color based on index
-                    chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
-                }
-            }
+            //for (int i = 0; i < chart1.ChartAreas[0].AxisX.CustomLabels.Count - 1; i++)
+            //{
+            //    if (i == 0)
+            //    {
+            //        double intervalStart = i == 0 ? chart1.ChartAreas[0].AxisX.Minimum : chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+            //        double intervalEnd = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+
+            //        StripLine stripLine = new StripLine();
+            //        stripLine.IntervalOffset = intervalStart;
+            //        stripLine.StripWidth = intervalEnd - intervalStart;
+            //        stripLine.BackColor = Color.FromArgb(249, 249, 249);
+            //        chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
+            //    }
+
+            //    else
+            //    {
+            //        StripLine stripLine = new StripLine();
+            //        stripLine.IntervalOffset = chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+            //        stripLine.StripWidth = chart1.ChartAreas[0].AxisX.CustomLabels[i + 1].FromPosition - chart1.ChartAreas[0].AxisX.CustomLabels[i].FromPosition;
+            //        stripLine.BackColor = (i % 2 != 0) ? Color.FromArgb(249, 249, 249) : Color.White; // Set color based on index
+            //        chart1.ChartAreas[0].AxisX.StripLines.Add(stripLine);
+            //    }
+            //}
 
 
         }
@@ -2466,10 +2495,24 @@ namespace POS
             }
         }
 
-
-
-
         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
     }
 }
 
