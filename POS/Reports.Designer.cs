@@ -33,20 +33,23 @@
             // 
             // reportViewer1
             // 
-            reportViewer1.Dock = DockStyle.Fill;
+            reportViewer1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            reportViewer1.DocumentMapWidth = 68;
             reportViewer1.Location = new Point(0, 0);
             reportViewer1.Name = "ReportViewer";
             reportViewer1.ServerReport.BearerToken = null;
-            reportViewer1.Size = new Size(636, 433);
+            reportViewer1.Size = new Size(668, 778);
             reportViewer1.TabIndex = 0;
             // 
             // Reports
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(636, 433);
+            ClientSize = new Size(668, 778);
             Controls.Add(reportViewer1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Reports";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Reports";
             Load += Reports_Load;
             ResumeLayout(false);

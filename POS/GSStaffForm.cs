@@ -14,13 +14,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace POS
 {
-    public partial class StaffForm : Form
+    public partial class GSStaffForm : Form
     {
         private int rowIndex;
         SqlConnection connection;
         SqlCommand command;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffForm));
-        public StaffForm(int rowIndex = -1)
+        public GSStaffForm(int rowIndex = -1)
         {
 
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
             connection = new SqlConnection(connectionString);
         }
 

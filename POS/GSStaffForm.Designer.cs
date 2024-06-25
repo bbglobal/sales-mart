@@ -1,6 +1,6 @@
 ﻿namespace POS
 {
-    partial class StaffForm
+    partial class GSStaffForm
     {
         /// <summary>
         /// Required designer variable.

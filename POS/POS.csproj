@@ -10,7 +10,9 @@
 
   <ItemGroup>
     <None Remove="MyriadProSemibold.ttf" />
+    <None Remove="Report1.rdlc" />
     <None Remove="Reports\Receipt.rdlc" />
+    <None Remove="Reports\SRByCategory.rdlc" />
     <None Remove="Resources\delete.png" />
     <None Remove="Resources\edit.png" />
     <None Remove="Resources\printIcon.png" />
@@ -21,6 +23,7 @@
   <ItemGroup>
     <EmbeddedResource Include="MyriadProSemibold.ttf" />
     <EmbeddedResource Include="Reports\Receipt.rdlc" />
+    <EmbeddedResource Include="Reports\SRByCategory.rdlc" />
     <EmbeddedResource Include="Resources\delete.png" />
     <EmbeddedResource Include="Resources\edit.png" />
     <EmbeddedResource Include="Resources\printIcon.png" />
@@ -36,15 +39,58 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="POSDataSet.Designer.cs">
+    <Compile Update="GSDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="DataSet1.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>POSDataSet.xsd</DependentUpon>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="DataSets\DataSet1.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="DataSets\GetItemByCatDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GetItemByCatDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="DataSet\GetItemsByCatDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GetItemsByCatDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="ClientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PurchaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GSBillList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GSPaymentMethodScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RestaurantPOS\ProductIngredientsForm.cs" />
+    <Compile Update="RestaurantPOS\POSIngredientScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SupplierForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="POSDataSet1.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>POSDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="ItemsCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ItemsForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="SelectTable.cs">
       <SubType>Form</SubType>
@@ -55,7 +101,13 @@
     <Compile Update="PaymentMethodScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="DeliveryForm.cs">
+    <Compile Update="GSDeliveryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GSStaffCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GSStaffForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="TablesForm.cs">
@@ -82,9 +134,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="POSDataSet.xsd">
+    <None Update="DataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>POSDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="DataSets\DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="DataSets\GetItemByCatDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GetItemByCatDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="DataSet\GetItemsByCatDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GetItemsByCatDataSet.Designer.cs</LastGenOutput>
     </None>
     <None Update="POSDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>

@@ -1,6 +1,6 @@
 ﻿namespace POS
 {
-    partial class StaffForm
+    partial class ClientForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,23 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientForm));
             panel3 = new Panel();
             Title_label = new Label();
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            Shift_ComboBox = new ComboBox();
-            label5 = new Label();
-            Phone_TextBox = new TextBox();
-            Status_ComboBox = new ComboBox();
-            label2 = new Label();
             Address_TextBox = new TextBox();
-            label4 = new Label();
+            Phone_TextBox = new TextBox();
+            Email_TextBox = new TextBox();
+            label2 = new Label();
             status_label = new Label();
-            Type_ComboBox = new ComboBox();
+            browse_button = new Button();
+            pictureBox1 = new PictureBox();
             category_label = new Label();
-            StaffName_TextBox = new TextBox();
+            Name_TextBox = new TextBox();
             label3 = new Label();
             panel4 = new Panel();
             save_button = new Button();
@@ -52,6 +50,7 @@
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel4.SuspendLayout();
             SuspendLayout();
             // 
@@ -75,9 +74,9 @@
             Title_label.ForeColor = Color.White;
             Title_label.Location = new Point(163, 33);
             Title_label.Name = "Title_label";
-            Title_label.Size = new Size(287, 47);
+            Title_label.Size = new Size(188, 47);
             Title_label.TabIndex = 1;
-            Title_label.Text = "Add Staff Details";
+            Title_label.Text = "Add Client";
             // 
             // label1
             // 
@@ -98,159 +97,129 @@
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(1, 0, 1, 1);
-            panel1.Size = new Size(659, 521);
+            panel1.Size = new Size(659, 548);
             panel1.TabIndex = 1;
             // 
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Controls.Add(Shift_ComboBox);
-            panel2.Controls.Add(label5);
-            panel2.Controls.Add(Phone_TextBox);
-            panel2.Controls.Add(Status_ComboBox);
-            panel2.Controls.Add(label2);
             panel2.Controls.Add(Address_TextBox);
-            panel2.Controls.Add(label4);
+            panel2.Controls.Add(Phone_TextBox);
+            panel2.Controls.Add(Email_TextBox);
+            panel2.Controls.Add(label2);
             panel2.Controls.Add(status_label);
-            panel2.Controls.Add(Type_ComboBox);
+            panel2.Controls.Add(browse_button);
+            panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(category_label);
-            panel2.Controls.Add(StaffName_TextBox);
+            panel2.Controls.Add(Name_TextBox);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(1, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(655, 518);
+            panel2.Size = new Size(655, 545);
             panel2.TabIndex = 1;
             // 
-            // Shift_ComboBox
+            // Address_TextBox
             // 
-            Shift_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
-            Shift_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            Shift_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            Shift_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Shift_ComboBox.FormattingEnabled = true;
-            Shift_ComboBox.IntegralHeight = false;
-            Shift_ComboBox.Items.AddRange(new object[] { "Morning", "Afternoon", "Evening" });
-            Shift_ComboBox.Location = new Point(104, 394);
-            Shift_ComboBox.Name = "Shift_ComboBox";
-            Shift_ComboBox.Size = new Size(181, 28);
-            Shift_ComboBox.TabIndex = 19;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(102, 367);
-            label5.Name = "label5";
-            label5.Size = new Size(39, 20);
-            label5.TabIndex = 18;
-            label5.Text = "Shift";
+            Address_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Address_TextBox.Location = new Point(104, 371);
+            Address_TextBox.Multiline = true;
+            Address_TextBox.Name = "Address_TextBox";
+            Address_TextBox.Size = new Size(181, 82);
+            Address_TextBox.TabIndex = 16;
             // 
             // Phone_TextBox
             // 
             Phone_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Phone_TextBox.Location = new Point(104, 315);
+            Phone_TextBox.Location = new Point(104, 298);
             Phone_TextBox.Multiline = true;
             Phone_TextBox.Name = "Phone_TextBox";
             Phone_TextBox.Size = new Size(181, 30);
-            Phone_TextBox.TabIndex = 17;
+            Phone_TextBox.TabIndex = 15;
             // 
-            // Status_ComboBox
+            // Email_TextBox
             // 
-            Status_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
-            Status_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            Status_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            Status_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Status_ComboBox.FormattingEnabled = true;
-            Status_ComboBox.IntegralHeight = false;
-            Status_ComboBox.Items.AddRange(new object[] { "Active", "Inactive" });
-            Status_ComboBox.Location = new Point(375, 280);
-            Status_ComboBox.Name = "Status_ComboBox";
-            Status_ComboBox.Size = new Size(181, 28);
-            Status_ComboBox.TabIndex = 16;
+            Email_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Email_TextBox.Location = new Point(104, 228);
+            Email_TextBox.Multiline = true;
+            Email_TextBox.Name = "Email_TextBox";
+            Email_TextBox.Size = new Size(181, 30);
+            Email_TextBox.TabIndex = 14;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(371, 253);
+            label2.Location = new Point(100, 201);
             label2.Name = "label2";
-            label2.Size = new Size(49, 20);
-            label2.TabIndex = 15;
-            label2.Text = "Status";
-            // 
-            // Address_TextBox
-            // 
-            Address_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Address_TextBox.Location = new Point(375, 164);
-            Address_TextBox.Multiline = true;
-            Address_TextBox.Name = "Address_TextBox";
-            Address_TextBox.Size = new Size(181, 69);
-            Address_TextBox.TabIndex = 14;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(371, 137);
-            label4.Name = "label4";
-            label4.Size = new Size(62, 20);
-            label4.TabIndex = 13;
-            label4.Text = "Address";
+            label2.Size = new Size(46, 20);
+            label2.TabIndex = 13;
+            label2.Text = "Email";
             // 
             // status_label
             // 
             status_label.AutoSize = true;
             status_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            status_label.Location = new Point(100, 288);
+            status_label.Location = new Point(100, 348);
             status_label.Name = "status_label";
-            status_label.Size = new Size(50, 20);
+            status_label.Size = new Size(62, 20);
             status_label.TabIndex = 11;
-            status_label.Text = "Phone";
+            status_label.Text = "Address";
             // 
-            // Type_ComboBox
+            // browse_button
             // 
-            Type_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
-            Type_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            Type_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            Type_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Type_ComboBox.FormattingEnabled = true;
-            Type_ComboBox.IntegralHeight = false;
-            Type_ComboBox.Location = new Point(104, 236);
-            Type_ComboBox.Name = "Type_ComboBox";
-            Type_ComboBox.Size = new Size(181, 28);
-            Type_ComboBox.TabIndex = 10;
+            browse_button.BackColor = Color.FromArgb(0, 119, 194);
+            browse_button.FlatAppearance.BorderSize = 0;
+            browse_button.FlatStyle = FlatStyle.Flat;
+            browse_button.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            browse_button.ForeColor = Color.White;
+            browse_button.Location = new Point(411, 330);
+            browse_button.Name = "browse_button";
+            browse_button.Size = new Size(103, 38);
+            browse_button.TabIndex = 9;
+            browse_button.Text = "Browse";
+            browse_button.UseVisualStyleBackColor = false;
+            browse_button.Click += browse_button_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox1.Location = new Point(401, 179);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(125, 125);
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
             // 
             // category_label
             // 
             category_label.AutoSize = true;
             category_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            category_label.Location = new Point(100, 209);
+            category_label.Location = new Point(100, 275);
             category_label.Name = "category_label";
-            category_label.Size = new Size(40, 20);
+            category_label.Size = new Size(50, 20);
             category_label.TabIndex = 4;
-            category_label.Text = "Type";
+            category_label.Text = "Phone";
             // 
-            // StaffName_TextBox
+            // Name_TextBox
             // 
-            StaffName_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            StaffName_TextBox.Location = new Point(104, 157);
-            StaffName_TextBox.Multiline = true;
-            StaffName_TextBox.Name = "StaffName_TextBox";
-            StaffName_TextBox.Size = new Size(181, 30);
-            StaffName_TextBox.TabIndex = 3;
+            Name_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Name_TextBox.Location = new Point(104, 151);
+            Name_TextBox.Multiline = true;
+            Name_TextBox.Name = "Name_TextBox";
+            Name_TextBox.Size = new Size(181, 30);
+            Name_TextBox.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(100, 130);
+            label3.Location = new Point(100, 124);
             label3.Name = "label3";
-            label3.Size = new Size(84, 20);
+            label3.Size = new Size(49, 20);
             label3.TabIndex = 2;
-            label3.Text = "Staff Name";
+            label3.Text = "Name";
             // 
             // panel4
             // 
@@ -258,7 +227,7 @@
             panel4.Controls.Add(save_button);
             panel4.Controls.Add(cancel_button);
             panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 448);
+            panel4.Location = new Point(0, 475);
             panel4.Name = "panel4";
             panel4.Size = new Size(655, 70);
             panel4.TabIndex = 1;
@@ -296,25 +265,24 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // StaffForm
+            // ClientForm
             // 
-            AcceptButton = save_button;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            CancelButton = cancel_button;
-            ClientSize = new Size(659, 521);
+            ClientSize = new Size(659, 548);
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "StaffForm";
+            Name = "ClientForm";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "StaffForm";
+            Text = "ProductsForm";
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel4.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -330,16 +298,14 @@
         private Button cancel_button;
         private Button save_button;
         private Label label3;
-        private TextBox StaffName_TextBox;
+        private TextBox Name_TextBox;
         private Label category_label;
-        private ComboBox Type_ComboBox;
+        private Button browse_button;
+        private PictureBox pictureBox1;
         private Label status_label;
-        private TextBox Phone_TextBox;
-        private ComboBox Status_ComboBox;
+        private TextBox Email_TextBox;
         private Label label2;
         private TextBox Address_TextBox;
-        private Label label4;
-        private ComboBox Shift_ComboBox;
-        private Label label5;
+        private TextBox Phone_TextBox;
     }
 }
