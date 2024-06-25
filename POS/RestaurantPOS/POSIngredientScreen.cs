@@ -47,7 +47,7 @@ namespace POS
             try
             {
                 connection.Open();
-                string query = $"select * from ingredients where product ='"+ product_name +"'";
+                string query = $"select * from product_ingredients where product ='"+ product_name +"'";
                 command = new SqlCommand(query, connection);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {

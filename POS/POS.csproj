@@ -74,7 +74,7 @@
     <Compile Update="GSPaymentMethodScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="RestaurantPOS\IngredientsForm.cs" />
+    <Compile Update="RestaurantPOS\ProductIngredientsForm.cs" />
     <Compile Update="RestaurantPOS\POSIngredientScreen.cs">
       <SubType>Form</SubType>
     </Compile>

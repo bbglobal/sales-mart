@@ -1054,7 +1054,7 @@ namespace POS
 
         #region All Dashboard Screen Funtions
 
-        #region Dashboard Load Event
+        #region Dashboard Load Event And Dashboard Supplier Datagrid Function
         private async void Dashboard_Load(object sender, EventArgs e)
         {
 

@@ -31,6 +31,7 @@ namespace POS
         private Point Menu_Logo_initialPosition;
         private Point Menu_Logo_targetPosition;
         private Point Menu_Dashboard_label_initialPosition;
+        private Point Menu_Ingredients_label_initialPosition;
         private Point Menu_Products_label_initialPosition;
         private Point Menu_Tables_label_initialPosition;
         private Point Menu_Staff_label_initialPosition;
@@ -39,6 +40,7 @@ namespace POS
         private Point Menu_Reports_label_initialPosition;
         private Point Menu_Settings_label_initialPosition;
         private Point Menu_Dashboard_label_targetPosition;
+        private Point Menu_Ingredients_label_targetPosition;
         private Point Menu_Products_label_targetPosition;
         private Point Menu_Tables_label_targetPosition;
         private Point Menu_Staff_label_targetPosition;
@@ -71,6 +73,7 @@ namespace POS
 
             #region Calling Image Resize and Rounded Corner,Timer & Font Functions 
             InitializeLabel(Menu_Dashboard_label, (Image)resources.GetObject("Menu_Dashboard_label.Image"), 25, 25);
+            InitializeLabel(Menu_Ingredients_label, (Image)resources.GetObject("Menu_Ingredients_label.Image"), 25, 25);
             InitializeLabel(Menu_Products_label, (Image)resources.GetObject("Menu_Products_label.Image"), 25, 25);
             InitializeLabel(Menu_Tables_label, (Image)resources.GetObject("Menu_Tables_label.Image"), 25, 27);
             InitializeLabel(Menu_Staff_label, (Image)resources.GetObject("Menu_Staff_label.Image"), 25, 25);
@@ -81,6 +84,7 @@ namespace POS
             InitializeLabel(Logo, (Image)resources.GetObject("Logo.Image"), 30, 45);
             InitializeLabel(LogoText, (Image)resources.GetObject("LogoText.Image"), 150, 25);
             RoundCorners(Menu_Dashboard_label, 20);
+            RoundCorners(Menu_Ingredients_label, 20);
             RoundCorners(Menu_Products_label, 20);
             RoundCorners(Menu_Tables_label, 20);
             RoundCorners(Menu_Staff_label, 20);
@@ -231,28 +235,31 @@ namespace POS
             {
 
                 Menu_Dashboard_label_initialPosition = Menu_Dashboard_label.Location;
-                Menu_Dashboard_label_targetPosition = new Point(10, 114);
+                Menu_Dashboard_label_targetPosition = new Point(10, 112);
+
+                Menu_Ingredients_label_initialPosition = Menu_Ingredients_label.Location;
+                Menu_Ingredients_label_targetPosition = new Point(10, 172);
 
                 Menu_Products_label_initialPosition = Menu_Products_label.Location;
-                Menu_Products_label_targetPosition = new Point(10, 184);
+                Menu_Products_label_targetPosition = new Point(10, 232);
 
                 Menu_Tables_label_initialPosition = Menu_Tables_label.Location;
-                Menu_Tables_label_targetPosition = new Point(10, 254);
+                Menu_Tables_label_targetPosition = new Point(10, 292);
 
                 Menu_Staff_label_initialPosition = Menu_Staff_label.Location;
-                Menu_Staff_label_targetPosition = new Point(10, 324);
+                Menu_Staff_label_targetPosition = new Point(10, 352);
 
                 Menu_POS_label_initialPosition = Menu_POS_label.Location;
-                Menu_POS_label_targetPosition = new Point(10, 394);
+                Menu_POS_label_targetPosition = new Point(10, 412);
 
                 Menu_Kitchen_label_initialPosition = Menu_Kitchen_label.Location;
-                Menu_Kitchen_label_targetPosition = new Point(10, 464);
+                Menu_Kitchen_label_targetPosition = new Point(10, 472);
 
                 Menu_Reports_label_initialPosition = Menu_Reports_label.Location;
-                Menu_Reports_label_targetPosition = new Point(10, 534);
+                Menu_Reports_label_targetPosition = new Point(10, 532);
 
                 Menu_Settings_label_initialPosition = Menu_Settings_label.Location;
-                Menu_Settings_label_targetPosition = new Point(10, 604);
+                Menu_Settings_label_targetPosition = new Point(10, 592);
 
                 Menu_Logo_initialPosition = Logo.Location;
                 Menu_Logo_targetPosition = new Point(10, 30);
@@ -273,28 +280,31 @@ namespace POS
             else
             {
                 Menu_Dashboard_label_initialPosition = Menu_Dashboard_label.Location;
-                Menu_Dashboard_label_targetPosition = new Point(55, 114);
+                Menu_Dashboard_label_targetPosition = new Point(55, 112);
+
+                Menu_Ingredients_label_initialPosition = Menu_Ingredients_label.Location;
+                Menu_Ingredients_label_targetPosition = new Point(55, 172);
 
                 Menu_Products_label_initialPosition = Menu_Products_label.Location;
-                Menu_Products_label_targetPosition = new Point(55, 184);
+                Menu_Products_label_targetPosition = new Point(55, 232);
 
                 Menu_Tables_label_initialPosition = Menu_Tables_label.Location;
-                Menu_Tables_label_targetPosition = new Point(55, 254);
+                Menu_Tables_label_targetPosition = new Point(55, 292);
 
                 Menu_Staff_label_initialPosition = Menu_Staff_label.Location;
-                Menu_Staff_label_targetPosition = new Point(55, 324);
+                Menu_Staff_label_targetPosition = new Point(55, 352);
 
                 Menu_POS_label_initialPosition = Menu_POS_label.Location;
-                Menu_POS_label_targetPosition = new Point(55, 394);
+                Menu_POS_label_targetPosition = new Point(55, 412);
 
                 Menu_Kitchen_label_initialPosition = Menu_Kitchen_label.Location;
-                Menu_Kitchen_label_targetPosition = new Point(55, 464);
+                Menu_Kitchen_label_targetPosition = new Point(55, 472);
 
                 Menu_Reports_label_initialPosition = Menu_Reports_label.Location;
-                Menu_Reports_label_targetPosition = new Point(55, 534);
+                Menu_Reports_label_targetPosition = new Point(55, 532);
 
                 Menu_Settings_label_initialPosition = Menu_Settings_label.Location;
-                Menu_Settings_label_targetPosition = new Point(55, 604);
+                Menu_Settings_label_targetPosition = new Point(55, 592);
 
                 Menu_Logo_initialPosition = Logo.Location;
                 Menu_Logo_targetPosition = new Point(36, 30);
@@ -325,6 +335,7 @@ namespace POS
             {
                 LabelTimer.Stop();
                 Menu_Dashboard_label.Location = Menu_Dashboard_label_targetPosition;
+                Menu_Ingredients_label.Location = Menu_Ingredients_label_targetPosition;
                 Menu_Products_label.Location = Menu_Products_label_targetPosition;
                 Menu_Tables_label.Location = Menu_Tables_label_targetPosition;
                 Menu_Staff_label.Location = Menu_Staff_label_targetPosition;
@@ -340,6 +351,10 @@ namespace POS
                 int Menu_Dashboard_label_newX = (int)(Menu_Dashboard_label_initialPosition.X + (Menu_Dashboard_label_targetPosition.X - Menu_Dashboard_label_initialPosition.X) * progress);
                 int Menu_Dashboard_label_newY = (int)Menu_Dashboard_label_targetPosition.Y;
                 Menu_Dashboard_label.Location = new Point(Menu_Dashboard_label_newX, Menu_Dashboard_label_newY);
+
+                int Menu_Ingredients_label_newX = (int)(Menu_Ingredients_label_initialPosition.X + (Menu_Ingredients_label_targetPosition.X - Menu_Ingredients_label_initialPosition.X) * progress);
+                int Menu_Ingredients_label_newY = (int)Menu_Ingredients_label_targetPosition.Y;
+                Menu_Ingredients_label.Location = new Point(Menu_Ingredients_label_newX, Menu_Ingredients_label_newY);
 
                 int Menu_Products_label_newX = (int)(Menu_Products_label_initialPosition.X + (Menu_Products_label_targetPosition.X - Menu_Products_label_initialPosition.X) * progress);
                 int Menu_Products_label_newY = (int)Menu_Products_label_targetPosition.Y;
@@ -440,6 +455,7 @@ namespace POS
         private void Menu_Dashboard_label_Click_1(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Dashboard_label, "#0077C3");
+            Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
@@ -451,6 +467,33 @@ namespace POS
             if (ContentContainer_panel.Visible == false)
             {
                 ContentContainer_panel.Visible = true;
+                ProductPanel.Visible = false;
+                IngredientsPanel.Visible = false;
+                StaffPanel.Visible = false;
+                POSPanel.Visible = false;
+                TablesPanel.Visible = false;
+                KitchenPanel.Visible = false;
+                ReportsPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
+        }
+
+        private void Menu_Ingredients_label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Ingredients_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Ingredients";
+            if (IngredientsPanel.Visible == false)
+            {
+                IngredientsPanel.Visible = true;
+                ContentContainer_panel.Visible = false;
                 ProductPanel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
@@ -465,6 +508,7 @@ namespace POS
         {
             SetLabelColor(Menu_Products_label, "#0077C3");
             Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
@@ -476,6 +520,7 @@ namespace POS
             {
                 ProductPanel.Visible = true;
                 ContentContainer_panel.Visible = false;
+                IngredientsPanel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
@@ -489,6 +534,7 @@ namespace POS
         {
             SetLabelColor(Menu_Tables_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
@@ -500,6 +546,7 @@ namespace POS
             {
                 TablesPanel.Visible = true;
                 ContentContainer_panel.Visible = false;
+                IngredientsPanel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
                 ProductPanel.Visible = false;
@@ -514,6 +561,7 @@ namespace POS
         {
             SetLabelColor(Menu_POS_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
@@ -526,7 +574,7 @@ namespace POS
                 POSPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
-                ContentContainer_panel.Visible = false;
+                IngredientsPanel.Visible = false;
                 StaffPanel.Visible = false;
                 TablesPanel.Visible = false;
                 KitchenPanel.Visible = false;
@@ -557,6 +605,7 @@ namespace POS
         {
             SetLabelColor(Menu_Staff_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
@@ -569,7 +618,7 @@ namespace POS
                 StaffPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
-                ContentContainer_panel.Visible = false;
+                IngredientsPanel.Visible = false;
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
                 KitchenPanel.Visible = false;
@@ -582,6 +631,7 @@ namespace POS
         {
             SetLabelColor(Menu_Kitchen_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
@@ -594,7 +644,7 @@ namespace POS
                 KitchenPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
-                ContentContainer_panel.Visible = false;
+                IngredientsPanel.Visible = false;
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
                 StaffPanel.Visible = false;
@@ -607,6 +657,7 @@ namespace POS
         {
             SetLabelColor(Menu_Reports_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
@@ -619,7 +670,7 @@ namespace POS
                 ReportsPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
-                ContentContainer_panel.Visible = false;
+                IngredientsPanel.Visible = false;
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
                 StaffPanel.Visible = false;
@@ -632,6 +683,7 @@ namespace POS
         {
             SetLabelColor(Menu_Settings_label, "#0077C3");
             Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_POS_label.BackColor = Color.Transparent;
@@ -942,13 +994,14 @@ namespace POS
             CurrentUser_label.Location = new Point(CurrentUser_label.Location.X - (CurrentUser_label.Width - CurrentUserInitialWidth), CurrentUser_label.Location.Y);
             Set_CardBox_Positions();
             SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
-            SetLabelLocations(Menu_Products_label, new Point(55, 172));
-            SetLabelLocations(Menu_Tables_label, new Point(55, 232));
-            SetLabelLocations(Menu_Staff_label, new Point(55, 292));
-            SetLabelLocations(Menu_POS_label, new Point(55, 352));
-            SetLabelLocations(Menu_Kitchen_label, new Point(55, 412));
-            SetLabelLocations(Menu_Reports_label, new Point(55, 472));
-            SetLabelLocations(Menu_Settings_label, new Point(55, 532));
+            SetLabelLocations(Menu_Ingredients_label, new Point(55, 172));
+            SetLabelLocations(Menu_Products_label, new Point(55, 232));
+            SetLabelLocations(Menu_Tables_label, new Point(55, 292));
+            SetLabelLocations(Menu_Staff_label, new Point(55, 352));
+            SetLabelLocations(Menu_POS_label, new Point(55, 412));
+            SetLabelLocations(Menu_Kitchen_label, new Point(55, 472));
+            SetLabelLocations(Menu_Reports_label, new Point(55, 532));
+            SetLabelLocations(Menu_Settings_label, new Point(55, 592));
             SetLabelColor(Menu_Dashboard_label, "#0077C3");
 
             //Menu_Dashboard_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
@@ -1065,7 +1118,6 @@ namespace POS
         #endregion
 
 
-
         #region All Products Screen Functions
 
         #region Products Tab Button Functions
@@ -1113,7 +1165,7 @@ namespace POS
                 ProductsTabButton.ForeColor = SystemColors.GrayText;
                 ProductsCategoryTabButton.BackColor = Color.Transparent;
                 ProductsCategoryTabButton.ForeColor = SystemColors.GrayText;
-                string query = "select * from ingredients";
+                string query = "select * from product_ingredients";
                 LoadDataAsync(ProductsDataGrid, query, "Async");
             }
         }
@@ -1139,7 +1191,7 @@ namespace POS
                 }
                 else
                 {
-                    string query = "select * from ingredients";
+                    string query = "select * from product_ingredients";
                     LoadDataAsync(ProductsDataGrid, query, "Async");
                 }
             }
@@ -1180,9 +1232,9 @@ namespace POS
                     }
                     else
                     {
-                        IngredientsForm IngForm = new IngredientsForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                        ProductIngredientsForm IngForm = new ProductIngredientsForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
                         IngForm.ShowDialog();
-                        LoadDataAsync(ProductsDataGrid, "select * from ingredients", "Sync");
+                        LoadDataAsync(ProductsDataGrid, "select * from product_ingredients", "Sync");
                     }
 
                 }
@@ -1207,7 +1259,7 @@ namespace POS
                     {
                         if (MessageBox.Show("Are you sure you want to delete this Ingredient?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                         {
-                            DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "ingredients", ProductsDataGrid, e.RowIndex);
+                            DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "product_ingredients", ProductsDataGrid, e.RowIndex);
                         }
                     }
                 }
@@ -1238,9 +1290,9 @@ namespace POS
             }
             else
             {
-                IngredientsForm IngForm = new IngredientsForm();
+                ProductIngredientsForm IngForm = new ProductIngredientsForm();
                 IngForm.ShowDialog();
-                string query = "select * from ingredients";
+                string query = "select * from product_ingredients";
                 LoadDataAsync(ProductsDataGrid, query, "Sync");
             }
         }
@@ -1261,7 +1313,7 @@ namespace POS
             }
             else
             {
-                string query = $"select * from ingredients where product like '%{textBox1.Text}%'";
+                string query = $"select * from product_ingredients where product like '%{textBox1.Text}%'";
                 LoadDataAsync(ProductsDataGrid, query, "Sync");
             }
         }
@@ -1286,7 +1338,7 @@ namespace POS
                 StaffTab.ForeColor = SystemColors.GrayText;
                 string query = "select * from staff_category";
                 LoadDataAsync(StaffDataGrid, query, "Async");
-            }   
+            }
         }
 
         private void StaffTab_Click(object sender, EventArgs e)

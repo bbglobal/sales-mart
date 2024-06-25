@@ -1,6 +1,6 @@
 ﻿namespace POS
 {
-    partial class IngredientsForm
+    partial class ProductIngredientsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IngredientsForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductIngredientsForm));
             panel3 = new Panel();
             Title_label = new Label();
             label1 = new Label();

@@ -13,13 +13,13 @@ using System.Windows.Forms;
 
 namespace POS
 {
-    public partial class IngredientsForm : Form
+    public partial class ProductIngredientsForm : Form
     {
         private int rowIndex;
         SqlConnection connection;
         SqlCommand command;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
-        public IngredientsForm(int rowIndex = -1)
+        public ProductIngredientsForm(int rowIndex = -1)
         {
 
             InitializeComponent();
@@ -74,7 +74,7 @@ namespace POS
                 connection.Open();
                 if (rowIndex == -1)
                 {
-                    string query = "INSERT INTO ingredients (product,ingredients) VALUES (@Product,@Ingredients)";
+                    string query = "INSERT INTO product_ingredients (product,ingredients) VALUES (@Product,@Ingredients)";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Product", Product_ComboBox.SelectedItem.ToString());
@@ -93,7 +93,7 @@ namespace POS
                 }
                 else
                 {
-                    string query = "UPDATE ingredients SET product=@Product,ingredients=@Ingredients WHERE id=@Id";
+                    string query = "UPDATE product_ingredients SET product=@Product,ingredients=@Ingredients WHERE id=@Id";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Product", Product_ComboBox.SelectedItem.ToString());
@@ -155,7 +155,7 @@ namespace POS
             try
             {
                 connection.Open();
-                string query = $"select * from ingredients where id={rowNo}";
+                string query = $"select * from product_ingredients where id={rowNo}";
                 command = new SqlCommand(query, connection);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
