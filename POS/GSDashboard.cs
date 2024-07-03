@@ -476,7 +476,6 @@ namespace POS
             Current_ScreenName_label.Text = "Dashboard";
             if (ContentContainer_panel.Visible == false)
             {
-                ContentContainer_panel.Visible = true;
                 ProductPanel.Visible = false;
                 StaffPanel.Visible = false;
                 StaffPanel.Visible = false;
@@ -486,6 +485,7 @@ namespace POS
                 PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                ContentContainer_panel.Visible = true;
             }
         }
 
@@ -504,7 +504,6 @@ namespace POS
             Current_ScreenName_label.Text = "Products/Restaurant";
             if (ProductPanel.Visible == false)
             {
-                ProductPanel.Visible = true;
                 ContentContainer_panel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
@@ -513,6 +512,7 @@ namespace POS
                 PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                ProductPanel.Visible = true;
             }
         }
 
@@ -545,7 +545,7 @@ namespace POS
                 //ProductPanel.Visible = false;
                 StartTransition(60, "Hide");
                 AddPOSCategory();
-                await Task.Delay(100);
+                await Task.Delay(300);
                 LoadPOSProducts();
 
 
@@ -579,7 +579,6 @@ namespace POS
             Current_ScreenName_label.Text = "Staff";
             if (StaffPanel.Visible == false)
             {
-                StaffPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
@@ -588,6 +587,7 @@ namespace POS
                 PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                StaffPanel.Visible = true;
             }
         }
 
@@ -605,7 +605,6 @@ namespace POS
             Current_ScreenName_label.Text = "Transactions";
             if (PurchasePanel.Visible == false)
             {
-                PurchasePanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
@@ -614,6 +613,7 @@ namespace POS
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                PurchasePanel.Visible = true;
             }
         }
 
@@ -634,7 +634,6 @@ namespace POS
             Current_ScreenName_label.Text = "Suppliers";
             if (SupplierPanel.Visible == false)
             {
-                SupplierPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
@@ -643,6 +642,7 @@ namespace POS
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                SupplierPanel.Visible = true;
             }
 
 
@@ -664,7 +664,6 @@ namespace POS
             Current_ScreenName_label.Text = "Clients";
             if (ClientsPanel.Visible == false)
             {
-                ClientsPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
@@ -673,6 +672,7 @@ namespace POS
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                ClientsPanel.Visible = true;
             }
 
 
@@ -695,7 +695,6 @@ namespace POS
             Current_ScreenName_label.Text = "Reports";
             if (ReportsPanel.Visible == false)
             {
-                ReportsPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 POSPanel.Visible = false;
@@ -704,6 +703,7 @@ namespace POS
                 ClientsPanel.Visible = false;
                 PurchasePanel.Visible = false;
                 //ProductPanel.Visible = false;
+                ReportsPanel.Visible = true;
             }
         }
 

@@ -121,7 +121,7 @@ namespace POS
         #endregion
 
 
-        #region All Necessary Functions(Sidebar Labels,Icons,Animations and ByteToImage)
+        #region All Necessary Functions  (Sidebar Labels,Icons,Animations and ByteToImage)
 
         #region Setting Label Fonts, Locations, Colors & Rounding Corners Functions
 
@@ -866,6 +866,7 @@ namespace POS
                 else
                 {
                     dataGridView.Columns["id"].Visible = false;
+                    dataGridView.Columns["product"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
                     dataGridView.Columns["product"].HeaderText = "Product";
                     dataGridView.Columns["ingredients"].HeaderText = "Ingredients";
@@ -901,6 +902,25 @@ namespace POS
 
 
             }
+
+            else if (dataGridView == Ingredients_DataGrid)
+            {
+
+                dataGridView.Columns["id"].Visible = false;
+                dataGridView.Columns["standard_quantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells; ;
+                dataGridView.Columns["precise_quantity"].Visible = false;
+                dataGridView.Columns["precise_unit"].Visible = false;
+                dataGridView.Columns["ingredient_name"].HeaderText = "Ingredient";
+                dataGridView.Columns["standard_quantity"].HeaderText = "Qty";
+                dataGridView.Columns["standard_unit"].HeaderText = "Unit";
+                dataGridView.Columns["cost_per_unit"].HeaderText = "Cost(per unit)";
+                dataGridView.Columns["min_quantity"].HeaderText = "Min Qty";
+
+
+            }
+
+
+
             foreach (DataGridViewColumn column in dataGridView.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -1318,6 +1338,62 @@ namespace POS
             }
         }
 
+
+        #endregion
+
+        #endregion
+
+
+        #region All Ingredients Screen Functions
+
+
+        #region Ingredients Add Button and Search TextBox Functions
+
+            private void IngredientsAddButton_Click(object sender, EventArgs e)
+            {
+                IngredientsForm ingredientsForm = new IngredientsForm();
+                ingredientsForm.ShowDialog();
+                LoadDataAsync(Ingredients_DataGrid, "select * from ingredients", "Sync");
+            }
+
+            private void Ingredients_SearchTextBox_TextChanged(object sender, EventArgs e)
+            {
+                string query = $"select * from ingredients where ingredient_name like '%{Ingredients_SearchTextBox.Text}%' ";
+                LoadDataAsync(Ingredients_DataGrid, query, "Sync");
+            }
+
+        #endregion
+
+        #region Ingredient Panel VisibleChanged and Ingredient Data Grid Functions
+            private void Ingredients_DataGrid_VisibleChanged(object sender, EventArgs e)
+            {
+                string query = "select * from ingredients";
+                LoadDataAsync(Ingredients_DataGrid, query, "Async");
+            }
+
+            private void Ingredients_DataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {
+                    if (Ingredients_DataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                    {
+                        IngredientsForm ingredientsForm = new IngredientsForm((int)Ingredients_DataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                        ingredientsForm.ShowDialog();
+                        LoadDataAsync(Ingredients_DataGrid, "select * from ingredients", "Sync");
+                    }
+
+                    else if (Ingredients_DataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                    {
+
+                        if (MessageBox.Show("Are you sure you want to delete this Ingredient?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            DeleteRowFromDatabase(Convert.ToInt32(Ingredients_DataGrid.Rows[e.RowIndex].Cells["id"].Value), "ingredients", Ingredients_DataGrid, e.RowIndex);
+                        }
+
+                    }
+
+                }
+            }
 
         #endregion
 

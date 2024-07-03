@@ -126,7 +126,7 @@ namespace POS
             try
             {
                 connection.Open();
-                string query = $"select * from products";
+                string query = $"select product_name from products";
                 command = new SqlCommand(query, connection);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -134,6 +134,17 @@ namespace POS
                     while (reader.Read())
                     {
                         Product_ComboBox.Items.Add((string)reader["product_name"]);
+                    }
+                }
+                
+                string query2 = $"select ingredient_name from ingredients";
+                command = new SqlCommand(query2, connection);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+
+                    while (reader.Read())
+                    {
+                        Ingredients_ComboBox.Items.Add((string)reader["ingredient_name"]);
                     }
                 }
             }
@@ -205,7 +216,8 @@ namespace POS
 
         private void ClearFields()
         {
-            Ingredient_TextBox.Text = "";
+           
+            Qty_TextBox.Text = "";
             IngredientsListBox.Items.Clear();
         }
 
@@ -225,14 +237,15 @@ namespace POS
 
         private void AddIngredientButton_Click(object sender, EventArgs e)
         {
-            if (Ingredient_TextBox.Text != "")
+            if (Ingredients_ComboBox.SelectedItem != null && Qty_TextBox.Text != "" && Unit_ComboBox.SelectedItem != null)
             {
-                IngredientsListBox.Items.Add(Ingredient_TextBox.Text);
-                Ingredient_TextBox.Text = "";
+                string Full_Ing = Ingredients_ComboBox.SelectedItem.ToString() + "|" + Qty_TextBox.Text + " " +Unit_ComboBox.SelectedItem.ToString();
+                IngredientsListBox.Items.Add(Full_Ing);
+                Qty_TextBox.Text = "";
             }
             else
             {
-                MessageBox.Show("Ingredients Field Cannot be Empty");
+                MessageBox.Show("Something is Missing!");
             }
         }
 
