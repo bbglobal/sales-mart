@@ -1338,51 +1338,51 @@ namespace POS
 
         #region Ingredients Add Button and Search TextBox Functions
 
-            private void IngredientsAddButton_Click(object sender, EventArgs e)
-            {
-                IngredientsForm ingredientsForm = new IngredientsForm();
-                ingredientsForm.ShowDialog();
-                LoadDataAsync(Ingredients_DataGrid, "select * from ingredients", "Sync");
-            }
+        private void IngredientsAddButton_Click(object sender, EventArgs e)
+        {
+            IngredientsForm ingredientsForm = new IngredientsForm();
+            ingredientsForm.ShowDialog();
+            LoadDataAsync(Ingredients_DataGrid, "select * from ingredients", "Sync");
+        }
 
-            private void Ingredients_SearchTextBox_TextChanged(object sender, EventArgs e)
-            {
-                string query = $"select * from ingredients where ingredient_name like '%{Ingredients_SearchTextBox.Text}%' ";
-                LoadDataAsync(Ingredients_DataGrid, query, "Sync");
-            }
+        private void Ingredients_SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string query = $"select * from ingredients where ingredient_name like '%{Ingredients_SearchTextBox.Text}%' ";
+            LoadDataAsync(Ingredients_DataGrid, query, "Sync");
+        }
 
         #endregion
 
         #region Ingredient Panel VisibleChanged and Ingredient Data Grid Functions
-            private void Ingredients_DataGrid_VisibleChanged(object sender, EventArgs e)
-            {
-                string query = "select * from ingredients";
-                LoadDataAsync(Ingredients_DataGrid, query, "Async");
-            }
+        private void Ingredients_DataGrid_VisibleChanged(object sender, EventArgs e)
+        {
+            string query = "select * from ingredients";
+            LoadDataAsync(Ingredients_DataGrid, query, "Async");
+        }
 
-            private void Ingredients_DataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Ingredients_DataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                if (Ingredients_DataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
                 {
-                    if (Ingredients_DataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                    IngredientsForm ingredientsForm = new IngredientsForm((int)Ingredients_DataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                    ingredientsForm.ShowDialog();
+                    LoadDataAsync(Ingredients_DataGrid, "select * from ingredients", "Sync");
+                }
+
+                else if (Ingredients_DataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+
+                    if (MessageBox.Show("Are you sure you want to delete this Ingredient?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        IngredientsForm ingredientsForm = new IngredientsForm((int)Ingredients_DataGrid.Rows[e.RowIndex].Cells["id"].Value);
-                        ingredientsForm.ShowDialog();
-                        LoadDataAsync(Ingredients_DataGrid, "select * from ingredients", "Sync");
-                    }
-
-                    else if (Ingredients_DataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
-                    {
-
-                        if (MessageBox.Show("Are you sure you want to delete this Ingredient?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        {
-                            DeleteRowFromDatabase(Convert.ToInt32(Ingredients_DataGrid.Rows[e.RowIndex].Cells["id"].Value), "ingredients", Ingredients_DataGrid, e.RowIndex);
-                        }
-
+                        DeleteRowFromDatabase(Convert.ToInt32(Ingredients_DataGrid.Rows[e.RowIndex].Cells["id"].Value), "ingredients", Ingredients_DataGrid, e.RowIndex);
                     }
 
                 }
+
             }
+        }
 
         #endregion
 
@@ -2706,56 +2706,163 @@ namespace POS
             }
         }
 
-        private void updateDashboardValues()
+        private async void updateDashboardValues()
         {
+            //try
+            //{
+            //    connection.Open();
+            //    decimal sales;
+            //    decimal discount;
+            //    decimal totalCost = 0;
+            //    command = new SqlCommand("SELECT SUM((discount/100) * total_amount) discount,SUM(net_total_amount) net_total FROM bill_list", connection);
+
+            //    using (SqlDataReader reader = command.ExecuteReader())
+            //    {
+            //        while (reader.Read())
+            //        {
+            //            sales = (decimal)reader["net_total"];
+            //            discount = (decimal)reader["discount"];
+            //            T_Sale_Amount_label.Text = sales.ToString() + "$";
+            //            T_Disc_Amount_label.Text = discount.ToString() + "$";
+
+            //        }
+            //        reader.Close();
+            //    }
+            //    SqlCommand cmd = new SqlCommand($"select items from bill_list where status='Paid'", connection);
+            //    using (SqlDataReader rdr = cmd.ExecuteReader())
+            //    {
+            //        while (rdr.Read())
+            //        {
+            //            string json = rdr["items"].ToString();
+            //            List<string> JSONLIST = JsonConvert.DeserializeObject<List<string>>(json);
+            //            foreach (var item in JSONLIST)
+            //            {
+            //                try
+            //                {
+
+            //                    SqlCommand cmd2 = new SqlCommand("ParseJsonData", connection);
+            //                    cmd2.CommandType = CommandType.StoredProcedure;
+
+            //                    // Add parameters
+            //                    cmd2.Parameters.Add("@jsonData", SqlDbType.NVarChar, -1).Value = item;
+            //                    cmd2.Parameters.Add("@TOTAL", SqlDbType.Decimal).Direction = ParameterDirection.Output;
+
+            //                    cmd2.ExecuteNonQuery();
+
+            //                    // Retrieve the output parameter value
+            //                    totalCost += Convert.ToDecimal(cmd2.Parameters["@TOTAL"].Value);
+
+            //                }
+            //                catch (Exception ex)
+            //                {
+            //                    MessageBox.Show(ex.Message);
+            //                }
+
+            //            }
+
+
+            //        }
+            //        MessageBox.Show(totalCost.ToString());
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+            //finally
+            //{
+            //    connection.Close();
+            //}
+
             try
             {
                 connection.Open();
-                decimal sales;
-                decimal discount;
-                command = new SqlCommand("SELECT SUM((discount/100) * total_amount) discount,SUM(net_total_amount) net_total FROM bill_list", connection);
+                decimal sales = 0;
+                decimal discount = 0;
+                decimal totalCost = 0;
+
+                // Retrieve sales and discount information
+                SqlCommand command = new SqlCommand("SELECT SUM((discount/100) * total_amount) AS discount, SUM(net_total_amount) AS net_total FROM bill_list", connection);
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    while (reader.Read())
+                    if (reader.Read())
                     {
                         sales = (decimal)reader["net_total"];
                         discount = (decimal)reader["discount"];
-                        T_Sale_Amount_label.Text = sales.ToString() + "$";
-                        T_Disc_Amount_label.Text = discount.ToString() + "$";
-                        reader.Close();
                     }
                 }
-                SqlCommand cmd = new SqlCommand("", connection);
-                using (SqlDataReader rdr = cmd.ExecuteReader())
+
+                // Update UI with sales and discount information
+                T_Sale_Amount_label.Text = sales.ToString("C"); // Display as currency format
+                T_Disc_Amount_label.Text = discount.ToString("C");
+
+                // Process JSON data from bill_list items
+                SqlCommand cmd = new SqlCommand("SELECT items FROM bill_list WHERE status = 'Paid'", connection);
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                if (rdr.Read())
                 {
-                    while (rdr.Read())
-                    {
-                        sales = (decimal)rdr["net_total"];
-                        discount = (decimal)rdr["discount"];
-                        T_Sale_Amount_label.Text = sales.ToString() + "$";
-                        T_Disc_Amount_label.Text = discount.ToString() + "$";
+                    dt.Load(rdr);
+                }
+                foreach (DataRow row in dt.Rows)
+                {
+                    string json = row["items"].ToString();
+                    List<string> JSONLIST = JsonConvert.DeserializeObject<List<string>>(json);
 
+                    foreach (var item in JSONLIST)
+                    {
+                        try
+                        {
+                            // Close the previous reader before executing cmd2
+                            //if (rdr != null && !rdr.IsClosed)
+                            //    rdr.Close();
+
+                            SqlCommand cmd2 = new SqlCommand("ParseJsonData", connection);
+                            cmd2.CommandType = CommandType.StoredProcedure;
+
+                            // Add parameters
+                            cmd2.Parameters.Add("@jsonData", SqlDbType.NVarChar, -1).Value = item;
+                            cmd2.Parameters.Add("@TOTAL", SqlDbType.Decimal).Direction = ParameterDirection.Output;
+
+                            cmd2.ExecuteNonQuery();
+
+                            // Retrieve the output parameter value
+                            totalCost += Convert.ToDecimal(cmd2.Parameters["@TOTAL"].Value);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error processing item: " + ex.Message);
+                        }
                     }
                 }
 
+
+
+
+                // Display total cost after processing all items
+                T_Cost_Amount_label.Text = totalCost.ToString("C"); // Display as currency format
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
                 connection.Close();
             }
 
-
-
         }
 
-
-
-
+        private void ContentContainer_panel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (ContentContainer_panel.Visible == true)
+            {
+                updateDashboardValues();
+            }
+        }
     }
 }
 
