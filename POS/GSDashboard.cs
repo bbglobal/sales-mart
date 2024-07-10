@@ -2065,6 +2065,7 @@ namespace POS
             {
                 List<string> columnValues = new List<string>();
                 decimal total_amount = 0;
+                
 
                 foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
                 {
@@ -2073,35 +2074,46 @@ namespace POS
                     columnValues.Add(ItemsValue + "-" + QtyValue);
                     total_amount += Convert.ToDecimal(row.Cells["total_amount"].Value.ToString());
                 }
-                string json = JsonConvert.SerializeObject(columnValues);
-                try
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("insert into bill_list(items,date,type,status,total_amount) values(@Items,@Date,@Type,@Status,@Total)", connection);
-                    command.Parameters.AddWithValue("@Items", json);
-                    command.Parameters.AddWithValue("@Date", DateTime.Now);
-                    command.Parameters.AddWithValue("@Type", "Take Away");
-                    command.Parameters.AddWithValue("@Status", "Complete");
-                    command.Parameters.AddWithValue("@Total", total_amount);
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Saved Successfully");
-                        POSProductsDataGrid.Rows.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("There was a problem saving");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
-                }
+                FastCashButton.Visible = true;
+                CheckOutButton.Visible = true;
+                TotalAmountLabel.Text = "Total Amount : " + total_amount;
+                TotalItemsAmount = total_amount;
+                TotalAmountLabel.Visible = true;
+                BillID = -2;
+                JSONItems = JsonConvert.SerializeObject(columnValues);
+                //try
+                //{
+                //    connection.Open();
+                //    SqlCommand command = new SqlCommand("insert into bill_list(items,date,type,status,total_amount,net_total_amount) values(@Items,@Date,@Type,@Status,@Total,@NetTotal)", connection);
+                //    command.Parameters.AddWithValue("@Items", json);
+                //    command.Parameters.AddWithValue("@Date", DateTime.Now);
+                //    command.Parameters.AddWithValue("@Type", "Take Away");
+                //    command.Parameters.AddWithValue("@Status", "Complete");
+                //    command.Parameters.AddWithValue("@Total", total_amount);
+                //    command.Parameters.AddWithValue("@NetTotal", total_amount);
+                //    int rowsAffected = command.ExecuteNonQuery();
+                //    if (rowsAffected > 0)
+                //    {
+                //        FastCashButton.Visible = true;
+                //        CheckOutButton.Visible = true;
+                //        TotalAmountLabel.Text = "Total Amount : " + total_amount;
+                //        TotalItemsAmount = total_amount;
+                //        TotalAmountLabel.Visible = true;
+
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("There was a problem saving");
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.Message);
+                //}
+                //finally
+                //{
+                //    connection.Close();
+                //}
 
             }
             else
@@ -2306,41 +2318,78 @@ namespace POS
 
         private void FastCashButton_Click(object sender, EventArgs e)
         {
-
-            try
+            if (BillID != -2)
             {
-                connection.Open();
-                string query = "UPDATE bill_list SET status=@Status WHERE bill_id=@Id";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                try
                 {
-                    command.Parameters.AddWithValue("@Status", "Paid");
-                    command.Parameters.AddWithValue("@Id", BillID);
+                    connection.Open();
+                    string query = "UPDATE bill_list SET status=@Status WHERE bill_id=@Id";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Status", "Paid");
+                        command.Parameters.AddWithValue("@Id", BillID);
 
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            NewScreen();
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Message : " + ex.Message);
+
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            else
+            {
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("insert into bill_list(items,date,type,status,total_amount,net_total_amount) values(@Items,@Date,@Type,@Status,@Total,@NetTotal)", connection);
+                    
+                    command.Parameters.AddWithValue("@Items", JSONItems);
+                    command.Parameters.AddWithValue("@Date", DateTime.Now);
+                    command.Parameters.AddWithValue("@Type", "Take Away");
+                    command.Parameters.AddWithValue("@Status", "Paid");
+                    command.Parameters.AddWithValue("@Total", TotalItemsAmount);
+                    command.Parameters.AddWithValue("@NetTotal", TotalItemsAmount);
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         NewScreen();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("There was a problem saving");
                     }
                 }
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error Message : " + ex.Message);
-
-            }
-            finally
-            {
-                connection.Close();
-            }
+            
         }
 
         private void CheckOutButton_Click(object sender, EventArgs e)
         {
 
             string updateStatus = "";
-            using (GSPaymentMethodScreen pms = new GSPaymentMethodScreen(TotalItemsAmount, BillID))
+            using (GSPaymentMethodScreen pms = new GSPaymentMethodScreen(TotalItemsAmount, BillID,JSONItems))
             {
                 if (pms.ShowDialog() != DialogResult.OK)
                 {

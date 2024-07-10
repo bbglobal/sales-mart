@@ -9,18 +9,20 @@ namespace POS
     {
         private string statusUpdated = "";
         private int rowIndex;
+        private string JSONItems;
         SqlConnection connection;
         SqlCommand command;
         System.Windows.Forms.TextBox targetTextBox;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
         private decimal total_amount;
-        public GSPaymentMethodScreen(decimal total_amount, int rowIndex)
+        public GSPaymentMethodScreen(decimal total_amount, int rowIndex, string jSONItems)
         {
 
             InitializeComponent();
             InitializeDatabaseConnection();
             this.total_amount = total_amount;
             this.rowIndex = rowIndex;
+            this.JSONItems = jSONItems;
             SetFields(this.total_amount);
             InitializeLabel(label1, (Image)resources.GetObject("label1.Image"), 45, 60);
             foreach (Control control in panel2.Controls)
@@ -31,7 +33,7 @@ namespace POS
                     textBox.Click += TextBox_Click;
                 }
             }
-
+            JSONItems = jSONItems;
         }
 
         private void TextBox_Click(object? sender, EventArgs e)
@@ -82,43 +84,89 @@ namespace POS
             //    return;
             //}
 
-
-            try
+            if (rowIndex != -2)
             {
-                connection.Open();
-                string query = "UPDATE bill_list SET status=@Status,discount=@Discount,net_total_amount=@NetTotal,cash_received=@CashReceived,change=@Change WHERE bill_id=@Id";
-                using (SqlCommand command = new SqlCommand(query, connection))
+
+                try
                 {
+                    connection.Open();
+                    string query = "UPDATE bill_list SET status=@Status,discount=@Discount,net_total_amount=@NetTotal,cash_received=@CashReceived,change=@Change WHERE bill_id=@Id";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        string disc = Discount_TextBox.Text;
+                        if (disc == "")
+                        {
+                            disc = "0";
+                        }
+                        command.Parameters.AddWithValue("@Status", "Paid"); 
+                        command.Parameters.AddWithValue("@Discount", Convert.ToDecimal(disc));
+                        command.Parameters.AddWithValue("@NetTotal", Convert.ToDecimal(NetAmount_TextBox.Text));
+                        command.Parameters.AddWithValue("@CashReceived", Convert.ToDecimal(CashReceived_TextBox.Text));
+                        command.Parameters.AddWithValue("@Change", Convert.ToDecimal(Change_TextBox.Text));
+                        command.Parameters.AddWithValue("@Id", rowIndex);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            statusUpdated = "Updated";
+                            this.Close();
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Message : " + ex.Message);
+
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+            else
+            {
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("insert into bill_list(items,date,type,status,total_amount,discount,net_total_amount,cash_received,change) values(@Items,@Date,@Type,@Status,@Total,@Discount,@NetTotal,@CashReceived,@Change)", connection);
                     string disc = Discount_TextBox.Text;
                     if (disc == "")
                     {
                         disc = "0";
                     }
-                    command.Parameters.AddWithValue("@Status", "Paid"); 
+                    command.Parameters.AddWithValue("@Items", JSONItems);
+                    command.Parameters.AddWithValue("@Date", DateTime.Now);
+                    command.Parameters.AddWithValue("@Type", "Take Away");
+                    command.Parameters.AddWithValue("@Status", "Paid");
+                    command.Parameters.AddWithValue("@Total", total_amount);
                     command.Parameters.AddWithValue("@Discount", Convert.ToDecimal(disc));
                     command.Parameters.AddWithValue("@NetTotal", Convert.ToDecimal(NetAmount_TextBox.Text));
                     command.Parameters.AddWithValue("@CashReceived", Convert.ToDecimal(CashReceived_TextBox.Text));
                     command.Parameters.AddWithValue("@Change", Convert.ToDecimal(Change_TextBox.Text));
-                    command.Parameters.AddWithValue("@Id", rowIndex);
-
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         statusUpdated = "Updated";
                         this.Close();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("There was a problem saving");
                     }
                 }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error Message : " + ex.Message);
-
-            }
-            finally
-            {
-                connection.Close();
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
 

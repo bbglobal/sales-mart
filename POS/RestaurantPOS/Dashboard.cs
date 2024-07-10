@@ -2061,12 +2061,13 @@ namespace POS
                 try
                 {
                     connection.Open();
-                    SqlCommand command = new SqlCommand("insert into bill_list(items,date,type,status,total_amount) values(@Items,@Date,@Type,@Status,@Total)", connection);
+                    SqlCommand command = new SqlCommand("insert into bill_list(items,date,type,status,total_amount,net_total_amount) values(@Items,@Date,@Type,@Status,@Total,@NetTotal)", connection);
                     command.Parameters.AddWithValue("@Items", json);
                     command.Parameters.AddWithValue("@Date", DateTime.Now);
                     command.Parameters.AddWithValue("@Type", "Take Away");
                     command.Parameters.AddWithValue("@Status", "In Complete");
                     command.Parameters.AddWithValue("@Total", total_amount);
+                    command.Parameters.AddWithValue("@NetTotal", total_amount);
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
@@ -2315,7 +2316,6 @@ namespace POS
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        NewScreen();
                     }
                 }
 
@@ -2329,6 +2329,8 @@ namespace POS
             {
                 connection.Close();
             }
+            UpdateIngredientsInventory();
+            NewScreen();
         }
 
         private void CheckOutButton_Click(object sender, EventArgs e)
@@ -2344,6 +2346,7 @@ namespace POS
             }
             if (updateStatus == "Updated")
             {
+                UpdateIngredientsInventory();
                 NewScreen();
             }
         }
@@ -2593,6 +2596,7 @@ namespace POS
 
 
         #region Notfication Logic (if necessary)
+
         //private void button2_Click_1(object sender, EventArgs e)
         //{
         //    ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
@@ -2606,7 +2610,60 @@ namespace POS
         //    notifyIcon1.Visible = false;
 
         //}
+
         #endregion
+
+
+        #region Function for Inventory Reduction Acc. To Sales
+
+        public void UpdateIngredientsInventory()
+        {
+
+            try
+            {
+                connection.Open();
+                List<string> products = JsonConvert.DeserializeObject<List<string>>(JSONItems);
+                foreach (var item in products)
+                {
+                    string[] pArray = item.Split("-");
+                    string query = $"select ingredients from product_ingredients WHERE product='{pArray[0]}'";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string ing = reader.GetString(0);
+                            reader.Close();
+                            SqlCommand cmd = new SqlCommand("UpdateMyIngredients", connection);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@ingredientString", ing);
+                            cmd.Parameters.AddWithValue("@productqty", Convert.ToDecimal(pArray[1]));
+                            cmd.ExecuteNonQuery();
+
+                        }
+
+                    }
+
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Message : " + ex.Message);
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+
+
+        #endregion
+
 
 
         private void ReportsPanel_VisibleChanged(object sender, EventArgs e)
@@ -2649,7 +2706,56 @@ namespace POS
             }
         }
 
-        
+        private void updateDashboardValues()
+        {
+            try
+            {
+                connection.Open();
+                decimal sales;
+                decimal discount;
+                command = new SqlCommand("SELECT SUM((discount/100) * total_amount) discount,SUM(net_total_amount) net_total FROM bill_list", connection);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        sales = (decimal)reader["net_total"];
+                        discount = (decimal)reader["discount"];
+                        T_Sale_Amount_label.Text = sales.ToString() + "$";
+                        T_Disc_Amount_label.Text = discount.ToString() + "$";
+                        reader.Close();
+                    }
+                }
+                SqlCommand cmd = new SqlCommand("", connection);
+                using (SqlDataReader rdr = cmd.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        sales = (decimal)rdr["net_total"];
+                        discount = (decimal)rdr["discount"];
+                        T_Sale_Amount_label.Text = sales.ToString() + "$";
+                        T_Disc_Amount_label.Text = discount.ToString() + "$";
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+
+        }
+
+
+
+
     }
 }
 
