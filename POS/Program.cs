@@ -12,7 +12,7 @@ namespace POS
             // see https://aka.ms/applicationconfiguration.
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new Dashboard());
+            Application.Run(new HotelDashboard());
         }
     }
 }

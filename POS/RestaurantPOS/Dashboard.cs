@@ -2664,8 +2664,6 @@ namespace POS
 
         #endregion
 
-
-
         private void ReportsPanel_VisibleChanged(object sender, EventArgs e)
         {
             if (ReportsPanel.Visible)
@@ -2706,88 +2704,23 @@ namespace POS
             }
         }
 
-        private async void updateDashboardValues()
+        
+        private async Task updateDashboardValues()
         {
-            //try
-            //{
-            //    connection.Open();
-            //    decimal sales;
-            //    decimal discount;
-            //    decimal totalCost = 0;
-            //    command = new SqlCommand("SELECT SUM((discount/100) * total_amount) discount,SUM(net_total_amount) net_total FROM bill_list", connection);
-
-            //    using (SqlDataReader reader = command.ExecuteReader())
-            //    {
-            //        while (reader.Read())
-            //        {
-            //            sales = (decimal)reader["net_total"];
-            //            discount = (decimal)reader["discount"];
-            //            T_Sale_Amount_label.Text = sales.ToString() + "$";
-            //            T_Disc_Amount_label.Text = discount.ToString() + "$";
-
-            //        }
-            //        reader.Close();
-            //    }
-            //    SqlCommand cmd = new SqlCommand($"select items from bill_list where status='Paid'", connection);
-            //    using (SqlDataReader rdr = cmd.ExecuteReader())
-            //    {
-            //        while (rdr.Read())
-            //        {
-            //            string json = rdr["items"].ToString();
-            //            List<string> JSONLIST = JsonConvert.DeserializeObject<List<string>>(json);
-            //            foreach (var item in JSONLIST)
-            //            {
-            //                try
-            //                {
-
-            //                    SqlCommand cmd2 = new SqlCommand("ParseJsonData", connection);
-            //                    cmd2.CommandType = CommandType.StoredProcedure;
-
-            //                    // Add parameters
-            //                    cmd2.Parameters.Add("@jsonData", SqlDbType.NVarChar, -1).Value = item;
-            //                    cmd2.Parameters.Add("@TOTAL", SqlDbType.Decimal).Direction = ParameterDirection.Output;
-
-            //                    cmd2.ExecuteNonQuery();
-
-            //                    // Retrieve the output parameter value
-            //                    totalCost += Convert.ToDecimal(cmd2.Parameters["@TOTAL"].Value);
-
-            //                }
-            //                catch (Exception ex)
-            //                {
-            //                    MessageBox.Show(ex.Message);
-            //                }
-
-            //            }
-
-
-            //        }
-            //        MessageBox.Show(totalCost.ToString());
-            //    }
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-            //finally
-            //{
-            //    connection.Close();
-            //}
-
             try
             {
-                connection.Open();
+                await connection.OpenAsync(); // Open connection asynchronously
+
                 decimal sales = 0;
                 decimal discount = 0;
                 decimal totalCost = 0;
 
                 // Retrieve sales and discount information
-                SqlCommand command = new SqlCommand("SELECT SUM((discount/100) * total_amount) AS discount, SUM(net_total_amount) AS net_total FROM bill_list", connection);
-
-                using (SqlDataReader reader = command.ExecuteReader())
+                string querySalesDiscount = "SELECT SUM((discount/100) * total_amount) AS discount, SUM(net_total_amount) AS net_total FROM bill_list";
+                using (SqlCommand command = new SqlCommand(querySalesDiscount, connection))
+                using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
-                    if (reader.Read())
+                    if (await reader.ReadAsync())
                     {
                         sales = (decimal)reader["net_total"];
                         discount = (decimal)reader["discount"];
@@ -2799,51 +2732,48 @@ namespace POS
                 T_Disc_Amount_label.Text = discount.ToString("C");
 
                 // Process JSON data from bill_list items
-                SqlCommand cmd = new SqlCommand("SELECT items FROM bill_list WHERE status = 'Paid'", connection);
-
-                SqlDataReader rdr = cmd.ExecuteReader();
-                DataTable dt = new DataTable();
-                if (rdr.Read())
+                string queryJsonData = "SELECT items FROM bill_list WHERE status = 'Paid'";
+                using (SqlCommand cmd = new SqlCommand(queryJsonData, connection))
+                using (SqlDataReader rdr = await cmd.ExecuteReaderAsync())
                 {
-                    dt.Load(rdr);
-                }
-                foreach (DataRow row in dt.Rows)
-                {
-                    string json = row["items"].ToString();
-                    List<string> JSONLIST = JsonConvert.DeserializeObject<List<string>>(json);
-
-                    foreach (var item in JSONLIST)
+                    DataTable dt = new DataTable();
+                    if (await rdr.ReadAsync())
                     {
-                        try
+                        dt.Load(rdr);
+                    }
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        string json = row["items"].ToString();
+                        List<string> JSONLIST = JsonConvert.DeserializeObject<List<string>>(json);
+
+                        foreach (var item in JSONLIST)
                         {
-                            // Close the previous reader before executing cmd2
-                            //if (rdr != null && !rdr.IsClosed)
-                            //    rdr.Close();
+                            try
+                            {
+                                SqlCommand cmd2 = new SqlCommand("ParseJsonData", connection);
+                                cmd2.CommandType = CommandType.StoredProcedure;
 
-                            SqlCommand cmd2 = new SqlCommand("ParseJsonData", connection);
-                            cmd2.CommandType = CommandType.StoredProcedure;
+                                // Add parameters
+                                cmd2.Parameters.Add("@jsonData", SqlDbType.NVarChar, -1).Value = item;
+                                cmd2.Parameters.Add("@TOTAL", SqlDbType.Decimal).Direction = ParameterDirection.Output;
 
-                            // Add parameters
-                            cmd2.Parameters.Add("@jsonData", SqlDbType.NVarChar, -1).Value = item;
-                            cmd2.Parameters.Add("@TOTAL", SqlDbType.Decimal).Direction = ParameterDirection.Output;
+                                await cmd2.ExecuteNonQueryAsync();
 
-                            cmd2.ExecuteNonQuery();
-
-                            // Retrieve the output parameter value
-                            totalCost += Convert.ToDecimal(cmd2.Parameters["@TOTAL"].Value);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error processing item: " + ex.Message);
+                                // Retrieve the output parameter value
+                                totalCost += Convert.ToDecimal(cmd2.Parameters["@TOTAL"].Value);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Error processing item: " + ex.Message);
+                            }
                         }
                     }
                 }
 
-
-
-
                 // Display total cost after processing all items
                 T_Cost_Amount_label.Text = totalCost.ToString("C"); // Display as currency format
+                T_Profit_Amount_label.Text = (sales - totalCost).ToString("C"); // Display as currency format
             }
             catch (Exception ex)
             {
@@ -2853,7 +2783,6 @@ namespace POS
             {
                 connection.Close();
             }
-
         }
 
         private void ContentContainer_panel_VisibleChanged(object sender, EventArgs e)

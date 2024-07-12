@@ -605,7 +605,7 @@
             T_Pay_Amount_label.Name = "T_Pay_Amount_label";
             T_Pay_Amount_label.Size = new Size(225, 30);
             T_Pay_Amount_label.TabIndex = 2;
-            T_Pay_Amount_label.Text = "47.00$";
+            T_Pay_Amount_label.Text = "$0";
             T_Pay_Amount_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // TPay_line
@@ -657,7 +657,7 @@
             T_Tax_Amout_label.Name = "T_Tax_Amout_label";
             T_Tax_Amout_label.Size = new Size(225, 30);
             T_Tax_Amout_label.TabIndex = 3;
-            T_Tax_Amout_label.Text = "47.00$";
+            T_Tax_Amout_label.Text = "$0";
             T_Tax_Amout_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // TT_line
@@ -730,7 +730,7 @@
             T_Profit_Amount_label.Name = "T_Profit_Amount_label";
             T_Profit_Amount_label.Size = new Size(225, 30);
             T_Profit_Amount_label.TabIndex = 4;
-            T_Profit_Amount_label.Text = "47.00$";
+            T_Profit_Amount_label.Text = "$0";
             T_Profit_Amount_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // TP_line
@@ -781,7 +781,7 @@
             T_Disc_Amount_label.Name = "T_Disc_Amount_label";
             T_Disc_Amount_label.Size = new Size(225, 30);
             T_Disc_Amount_label.TabIndex = 5;
-            T_Disc_Amount_label.Text = "47.00$";
+            T_Disc_Amount_label.Text = "$0";
             T_Disc_Amount_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // TD_line
@@ -834,7 +834,7 @@
             T_Cost_Amount_label.Name = "T_Cost_Amount_label";
             T_Cost_Amount_label.Size = new Size(225, 30);
             T_Cost_Amount_label.TabIndex = 6;
-            T_Cost_Amount_label.Text = "47.00$";
+            T_Cost_Amount_label.Text = "$0";
             T_Cost_Amount_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // TC_line
@@ -886,7 +886,7 @@
             T_Sale_Amount_label.Name = "T_Sale_Amount_label";
             T_Sale_Amount_label.Size = new Size(225, 30);
             T_Sale_Amount_label.TabIndex = 7;
-            T_Sale_Amount_label.Text = "47.00$";
+            T_Sale_Amount_label.Text = "$0";
             T_Sale_Amount_label.TextAlign = ContentAlignment.TopCenter;
             // 
             // TS_line
