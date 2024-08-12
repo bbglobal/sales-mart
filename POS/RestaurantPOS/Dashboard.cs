@@ -1759,12 +1759,14 @@ namespace POS
                                 item.Cells["quantity"].Value = int.Parse(item.Cells["quantity"].Value.ToString()) + 1;
                                 item.Cells["total_amount"].Value = decimal.Parse(item.Cells["quantity"].Value.ToString()) *
                                                                    decimal.Parse(item.Cells["product_price"].Value.ToString());
+                                setTotalAmount();
                                 return;
                             }
 
                         }
 
                         POSProductsDataGrid.Rows.Add(new object[] { 0, wdg.id, wdg.product_name, 1, wdg.product_price, wdg.product_price });
+                        setTotalAmount();
                     }
                     else
                     {
@@ -1788,7 +1790,28 @@ namespace POS
             //    POSIngredientScreen IngForm = new POSIngredientScreen(wdg.product_name,wdg.product_category,(wdg.product_price).ToString(),wdg.product_image);
             //    IngForm.Show();
             //};
+
+
         }
+        private void setTotalAmount()
+        {
+            decimal total = 0;
+            if (POSProductsDataGrid.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow item in POSProductsDataGrid.Rows)
+                {
+                    total = total + (Convert.ToDecimal(item.Cells["product_price"].Value) * Convert.ToDecimal(item.Cells["quantity"].Value)) ;
+                }
+                TotalAmountLabel.Text = "Total Amount : " + total;
+                TotalAmountLabel.Visible = true;
+            }
+            else
+            {
+                TotalAmountLabel.Visible = false;
+            }
+
+        }
+
 
         #endregion
 
@@ -2263,6 +2286,7 @@ namespace POS
         {
             POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
             POSProductsDataGrid.AllowUserToDeleteRows = false;
+            setTotalAmount();
         }
 
 
@@ -2289,6 +2313,7 @@ namespace POS
                 else
                 {
                     POSProductsDataGrid.Rows.RemoveAt(e.RowIndex);
+                    setTotalAmount();
                 }
 
             }
@@ -2772,8 +2797,8 @@ namespace POS
                 }
 
                 // Display total cost after processing all items
-                T_Cost_Amount_label.Text = totalCost.ToString("C"); // Display as currency format
-                T_Profit_Amount_label.Text = (sales - totalCost).ToString("C"); // Display as currency format
+                T_Cost_Amount_label.Text = totalCost.ToString("C");                 // Display as currency format
+                T_Profit_Amount_label.Text = (sales - totalCost).ToString("C");     // Display as currency format
             }
             catch (Exception ex)
             {

@@ -2030,7 +2030,6 @@ namespace POS
             }
 
         }
-
         private void AddPOSProducts(int pid, decimal price, string category, string name, Image image)
         {
             var w = new ProductCard()
@@ -2064,6 +2063,7 @@ namespace POS
                         }
 
                         POSProductsDataGrid.Rows.Add(new object[] { 0, wdg.id, wdg.product_name, 1, wdg.product_price, wdg.product_price });
+
                     }
                     else
                     {
@@ -2088,6 +2088,10 @@ namespace POS
             //    IngForm.Show();
             //};
         }
+
+
+
+
 
         #endregion
 
@@ -2562,6 +2566,7 @@ namespace POS
         {
             POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
             POSProductsDataGrid.AllowUserToDeleteRows = false;
+
         }
 
 
@@ -2588,6 +2593,7 @@ namespace POS
                 else
                 {
                     POSProductsDataGrid.Rows.RemoveAt(e.RowIndex);
+
                 }
 
             }
@@ -3486,7 +3492,7 @@ namespace POS
             }
         }
 
-        private async Task setRoomTypeComboBox() 
+        private async Task setRoomTypeComboBox()
         {
             try
             {
@@ -3523,6 +3529,38 @@ namespace POS
                 }
             }
         }
+
+        private void GuestInfoListTabButton_Click(object sender, EventArgs e)
+        {
+            if (GuestInfoListTabButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                GuestInfoListTabButton.BackColor = Color.FromArgb(37, 150, 190);
+                GuestInfoListTabButton.ForeColor = Color.White;
+                GuestInfoTabButton.BackColor = Color.Transparent;
+                GuestInfoTabButton.ForeColor = SystemColors.GrayText;
+            }
+            if (GuestInfoListMiniPanel.Visible == false)
+            {
+                GuestInfoListMiniPanel.Visible = true;
+            }
+        }
+
+        private void GuestInfoTabButton_Click(object sender, EventArgs e)
+        {
+            if (GuestInfoTabButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                GuestInfoTabButton.BackColor = Color.FromArgb(37, 150, 190);
+                GuestInfoTabButton.ForeColor = Color.White;
+                GuestInfoListTabButton.BackColor = Color.Transparent;
+                GuestInfoListTabButton.ForeColor = SystemColors.GrayText;
+            }
+            if (GuestInfoListMiniPanel.Visible == true)
+            {
+                GuestInfoListMiniPanel.Visible = false;
+            }
+        }
+
+
     }
 }
 

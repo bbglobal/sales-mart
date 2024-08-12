@@ -30,18 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
@@ -50,6 +38,18 @@
             DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             Main_panel = new Panel();
             Sidebar_panel = new Panel();
             Menu_Ingredients_label = new Label();
@@ -67,6 +67,43 @@
             CurrentUser_label = new Label();
             Current_ScreenName_label = new Label();
             Splitter_label = new Label();
+            IngredientsPanel = new Panel();
+            Ingredients_DataGrid = new DataGridView();
+            Ingredients_tableLayoutPanel = new TableLayoutPanel();
+            IngredientsAddButton = new Button();
+            comboBox4 = new ComboBox();
+            panel9 = new Panel();
+            Ingredients_SearchTextBox = new TextBox();
+            button3 = new Button();
+            TablesPanel = new Panel();
+            TablesDataGrid = new DataGridView();
+            Tables_tableLayoutPanel = new TableLayoutPanel();
+            TablesAddButton = new Button();
+            comboBox3 = new ComboBox();
+            panel5 = new Panel();
+            TablesSearchTextBox = new TextBox();
+            button5 = new Button();
+            StaffPanel = new Panel();
+            StaffCategoryTab = new Button();
+            StaffTab = new Button();
+            StaffDataGrid = new DataGridView();
+            StaffButtonsPanel = new TableLayoutPanel();
+            AddStaffButton = new Button();
+            comboBox1 = new ComboBox();
+            panel3 = new Panel();
+            SearchStaff_TextBox = new TextBox();
+            SearchStaffIcon = new Button();
+            ProductPanel = new Panel();
+            IngrediantsTabButton = new Button();
+            ProductsCategoryTabButton = new Button();
+            ProductsTabButton = new Button();
+            ProductsDataGrid = new DataGridView();
+            ProductButtonsLayout = new TableLayoutPanel();
+            AddProductsButton = new Button();
+            comboBox2 = new ComboBox();
+            panel1 = new Panel();
+            textBox1 = new TextBox();
+            search_button = new Button();
             ContentContainer_panel = new Panel();
             Month_ComboBox = new ComboBox();
             PrintButton = new Button();
@@ -143,47 +180,26 @@
             MenuListButton = new Button();
             KitchenPanel = new Panel();
             KitchenFlowLayoutPanel = new FlowLayoutPanel();
-            IngredientsPanel = new Panel();
-            Ingredients_DataGrid = new DataGridView();
-            Ingredients_tableLayoutPanel = new TableLayoutPanel();
-            IngredientsAddButton = new Button();
-            comboBox4 = new ComboBox();
-            panel9 = new Panel();
-            Ingredients_SearchTextBox = new TextBox();
-            button3 = new Button();
-            TablesPanel = new Panel();
-            TablesDataGrid = new DataGridView();
-            Tables_tableLayoutPanel = new TableLayoutPanel();
-            TablesAddButton = new Button();
-            comboBox3 = new ComboBox();
-            panel5 = new Panel();
-            TablesSearchTextBox = new TextBox();
-            button5 = new Button();
-            StaffPanel = new Panel();
-            StaffCategoryTab = new Button();
-            StaffTab = new Button();
-            StaffDataGrid = new DataGridView();
-            StaffButtonsPanel = new TableLayoutPanel();
-            AddStaffButton = new Button();
-            comboBox1 = new ComboBox();
-            panel3 = new Panel();
-            SearchStaff_TextBox = new TextBox();
-            SearchStaffIcon = new Button();
-            ProductPanel = new Panel();
-            IngrediantsTabButton = new Button();
-            ProductsCategoryTabButton = new Button();
-            ProductsTabButton = new Button();
-            ProductsDataGrid = new DataGridView();
-            ProductButtonsLayout = new TableLayoutPanel();
-            AddProductsButton = new Button();
-            comboBox2 = new ComboBox();
-            panel1 = new Panel();
-            textBox1 = new TextBox();
-            search_button = new Button();
             notifyIcon1 = new NotifyIcon(components);
             Main_panel.SuspendLayout();
             Sidebar_panel.SuspendLayout();
             ScreenContainer_panel.SuspendLayout();
+            IngredientsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Ingredients_DataGrid).BeginInit();
+            Ingredients_tableLayoutPanel.SuspendLayout();
+            panel9.SuspendLayout();
+            TablesPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)TablesDataGrid).BeginInit();
+            Tables_tableLayoutPanel.SuspendLayout();
+            panel5.SuspendLayout();
+            StaffPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)StaffDataGrid).BeginInit();
+            StaffButtonsPanel.SuspendLayout();
+            panel3.SuspendLayout();
+            ProductPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ProductsDataGrid).BeginInit();
+            ProductButtonsLayout.SuspendLayout();
+            panel1.SuspendLayout();
             ContentContainer_panel.SuspendLayout();
             ChartContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
@@ -207,22 +223,6 @@
             panel6.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             KitchenPanel.SuspendLayout();
-            IngredientsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)Ingredients_DataGrid).BeginInit();
-            Ingredients_tableLayoutPanel.SuspendLayout();
-            panel9.SuspendLayout();
-            TablesPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)TablesDataGrid).BeginInit();
-            Tables_tableLayoutPanel.SuspendLayout();
-            panel5.SuspendLayout();
-            StaffPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)StaffDataGrid).BeginInit();
-            StaffButtonsPanel.SuspendLayout();
-            panel3.SuspendLayout();
-            ProductPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ProductsDataGrid).BeginInit();
-            ProductButtonsLayout.SuspendLayout();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // Main_panel
@@ -437,14 +437,14 @@
             ScreenContainer_panel.Controls.Add(CurrentUser_label);
             ScreenContainer_panel.Controls.Add(Current_ScreenName_label);
             ScreenContainer_panel.Controls.Add(Splitter_label);
+            ScreenContainer_panel.Controls.Add(StaffPanel);
+            ScreenContainer_panel.Controls.Add(ProductPanel);
             ScreenContainer_panel.Controls.Add(ContentContainer_panel);
             ScreenContainer_panel.Controls.Add(POSPanel);
             ScreenContainer_panel.Controls.Add(ReportsPanel);
             ScreenContainer_panel.Controls.Add(KitchenPanel);
             ScreenContainer_panel.Controls.Add(IngredientsPanel);
             ScreenContainer_panel.Controls.Add(TablesPanel);
-            ScreenContainer_panel.Controls.Add(StaffPanel);
-            ScreenContainer_panel.Controls.Add(ProductPanel);
             ScreenContainer_panel.Location = new Point(264, 3);
             ScreenContainer_panel.Name = "ScreenContainer_panel";
             ScreenContainer_panel.Size = new Size(1020, 750);
@@ -486,6 +486,671 @@
             Splitter_label.Name = "Splitter_label";
             Splitter_label.Size = new Size(1017, 1);
             Splitter_label.TabIndex = 5;
+            // 
+            // IngredientsPanel
+            // 
+            IngredientsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            IngredientsPanel.BackColor = Color.White;
+            IngredientsPanel.Controls.Add(Ingredients_DataGrid);
+            IngredientsPanel.Controls.Add(Ingredients_tableLayoutPanel);
+            IngredientsPanel.Location = new Point(21, 95);
+            IngredientsPanel.Name = "IngredientsPanel";
+            IngredientsPanel.Size = new Size(978, 639);
+            IngredientsPanel.TabIndex = 12;
+            IngredientsPanel.Visible = false;
+            // 
+            // Ingredients_DataGrid
+            // 
+            Ingredients_DataGrid.AllowUserToAddRows = false;
+            Ingredients_DataGrid.AllowUserToDeleteRows = false;
+            Ingredients_DataGrid.AllowUserToResizeColumns = false;
+            Ingredients_DataGrid.AllowUserToResizeRows = false;
+            Ingredients_DataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Ingredients_DataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Ingredients_DataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            Ingredients_DataGrid.BackgroundColor = Color.White;
+            Ingredients_DataGrid.BorderStyle = BorderStyle.None;
+            Ingredients_DataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            Ingredients_DataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            Ingredients_DataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            Ingredients_DataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.White;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle12.ForeColor = Color.Black;
+            dataGridViewCellStyle12.SelectionBackColor = Color.White;
+            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            Ingredients_DataGrid.DefaultCellStyle = dataGridViewCellStyle12;
+            Ingredients_DataGrid.EnableHeadersVisualStyles = false;
+            Ingredients_DataGrid.Location = new Point(3, 121);
+            Ingredients_DataGrid.Margin = new Padding(0);
+            Ingredients_DataGrid.Name = "Ingredients_DataGrid";
+            Ingredients_DataGrid.ReadOnly = true;
+            Ingredients_DataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = SystemColors.Control;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle13.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle13.Padding = new Padding(3);
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            Ingredients_DataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            Ingredients_DataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle14.Padding = new Padding(3);
+            Ingredients_DataGrid.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            Ingredients_DataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            Ingredients_DataGrid.Size = new Size(970, 508);
+            Ingredients_DataGrid.TabIndex = 1;
+            Ingredients_DataGrid.CellContentClick += Ingredients_DataGrid_CellContentClick;
+            Ingredients_DataGrid.VisibleChanged += Ingredients_DataGrid_VisibleChanged;
+            // 
+            // Ingredients_tableLayoutPanel
+            // 
+            Ingredients_tableLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            Ingredients_tableLayoutPanel.ColumnCount = 4;
+            Ingredients_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            Ingredients_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            Ingredients_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            Ingredients_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            Ingredients_tableLayoutPanel.Controls.Add(IngredientsAddButton, 0, 0);
+            Ingredients_tableLayoutPanel.Controls.Add(comboBox4, 2, 0);
+            Ingredients_tableLayoutPanel.Controls.Add(panel9, 3, 0);
+            Ingredients_tableLayoutPanel.Location = new Point(3, 37);
+            Ingredients_tableLayoutPanel.Name = "Ingredients_tableLayoutPanel";
+            Ingredients_tableLayoutPanel.RowCount = 1;
+            Ingredients_tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            Ingredients_tableLayoutPanel.Size = new Size(970, 80);
+            Ingredients_tableLayoutPanel.TabIndex = 0;
+            // 
+            // IngredientsAddButton
+            // 
+            IngredientsAddButton.BackColor = Color.FromArgb(37, 150, 190);
+            IngredientsAddButton.FlatAppearance.BorderSize = 0;
+            IngredientsAddButton.FlatStyle = FlatStyle.Flat;
+            IngredientsAddButton.Image = (Image)resources.GetObject("IngredientsAddButton.Image");
+            IngredientsAddButton.Location = new Point(15, 15);
+            IngredientsAddButton.Margin = new Padding(15, 15, 3, 3);
+            IngredientsAddButton.Name = "IngredientsAddButton";
+            IngredientsAddButton.Size = new Size(40, 40);
+            IngredientsAddButton.TabIndex = 0;
+            IngredientsAddButton.UseVisualStyleBackColor = false;
+            IngredientsAddButton.Click += IngredientsAddButton_Click;
+            // 
+            // comboBox4
+            // 
+            comboBox4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox4.Location = new Point(597, 25);
+            comboBox4.Margin = new Padding(15, 25, 3, 3);
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(79, 29);
+            comboBox4.TabIndex = 1;
+            comboBox4.Text = "100";
+            comboBox4.Visible = false;
+            // 
+            // panel9
+            // 
+            panel9.Controls.Add(Ingredients_SearchTextBox);
+            panel9.Controls.Add(button3);
+            panel9.Location = new Point(679, 0);
+            panel9.Margin = new Padding(0);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(291, 80);
+            panel9.TabIndex = 4;
+            // 
+            // Ingredients_SearchTextBox
+            // 
+            Ingredients_SearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Ingredients_SearchTextBox.Location = new Point(33, 25);
+            Ingredients_SearchTextBox.Multiline = true;
+            Ingredients_SearchTextBox.Name = "Ingredients_SearchTextBox";
+            Ingredients_SearchTextBox.PlaceholderText = "Search..";
+            Ingredients_SearchTextBox.Size = new Size(150, 29);
+            Ingredients_SearchTextBox.TabIndex = 0;
+            Ingredients_SearchTextBox.WordWrap = false;
+            Ingredients_SearchTextBox.TextChanged += Ingredients_SearchTextBox_TextChanged;
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.White;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Image = (Image)resources.GetObject("button3.Image");
+            button3.Location = new Point(5, 25);
+            button3.Name = "button3";
+            button3.Size = new Size(29, 29);
+            button3.TabIndex = 3;
+            button3.UseVisualStyleBackColor = false;
+            // 
+            // TablesPanel
+            // 
+            TablesPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            TablesPanel.BackColor = Color.White;
+            TablesPanel.Controls.Add(TablesDataGrid);
+            TablesPanel.Controls.Add(Tables_tableLayoutPanel);
+            TablesPanel.Location = new Point(21, 95);
+            TablesPanel.Name = "TablesPanel";
+            TablesPanel.Size = new Size(978, 639);
+            TablesPanel.TabIndex = 9;
+            TablesPanel.Visible = false;
+            TablesPanel.VisibleChanged += TablesPanel_VisibleChanged;
+            // 
+            // TablesDataGrid
+            // 
+            TablesDataGrid.AllowUserToAddRows = false;
+            TablesDataGrid.AllowUserToDeleteRows = false;
+            TablesDataGrid.AllowUserToResizeColumns = false;
+            TablesDataGrid.AllowUserToResizeRows = false;
+            TablesDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            TablesDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            TablesDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            TablesDataGrid.BackgroundColor = Color.White;
+            TablesDataGrid.BorderStyle = BorderStyle.None;
+            TablesDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            TablesDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle15.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
+            TablesDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            TablesDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = Color.White;
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle16.ForeColor = Color.Black;
+            dataGridViewCellStyle16.SelectionBackColor = Color.White;
+            dataGridViewCellStyle16.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
+            TablesDataGrid.DefaultCellStyle = dataGridViewCellStyle16;
+            TablesDataGrid.EnableHeadersVisualStyles = false;
+            TablesDataGrid.Location = new Point(3, 121);
+            TablesDataGrid.Margin = new Padding(0);
+            TablesDataGrid.Name = "TablesDataGrid";
+            TablesDataGrid.ReadOnly = true;
+            TablesDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = SystemColors.Control;
+            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle17.Padding = new Padding(3);
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            TablesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            TablesDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle18.Padding = new Padding(3);
+            TablesDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            TablesDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            TablesDataGrid.Size = new Size(970, 508);
+            TablesDataGrid.TabIndex = 1;
+            TablesDataGrid.CellContentClick += TablesDataGrid_CellContentClick;
+            // 
+            // Tables_tableLayoutPanel
+            // 
+            Tables_tableLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            Tables_tableLayoutPanel.ColumnCount = 4;
+            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            Tables_tableLayoutPanel.Controls.Add(TablesAddButton, 0, 0);
+            Tables_tableLayoutPanel.Controls.Add(comboBox3, 2, 0);
+            Tables_tableLayoutPanel.Controls.Add(panel5, 3, 0);
+            Tables_tableLayoutPanel.Location = new Point(3, 37);
+            Tables_tableLayoutPanel.Name = "Tables_tableLayoutPanel";
+            Tables_tableLayoutPanel.RowCount = 1;
+            Tables_tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            Tables_tableLayoutPanel.Size = new Size(970, 80);
+            Tables_tableLayoutPanel.TabIndex = 0;
+            // 
+            // TablesAddButton
+            // 
+            TablesAddButton.BackColor = Color.FromArgb(37, 150, 190);
+            TablesAddButton.FlatAppearance.BorderSize = 0;
+            TablesAddButton.FlatStyle = FlatStyle.Flat;
+            TablesAddButton.Image = (Image)resources.GetObject("TablesAddButton.Image");
+            TablesAddButton.Location = new Point(15, 15);
+            TablesAddButton.Margin = new Padding(15, 15, 3, 3);
+            TablesAddButton.Name = "TablesAddButton";
+            TablesAddButton.Size = new Size(40, 40);
+            TablesAddButton.TabIndex = 0;
+            TablesAddButton.UseVisualStyleBackColor = false;
+            TablesAddButton.Click += TablesAddButton_Click;
+            // 
+            // comboBox3
+            // 
+            comboBox3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox3.Location = new Point(597, 25);
+            comboBox3.Margin = new Padding(15, 25, 3, 3);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(79, 29);
+            comboBox3.TabIndex = 1;
+            comboBox3.Text = "100";
+            comboBox3.Visible = false;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(TablesSearchTextBox);
+            panel5.Controls.Add(button5);
+            panel5.Location = new Point(679, 0);
+            panel5.Margin = new Padding(0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(291, 80);
+            panel5.TabIndex = 4;
+            // 
+            // TablesSearchTextBox
+            // 
+            TablesSearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TablesSearchTextBox.Location = new Point(33, 25);
+            TablesSearchTextBox.Multiline = true;
+            TablesSearchTextBox.Name = "TablesSearchTextBox";
+            TablesSearchTextBox.PlaceholderText = "Search..";
+            TablesSearchTextBox.Size = new Size(150, 29);
+            TablesSearchTextBox.TabIndex = 0;
+            TablesSearchTextBox.WordWrap = false;
+            TablesSearchTextBox.TextChanged += TablesSearchTextBox_TextChanged;
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.White;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Image = (Image)resources.GetObject("button5.Image");
+            button5.Location = new Point(5, 25);
+            button5.Name = "button5";
+            button5.Size = new Size(29, 29);
+            button5.TabIndex = 3;
+            button5.UseVisualStyleBackColor = false;
+            // 
+            // StaffPanel
+            // 
+            StaffPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            StaffPanel.BackColor = Color.White;
+            StaffPanel.Controls.Add(StaffCategoryTab);
+            StaffPanel.Controls.Add(StaffTab);
+            StaffPanel.Controls.Add(StaffDataGrid);
+            StaffPanel.Controls.Add(StaffButtonsPanel);
+            StaffPanel.Location = new Point(21, 95);
+            StaffPanel.Name = "StaffPanel";
+            StaffPanel.Size = new Size(978, 639);
+            StaffPanel.TabIndex = 7;
+            StaffPanel.Visible = false;
+            StaffPanel.VisibleChanged += StaffPanel_VisibleChanged;
+            // 
+            // StaffCategoryTab
+            // 
+            StaffCategoryTab.BackColor = Color.Transparent;
+            StaffCategoryTab.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            StaffCategoryTab.FlatAppearance.BorderSize = 2;
+            StaffCategoryTab.FlatStyle = FlatStyle.Flat;
+            StaffCategoryTab.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            StaffCategoryTab.ForeColor = SystemColors.GrayText;
+            StaffCategoryTab.Location = new Point(151, 24);
+            StaffCategoryTab.Name = "StaffCategoryTab";
+            StaffCategoryTab.Size = new Size(151, 40);
+            StaffCategoryTab.TabIndex = 3;
+            StaffCategoryTab.Text = "Staff Category";
+            StaffCategoryTab.UseVisualStyleBackColor = false;
+            StaffCategoryTab.Click += StaffCategoryTab_Click;
+            // 
+            // StaffTab
+            // 
+            StaffTab.BackColor = Color.FromArgb(37, 150, 190);
+            StaffTab.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            StaffTab.FlatAppearance.BorderSize = 2;
+            StaffTab.FlatStyle = FlatStyle.Flat;
+            StaffTab.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            StaffTab.ForeColor = Color.White;
+            StaffTab.Location = new Point(26, 24);
+            StaffTab.Name = "StaffTab";
+            StaffTab.Size = new Size(119, 40);
+            StaffTab.TabIndex = 2;
+            StaffTab.Text = "Staff";
+            StaffTab.UseVisualStyleBackColor = false;
+            StaffTab.Click += StaffTab_Click;
+            // 
+            // StaffDataGrid
+            // 
+            StaffDataGrid.AllowUserToAddRows = false;
+            StaffDataGrid.AllowUserToDeleteRows = false;
+            StaffDataGrid.AllowUserToResizeColumns = false;
+            StaffDataGrid.AllowUserToResizeRows = false;
+            StaffDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            StaffDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            StaffDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            StaffDataGrid.BackgroundColor = Color.White;
+            StaffDataGrid.BorderStyle = BorderStyle.None;
+            StaffDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            StaffDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            StaffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            StaffDataGrid.EnableHeadersVisualStyles = false;
+            StaffDataGrid.Location = new Point(3, 161);
+            StaffDataGrid.Margin = new Padding(0);
+            StaffDataGrid.Name = "StaffDataGrid";
+            StaffDataGrid.ReadOnly = true;
+            StaffDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new Padding(3);
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            StaffDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle4.Padding = new Padding(3);
+            StaffDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            StaffDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            StaffDataGrid.Size = new Size(970, 468);
+            StaffDataGrid.TabIndex = 1;
+            StaffDataGrid.CellContentClick += StaffDataGrid_CellContentClick;
+            StaffDataGrid.CellMouseEnter += StaffDataGrid_CellMouseEnter;
+            StaffDataGrid.CellMouseLeave += StaffDataGrid_CellMouseLeave;
+            // 
+            // StaffButtonsPanel
+            // 
+            StaffButtonsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            StaffButtonsPanel.ColumnCount = 4;
+            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            StaffButtonsPanel.Controls.Add(AddStaffButton, 0, 0);
+            StaffButtonsPanel.Controls.Add(comboBox1, 2, 0);
+            StaffButtonsPanel.Controls.Add(panel3, 3, 0);
+            StaffButtonsPanel.Location = new Point(3, 77);
+            StaffButtonsPanel.Name = "StaffButtonsPanel";
+            StaffButtonsPanel.RowCount = 1;
+            StaffButtonsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            StaffButtonsPanel.Size = new Size(972, 80);
+            StaffButtonsPanel.TabIndex = 0;
+            // 
+            // AddStaffButton
+            // 
+            AddStaffButton.BackColor = Color.FromArgb(37, 150, 190);
+            AddStaffButton.FlatAppearance.BorderSize = 0;
+            AddStaffButton.FlatStyle = FlatStyle.Flat;
+            AddStaffButton.Image = (Image)resources.GetObject("AddStaffButton.Image");
+            AddStaffButton.Location = new Point(15, 15);
+            AddStaffButton.Margin = new Padding(15, 15, 3, 3);
+            AddStaffButton.Name = "AddStaffButton";
+            AddStaffButton.Size = new Size(40, 40);
+            AddStaffButton.TabIndex = 0;
+            AddStaffButton.UseVisualStyleBackColor = false;
+            AddStaffButton.Click += AddStaffButton_Click;
+            // 
+            // comboBox1
+            // 
+            comboBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox1.Location = new Point(598, 25);
+            comboBox1.Margin = new Padding(15, 25, 3, 3);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(79, 29);
+            comboBox1.TabIndex = 1;
+            comboBox1.Text = "100";
+            comboBox1.Visible = false;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(SearchStaff_TextBox);
+            panel3.Controls.Add(SearchStaffIcon);
+            panel3.Location = new Point(680, 0);
+            panel3.Margin = new Padding(0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(292, 80);
+            panel3.TabIndex = 4;
+            // 
+            // SearchStaff_TextBox
+            // 
+            SearchStaff_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SearchStaff_TextBox.Location = new Point(33, 25);
+            SearchStaff_TextBox.Multiline = true;
+            SearchStaff_TextBox.Name = "SearchStaff_TextBox";
+            SearchStaff_TextBox.PlaceholderText = "Search..";
+            SearchStaff_TextBox.Size = new Size(150, 29);
+            SearchStaff_TextBox.TabIndex = 0;
+            SearchStaff_TextBox.WordWrap = false;
+            SearchStaff_TextBox.KeyUp += SearchStaff_TextBox_KeyUp;
+            // 
+            // SearchStaffIcon
+            // 
+            SearchStaffIcon.BackColor = Color.White;
+            SearchStaffIcon.FlatStyle = FlatStyle.Flat;
+            SearchStaffIcon.Image = (Image)resources.GetObject("SearchStaffIcon.Image");
+            SearchStaffIcon.Location = new Point(5, 25);
+            SearchStaffIcon.Name = "SearchStaffIcon";
+            SearchStaffIcon.Size = new Size(29, 29);
+            SearchStaffIcon.TabIndex = 3;
+            SearchStaffIcon.UseVisualStyleBackColor = false;
+            // 
+            // ProductPanel
+            // 
+            ProductPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ProductPanel.BackColor = Color.White;
+            ProductPanel.Controls.Add(IngrediantsTabButton);
+            ProductPanel.Controls.Add(ProductsCategoryTabButton);
+            ProductPanel.Controls.Add(ProductsTabButton);
+            ProductPanel.Controls.Add(ProductsDataGrid);
+            ProductPanel.Controls.Add(ProductButtonsLayout);
+            ProductPanel.Location = new Point(21, 95);
+            ProductPanel.Name = "ProductPanel";
+            ProductPanel.Size = new Size(978, 639);
+            ProductPanel.TabIndex = 6;
+            ProductPanel.Visible = false;
+            // 
+            // IngrediantsTabButton
+            // 
+            IngrediantsTabButton.BackColor = Color.Transparent;
+            IngrediantsTabButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            IngrediantsTabButton.FlatAppearance.BorderSize = 2;
+            IngrediantsTabButton.FlatStyle = FlatStyle.Flat;
+            IngrediantsTabButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            IngrediantsTabButton.ForeColor = SystemColors.GrayText;
+            IngrediantsTabButton.Location = new Point(316, 24);
+            IngrediantsTabButton.Name = "IngrediantsTabButton";
+            IngrediantsTabButton.Size = new Size(183, 40);
+            IngrediantsTabButton.TabIndex = 6;
+            IngrediantsTabButton.Text = "Product Ingredients";
+            IngrediantsTabButton.UseVisualStyleBackColor = false;
+            IngrediantsTabButton.Click += IngrediantsTabButton_Click;
+            // 
+            // ProductsCategoryTabButton
+            // 
+            ProductsCategoryTabButton.BackColor = Color.Transparent;
+            ProductsCategoryTabButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            ProductsCategoryTabButton.FlatAppearance.BorderSize = 2;
+            ProductsCategoryTabButton.FlatStyle = FlatStyle.Flat;
+            ProductsCategoryTabButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ProductsCategoryTabButton.ForeColor = SystemColors.GrayText;
+            ProductsCategoryTabButton.Location = new Point(151, 24);
+            ProductsCategoryTabButton.Name = "ProductsCategoryTabButton";
+            ProductsCategoryTabButton.Size = new Size(158, 40);
+            ProductsCategoryTabButton.TabIndex = 5;
+            ProductsCategoryTabButton.Text = "Product Category";
+            ProductsCategoryTabButton.UseVisualStyleBackColor = false;
+            ProductsCategoryTabButton.Click += ProductsCategoryTabButton_Click;
+            // 
+            // ProductsTabButton
+            // 
+            ProductsTabButton.BackColor = Color.FromArgb(37, 150, 190);
+            ProductsTabButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            ProductsTabButton.FlatAppearance.BorderSize = 2;
+            ProductsTabButton.FlatStyle = FlatStyle.Flat;
+            ProductsTabButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ProductsTabButton.ForeColor = Color.White;
+            ProductsTabButton.Location = new Point(26, 24);
+            ProductsTabButton.Name = "ProductsTabButton";
+            ProductsTabButton.Size = new Size(119, 40);
+            ProductsTabButton.TabIndex = 4;
+            ProductsTabButton.Text = "Products";
+            ProductsTabButton.UseVisualStyleBackColor = false;
+            ProductsTabButton.Click += ProductsTabButton_Click;
+            // 
+            // ProductsDataGrid
+            // 
+            ProductsDataGrid.AllowUserToAddRows = false;
+            ProductsDataGrid.AllowUserToDeleteRows = false;
+            ProductsDataGrid.AllowUserToResizeColumns = false;
+            ProductsDataGrid.AllowUserToResizeRows = false;
+            ProductsDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ProductsDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ProductsDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            ProductsDataGrid.BackgroundColor = Color.White;
+            ProductsDataGrid.BorderStyle = BorderStyle.None;
+            ProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            ProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            ProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            ProductsDataGrid.EnableHeadersVisualStyles = false;
+            ProductsDataGrid.Location = new Point(3, 161);
+            ProductsDataGrid.Margin = new Padding(0);
+            ProductsDataGrid.Name = "ProductsDataGrid";
+            ProductsDataGrid.ReadOnly = true;
+            ProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = SystemColors.Control;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.Padding = new Padding(3);
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            ProductsDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle8.Padding = new Padding(3);
+            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            ProductsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            ProductsDataGrid.Size = new Size(970, 468);
+            ProductsDataGrid.TabIndex = 1;
+            ProductsDataGrid.CellContentClick += ProductsDataGrid_CellContentClick;
+            ProductsDataGrid.CellMouseEnter += ProductsDataGrid_CellMouseEnter;
+            ProductsDataGrid.CellMouseLeave += ProductsDataGrid_CellMouseLeave;
+            ProductsDataGrid.VisibleChanged += ProductsDataGrid_VisibleChanged;
+            // 
+            // ProductButtonsLayout
+            // 
+            ProductButtonsLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            ProductButtonsLayout.ColumnCount = 4;
+            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            ProductButtonsLayout.Controls.Add(AddProductsButton, 0, 0);
+            ProductButtonsLayout.Controls.Add(comboBox2, 2, 0);
+            ProductButtonsLayout.Controls.Add(panel1, 3, 0);
+            ProductButtonsLayout.Location = new Point(3, 77);
+            ProductButtonsLayout.Name = "ProductButtonsLayout";
+            ProductButtonsLayout.RowCount = 1;
+            ProductButtonsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            ProductButtonsLayout.Size = new Size(972, 80);
+            ProductButtonsLayout.TabIndex = 0;
+            // 
+            // AddProductsButton
+            // 
+            AddProductsButton.BackColor = Color.FromArgb(37, 150, 190);
+            AddProductsButton.FlatAppearance.BorderSize = 0;
+            AddProductsButton.FlatStyle = FlatStyle.Flat;
+            AddProductsButton.Image = (Image)resources.GetObject("AddProductsButton.Image");
+            AddProductsButton.Location = new Point(15, 15);
+            AddProductsButton.Margin = new Padding(15, 15, 3, 3);
+            AddProductsButton.Name = "AddProductsButton";
+            AddProductsButton.Size = new Size(40, 40);
+            AddProductsButton.TabIndex = 0;
+            AddProductsButton.UseVisualStyleBackColor = false;
+            AddProductsButton.Click += button2_Click;
+            // 
+            // comboBox2
+            // 
+            comboBox2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox2.Location = new Point(598, 25);
+            comboBox2.Margin = new Padding(15, 25, 3, 3);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(79, 29);
+            comboBox2.TabIndex = 1;
+            comboBox2.Text = "100";
+            comboBox2.Visible = false;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(search_button);
+            panel1.Location = new Point(680, 0);
+            panel1.Margin = new Padding(0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(292, 80);
+            panel1.TabIndex = 4;
+            // 
+            // textBox1
+            // 
+            textBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.Location = new Point(33, 25);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Search..";
+            textBox1.Size = new Size(150, 29);
+            textBox1.TabIndex = 0;
+            textBox1.WordWrap = false;
+            textBox1.KeyUp += textBox1_KeyUp;
+            // 
+            // search_button
+            // 
+            search_button.BackColor = Color.White;
+            search_button.FlatStyle = FlatStyle.Flat;
+            search_button.Image = (Image)resources.GetObject("search_button.Image");
+            search_button.Location = new Point(5, 25);
+            search_button.Name = "search_button";
+            search_button.Size = new Size(29, 29);
+            search_button.TabIndex = 3;
+            search_button.UseVisualStyleBackColor = false;
             // 
             // ContentContainer_panel
             // 
@@ -1025,24 +1690,24 @@
             POSProductsDataGrid.BorderStyle = BorderStyle.None;
             POSProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             POSProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Control;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            POSProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = SystemColors.Control;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Control;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            POSProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             POSProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             POSProductsDataGrid.Columns.AddRange(new DataGridViewColumn[] { id, hidden_id, product_name, quantity, product_price, total_amount });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Window;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            POSProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = SystemColors.Window;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle10.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Window;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            POSProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle10;
             POSProductsDataGrid.EnableHeadersVisualStyles = false;
             POSProductsDataGrid.Location = new Point(1, 1);
             POSProductsDataGrid.Name = "POSProductsDataGrid";
@@ -1526,671 +2191,6 @@
             KitchenFlowLayoutPanel.Size = new Size(941, 599);
             KitchenFlowLayoutPanel.TabIndex = 0;
             // 
-            // IngredientsPanel
-            // 
-            IngredientsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            IngredientsPanel.BackColor = Color.White;
-            IngredientsPanel.Controls.Add(Ingredients_DataGrid);
-            IngredientsPanel.Controls.Add(Ingredients_tableLayoutPanel);
-            IngredientsPanel.Location = new Point(21, 95);
-            IngredientsPanel.Name = "IngredientsPanel";
-            IngredientsPanel.Size = new Size(978, 639);
-            IngredientsPanel.TabIndex = 12;
-            IngredientsPanel.Visible = false;
-            // 
-            // Ingredients_DataGrid
-            // 
-            Ingredients_DataGrid.AllowUserToAddRows = false;
-            Ingredients_DataGrid.AllowUserToDeleteRows = false;
-            Ingredients_DataGrid.AllowUserToResizeColumns = false;
-            Ingredients_DataGrid.AllowUserToResizeRows = false;
-            Ingredients_DataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            Ingredients_DataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            Ingredients_DataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            Ingredients_DataGrid.BackgroundColor = Color.White;
-            Ingredients_DataGrid.BorderStyle = BorderStyle.None;
-            Ingredients_DataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            Ingredients_DataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            Ingredients_DataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            Ingredients_DataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            Ingredients_DataGrid.DefaultCellStyle = dataGridViewCellStyle4;
-            Ingredients_DataGrid.EnableHeadersVisualStyles = false;
-            Ingredients_DataGrid.Location = new Point(3, 121);
-            Ingredients_DataGrid.Margin = new Padding(0);
-            Ingredients_DataGrid.Name = "Ingredients_DataGrid";
-            Ingredients_DataGrid.ReadOnly = true;
-            Ingredients_DataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = SystemColors.Control;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle5.Padding = new Padding(3);
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            Ingredients_DataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            Ingredients_DataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle6.Padding = new Padding(3);
-            Ingredients_DataGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
-            Ingredients_DataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            Ingredients_DataGrid.Size = new Size(970, 508);
-            Ingredients_DataGrid.TabIndex = 1;
-            Ingredients_DataGrid.CellContentClick += Ingredients_DataGrid_CellContentClick;
-            Ingredients_DataGrid.VisibleChanged += Ingredients_DataGrid_VisibleChanged;
-            // 
-            // Ingredients_tableLayoutPanel
-            // 
-            Ingredients_tableLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            Ingredients_tableLayoutPanel.ColumnCount = 4;
-            Ingredients_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            Ingredients_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            Ingredients_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            Ingredients_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            Ingredients_tableLayoutPanel.Controls.Add(IngredientsAddButton, 0, 0);
-            Ingredients_tableLayoutPanel.Controls.Add(comboBox4, 2, 0);
-            Ingredients_tableLayoutPanel.Controls.Add(panel9, 3, 0);
-            Ingredients_tableLayoutPanel.Location = new Point(3, 37);
-            Ingredients_tableLayoutPanel.Name = "Ingredients_tableLayoutPanel";
-            Ingredients_tableLayoutPanel.RowCount = 1;
-            Ingredients_tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            Ingredients_tableLayoutPanel.Size = new Size(970, 80);
-            Ingredients_tableLayoutPanel.TabIndex = 0;
-            // 
-            // IngredientsAddButton
-            // 
-            IngredientsAddButton.BackColor = Color.FromArgb(37, 150, 190);
-            IngredientsAddButton.FlatAppearance.BorderSize = 0;
-            IngredientsAddButton.FlatStyle = FlatStyle.Flat;
-            IngredientsAddButton.Image = (Image)resources.GetObject("IngredientsAddButton.Image");
-            IngredientsAddButton.Location = new Point(15, 15);
-            IngredientsAddButton.Margin = new Padding(15, 15, 3, 3);
-            IngredientsAddButton.Name = "IngredientsAddButton";
-            IngredientsAddButton.Size = new Size(40, 40);
-            IngredientsAddButton.TabIndex = 0;
-            IngredientsAddButton.UseVisualStyleBackColor = false;
-            IngredientsAddButton.Click += IngredientsAddButton_Click;
-            // 
-            // comboBox4
-            // 
-            comboBox4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Items.AddRange(new object[] { "25", "50", "75", "100" });
-            comboBox4.Location = new Point(597, 25);
-            comboBox4.Margin = new Padding(15, 25, 3, 3);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(79, 29);
-            comboBox4.TabIndex = 1;
-            comboBox4.Text = "100";
-            comboBox4.Visible = false;
-            // 
-            // panel9
-            // 
-            panel9.Controls.Add(Ingredients_SearchTextBox);
-            panel9.Controls.Add(button3);
-            panel9.Location = new Point(679, 0);
-            panel9.Margin = new Padding(0);
-            panel9.Name = "panel9";
-            panel9.Size = new Size(291, 80);
-            panel9.TabIndex = 4;
-            // 
-            // Ingredients_SearchTextBox
-            // 
-            Ingredients_SearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Ingredients_SearchTextBox.Location = new Point(33, 25);
-            Ingredients_SearchTextBox.Multiline = true;
-            Ingredients_SearchTextBox.Name = "Ingredients_SearchTextBox";
-            Ingredients_SearchTextBox.PlaceholderText = "Search..";
-            Ingredients_SearchTextBox.Size = new Size(150, 29);
-            Ingredients_SearchTextBox.TabIndex = 0;
-            Ingredients_SearchTextBox.WordWrap = false;
-            Ingredients_SearchTextBox.TextChanged += Ingredients_SearchTextBox_TextChanged;
-            // 
-            // button3
-            // 
-            button3.BackColor = Color.White;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Image = (Image)resources.GetObject("button3.Image");
-            button3.Location = new Point(5, 25);
-            button3.Name = "button3";
-            button3.Size = new Size(29, 29);
-            button3.TabIndex = 3;
-            button3.UseVisualStyleBackColor = false;
-            // 
-            // TablesPanel
-            // 
-            TablesPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            TablesPanel.BackColor = Color.White;
-            TablesPanel.Controls.Add(TablesDataGrid);
-            TablesPanel.Controls.Add(Tables_tableLayoutPanel);
-            TablesPanel.Location = new Point(21, 95);
-            TablesPanel.Name = "TablesPanel";
-            TablesPanel.Size = new Size(978, 639);
-            TablesPanel.TabIndex = 9;
-            TablesPanel.Visible = false;
-            TablesPanel.VisibleChanged += TablesPanel_VisibleChanged;
-            // 
-            // TablesDataGrid
-            // 
-            TablesDataGrid.AllowUserToAddRows = false;
-            TablesDataGrid.AllowUserToDeleteRows = false;
-            TablesDataGrid.AllowUserToResizeColumns = false;
-            TablesDataGrid.AllowUserToResizeRows = false;
-            TablesDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            TablesDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            TablesDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            TablesDataGrid.BackgroundColor = Color.White;
-            TablesDataGrid.BorderStyle = BorderStyle.None;
-            TablesDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            TablesDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            TablesDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            TablesDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.White;
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle8.ForeColor = Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            TablesDataGrid.DefaultCellStyle = dataGridViewCellStyle8;
-            TablesDataGrid.EnableHeadersVisualStyles = false;
-            TablesDataGrid.Location = new Point(3, 121);
-            TablesDataGrid.Margin = new Padding(0);
-            TablesDataGrid.Name = "TablesDataGrid";
-            TablesDataGrid.ReadOnly = true;
-            TablesDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = SystemColors.Control;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle9.Padding = new Padding(3);
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            TablesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            TablesDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle10.Padding = new Padding(3);
-            TablesDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle10;
-            TablesDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            TablesDataGrid.Size = new Size(970, 508);
-            TablesDataGrid.TabIndex = 1;
-            TablesDataGrid.CellContentClick += TablesDataGrid_CellContentClick;
-            // 
-            // Tables_tableLayoutPanel
-            // 
-            Tables_tableLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            Tables_tableLayoutPanel.ColumnCount = 4;
-            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            Tables_tableLayoutPanel.Controls.Add(TablesAddButton, 0, 0);
-            Tables_tableLayoutPanel.Controls.Add(comboBox3, 2, 0);
-            Tables_tableLayoutPanel.Controls.Add(panel5, 3, 0);
-            Tables_tableLayoutPanel.Location = new Point(3, 37);
-            Tables_tableLayoutPanel.Name = "Tables_tableLayoutPanel";
-            Tables_tableLayoutPanel.RowCount = 1;
-            Tables_tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            Tables_tableLayoutPanel.Size = new Size(970, 80);
-            Tables_tableLayoutPanel.TabIndex = 0;
-            // 
-            // TablesAddButton
-            // 
-            TablesAddButton.BackColor = Color.FromArgb(37, 150, 190);
-            TablesAddButton.FlatAppearance.BorderSize = 0;
-            TablesAddButton.FlatStyle = FlatStyle.Flat;
-            TablesAddButton.Image = (Image)resources.GetObject("TablesAddButton.Image");
-            TablesAddButton.Location = new Point(15, 15);
-            TablesAddButton.Margin = new Padding(15, 15, 3, 3);
-            TablesAddButton.Name = "TablesAddButton";
-            TablesAddButton.Size = new Size(40, 40);
-            TablesAddButton.TabIndex = 0;
-            TablesAddButton.UseVisualStyleBackColor = false;
-            TablesAddButton.Click += TablesAddButton_Click;
-            // 
-            // comboBox3
-            // 
-            comboBox3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Items.AddRange(new object[] { "25", "50", "75", "100" });
-            comboBox3.Location = new Point(597, 25);
-            comboBox3.Margin = new Padding(15, 25, 3, 3);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(79, 29);
-            comboBox3.TabIndex = 1;
-            comboBox3.Text = "100";
-            comboBox3.Visible = false;
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(TablesSearchTextBox);
-            panel5.Controls.Add(button5);
-            panel5.Location = new Point(679, 0);
-            panel5.Margin = new Padding(0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(291, 80);
-            panel5.TabIndex = 4;
-            // 
-            // TablesSearchTextBox
-            // 
-            TablesSearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TablesSearchTextBox.Location = new Point(33, 25);
-            TablesSearchTextBox.Multiline = true;
-            TablesSearchTextBox.Name = "TablesSearchTextBox";
-            TablesSearchTextBox.PlaceholderText = "Search..";
-            TablesSearchTextBox.Size = new Size(150, 29);
-            TablesSearchTextBox.TabIndex = 0;
-            TablesSearchTextBox.WordWrap = false;
-            TablesSearchTextBox.TextChanged += TablesSearchTextBox_TextChanged;
-            // 
-            // button5
-            // 
-            button5.BackColor = Color.White;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Image = (Image)resources.GetObject("button5.Image");
-            button5.Location = new Point(5, 25);
-            button5.Name = "button5";
-            button5.Size = new Size(29, 29);
-            button5.TabIndex = 3;
-            button5.UseVisualStyleBackColor = false;
-            // 
-            // StaffPanel
-            // 
-            StaffPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            StaffPanel.BackColor = Color.White;
-            StaffPanel.Controls.Add(StaffCategoryTab);
-            StaffPanel.Controls.Add(StaffTab);
-            StaffPanel.Controls.Add(StaffDataGrid);
-            StaffPanel.Controls.Add(StaffButtonsPanel);
-            StaffPanel.Location = new Point(21, 95);
-            StaffPanel.Name = "StaffPanel";
-            StaffPanel.Size = new Size(978, 639);
-            StaffPanel.TabIndex = 7;
-            StaffPanel.Visible = false;
-            StaffPanel.VisibleChanged += StaffPanel_VisibleChanged;
-            // 
-            // StaffCategoryTab
-            // 
-            StaffCategoryTab.BackColor = Color.Transparent;
-            StaffCategoryTab.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
-            StaffCategoryTab.FlatAppearance.BorderSize = 2;
-            StaffCategoryTab.FlatStyle = FlatStyle.Flat;
-            StaffCategoryTab.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            StaffCategoryTab.ForeColor = SystemColors.GrayText;
-            StaffCategoryTab.Location = new Point(151, 24);
-            StaffCategoryTab.Name = "StaffCategoryTab";
-            StaffCategoryTab.Size = new Size(151, 40);
-            StaffCategoryTab.TabIndex = 3;
-            StaffCategoryTab.Text = "Staff Category";
-            StaffCategoryTab.UseVisualStyleBackColor = false;
-            StaffCategoryTab.Click += StaffCategoryTab_Click;
-            // 
-            // StaffTab
-            // 
-            StaffTab.BackColor = Color.FromArgb(37, 150, 190);
-            StaffTab.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
-            StaffTab.FlatAppearance.BorderSize = 2;
-            StaffTab.FlatStyle = FlatStyle.Flat;
-            StaffTab.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            StaffTab.ForeColor = Color.White;
-            StaffTab.Location = new Point(26, 24);
-            StaffTab.Name = "StaffTab";
-            StaffTab.Size = new Size(119, 40);
-            StaffTab.TabIndex = 2;
-            StaffTab.Text = "Staff";
-            StaffTab.UseVisualStyleBackColor = false;
-            StaffTab.Click += StaffTab_Click;
-            // 
-            // StaffDataGrid
-            // 
-            StaffDataGrid.AllowUserToAddRows = false;
-            StaffDataGrid.AllowUserToDeleteRows = false;
-            StaffDataGrid.AllowUserToResizeColumns = false;
-            StaffDataGrid.AllowUserToResizeRows = false;
-            StaffDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            StaffDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            StaffDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            StaffDataGrid.BackgroundColor = Color.White;
-            StaffDataGrid.BorderStyle = BorderStyle.None;
-            StaffDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            StaffDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
-            StaffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle12.ForeColor = Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = Color.White;
-            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.DefaultCellStyle = dataGridViewCellStyle12;
-            StaffDataGrid.EnableHeadersVisualStyles = false;
-            StaffDataGrid.Location = new Point(3, 161);
-            StaffDataGrid.Margin = new Padding(0);
-            StaffDataGrid.Name = "StaffDataGrid";
-            StaffDataGrid.ReadOnly = true;
-            StaffDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = SystemColors.Control;
-            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle13.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle13.Padding = new Padding(3);
-            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            StaffDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle14.Padding = new Padding(3);
-            StaffDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle14;
-            StaffDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            StaffDataGrid.Size = new Size(970, 468);
-            StaffDataGrid.TabIndex = 1;
-            StaffDataGrid.CellContentClick += StaffDataGrid_CellContentClick;
-            StaffDataGrid.CellMouseEnter += StaffDataGrid_CellMouseEnter;
-            StaffDataGrid.CellMouseLeave += StaffDataGrid_CellMouseLeave;
-            // 
-            // StaffButtonsPanel
-            // 
-            StaffButtonsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            StaffButtonsPanel.ColumnCount = 4;
-            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            StaffButtonsPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            StaffButtonsPanel.Controls.Add(AddStaffButton, 0, 0);
-            StaffButtonsPanel.Controls.Add(comboBox1, 2, 0);
-            StaffButtonsPanel.Controls.Add(panel3, 3, 0);
-            StaffButtonsPanel.Location = new Point(3, 77);
-            StaffButtonsPanel.Name = "StaffButtonsPanel";
-            StaffButtonsPanel.RowCount = 1;
-            StaffButtonsPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            StaffButtonsPanel.Size = new Size(972, 80);
-            StaffButtonsPanel.TabIndex = 0;
-            // 
-            // AddStaffButton
-            // 
-            AddStaffButton.BackColor = Color.FromArgb(37, 150, 190);
-            AddStaffButton.FlatAppearance.BorderSize = 0;
-            AddStaffButton.FlatStyle = FlatStyle.Flat;
-            AddStaffButton.Image = (Image)resources.GetObject("AddStaffButton.Image");
-            AddStaffButton.Location = new Point(15, 15);
-            AddStaffButton.Margin = new Padding(15, 15, 3, 3);
-            AddStaffButton.Name = "AddStaffButton";
-            AddStaffButton.Size = new Size(40, 40);
-            AddStaffButton.TabIndex = 0;
-            AddStaffButton.UseVisualStyleBackColor = false;
-            AddStaffButton.Click += AddStaffButton_Click;
-            // 
-            // comboBox1
-            // 
-            comboBox1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "25", "50", "75", "100" });
-            comboBox1.Location = new Point(598, 25);
-            comboBox1.Margin = new Padding(15, 25, 3, 3);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(79, 29);
-            comboBox1.TabIndex = 1;
-            comboBox1.Text = "100";
-            comboBox1.Visible = false;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(SearchStaff_TextBox);
-            panel3.Controls.Add(SearchStaffIcon);
-            panel3.Location = new Point(680, 0);
-            panel3.Margin = new Padding(0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(292, 80);
-            panel3.TabIndex = 4;
-            // 
-            // SearchStaff_TextBox
-            // 
-            SearchStaff_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            SearchStaff_TextBox.Location = new Point(33, 25);
-            SearchStaff_TextBox.Multiline = true;
-            SearchStaff_TextBox.Name = "SearchStaff_TextBox";
-            SearchStaff_TextBox.PlaceholderText = "Search..";
-            SearchStaff_TextBox.Size = new Size(150, 29);
-            SearchStaff_TextBox.TabIndex = 0;
-            SearchStaff_TextBox.WordWrap = false;
-            SearchStaff_TextBox.KeyUp += SearchStaff_TextBox_KeyUp;
-            // 
-            // SearchStaffIcon
-            // 
-            SearchStaffIcon.BackColor = Color.White;
-            SearchStaffIcon.FlatStyle = FlatStyle.Flat;
-            SearchStaffIcon.Image = (Image)resources.GetObject("SearchStaffIcon.Image");
-            SearchStaffIcon.Location = new Point(5, 25);
-            SearchStaffIcon.Name = "SearchStaffIcon";
-            SearchStaffIcon.Size = new Size(29, 29);
-            SearchStaffIcon.TabIndex = 3;
-            SearchStaffIcon.UseVisualStyleBackColor = false;
-            // 
-            // ProductPanel
-            // 
-            ProductPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ProductPanel.BackColor = Color.White;
-            ProductPanel.Controls.Add(IngrediantsTabButton);
-            ProductPanel.Controls.Add(ProductsCategoryTabButton);
-            ProductPanel.Controls.Add(ProductsTabButton);
-            ProductPanel.Controls.Add(ProductsDataGrid);
-            ProductPanel.Controls.Add(ProductButtonsLayout);
-            ProductPanel.Location = new Point(21, 95);
-            ProductPanel.Name = "ProductPanel";
-            ProductPanel.Size = new Size(978, 639);
-            ProductPanel.TabIndex = 6;
-            ProductPanel.Visible = false;
-            // 
-            // IngrediantsTabButton
-            // 
-            IngrediantsTabButton.BackColor = Color.Transparent;
-            IngrediantsTabButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
-            IngrediantsTabButton.FlatAppearance.BorderSize = 2;
-            IngrediantsTabButton.FlatStyle = FlatStyle.Flat;
-            IngrediantsTabButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            IngrediantsTabButton.ForeColor = SystemColors.GrayText;
-            IngrediantsTabButton.Location = new Point(316, 24);
-            IngrediantsTabButton.Name = "IngrediantsTabButton";
-            IngrediantsTabButton.Size = new Size(183, 40);
-            IngrediantsTabButton.TabIndex = 6;
-            IngrediantsTabButton.Text = "Product Ingredients";
-            IngrediantsTabButton.UseVisualStyleBackColor = false;
-            IngrediantsTabButton.Click += IngrediantsTabButton_Click;
-            // 
-            // ProductsCategoryTabButton
-            // 
-            ProductsCategoryTabButton.BackColor = Color.Transparent;
-            ProductsCategoryTabButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
-            ProductsCategoryTabButton.FlatAppearance.BorderSize = 2;
-            ProductsCategoryTabButton.FlatStyle = FlatStyle.Flat;
-            ProductsCategoryTabButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ProductsCategoryTabButton.ForeColor = SystemColors.GrayText;
-            ProductsCategoryTabButton.Location = new Point(151, 24);
-            ProductsCategoryTabButton.Name = "ProductsCategoryTabButton";
-            ProductsCategoryTabButton.Size = new Size(158, 40);
-            ProductsCategoryTabButton.TabIndex = 5;
-            ProductsCategoryTabButton.Text = "Product Category";
-            ProductsCategoryTabButton.UseVisualStyleBackColor = false;
-            ProductsCategoryTabButton.Click += ProductsCategoryTabButton_Click;
-            // 
-            // ProductsTabButton
-            // 
-            ProductsTabButton.BackColor = Color.FromArgb(37, 150, 190);
-            ProductsTabButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
-            ProductsTabButton.FlatAppearance.BorderSize = 2;
-            ProductsTabButton.FlatStyle = FlatStyle.Flat;
-            ProductsTabButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ProductsTabButton.ForeColor = Color.White;
-            ProductsTabButton.Location = new Point(26, 24);
-            ProductsTabButton.Name = "ProductsTabButton";
-            ProductsTabButton.Size = new Size(119, 40);
-            ProductsTabButton.TabIndex = 4;
-            ProductsTabButton.Text = "Products";
-            ProductsTabButton.UseVisualStyleBackColor = false;
-            ProductsTabButton.Click += ProductsTabButton_Click;
-            // 
-            // ProductsDataGrid
-            // 
-            ProductsDataGrid.AllowUserToAddRows = false;
-            ProductsDataGrid.AllowUserToDeleteRows = false;
-            ProductsDataGrid.AllowUserToResizeColumns = false;
-            ProductsDataGrid.AllowUserToResizeRows = false;
-            ProductsDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ProductsDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            ProductsDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            ProductsDataGrid.BackgroundColor = Color.White;
-            ProductsDataGrid.BorderStyle = BorderStyle.None;
-            ProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            ProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle15.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
-            ProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = Color.White;
-            dataGridViewCellStyle16.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle16.ForeColor = Color.Black;
-            dataGridViewCellStyle16.SelectionBackColor = Color.White;
-            dataGridViewCellStyle16.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle16;
-            ProductsDataGrid.EnableHeadersVisualStyles = false;
-            ProductsDataGrid.Location = new Point(3, 161);
-            ProductsDataGrid.Margin = new Padding(0);
-            ProductsDataGrid.Name = "ProductsDataGrid";
-            ProductsDataGrid.ReadOnly = true;
-            ProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = SystemColors.Control;
-            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle17.Padding = new Padding(3);
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
-            ProductsDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle18.Padding = new Padding(3);
-            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle18;
-            ProductsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            ProductsDataGrid.Size = new Size(970, 468);
-            ProductsDataGrid.TabIndex = 1;
-            ProductsDataGrid.CellContentClick += ProductsDataGrid_CellContentClick;
-            ProductsDataGrid.CellMouseEnter += ProductsDataGrid_CellMouseEnter;
-            ProductsDataGrid.CellMouseLeave += ProductsDataGrid_CellMouseLeave;
-            ProductsDataGrid.VisibleChanged += ProductsDataGrid_VisibleChanged;
-            // 
-            // ProductButtonsLayout
-            // 
-            ProductButtonsLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            ProductButtonsLayout.ColumnCount = 4;
-            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            ProductButtonsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            ProductButtonsLayout.Controls.Add(AddProductsButton, 0, 0);
-            ProductButtonsLayout.Controls.Add(comboBox2, 2, 0);
-            ProductButtonsLayout.Controls.Add(panel1, 3, 0);
-            ProductButtonsLayout.Location = new Point(3, 77);
-            ProductButtonsLayout.Name = "ProductButtonsLayout";
-            ProductButtonsLayout.RowCount = 1;
-            ProductButtonsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            ProductButtonsLayout.Size = new Size(972, 80);
-            ProductButtonsLayout.TabIndex = 0;
-            // 
-            // AddProductsButton
-            // 
-            AddProductsButton.BackColor = Color.FromArgb(37, 150, 190);
-            AddProductsButton.FlatAppearance.BorderSize = 0;
-            AddProductsButton.FlatStyle = FlatStyle.Flat;
-            AddProductsButton.Image = (Image)resources.GetObject("AddProductsButton.Image");
-            AddProductsButton.Location = new Point(15, 15);
-            AddProductsButton.Margin = new Padding(15, 15, 3, 3);
-            AddProductsButton.Name = "AddProductsButton";
-            AddProductsButton.Size = new Size(40, 40);
-            AddProductsButton.TabIndex = 0;
-            AddProductsButton.UseVisualStyleBackColor = false;
-            AddProductsButton.Click += button2_Click;
-            // 
-            // comboBox2
-            // 
-            comboBox2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "25", "50", "75", "100" });
-            comboBox2.Location = new Point(598, 25);
-            comboBox2.Margin = new Padding(15, 25, 3, 3);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(79, 29);
-            comboBox2.TabIndex = 1;
-            comboBox2.Text = "100";
-            comboBox2.Visible = false;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(search_button);
-            panel1.Location = new Point(680, 0);
-            panel1.Margin = new Padding(0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(292, 80);
-            panel1.TabIndex = 4;
-            // 
-            // textBox1
-            // 
-            textBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(33, 25);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Search..";
-            textBox1.Size = new Size(150, 29);
-            textBox1.TabIndex = 0;
-            textBox1.WordWrap = false;
-            textBox1.KeyUp += textBox1_KeyUp;
-            // 
-            // search_button
-            // 
-            search_button.BackColor = Color.White;
-            search_button.FlatStyle = FlatStyle.Flat;
-            search_button.Image = (Image)resources.GetObject("search_button.Image");
-            search_button.Location = new Point(5, 25);
-            search_button.Name = "search_button";
-            search_button.Size = new Size(29, 29);
-            search_button.TabIndex = 3;
-            search_button.UseVisualStyleBackColor = false;
-            // 
             // notifyIcon1
             // 
             notifyIcon1.Icon = (Icon)resources.GetObject("notifyIcon1.Icon");
@@ -2215,6 +2215,26 @@
             Sidebar_panel.ResumeLayout(false);
             ScreenContainer_panel.ResumeLayout(false);
             ScreenContainer_panel.PerformLayout();
+            IngredientsPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)Ingredients_DataGrid).EndInit();
+            Ingredients_tableLayoutPanel.ResumeLayout(false);
+            panel9.ResumeLayout(false);
+            panel9.PerformLayout();
+            TablesPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)TablesDataGrid).EndInit();
+            Tables_tableLayoutPanel.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            StaffPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)StaffDataGrid).EndInit();
+            StaffButtonsPanel.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ProductPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ProductsDataGrid).EndInit();
+            ProductButtonsLayout.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ContentContainer_panel.ResumeLayout(false);
             ChartContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
@@ -2244,26 +2264,6 @@
             panel6.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
             KitchenPanel.ResumeLayout(false);
-            IngredientsPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)Ingredients_DataGrid).EndInit();
-            Ingredients_tableLayoutPanel.ResumeLayout(false);
-            panel9.ResumeLayout(false);
-            panel9.PerformLayout();
-            TablesPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)TablesDataGrid).EndInit();
-            Tables_tableLayoutPanel.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            StaffPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)StaffDataGrid).EndInit();
-            StaffButtonsPanel.ResumeLayout(false);
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            ProductPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)ProductsDataGrid).EndInit();
-            ProductButtonsLayout.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ResumeLayout(false);
         }
 

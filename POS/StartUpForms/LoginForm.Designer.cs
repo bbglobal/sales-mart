@@ -34,13 +34,14 @@
             button1 = new Button();
             linkLabel1 = new LinkLabel();
             linkLabel2 = new LinkLabel();
+            Category_ComboBox = new ComboBox();
             SuspendLayout();
             // 
             // textBox1
             // 
             textBox1.Anchor = AnchorStyles.None;
             textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(203, 233);
+            textBox1.Location = new Point(203, 284);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Email";
@@ -51,7 +52,7 @@
             // 
             textBox2.Anchor = AnchorStyles.None;
             textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(203, 299);
+            textBox2.Location = new Point(203, 347);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.PasswordChar = '*';
@@ -66,7 +67,7 @@
             button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(203, 411);
+            button1.Location = new Point(203, 426);
             button1.Name = "button1";
             button1.Size = new Size(389, 37);
             button1.TabIndex = 2;
@@ -83,7 +84,7 @@
             linkLabel1.ForeColor = Color.White;
             linkLabel1.LinkBehavior = LinkBehavior.NeverUnderline;
             linkLabel1.LinkColor = Color.White;
-            linkLabel1.Location = new Point(203, 463);
+            linkLabel1.Location = new Point(203, 478);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(124, 16);
             linkLabel1.TabIndex = 3;
@@ -100,7 +101,7 @@
             linkLabel2.ForeColor = Color.White;
             linkLabel2.LinkBehavior = LinkBehavior.NeverUnderline;
             linkLabel2.LinkColor = Color.White;
-            linkLabel2.Location = new Point(461, 463);
+            linkLabel2.Location = new Point(461, 478);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(131, 16);
             linkLabel2.TabIndex = 4;
@@ -108,6 +109,21 @@
             linkLabel2.Text = "Create an account";
             linkLabel2.Visible = false;
             linkLabel2.LinkClicked += linkLabel2_LinkClicked;
+            // 
+            // Category_ComboBox
+            // 
+            Category_ComboBox.Anchor = AnchorStyles.None;
+            Category_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
+            Category_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            Category_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Category_ComboBox.FormattingEnabled = true;
+            Category_ComboBox.IntegralHeight = false;
+            Category_ComboBox.Items.AddRange(new object[] { "Restaurant POS", "General Store", "Retail Store", "Hotel Management" });
+            Category_ComboBox.Location = new Point(203, 229);
+            Category_ComboBox.Name = "Category_ComboBox";
+            Category_ComboBox.Size = new Size(389, 28);
+            Category_ComboBox.TabIndex = 11;
+            Category_ComboBox.Text = "Module Select...";
             // 
             // LoginForm
             // 
@@ -118,6 +134,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(798, 569);
+            Controls.Add(Category_ComboBox);
             Controls.Add(linkLabel2);
             Controls.Add(linkLabel1);
             Controls.Add(button1);
@@ -138,5 +155,6 @@
         private Button button1;
         private LinkLabel linkLabel1;
         private LinkLabel linkLabel2;
+        private ComboBox Category_ComboBox;
     }
 }

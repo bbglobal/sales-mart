@@ -97,7 +97,7 @@
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(1, 0, 1, 1);
-            panel1.Size = new Size(659, 507);
+            panel1.Size = new Size(659, 508);
             panel1.TabIndex = 1;
             // 
             // panel2
@@ -118,7 +118,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(1, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(655, 504);
+            panel2.Size = new Size(655, 505);
             panel2.TabIndex = 1;
             // 
             // ProductPrice_TextBox
@@ -147,7 +147,7 @@
             Status_ComboBox.FormattingEnabled = true;
             Status_ComboBox.IntegralHeight = false;
             Status_ComboBox.Items.AddRange(new object[] { "Active", "Inactive" });
-            Status_ComboBox.Location = new Point(104, 380);
+            Status_ComboBox.Location = new Point(104, 381);
             Status_ComboBox.Name = "Status_ComboBox";
             Status_ComboBox.Size = new Size(181, 28);
             Status_ComboBox.TabIndex = 12;
@@ -156,7 +156,7 @@
             // 
             status_label.AutoSize = true;
             status_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            status_label.Location = new Point(100, 353);
+            status_label.Location = new Point(100, 354);
             status_label.Name = "status_label";
             status_label.Size = new Size(49, 20);
             status_label.TabIndex = 11;
@@ -170,7 +170,7 @@
             Category_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Category_ComboBox.FormattingEnabled = true;
             Category_ComboBox.IntegralHeight = false;
-            Category_ComboBox.Location = new Point(104, 302);
+            Category_ComboBox.Location = new Point(104, 308);
             Category_ComboBox.Name = "Category_ComboBox";
             Category_ComboBox.Size = new Size(181, 28);
             Category_ComboBox.TabIndex = 10;
@@ -182,7 +182,7 @@
             browse_button.FlatStyle = FlatStyle.Flat;
             browse_button.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             browse_button.ForeColor = Color.White;
-            browse_button.Location = new Point(411, 330);
+            browse_button.Location = new Point(411, 348);
             browse_button.Name = "browse_button";
             browse_button.Size = new Size(103, 38);
             browse_button.TabIndex = 9;
@@ -193,7 +193,7 @@
             // pictureBox1
             // 
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(401, 179);
+            pictureBox1.Location = new Point(401, 197);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(125, 125);
             pictureBox1.TabIndex = 8;
@@ -203,7 +203,7 @@
             // 
             category_label.AutoSize = true;
             category_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            category_label.Location = new Point(100, 275);
+            category_label.Location = new Point(100, 281);
             category_label.Name = "category_label";
             category_label.Size = new Size(69, 20);
             category_label.TabIndex = 4;
@@ -234,7 +234,7 @@
             panel4.Controls.Add(save_button);
             panel4.Controls.Add(cancel_button);
             panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 434);
+            panel4.Location = new Point(0, 435);
             panel4.Name = "panel4";
             panel4.Size = new Size(655, 70);
             panel4.TabIndex = 1;
@@ -276,7 +276,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(659, 507);
+            ClientSize = new Size(659, 508);
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;

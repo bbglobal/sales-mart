@@ -51,6 +51,8 @@
             panel4 = new Panel();
             save_button = new Button();
             cancel_button = new Button();
+            ExpiryDate_TextBox = new DateTimePicker();
+            label6 = new Label();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -101,12 +103,14 @@
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(1, 0, 1, 1);
-            panel1.Size = new Size(659, 507);
+            panel1.Size = new Size(659, 588);
             panel1.TabIndex = 1;
             // 
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(ExpiryDate_TextBox);
+            panel2.Controls.Add(label6);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(Unit_ComboBox);
@@ -126,7 +130,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(1, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(655, 504);
+            panel2.Size = new Size(655, 585);
             panel2.TabIndex = 1;
             // 
             // label5
@@ -199,7 +203,7 @@
             Status_ComboBox.FormattingEnabled = true;
             Status_ComboBox.IntegralHeight = false;
             Status_ComboBox.Items.AddRange(new object[] { "Active", "Inactive" });
-            Status_ComboBox.Location = new Point(104, 380);
+            Status_ComboBox.Location = new Point(104, 458);
             Status_ComboBox.Name = "Status_ComboBox";
             Status_ComboBox.Size = new Size(181, 28);
             Status_ComboBox.TabIndex = 12;
@@ -208,7 +212,7 @@
             // 
             status_label.AutoSize = true;
             status_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            status_label.Location = new Point(100, 353);
+            status_label.Location = new Point(100, 431);
             status_label.Name = "status_label";
             status_label.Size = new Size(49, 20);
             status_label.TabIndex = 11;
@@ -222,7 +226,7 @@
             Category_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Category_ComboBox.FormattingEnabled = true;
             Category_ComboBox.IntegralHeight = false;
-            Category_ComboBox.Location = new Point(104, 302);
+            Category_ComboBox.Location = new Point(104, 382);
             Category_ComboBox.Name = "Category_ComboBox";
             Category_ComboBox.Size = new Size(181, 28);
             Category_ComboBox.TabIndex = 10;
@@ -234,7 +238,7 @@
             browse_button.FlatStyle = FlatStyle.Flat;
             browse_button.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             browse_button.ForeColor = Color.White;
-            browse_button.Location = new Point(411, 330);
+            browse_button.Location = new Point(411, 357);
             browse_button.Name = "browse_button";
             browse_button.Size = new Size(103, 38);
             browse_button.TabIndex = 9;
@@ -245,7 +249,7 @@
             // pictureBox1
             // 
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(401, 179);
+            pictureBox1.Location = new Point(401, 206);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(125, 125);
             pictureBox1.TabIndex = 8;
@@ -255,7 +259,7 @@
             // 
             category_label.AutoSize = true;
             category_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            category_label.Location = new Point(100, 275);
+            category_label.Location = new Point(100, 355);
             category_label.Name = "category_label";
             category_label.Size = new Size(69, 20);
             category_label.TabIndex = 4;
@@ -286,7 +290,7 @@
             panel4.Controls.Add(save_button);
             panel4.Controls.Add(cancel_button);
             panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 434);
+            panel4.Location = new Point(0, 515);
             panel4.Name = "panel4";
             panel4.Size = new Size(655, 70);
             panel4.TabIndex = 1;
@@ -324,11 +328,29 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
+            // ExpiryDate_TextBox
+            // 
+            ExpiryDate_TextBox.Format = DateTimePickerFormat.Short;
+            ExpiryDate_TextBox.Location = new Point(102, 308);
+            ExpiryDate_TextBox.Name = "ExpiryDate_TextBox";
+            ExpiryDate_TextBox.Size = new Size(181, 23);
+            ExpiryDate_TextBox.TabIndex = 21;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(98, 279);
+            label6.Name = "label6";
+            label6.Size = new Size(85, 20);
+            label6.TabIndex = 20;
+            label6.Text = "Expiry Date";
+            // 
             // ItemsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(659, 507);
+            ClientSize = new Size(659, 588);
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -370,5 +392,7 @@
         private Label label4;
         private ComboBox Unit_ComboBox;
         private TextBox Quantity_TextBox;
+        private DateTimePicker ExpiryDate_TextBox;
+        private Label label6;
     }
 }
