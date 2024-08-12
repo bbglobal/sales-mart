@@ -3014,6 +3014,8 @@ namespace POS
 
 
 
+        #region All Room Screen Functions
+
         #region Rooms Tab Button Functions
 
 
@@ -3129,10 +3131,10 @@ namespace POS
 
             // Generate sample data rows
             dataTable.Rows.Add(1, "A/C Standard", 101, 125, "Y");
-            dataTable.Rows.Add(2, "A/C Standard", 101, 125, "Y");
-            dataTable.Rows.Add(3, "A/C Standard", 101, 125, "Y");
-            dataTable.Rows.Add(4, "A/C Standard", 101, 125, "Y");
-            dataTable.Rows.Add(5, "A/C Standard", 101, 125, "Y");
+            dataTable.Rows.Add(2, "A/C Standard", 102, 125, "N");
+            dataTable.Rows.Add(3, "A/C Standard", 103, 125, "N");
+            dataTable.Rows.Add(4, "A/C Standard", 104, 125, "Y");
+            dataTable.Rows.Add(5, "A/C Standard", 105, 125, "Y");
 
 
             return dataTable;
@@ -3297,6 +3299,8 @@ namespace POS
         #endregion
 
 
+        #region Data to Database Function for Both Room Types Screen and Room Details Screen
+
         private void DataToDataBase(string query, string message)
         {
             try
@@ -3320,9 +3324,10 @@ namespace POS
 
         }
 
+        #endregion
 
 
-
+        #region Browse Button Function and Image to ByteArray Function 
 
         string filepath;
         private void browseRoom_button_Click(object sender, EventArgs e)
@@ -3349,7 +3354,9 @@ namespace POS
             }
         }
 
+        #endregion
 
+        #region Room Details Add, Update, Reset ,Load Functions and DataGrid EventListener Funcions
 
         private void AddRoomDetailsButton_Click(object sender, EventArgs e)
         {
@@ -3491,6 +3498,10 @@ namespace POS
                 }
             }
         }
+        #endregion
+
+        #region Room Type ComboBox Set Function and Room Details Panel Visibility Function 
+
 
         private async Task setRoomTypeComboBox()
         {
@@ -3529,6 +3540,13 @@ namespace POS
                 }
             }
         }
+
+        #endregion
+
+        #endregion
+
+
+
 
         private void GuestInfoListTabButton_Click(object sender, EventArgs e)
         {
