@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static System.Windows.Forms.AxHost;
 
 namespace POS
 {
@@ -38,7 +39,9 @@ namespace POS
         private Point Menu_Client_label_initialPosition;
         private Point Menu_POS_label_initialPosition;
         private Point Menu_Reports_label_initialPosition;
+        private Point Menu_Branch_label_initialPosition;
         private Point Menu_Settings_label_initialPosition;
+
         private Point Menu_Dashboard_label_targetPosition;
         private Point Menu_Products_label_targetPosition;
         private Point Menu_Staff_label_targetPosition;
@@ -47,7 +50,9 @@ namespace POS
         private Point Menu_Client_label_targetPosition;
         private Point Menu_POS_label_targetPosition;
         private Point Menu_Reports_label_targetPosition;
+        private Point Menu_Branch_label_targetPosition;
         private Point Menu_Settings_label_targetPosition;
+
         private int targetWidth;
         private int initialWidth;
         private int ScreenContainer_panelinitialWidth;
@@ -93,6 +98,7 @@ namespace POS
             RoundCorners(Menu_Supplier_label, 20);
             RoundCorners(Menu_Client_label, 20);
             RoundCorners(Menu_Reports_label, 20);
+            RoundCorners(Menu_Branch_label, 20);
             RoundCorners(Menu_Settings_label, 20);
             InitializeTimer();
             //LoadCustomFont("POS.MyriadProSemibold.ttf");
@@ -261,10 +267,13 @@ namespace POS
 
 
                 Menu_Reports_label_initialPosition = Menu_Reports_label.Location;
-                Menu_Reports_label_targetPosition = new Point(10, 532);
+                Menu_Reports_label_targetPosition = new Point(10, 532); 
+                
+                Menu_Branch_label_initialPosition = Menu_Branch_label.Location;
+                Menu_Branch_label_targetPosition = new Point(10, 592);
 
                 Menu_Settings_label_initialPosition = Menu_Settings_label.Location;
-                Menu_Settings_label_targetPosition = new Point(10, 592);
+                Menu_Settings_label_targetPosition = new Point(10, 652);
 
                 Menu_Logo_initialPosition = Logo.Location;
                 Menu_Logo_targetPosition = new Point(10, 30);
@@ -308,9 +317,12 @@ namespace POS
 
                 Menu_Reports_label_initialPosition = Menu_Reports_label.Location;
                 Menu_Reports_label_targetPosition = new Point(55, 532);
+                
+                Menu_Branch_label_initialPosition = Menu_Branch_label.Location;
+                Menu_Branch_label_targetPosition = new Point(55, 592);
 
                 Menu_Settings_label_initialPosition = Menu_Settings_label.Location;
-                Menu_Settings_label_targetPosition = new Point(55, 592);
+                Menu_Settings_label_targetPosition = new Point(55, 652);
 
                 Menu_Logo_initialPosition = Logo.Location;
                 Menu_Logo_targetPosition = new Point(36, 30);
@@ -348,6 +360,7 @@ namespace POS
                 Menu_Client_label.Location = Menu_Client_label_targetPosition;
                 Menu_POS_label.Location = Menu_POS_label_targetPosition;
                 Menu_Reports_label.Location = Menu_Reports_label_targetPosition;
+                Menu_Branch_label.Location = Menu_Branch_label_targetPosition;
                 Menu_Settings_label.Location = Menu_Settings_label_targetPosition;
                 Logo.Location = Menu_Logo_targetPosition;
 
@@ -388,6 +401,10 @@ namespace POS
                 int Menu_Reports_label_newX = (int)(Menu_Reports_label_initialPosition.X + (Menu_Reports_label_targetPosition.X - Menu_Reports_label_initialPosition.X) * progress);
                 int Menu_Reports_label_newY = (int)Menu_Reports_label_targetPosition.Y;
                 Menu_Reports_label.Location = new Point(Menu_Reports_label_newX, Menu_Reports_label_newY);
+
+                int Menu_Branch_label_newX = (int)(Menu_Branch_label_initialPosition.X + (Menu_Branch_label_targetPosition.X - Menu_Branch_label_initialPosition.X) * progress);
+                int Menu_Branch_label_newY = (int)Menu_Branch_label_targetPosition.Y;
+                Menu_Branch_label.Location = new Point(Menu_Branch_label_newX, Menu_Branch_label_newY);
 
                 int Menu_Settings_label_newX = (int)(Menu_Settings_label_initialPosition.X + (Menu_Settings_label_targetPosition.X - Menu_Settings_label_initialPosition.X) * progress);
                 int Menu_Settings_label_newY = (int)Menu_Settings_label_targetPosition.Y;
@@ -472,6 +489,7 @@ namespace POS
             Menu_Supplier_label.BackColor = Color.Transparent;
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Branch_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Dashboard";
             if (ContentContainer_panel.Visible == false)
@@ -484,6 +502,7 @@ namespace POS
                 ClientsPanel.Visible = false;
                 PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
+                BranchPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = true;
             }
@@ -500,6 +519,7 @@ namespace POS
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Branch_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Products/Restaurant";
             if (ProductPanel.Visible == false)
@@ -511,6 +531,7 @@ namespace POS
                 ClientsPanel.Visible = false;
                 PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
+                BranchPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 ProductPanel.Visible = true;
             }
@@ -530,6 +551,7 @@ namespace POS
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Branch_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "POS";
             if (POSPanel.Visible == false)
@@ -542,6 +564,7 @@ namespace POS
                 ClientsPanel.Visible = false;
                 PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
+                BranchPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 StartTransition(60, "Hide");
                 AddPOSCategory();
@@ -575,6 +598,7 @@ namespace POS
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Branch_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Staff";
             if (StaffPanel.Visible == false)
@@ -586,6 +610,7 @@ namespace POS
                 ClientsPanel.Visible = false;
                 PurchasePanel.Visible = false;
                 ReportsPanel.Visible = false;
+                BranchPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 StaffPanel.Visible = true;
             }
@@ -601,6 +626,7 @@ namespace POS
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Branch_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Transactions";
             if (PurchasePanel.Visible == false)
@@ -612,6 +638,7 @@ namespace POS
                 ClientsPanel.Visible = false;
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
+                BranchPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 PurchasePanel.Visible = true;
             }
@@ -630,6 +657,7 @@ namespace POS
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Branch_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Suppliers";
             if (SupplierPanel.Visible == false)
@@ -641,6 +669,7 @@ namespace POS
                 PurchasePanel.Visible = false;
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
+                BranchPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 SupplierPanel.Visible = true;
             }
@@ -660,6 +689,7 @@ namespace POS
             Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Branch_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Clients";
             if (ClientsPanel.Visible == false)
@@ -671,6 +701,7 @@ namespace POS
                 PurchasePanel.Visible = false;
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
+                BranchPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 ClientsPanel.Visible = true;
             }
@@ -691,6 +722,7 @@ namespace POS
             Menu_Supplier_label.BackColor = Color.Transparent;
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Branch_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Reports";
             if (ReportsPanel.Visible == false)
@@ -702,11 +734,39 @@ namespace POS
                 StaffPanel.Visible = false;
                 ClientsPanel.Visible = false;
                 PurchasePanel.Visible = false;
+                BranchPanel.Visible = false;
                 //ProductPanel.Visible = false;
                 ReportsPanel.Visible = true;
             }
         }
-
+        private void Menu_Branch_label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Branch_label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Transactions_label.BackColor = Color.Transparent;
+            Menu_Supplier_label.BackColor = Color.Transparent;
+            Menu_Client_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Branch Management";
+            if (BranchPanel.Visible == false)
+            {
+                ProductPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                POSPanel.Visible = false;
+                SupplierPanel.Visible = false;
+                StaffPanel.Visible = false;
+                ClientsPanel.Visible = false;
+                PurchasePanel.Visible = false;
+                //ProductPanel.Visible = false;
+                ReportsPanel.Visible = false;
+                BranchPanel.Visible = true;
+            }
+        }
         private void Menu_Settings_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Settings_label, "#0077C3");
@@ -718,6 +778,7 @@ namespace POS
             Menu_Client_label.BackColor = Color.Transparent;
             Menu_Transactions_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Branch_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
         }
         #endregion
@@ -1062,17 +1123,17 @@ namespace POS
             CurrentUser_label.Text = $"User Name:  {Session.Username}";
             CurrentUser_label.Location = new Point(CurrentUser_label.Location.X - (CurrentUser_label.Width - CurrentUserInitialWidth), CurrentUser_label.Location.Y);
             Set_CardBox_Positions();
-            SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
-            SetLabelLocations(Menu_Products_label, new Point(55, 172));
-            SetLabelLocations(Menu_Staff_label, new Point(55, 232));
-            SetLabelLocations(Menu_Transactions_label, new Point(55, 292));
-            SetLabelLocations(Menu_Supplier_label, new Point(55, 352));
-            SetLabelLocations(Menu_Client_label, new Point(55, 412));
-            SetLabelLocations(Menu_POS_label, new Point(55, 472));
-            SetLabelLocations(Menu_Reports_label, new Point(55, 532));
-            SetLabelLocations(Menu_Settings_label, new Point(55, 592));
+            AllLabelLocations(55, 112, 60);
+            //SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
+            //SetLabelLocations(Menu_Products_label, new Point(55, 172));
+            //SetLabelLocations(Menu_Staff_label, new Point(55, 232));
+            //SetLabelLocations(Menu_Transactions_label, new Point(55, 292));
+            //SetLabelLocations(Menu_Supplier_label, new Point(55, 352));
+            //SetLabelLocations(Menu_Client_label, new Point(55, 412));
+            //SetLabelLocations(Menu_POS_label, new Point(55, 472));
+            //SetLabelLocations(Menu_Reports_label, new Point(55, 532));
+            //SetLabelLocations(Menu_Settings_label, new Point(55, 592));
             SetLabelColor(Menu_Dashboard_label, "#0077C3");
-
             //Menu_Dashboard_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
             //Menu_Products_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
             //Menu_Tables_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
@@ -1088,6 +1149,32 @@ namespace POS
 
 
         }
+
+
+        private void AllLabelLocations(int X, int start, int increment)
+        {
+            SetLabelLocations(Menu_Dashboard_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Products_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Staff_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Transactions_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Supplier_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Client_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_POS_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Reports_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Branch_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Settings_label, new Point(X, start));
+        }
+
+
 
         private async void SupplierDashboardData()
         {
@@ -2065,7 +2152,7 @@ namespace POS
             {
                 List<string> columnValues = new List<string>();
                 decimal total_amount = 0;
-                
+
 
                 foreach (DataGridViewRow row in POSProductsDataGrid.Rows)
                 {
@@ -2354,7 +2441,7 @@ namespace POS
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("insert into bill_list(items,date,type,status,total_amount,net_total_amount) values(@Items,@Date,@Type,@Status,@Total,@NetTotal)", connection);
-                    
+
                     command.Parameters.AddWithValue("@Items", JSONItems);
                     command.Parameters.AddWithValue("@Date", DateTime.Now);
                     command.Parameters.AddWithValue("@Type", "Take Away");
@@ -2382,14 +2469,14 @@ namespace POS
                     connection.Close();
                 }
             }
-            
+
         }
 
         private void CheckOutButton_Click(object sender, EventArgs e)
         {
 
             string updateStatus = "";
-            using (GSPaymentMethodScreen pms = new GSPaymentMethodScreen(TotalItemsAmount, BillID,JSONItems))
+            using (GSPaymentMethodScreen pms = new GSPaymentMethodScreen(TotalItemsAmount, BillID, JSONItems))
             {
                 if (pms.ShowDialog() != DialogResult.OK)
                 {
@@ -2544,24 +2631,150 @@ namespace POS
             }
         }
 
+
+
+
+
+        #region Sample Data For Branch Management
+
+        private void sampleDataForBranchDetails() 
+        {
+            DataTable dataTable = new DataTable();
+
+            // Define columns
+            dataTable.Columns.Add("Branch Name", typeof(string));
+            dataTable.Columns.Add("Branch Code", typeof(string));
+            dataTable.Columns.Add("Phone", typeof(string));
+            dataTable.Columns.Add("Address", typeof(string));
+            dataTable.Columns.Add("Note", typeof(string));
+
+            // Add sample data
+            dataTable.Rows.Add("Downtown Branch", "D01", "555-1234", "123 Main St, Downtown", "Main office branch");
+            dataTable.Rows.Add("Uptown Branch", "U01", "555-5678", "456 Elm St, Uptown", "Sales and service branch");
+            dataTable.Rows.Add("Suburb Branch", "S01", "555-9876", "789 Oak St, Suburb", "Customer support branch");
+            dataTable.Rows.Add("Airport Branch", "A01", "555-4321", "101 Airport Rd, Airport", "24/7 service branch");
+            dataTable.Rows.Add("Central Branch", "C01", "555-6789", "202 Central Ave, Central City", "Headquarters branch");
+            BranchDataGrid.DataSource = null;
+            BranchDataGrid.Columns.Clear();
+            BranchDataGrid.DataSource = dataTable;
+            DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
+            {
+                HeaderText = "Edit",
+                Image = ResizeImage((Image)EditImage, 15, 15),
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            };
+            BranchDataGrid.Columns.Add(EditBtn);
+
+            DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
+            {
+                HeaderText = "Delete",
+                Image = ResizeImage((Image)DeleteImage, 15, 15),
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            };
+            BranchDataGrid.Columns.Add(DelBtn);
+        }
         
+        private void sampleDataForStockTransfer() 
+        {
+            DataTable dataTable = new DataTable();
+
+            // Define columns
+            dataTable.Columns.Add("Source Branch", typeof(string));
+            dataTable.Columns.Add("Dest Branch", typeof(string));
+            dataTable.Columns.Add("Product", typeof(string));
+            dataTable.Columns.Add("Stock Transfer Amount", typeof(decimal));
+
+            // Add sample data
+            dataTable.Rows.Add("Downtown Branch", "Uptown Branch", "Laptops", 15);
+            dataTable.Rows.Add("Uptown Branch", "Suburb Branch", "Monitors", 20);
+            dataTable.Rows.Add("Suburb Branch", "Airport Branch", "Keyboards", 10);
+            dataTable.Rows.Add("Airport Branch", "Central Branch", "Mice", 25);
+            dataTable.Rows.Add("Central Branch", "Downtown Branch", "Printers", 5);
+            BranchDataGrid.DataSource = null;
+            BranchDataGrid.Columns.Clear();
+            BranchDataGrid.DataSource = dataTable;
+            DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
+            {
+                HeaderText = "Edit",
+                Image = ResizeImage((Image)EditImage, 15, 15),
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            };
+            BranchDataGrid.Columns.Add(EditBtn);
+
+            DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
+            {
+                HeaderText = "Delete",
+                Image = ResizeImage((Image)DeleteImage, 15, 15),
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            };
+            BranchDataGrid.Columns.Add(DelBtn);
+        }
+
+        #endregion
 
 
 
 
 
+        private void BranchTabButton_Click(object sender, EventArgs e)
+        {
+            if (BranchTabButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
 
+                BranchTabButton.BackColor = Color.FromArgb(37, 150, 190);
+                BranchTabButton.ForeColor = Color.White;
+                StockTransferTabButton.BackColor = Color.Transparent;
+                StockTransferTabButton.ForeColor = SystemColors.GrayText;
+                sampleDataForBranchDetails();
+            }
+        }
 
+        private void StockTransferTabButton_Click(object sender, EventArgs e)
+        {
+            if (StockTransferTabButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
 
+                StockTransferTabButton.BackColor = Color.FromArgb(37, 150, 190);
+                StockTransferTabButton.ForeColor = Color.White;
+                BranchTabButton.BackColor = Color.Transparent;
+                BranchTabButton.ForeColor = SystemColors.GrayText;
+                sampleDataForStockTransfer();
+            }
+        }
 
+        private void BranchPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (BranchPanel.Visible == true)
+            {
+                if (BranchTabButton.BackColor == Color.FromArgb(37, 150, 190))
+                {
+                    sampleDataForBranchDetails();
+                }
 
+                else
+                {
+                    sampleDataForStockTransfer();
+                }
+            }
+        }
 
+        private void AddBranchButton_Click(object sender, EventArgs e)
+        {
+            if (BranchTabButton.BackColor == Color.FromArgb(37, 150, 190))
+            {
+                BranchForm BForm = new BranchForm();
+                BForm.ShowDialog();
+                //LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
+            }
 
-
-
-
-
-       
+            else
+            {
+                StockTransferForm stockTransfer = new StockTransferForm();
+                stockTransfer.ShowDialog();
+                //string query = "select * from staff_category";
+                //LoadDataAsync(StaffDataGrid, query, "Sync");
+            }
+        }
     }
 }
 

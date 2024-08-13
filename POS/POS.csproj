@@ -39,6 +39,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="GeneralStorePOS\StockTransferForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GeneralStorePOS\BranchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="HotelDashboard.cs">
       <SubType>Form</SubType>
     </Compile>

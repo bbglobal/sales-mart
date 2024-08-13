@@ -92,6 +92,10 @@
             Current_ScreenName_label = new Label();
             Splitter_label = new Label();
             GuestInfoPanel = new Panel();
+            GuestInfoListMiniPanel = new Panel();
+            textBox27 = new TextBox();
+            button17 = new Button();
+            GuestInfoListDataGrid = new DataGridView();
             GuestInfoListTabButton = new Button();
             GuestInfoTabButton = new Button();
             tableLayoutPanel13 = new TableLayoutPanel();
@@ -129,10 +133,6 @@
             panel12 = new Panel();
             textBox3 = new TextBox();
             label11 = new Label();
-            GuestInfoListMiniPanel = new Panel();
-            textBox27 = new TextBox();
-            button17 = new Button();
-            GuestInfoListDataGrid = new DataGridView();
             RoomsPanel = new Panel();
             RoomTypeTab = new Button();
             RoomHistoryTab = new Button();
@@ -358,6 +358,8 @@
             Sidebar_panel.SuspendLayout();
             ScreenContainer_panel.SuspendLayout();
             GuestInfoPanel.SuspendLayout();
+            GuestInfoListMiniPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)GuestInfoListDataGrid).BeginInit();
             tableLayoutPanel13.SuspendLayout();
             panel47.SuspendLayout();
             panel48.SuspendLayout();
@@ -371,8 +373,6 @@
             panel14.SuspendLayout();
             panel13.SuspendLayout();
             panel12.SuspendLayout();
-            GuestInfoListMiniPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)GuestInfoListDataGrid).BeginInit();
             RoomsPanel.SuspendLayout();
             RoomDetailsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RoomDetailsDataGrid).BeginInit();
@@ -809,6 +809,94 @@
             GuestInfoPanel.TabIndex = 13;
             GuestInfoPanel.Visible = false;
             // 
+            // GuestInfoListMiniPanel
+            // 
+            GuestInfoListMiniPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            GuestInfoListMiniPanel.Controls.Add(textBox27);
+            GuestInfoListMiniPanel.Controls.Add(button17);
+            GuestInfoListMiniPanel.Controls.Add(GuestInfoListDataGrid);
+            GuestInfoListMiniPanel.Location = new Point(0, 70);
+            GuestInfoListMiniPanel.Name = "GuestInfoListMiniPanel";
+            GuestInfoListMiniPanel.Size = new Size(978, 569);
+            GuestInfoListMiniPanel.TabIndex = 11;
+            GuestInfoListMiniPanel.Visible = false;
+            // 
+            // textBox27
+            // 
+            textBox27.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBox27.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox27.Location = new Point(745, 19);
+            textBox27.Multiline = true;
+            textBox27.Name = "textBox27";
+            textBox27.PlaceholderText = "Search..";
+            textBox27.Size = new Size(218, 29);
+            textBox27.TabIndex = 6;
+            textBox27.WordWrap = false;
+            // 
+            // button17
+            // 
+            button17.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button17.BackColor = Color.White;
+            button17.FlatStyle = FlatStyle.Flat;
+            button17.Image = (Image)resources.GetObject("button17.Image");
+            button17.Location = new Point(717, 19);
+            button17.Name = "button17";
+            button17.Size = new Size(29, 29);
+            button17.TabIndex = 7;
+            button17.UseVisualStyleBackColor = false;
+            // 
+            // GuestInfoListDataGrid
+            // 
+            GuestInfoListDataGrid.AllowUserToAddRows = false;
+            GuestInfoListDataGrid.AllowUserToDeleteRows = false;
+            GuestInfoListDataGrid.AllowUserToResizeColumns = false;
+            GuestInfoListDataGrid.AllowUserToResizeRows = false;
+            GuestInfoListDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            GuestInfoListDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            GuestInfoListDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            GuestInfoListDataGrid.BackgroundColor = Color.White;
+            GuestInfoListDataGrid.BorderStyle = BorderStyle.None;
+            GuestInfoListDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            GuestInfoListDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            GuestInfoListDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            GuestInfoListDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            GuestInfoListDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            GuestInfoListDataGrid.EnableHeadersVisualStyles = false;
+            GuestInfoListDataGrid.Location = new Point(4, 71);
+            GuestInfoListDataGrid.Margin = new Padding(0);
+            GuestInfoListDataGrid.Name = "GuestInfoListDataGrid";
+            GuestInfoListDataGrid.ReadOnly = true;
+            GuestInfoListDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new Padding(3);
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            GuestInfoListDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            GuestInfoListDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle4.Padding = new Padding(3);
+            GuestInfoListDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            GuestInfoListDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            GuestInfoListDataGrid.Size = new Size(970, 488);
+            GuestInfoListDataGrid.TabIndex = 2;
+            // 
             // GuestInfoListTabButton
             // 
             GuestInfoListTabButton.BackColor = Color.Transparent;
@@ -1241,94 +1329,6 @@
             label11.Size = new Size(96, 21);
             label11.TabIndex = 0;
             label11.Text = "Guest Name";
-            // 
-            // GuestInfoListMiniPanel
-            // 
-            GuestInfoListMiniPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            GuestInfoListMiniPanel.Controls.Add(textBox27);
-            GuestInfoListMiniPanel.Controls.Add(button17);
-            GuestInfoListMiniPanel.Controls.Add(GuestInfoListDataGrid);
-            GuestInfoListMiniPanel.Location = new Point(0, 70);
-            GuestInfoListMiniPanel.Name = "GuestInfoListMiniPanel";
-            GuestInfoListMiniPanel.Size = new Size(978, 569);
-            GuestInfoListMiniPanel.TabIndex = 11;
-            GuestInfoListMiniPanel.Visible = false;
-            // 
-            // textBox27
-            // 
-            textBox27.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox27.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox27.Location = new Point(745, 19);
-            textBox27.Multiline = true;
-            textBox27.Name = "textBox27";
-            textBox27.PlaceholderText = "Search..";
-            textBox27.Size = new Size(218, 29);
-            textBox27.TabIndex = 6;
-            textBox27.WordWrap = false;
-            // 
-            // button17
-            // 
-            button17.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button17.BackColor = Color.White;
-            button17.FlatStyle = FlatStyle.Flat;
-            button17.Image = (Image)resources.GetObject("button17.Image");
-            button17.Location = new Point(717, 19);
-            button17.Name = "button17";
-            button17.Size = new Size(29, 29);
-            button17.TabIndex = 7;
-            button17.UseVisualStyleBackColor = false;
-            // 
-            // GuestInfoListDataGrid
-            // 
-            GuestInfoListDataGrid.AllowUserToAddRows = false;
-            GuestInfoListDataGrid.AllowUserToDeleteRows = false;
-            GuestInfoListDataGrid.AllowUserToResizeColumns = false;
-            GuestInfoListDataGrid.AllowUserToResizeRows = false;
-            GuestInfoListDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            GuestInfoListDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            GuestInfoListDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            GuestInfoListDataGrid.BackgroundColor = Color.White;
-            GuestInfoListDataGrid.BorderStyle = BorderStyle.None;
-            GuestInfoListDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            GuestInfoListDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            GuestInfoListDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            GuestInfoListDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            GuestInfoListDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            GuestInfoListDataGrid.EnableHeadersVisualStyles = false;
-            GuestInfoListDataGrid.Location = new Point(4, 71);
-            GuestInfoListDataGrid.Margin = new Padding(0);
-            GuestInfoListDataGrid.Name = "GuestInfoListDataGrid";
-            GuestInfoListDataGrid.ReadOnly = true;
-            GuestInfoListDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new Padding(3);
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            GuestInfoListDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            GuestInfoListDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Padding = new Padding(3);
-            GuestInfoListDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            GuestInfoListDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            GuestInfoListDataGrid.Size = new Size(970, 488);
-            GuestInfoListDataGrid.TabIndex = 2;
             // 
             // RoomsPanel
             // 
@@ -4548,6 +4548,9 @@
             ScreenContainer_panel.ResumeLayout(false);
             ScreenContainer_panel.PerformLayout();
             GuestInfoPanel.ResumeLayout(false);
+            GuestInfoListMiniPanel.ResumeLayout(false);
+            GuestInfoListMiniPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)GuestInfoListDataGrid).EndInit();
             tableLayoutPanel13.ResumeLayout(false);
             panel47.ResumeLayout(false);
             panel47.PerformLayout();
@@ -4571,9 +4574,6 @@
             panel13.PerformLayout();
             panel12.ResumeLayout(false);
             panel12.PerformLayout();
-            GuestInfoListMiniPanel.ResumeLayout(false);
-            GuestInfoListMiniPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)GuestInfoListDataGrid).EndInit();
             RoomsPanel.ResumeLayout(false);
             RoomDetailsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)RoomDetailsDataGrid).EndInit();
