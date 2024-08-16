@@ -2302,6 +2302,8 @@ namespace POS
                 if (POSProductsDataGrid.Rows[e.RowIndex].Cells["quantity"].Value == null)
                 {
                     POSProductsDataGrid.Rows[e.RowIndex].Cells["quantity"].Value = 1;
+                    POSProductsDataGrid.Rows[e.RowIndex].Cells["total_amount"].Value = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells["product_price"].Value) * Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+                    setTotalAmount();
                     return;
                 }
                 decimal qty = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
@@ -2309,6 +2311,7 @@ namespace POS
                 if (qty > 0)
                 {
                     POSProductsDataGrid.Rows[e.RowIndex].Cells["total_amount"].Value = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells["product_price"].Value) * qty;
+                    setTotalAmount();
                 }
                 else
                 {

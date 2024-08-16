@@ -14,7 +14,9 @@
     <None Remove="Reports\Receipt.rdlc" />
     <None Remove="Reports\SRByCategory.rdlc" />
     <None Remove="Resources\delete.png" />
+    <None Remove="Resources\details.png" />
     <None Remove="Resources\edit.png" />
+    <None Remove="Resources\pay.png" />
     <None Remove="Resources\printIcon.png" />
     <None Remove="Resources\radio_checked.png" />
     <None Remove="Resources\radio_unchecked.png" />
@@ -25,7 +27,9 @@
     <EmbeddedResource Include="Reports\Receipt.rdlc" />
     <EmbeddedResource Include="Reports\SRByCategory.rdlc" />
     <EmbeddedResource Include="Resources\delete.png" />
+    <EmbeddedResource Include="Resources\details.png" />
     <EmbeddedResource Include="Resources\edit.png" />
+    <EmbeddedResource Include="Resources\pay.png" />
     <EmbeddedResource Include="Resources\printIcon.png" />
     <EmbeddedResource Include="Resources\radio_checked.png" />
     <EmbeddedResource Include="Resources\radio_unchecked.png" />
@@ -39,6 +43,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="GeneralStorePOS\LaybyDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GeneralStorePOS\LaybyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="GeneralStorePOS\StockTransferForm.cs">
       <SubType>Form</SubType>
     </Compile>

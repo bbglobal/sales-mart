@@ -30,8 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GSDashboard));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
@@ -58,8 +56,15 @@
             DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle29 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle30 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle31 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle32 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             Main_panel = new Panel();
             Sidebar_panel = new Panel();
+            Menu_Layby_label = new Label();
             Menu_Branch_label = new Label();
             Menu_Client_label = new Label();
             Menu_Supplier_label = new Label();
@@ -73,6 +78,40 @@
             Menu_Products_label = new Label();
             Menu_Dashboard_label = new Label();
             ScreenContainer_panel = new Panel();
+            LaybyPanel = new Panel();
+            LaybyDataGrid = new DataGridView();
+            tableLayoutPanel6 = new TableLayoutPanel();
+            comboBox7 = new ComboBox();
+            panel11 = new Panel();
+            textBox3 = new TextBox();
+            button6 = new Button();
+            CurrentUser_label = new Label();
+            Current_ScreenName_label = new Label();
+            Splitter_label = new Label();
+            PurchasePanel = new Panel();
+            PurchaseDataGrid = new DataGridView();
+            Purchase_TablePanelLayout = new TableLayoutPanel();
+            PurchaseAddButton = new Button();
+            comboBox5 = new ComboBox();
+            panel9 = new Panel();
+            Purchase_SearchTextBox = new TextBox();
+            button4 = new Button();
+            ClientsPanel = new Panel();
+            ClientsDataGrid = new DataGridView();
+            tableLayoutPanel3 = new TableLayoutPanel();
+            AddClientsButton = new Button();
+            comboBox4 = new ComboBox();
+            panel8 = new Panel();
+            Clients_SearchTextBox = new TextBox();
+            button3 = new Button();
+            SupplierPanel = new Panel();
+            SupplierDataGrid = new DataGridView();
+            Tables_tableLayoutPanel = new TableLayoutPanel();
+            SupplierAddButton = new Button();
+            comboBox3 = new ComboBox();
+            panel5 = new Panel();
+            SupplierSearchTextBox = new TextBox();
+            button5 = new Button();
             BranchPanel = new Panel();
             StockTransferTabButton = new Button();
             BranchTabButton = new Button();
@@ -83,9 +122,6 @@
             panel10 = new Panel();
             BranchSearchTextBox = new TextBox();
             button8 = new Button();
-            CurrentUser_label = new Label();
-            Current_ScreenName_label = new Label();
-            Splitter_label = new Label();
             StaffPanel = new Panel();
             StaffCategoryTab = new Button();
             StaffTab = new Button();
@@ -154,6 +190,7 @@
             Unit = new DataGridViewTextBoxColumn();
             total_amount = new DataGridViewTextBoxColumn();
             tableLayoutPanel1 = new TableLayoutPanel();
+            LaybyButton = new Button();
             TakeAwayButton = new Button();
             DeliveryButton = new Button();
             BillListButton = new Button();
@@ -176,34 +213,26 @@
             StaffListButton = new Button();
             SalesReportItemWiseButton = new Button();
             MenuListButton = new Button();
-            PurchasePanel = new Panel();
-            PurchaseDataGrid = new DataGridView();
-            Purchase_TablePanelLayout = new TableLayoutPanel();
-            PurchaseAddButton = new Button();
-            comboBox5 = new ComboBox();
-            panel9 = new Panel();
-            Purchase_SearchTextBox = new TextBox();
-            button4 = new Button();
-            ClientsPanel = new Panel();
-            ClientsDataGrid = new DataGridView();
-            tableLayoutPanel3 = new TableLayoutPanel();
-            AddClientsButton = new Button();
-            comboBox4 = new ComboBox();
-            panel8 = new Panel();
-            Clients_SearchTextBox = new TextBox();
-            button3 = new Button();
-            SupplierPanel = new Panel();
-            SupplierDataGrid = new DataGridView();
-            Tables_tableLayoutPanel = new TableLayoutPanel();
-            SupplierAddButton = new Button();
-            comboBox3 = new ComboBox();
-            panel5 = new Panel();
-            SupplierSearchTextBox = new TextBox();
-            button5 = new Button();
             notifyIcon1 = new NotifyIcon(components);
             Main_panel.SuspendLayout();
             Sidebar_panel.SuspendLayout();
             ScreenContainer_panel.SuspendLayout();
+            LaybyPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)LaybyDataGrid).BeginInit();
+            tableLayoutPanel6.SuspendLayout();
+            panel11.SuspendLayout();
+            PurchasePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)PurchaseDataGrid).BeginInit();
+            Purchase_TablePanelLayout.SuspendLayout();
+            panel9.SuspendLayout();
+            ClientsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ClientsDataGrid).BeginInit();
+            tableLayoutPanel3.SuspendLayout();
+            panel8.SuspendLayout();
+            SupplierPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)SupplierDataGrid).BeginInit();
+            Tables_tableLayoutPanel.SuspendLayout();
+            panel5.SuspendLayout();
             BranchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)BranchDataGrid).BeginInit();
             tableLayoutPanel5.SuspendLayout();
@@ -237,18 +266,6 @@
             panel4.SuspendLayout();
             panel6.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            PurchasePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)PurchaseDataGrid).BeginInit();
-            Purchase_TablePanelLayout.SuspendLayout();
-            panel9.SuspendLayout();
-            ClientsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ClientsDataGrid).BeginInit();
-            tableLayoutPanel3.SuspendLayout();
-            panel8.SuspendLayout();
-            SupplierPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)SupplierDataGrid).BeginInit();
-            Tables_tableLayoutPanel.SuspendLayout();
-            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // Main_panel
@@ -267,6 +284,7 @@
             Sidebar_panel.BackColor = Color.Transparent;
             Sidebar_panel.BackgroundImage = (Image)resources.GetObject("Sidebar_panel.BackgroundImage");
             Sidebar_panel.BackgroundImageLayout = ImageLayout.Stretch;
+            Sidebar_panel.Controls.Add(Menu_Layby_label);
             Sidebar_panel.Controls.Add(Menu_Branch_label);
             Sidebar_panel.Controls.Add(Menu_Client_label);
             Sidebar_panel.Controls.Add(Menu_Supplier_label);
@@ -285,6 +303,23 @@
             Sidebar_panel.Size = new Size(266, 753);
             Sidebar_panel.TabIndex = 0;
             // 
+            // Menu_Layby_label
+            // 
+            Menu_Layby_label.Anchor = AnchorStyles.None;
+            Menu_Layby_label.Font = new Font("Arial", 12F);
+            Menu_Layby_label.ForeColor = SystemColors.HighlightText;
+            Menu_Layby_label.Image = (Image)resources.GetObject("Menu_Layby_label.Image");
+            Menu_Layby_label.ImageAlign = ContentAlignment.MiddleLeft;
+            Menu_Layby_label.Location = new Point(55, 643);
+            Menu_Layby_label.Margin = new Padding(0);
+            Menu_Layby_label.Name = "Menu_Layby_label";
+            Menu_Layby_label.Padding = new Padding(10, 0, 0, 0);
+            Menu_Layby_label.Size = new Size(211, 39);
+            Menu_Layby_label.TabIndex = 13;
+            Menu_Layby_label.Text = "           Layby";
+            Menu_Layby_label.TextAlign = ContentAlignment.MiddleLeft;
+            Menu_Layby_label.Click += Menu_Layby_label_Click;
+            // 
             // Menu_Branch_label
             // 
             Menu_Branch_label.Anchor = AnchorStyles.None;
@@ -292,7 +327,7 @@
             Menu_Branch_label.ForeColor = SystemColors.HighlightText;
             Menu_Branch_label.Image = (Image)resources.GetObject("Menu_Branch_label.Image");
             Menu_Branch_label.ImageAlign = ContentAlignment.MiddleLeft;
-            Menu_Branch_label.Location = new Point(55, 647);
+            Menu_Branch_label.Location = new Point(55, 694);
             Menu_Branch_label.Margin = new Padding(0);
             Menu_Branch_label.Name = "Menu_Branch_label";
             Menu_Branch_label.Padding = new Padding(10, 0, 0, 0);
@@ -478,22 +513,620 @@
             // ScreenContainer_panel
             // 
             ScreenContainer_panel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ScreenContainer_panel.Controls.Add(BranchPanel);
             ScreenContainer_panel.Controls.Add(CurrentUser_label);
             ScreenContainer_panel.Controls.Add(Current_ScreenName_label);
             ScreenContainer_panel.Controls.Add(Splitter_label);
-            ScreenContainer_panel.Controls.Add(StaffPanel);
-            ScreenContainer_panel.Controls.Add(ProductPanel);
-            ScreenContainer_panel.Controls.Add(ContentContainer_panel);
             ScreenContainer_panel.Controls.Add(POSPanel);
             ScreenContainer_panel.Controls.Add(ReportsPanel);
+            ScreenContainer_panel.Controls.Add(LaybyPanel);
             ScreenContainer_panel.Controls.Add(PurchasePanel);
             ScreenContainer_panel.Controls.Add(ClientsPanel);
             ScreenContainer_panel.Controls.Add(SupplierPanel);
+            ScreenContainer_panel.Controls.Add(BranchPanel);
+            ScreenContainer_panel.Controls.Add(StaffPanel);
+            ScreenContainer_panel.Controls.Add(ProductPanel);
+            ScreenContainer_panel.Controls.Add(ContentContainer_panel);
             ScreenContainer_panel.Location = new Point(264, 3);
             ScreenContainer_panel.Name = "ScreenContainer_panel";
             ScreenContainer_panel.Size = new Size(1020, 750);
             ScreenContainer_panel.TabIndex = 0;
+            // 
+            // LaybyPanel
+            // 
+            LaybyPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            LaybyPanel.BackColor = Color.White;
+            LaybyPanel.Controls.Add(LaybyDataGrid);
+            LaybyPanel.Controls.Add(tableLayoutPanel6);
+            LaybyPanel.Location = new Point(21, 95);
+            LaybyPanel.Name = "LaybyPanel";
+            LaybyPanel.Size = new Size(978, 639);
+            LaybyPanel.TabIndex = 15;
+            LaybyPanel.Visible = false;
+            LaybyPanel.VisibleChanged += LaybyPanel_VisibleChanged;
+            // 
+            // LaybyDataGrid
+            // 
+            LaybyDataGrid.AllowUserToAddRows = false;
+            LaybyDataGrid.AllowUserToDeleteRows = false;
+            LaybyDataGrid.AllowUserToResizeColumns = false;
+            LaybyDataGrid.AllowUserToResizeRows = false;
+            LaybyDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            LaybyDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            LaybyDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            LaybyDataGrid.BackgroundColor = Color.White;
+            LaybyDataGrid.BorderStyle = BorderStyle.None;
+            LaybyDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            LaybyDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            LaybyDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            LaybyDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            LaybyDataGrid.DefaultCellStyle = dataGridViewCellStyle4;
+            LaybyDataGrid.EnableHeadersVisualStyles = false;
+            LaybyDataGrid.Location = new Point(3, 123);
+            LaybyDataGrid.Margin = new Padding(0);
+            LaybyDataGrid.Name = "LaybyDataGrid";
+            LaybyDataGrid.ReadOnly = true;
+            LaybyDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Control;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle5.Padding = new Padding(3);
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            LaybyDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            LaybyDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle6.Padding = new Padding(3);
+            LaybyDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            LaybyDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            LaybyDataGrid.Size = new Size(970, 506);
+            LaybyDataGrid.TabIndex = 1;
+            LaybyDataGrid.CellContentClick += LaybyDataGrid_CellContentClick;
+            // 
+            // tableLayoutPanel6
+            // 
+            tableLayoutPanel6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel6.ColumnCount = 4;
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            tableLayoutPanel6.Controls.Add(comboBox7, 2, 0);
+            tableLayoutPanel6.Controls.Add(panel11, 3, 0);
+            tableLayoutPanel6.Location = new Point(3, 40);
+            tableLayoutPanel6.Name = "tableLayoutPanel6";
+            tableLayoutPanel6.RowCount = 1;
+            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel6.Size = new Size(970, 80);
+            tableLayoutPanel6.TabIndex = 0;
+            // 
+            // comboBox7
+            // 
+            comboBox7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox7.FormattingEnabled = true;
+            comboBox7.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox7.Location = new Point(597, 25);
+            comboBox7.Margin = new Padding(15, 25, 3, 3);
+            comboBox7.Name = "comboBox7";
+            comboBox7.Size = new Size(79, 29);
+            comboBox7.TabIndex = 1;
+            comboBox7.Text = "100";
+            comboBox7.Visible = false;
+            // 
+            // panel11
+            // 
+            panel11.Controls.Add(textBox3);
+            panel11.Controls.Add(button6);
+            panel11.Location = new Point(679, 0);
+            panel11.Margin = new Padding(0);
+            panel11.Name = "panel11";
+            panel11.Size = new Size(291, 80);
+            panel11.TabIndex = 4;
+            // 
+            // textBox3
+            // 
+            textBox3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox3.Location = new Point(33, 25);
+            textBox3.Multiline = true;
+            textBox3.Name = "textBox3";
+            textBox3.PlaceholderText = "Search..";
+            textBox3.Size = new Size(150, 29);
+            textBox3.TabIndex = 0;
+            textBox3.WordWrap = false;
+            // 
+            // button6
+            // 
+            button6.BackColor = Color.White;
+            button6.FlatStyle = FlatStyle.Flat;
+            button6.Image = (Image)resources.GetObject("button6.Image");
+            button6.Location = new Point(5, 25);
+            button6.Name = "button6";
+            button6.Size = new Size(29, 29);
+            button6.TabIndex = 3;
+            button6.UseVisualStyleBackColor = false;
+            // 
+            // CurrentUser_label
+            // 
+            CurrentUser_label.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            CurrentUser_label.AutoSize = true;
+            CurrentUser_label.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CurrentUser_label.ForeColor = Color.FromArgb(110, 111, 115);
+            CurrentUser_label.Location = new Point(914, 27);
+            CurrentUser_label.Margin = new Padding(0);
+            CurrentUser_label.Name = "CurrentUser_label";
+            CurrentUser_label.RightToLeft = RightToLeft.No;
+            CurrentUser_label.Size = new Size(94, 21);
+            CurrentUser_label.TabIndex = 2;
+            CurrentUser_label.Text = "User Name:";
+            CurrentUser_label.TextAlign = ContentAlignment.TopRight;
+            // 
+            // Current_ScreenName_label
+            // 
+            Current_ScreenName_label.AutoSize = true;
+            Current_ScreenName_label.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Current_ScreenName_label.ForeColor = Color.FromArgb(0, 119, 195);
+            Current_ScreenName_label.Location = new Point(21, 21);
+            Current_ScreenName_label.Name = "Current_ScreenName_label";
+            Current_ScreenName_label.Size = new Size(118, 30);
+            Current_ScreenName_label.TabIndex = 1;
+            Current_ScreenName_label.Text = "Dashboard";
+            // 
+            // Splitter_label
+            // 
+            Splitter_label.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            Splitter_label.BackColor = Color.Black;
+            Splitter_label.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Splitter_label.ForeColor = Color.Transparent;
+            Splitter_label.Location = new Point(2, 71);
+            Splitter_label.Name = "Splitter_label";
+            Splitter_label.Size = new Size(1017, 1);
+            Splitter_label.TabIndex = 5;
+            // 
+            // PurchasePanel
+            // 
+            PurchasePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PurchasePanel.BackColor = Color.White;
+            PurchasePanel.Controls.Add(PurchaseDataGrid);
+            PurchasePanel.Controls.Add(Purchase_TablePanelLayout);
+            PurchasePanel.Location = new Point(21, 95);
+            PurchasePanel.Name = "PurchasePanel";
+            PurchasePanel.Size = new Size(978, 639);
+            PurchasePanel.TabIndex = 13;
+            PurchasePanel.Visible = false;
+            PurchasePanel.VisibleChanged += PurchasePanel_VisibleChanged;
+            // 
+            // PurchaseDataGrid
+            // 
+            PurchaseDataGrid.AllowUserToAddRows = false;
+            PurchaseDataGrid.AllowUserToDeleteRows = false;
+            PurchaseDataGrid.AllowUserToResizeColumns = false;
+            PurchaseDataGrid.AllowUserToResizeRows = false;
+            PurchaseDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PurchaseDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            PurchaseDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            PurchaseDataGrid.BackgroundColor = Color.White;
+            PurchaseDataGrid.BorderStyle = BorderStyle.None;
+            PurchaseDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            PurchaseDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle7.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            PurchaseDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            PurchaseDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.White;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle8.ForeColor = Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = Color.White;
+            dataGridViewCellStyle8.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            PurchaseDataGrid.DefaultCellStyle = dataGridViewCellStyle8;
+            PurchaseDataGrid.EnableHeadersVisualStyles = false;
+            PurchaseDataGrid.Location = new Point(3, 123);
+            PurchaseDataGrid.Margin = new Padding(0);
+            PurchaseDataGrid.Name = "PurchaseDataGrid";
+            PurchaseDataGrid.ReadOnly = true;
+            PurchaseDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = SystemColors.Control;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.Padding = new Padding(3);
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            PurchaseDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            PurchaseDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle10.Padding = new Padding(3);
+            PurchaseDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            PurchaseDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            PurchaseDataGrid.Size = new Size(970, 506);
+            PurchaseDataGrid.TabIndex = 1;
+            PurchaseDataGrid.CellContentClick += PurchaseDataGrid_CellContentClick;
+            // 
+            // Purchase_TablePanelLayout
+            // 
+            Purchase_TablePanelLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            Purchase_TablePanelLayout.ColumnCount = 4;
+            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            Purchase_TablePanelLayout.Controls.Add(PurchaseAddButton, 0, 0);
+            Purchase_TablePanelLayout.Controls.Add(comboBox5, 2, 0);
+            Purchase_TablePanelLayout.Controls.Add(panel9, 3, 0);
+            Purchase_TablePanelLayout.Location = new Point(3, 40);
+            Purchase_TablePanelLayout.Name = "Purchase_TablePanelLayout";
+            Purchase_TablePanelLayout.RowCount = 1;
+            Purchase_TablePanelLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            Purchase_TablePanelLayout.Size = new Size(970, 80);
+            Purchase_TablePanelLayout.TabIndex = 0;
+            // 
+            // PurchaseAddButton
+            // 
+            PurchaseAddButton.BackColor = Color.FromArgb(37, 150, 190);
+            PurchaseAddButton.FlatAppearance.BorderSize = 0;
+            PurchaseAddButton.FlatStyle = FlatStyle.Flat;
+            PurchaseAddButton.Image = (Image)resources.GetObject("PurchaseAddButton.Image");
+            PurchaseAddButton.Location = new Point(15, 15);
+            PurchaseAddButton.Margin = new Padding(15, 15, 3, 3);
+            PurchaseAddButton.Name = "PurchaseAddButton";
+            PurchaseAddButton.Size = new Size(40, 40);
+            PurchaseAddButton.TabIndex = 0;
+            PurchaseAddButton.UseVisualStyleBackColor = false;
+            PurchaseAddButton.Click += PurchaseAddButton_Click;
+            // 
+            // comboBox5
+            // 
+            comboBox5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox5.FormattingEnabled = true;
+            comboBox5.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox5.Location = new Point(597, 25);
+            comboBox5.Margin = new Padding(15, 25, 3, 3);
+            comboBox5.Name = "comboBox5";
+            comboBox5.Size = new Size(79, 29);
+            comboBox5.TabIndex = 1;
+            comboBox5.Text = "100";
+            comboBox5.Visible = false;
+            // 
+            // panel9
+            // 
+            panel9.Controls.Add(Purchase_SearchTextBox);
+            panel9.Controls.Add(button4);
+            panel9.Location = new Point(679, 0);
+            panel9.Margin = new Padding(0);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(291, 80);
+            panel9.TabIndex = 4;
+            // 
+            // Purchase_SearchTextBox
+            // 
+            Purchase_SearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Purchase_SearchTextBox.Location = new Point(33, 25);
+            Purchase_SearchTextBox.Multiline = true;
+            Purchase_SearchTextBox.Name = "Purchase_SearchTextBox";
+            Purchase_SearchTextBox.PlaceholderText = "Search..";
+            Purchase_SearchTextBox.Size = new Size(150, 29);
+            Purchase_SearchTextBox.TabIndex = 0;
+            Purchase_SearchTextBox.WordWrap = false;
+            Purchase_SearchTextBox.TextChanged += Purchase_SearchTextBox_TextChanged;
+            // 
+            // button4
+            // 
+            button4.BackColor = Color.White;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Image = (Image)resources.GetObject("button4.Image");
+            button4.Location = new Point(5, 25);
+            button4.Name = "button4";
+            button4.Size = new Size(29, 29);
+            button4.TabIndex = 3;
+            button4.UseVisualStyleBackColor = false;
+            // 
+            // ClientsPanel
+            // 
+            ClientsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ClientsPanel.BackColor = Color.White;
+            ClientsPanel.Controls.Add(ClientsDataGrid);
+            ClientsPanel.Controls.Add(tableLayoutPanel3);
+            ClientsPanel.Location = new Point(21, 95);
+            ClientsPanel.Name = "ClientsPanel";
+            ClientsPanel.Size = new Size(978, 639);
+            ClientsPanel.TabIndex = 12;
+            ClientsPanel.Visible = false;
+            ClientsPanel.VisibleChanged += ClientsPanel_VisibleChanged;
+            // 
+            // ClientsDataGrid
+            // 
+            ClientsDataGrid.AllowUserToAddRows = false;
+            ClientsDataGrid.AllowUserToDeleteRows = false;
+            ClientsDataGrid.AllowUserToResizeColumns = false;
+            ClientsDataGrid.AllowUserToResizeRows = false;
+            ClientsDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ClientsDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ClientsDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            ClientsDataGrid.BackgroundColor = Color.White;
+            ClientsDataGrid.BorderStyle = BorderStyle.None;
+            ClientsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            ClientsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            ClientsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            ClientsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.White;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle12.ForeColor = Color.Black;
+            dataGridViewCellStyle12.SelectionBackColor = Color.White;
+            dataGridViewCellStyle12.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            ClientsDataGrid.DefaultCellStyle = dataGridViewCellStyle12;
+            ClientsDataGrid.EnableHeadersVisualStyles = false;
+            ClientsDataGrid.Location = new Point(3, 121);
+            ClientsDataGrid.Margin = new Padding(0);
+            ClientsDataGrid.Name = "ClientsDataGrid";
+            ClientsDataGrid.ReadOnly = true;
+            ClientsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = SystemColors.Control;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle13.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle13.Padding = new Padding(3);
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            ClientsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            ClientsDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle14.Padding = new Padding(3);
+            ClientsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            ClientsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            ClientsDataGrid.Size = new Size(970, 508);
+            ClientsDataGrid.TabIndex = 1;
+            ClientsDataGrid.CellContentClick += ClientsDataGrid_CellContentClick;
+            // 
+            // tableLayoutPanel3
+            // 
+            tableLayoutPanel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel3.ColumnCount = 4;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            tableLayoutPanel3.Controls.Add(AddClientsButton, 0, 0);
+            tableLayoutPanel3.Controls.Add(comboBox4, 2, 0);
+            tableLayoutPanel3.Controls.Add(panel8, 3, 0);
+            tableLayoutPanel3.Location = new Point(3, 37);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Size = new Size(970, 80);
+            tableLayoutPanel3.TabIndex = 0;
+            // 
+            // AddClientsButton
+            // 
+            AddClientsButton.BackColor = Color.FromArgb(37, 150, 190);
+            AddClientsButton.FlatAppearance.BorderSize = 0;
+            AddClientsButton.FlatStyle = FlatStyle.Flat;
+            AddClientsButton.Image = (Image)resources.GetObject("AddClientsButton.Image");
+            AddClientsButton.Location = new Point(15, 15);
+            AddClientsButton.Margin = new Padding(15, 15, 3, 3);
+            AddClientsButton.Name = "AddClientsButton";
+            AddClientsButton.Size = new Size(40, 40);
+            AddClientsButton.TabIndex = 0;
+            AddClientsButton.UseVisualStyleBackColor = false;
+            AddClientsButton.Click += AddClientsButton_Click;
+            // 
+            // comboBox4
+            // 
+            comboBox4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox4.Location = new Point(597, 25);
+            comboBox4.Margin = new Padding(15, 25, 3, 3);
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(79, 29);
+            comboBox4.TabIndex = 1;
+            comboBox4.Text = "100";
+            comboBox4.Visible = false;
+            // 
+            // panel8
+            // 
+            panel8.Controls.Add(Clients_SearchTextBox);
+            panel8.Controls.Add(button3);
+            panel8.Location = new Point(679, 0);
+            panel8.Margin = new Padding(0);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(291, 80);
+            panel8.TabIndex = 4;
+            // 
+            // Clients_SearchTextBox
+            // 
+            Clients_SearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Clients_SearchTextBox.Location = new Point(33, 25);
+            Clients_SearchTextBox.Multiline = true;
+            Clients_SearchTextBox.Name = "Clients_SearchTextBox";
+            Clients_SearchTextBox.PlaceholderText = "Search..";
+            Clients_SearchTextBox.Size = new Size(150, 29);
+            Clients_SearchTextBox.TabIndex = 0;
+            Clients_SearchTextBox.WordWrap = false;
+            Clients_SearchTextBox.TextChanged += Clients_SearchTextBox_TextChanged;
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.White;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Image = (Image)resources.GetObject("button3.Image");
+            button3.Location = new Point(5, 25);
+            button3.Name = "button3";
+            button3.Size = new Size(29, 29);
+            button3.TabIndex = 3;
+            button3.UseVisualStyleBackColor = false;
+            // 
+            // SupplierPanel
+            // 
+            SupplierPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            SupplierPanel.BackColor = Color.White;
+            SupplierPanel.Controls.Add(SupplierDataGrid);
+            SupplierPanel.Controls.Add(Tables_tableLayoutPanel);
+            SupplierPanel.Location = new Point(21, 95);
+            SupplierPanel.Name = "SupplierPanel";
+            SupplierPanel.Size = new Size(978, 639);
+            SupplierPanel.TabIndex = 9;
+            SupplierPanel.Visible = false;
+            SupplierPanel.VisibleChanged += SupplierPanel_VisibleChanged;
+            // 
+            // SupplierDataGrid
+            // 
+            SupplierDataGrid.AllowUserToAddRows = false;
+            SupplierDataGrid.AllowUserToDeleteRows = false;
+            SupplierDataGrid.AllowUserToResizeColumns = false;
+            SupplierDataGrid.AllowUserToResizeRows = false;
+            SupplierDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            SupplierDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            SupplierDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            SupplierDataGrid.BackgroundColor = Color.White;
+            SupplierDataGrid.BorderStyle = BorderStyle.None;
+            SupplierDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            SupplierDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle15.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
+            SupplierDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            SupplierDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = Color.White;
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle16.ForeColor = Color.Black;
+            dataGridViewCellStyle16.SelectionBackColor = Color.White;
+            dataGridViewCellStyle16.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
+            SupplierDataGrid.DefaultCellStyle = dataGridViewCellStyle16;
+            SupplierDataGrid.EnableHeadersVisualStyles = false;
+            SupplierDataGrid.Location = new Point(3, 121);
+            SupplierDataGrid.Margin = new Padding(0);
+            SupplierDataGrid.Name = "SupplierDataGrid";
+            SupplierDataGrid.ReadOnly = true;
+            SupplierDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = SystemColors.Control;
+            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle17.Padding = new Padding(3);
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            SupplierDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            SupplierDataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle18.Padding = new Padding(3);
+            SupplierDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            SupplierDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            SupplierDataGrid.Size = new Size(970, 508);
+            SupplierDataGrid.TabIndex = 1;
+            SupplierDataGrid.CellContentClick += SupplierDataGrid_CellContentClick;
+            // 
+            // Tables_tableLayoutPanel
+            // 
+            Tables_tableLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            Tables_tableLayoutPanel.ColumnCount = 4;
+            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            Tables_tableLayoutPanel.Controls.Add(SupplierAddButton, 0, 0);
+            Tables_tableLayoutPanel.Controls.Add(comboBox3, 2, 0);
+            Tables_tableLayoutPanel.Controls.Add(panel5, 3, 0);
+            Tables_tableLayoutPanel.Location = new Point(3, 37);
+            Tables_tableLayoutPanel.Name = "Tables_tableLayoutPanel";
+            Tables_tableLayoutPanel.RowCount = 1;
+            Tables_tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            Tables_tableLayoutPanel.Size = new Size(970, 80);
+            Tables_tableLayoutPanel.TabIndex = 0;
+            // 
+            // SupplierAddButton
+            // 
+            SupplierAddButton.BackColor = Color.FromArgb(37, 150, 190);
+            SupplierAddButton.FlatAppearance.BorderSize = 0;
+            SupplierAddButton.FlatStyle = FlatStyle.Flat;
+            SupplierAddButton.Image = (Image)resources.GetObject("SupplierAddButton.Image");
+            SupplierAddButton.Location = new Point(15, 15);
+            SupplierAddButton.Margin = new Padding(15, 15, 3, 3);
+            SupplierAddButton.Name = "SupplierAddButton";
+            SupplierAddButton.Size = new Size(40, 40);
+            SupplierAddButton.TabIndex = 0;
+            SupplierAddButton.UseVisualStyleBackColor = false;
+            SupplierAddButton.Click += SupplierAddButton_Click;
+            // 
+            // comboBox3
+            // 
+            comboBox3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Items.AddRange(new object[] { "25", "50", "75", "100" });
+            comboBox3.Location = new Point(597, 25);
+            comboBox3.Margin = new Padding(15, 25, 3, 3);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(79, 29);
+            comboBox3.TabIndex = 1;
+            comboBox3.Text = "100";
+            comboBox3.Visible = false;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(SupplierSearchTextBox);
+            panel5.Controls.Add(button5);
+            panel5.Location = new Point(679, 0);
+            panel5.Margin = new Padding(0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(291, 80);
+            panel5.TabIndex = 4;
+            // 
+            // SupplierSearchTextBox
+            // 
+            SupplierSearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SupplierSearchTextBox.Location = new Point(33, 25);
+            SupplierSearchTextBox.Multiline = true;
+            SupplierSearchTextBox.Name = "SupplierSearchTextBox";
+            SupplierSearchTextBox.PlaceholderText = "Search..";
+            SupplierSearchTextBox.Size = new Size(150, 29);
+            SupplierSearchTextBox.TabIndex = 0;
+            SupplierSearchTextBox.WordWrap = false;
+            SupplierSearchTextBox.TextChanged += SupplierSearchTextBox_TextChanged;
+            // 
+            // button5
+            // 
+            button5.BackColor = Color.White;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Image = (Image)resources.GetObject("button5.Image");
+            button5.Location = new Point(5, 25);
+            button5.Name = "button5";
+            button5.Size = new Size(29, 29);
+            button5.TabIndex = 3;
+            button5.UseVisualStyleBackColor = false;
             // 
             // BranchPanel
             // 
@@ -555,41 +1188,41 @@
             BranchDataGrid.BorderStyle = BorderStyle.None;
             BranchDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             BranchDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            BranchDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle19.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle19.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
+            BranchDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             BranchDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            BranchDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = Color.White;
+            dataGridViewCellStyle20.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle20.ForeColor = Color.Black;
+            dataGridViewCellStyle20.SelectionBackColor = Color.White;
+            dataGridViewCellStyle20.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle20.WrapMode = DataGridViewTriState.True;
+            BranchDataGrid.DefaultCellStyle = dataGridViewCellStyle20;
             BranchDataGrid.EnableHeadersVisualStyles = false;
             BranchDataGrid.Location = new Point(3, 161);
             BranchDataGrid.Margin = new Padding(0);
             BranchDataGrid.Name = "BranchDataGrid";
             BranchDataGrid.ReadOnly = true;
             BranchDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new Padding(3);
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            BranchDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = SystemColors.Control;
+            dataGridViewCellStyle21.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle21.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle21.Padding = new Padding(3);
+            dataGridViewCellStyle21.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.True;
+            BranchDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
             BranchDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle4.Padding = new Padding(3);
-            BranchDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle22.Padding = new Padding(3);
+            BranchDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle22;
             BranchDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             BranchDataGrid.Size = new Size(970, 468);
             BranchDataGrid.TabIndex = 1;
@@ -671,43 +1304,6 @@
             button8.TabIndex = 3;
             button8.UseVisualStyleBackColor = false;
             // 
-            // CurrentUser_label
-            // 
-            CurrentUser_label.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            CurrentUser_label.AutoSize = true;
-            CurrentUser_label.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            CurrentUser_label.ForeColor = Color.FromArgb(110, 111, 115);
-            CurrentUser_label.Location = new Point(914, 27);
-            CurrentUser_label.Margin = new Padding(0);
-            CurrentUser_label.Name = "CurrentUser_label";
-            CurrentUser_label.RightToLeft = RightToLeft.No;
-            CurrentUser_label.Size = new Size(94, 21);
-            CurrentUser_label.TabIndex = 2;
-            CurrentUser_label.Text = "User Name:";
-            CurrentUser_label.TextAlign = ContentAlignment.TopRight;
-            // 
-            // Current_ScreenName_label
-            // 
-            Current_ScreenName_label.AutoSize = true;
-            Current_ScreenName_label.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Current_ScreenName_label.ForeColor = Color.FromArgb(0, 119, 195);
-            Current_ScreenName_label.Location = new Point(21, 21);
-            Current_ScreenName_label.Name = "Current_ScreenName_label";
-            Current_ScreenName_label.Size = new Size(118, 30);
-            Current_ScreenName_label.TabIndex = 1;
-            Current_ScreenName_label.Text = "Dashboard";
-            // 
-            // Splitter_label
-            // 
-            Splitter_label.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            Splitter_label.BackColor = Color.Black;
-            Splitter_label.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Splitter_label.ForeColor = Color.Transparent;
-            Splitter_label.Location = new Point(2, 71);
-            Splitter_label.Name = "Splitter_label";
-            Splitter_label.Size = new Size(1017, 1);
-            Splitter_label.TabIndex = 5;
-            // 
             // StaffPanel
             // 
             StaffPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -768,41 +1364,41 @@
             StaffDataGrid.BorderStyle = BorderStyle.None;
             StaffDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             StaffDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle5.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle23.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle23.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle23.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle23.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
             StaffDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = Color.White;
+            dataGridViewCellStyle24.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle24.ForeColor = Color.Black;
+            dataGridViewCellStyle24.SelectionBackColor = Color.White;
+            dataGridViewCellStyle24.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle24.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.DefaultCellStyle = dataGridViewCellStyle24;
             StaffDataGrid.EnableHeadersVisualStyles = false;
             StaffDataGrid.Location = new Point(3, 161);
             StaffDataGrid.Margin = new Padding(0);
             StaffDataGrid.Name = "StaffDataGrid";
             StaffDataGrid.ReadOnly = true;
             StaffDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = SystemColors.Control;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.Padding = new Padding(3);
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            StaffDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle25.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.BackColor = SystemColors.Control;
+            dataGridViewCellStyle25.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle25.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle25.Padding = new Padding(3);
+            dataGridViewCellStyle25.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = DataGridViewTriState.True;
+            StaffDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle25;
             StaffDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle8.Padding = new Padding(3);
-            StaffDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle26.Padding = new Padding(3);
+            StaffDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle26;
             StaffDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             StaffDataGrid.Size = new Size(970, 468);
             StaffDataGrid.TabIndex = 1;
@@ -947,41 +1543,41 @@
             ProductsDataGrid.BorderStyle = BorderStyle.None;
             ProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             ProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle9.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle27.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = Color.FromArgb(246, 247, 252);
+            dataGridViewCellStyle27.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle27.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle27.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle27.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle27;
             ProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = Color.White;
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle10.ForeColor = Color.Black;
-            dataGridViewCellStyle10.SelectionBackColor = Color.White;
-            dataGridViewCellStyle10.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = Color.White;
+            dataGridViewCellStyle28.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle28.ForeColor = Color.Black;
+            dataGridViewCellStyle28.SelectionBackColor = Color.White;
+            dataGridViewCellStyle28.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle28.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle28;
             ProductsDataGrid.EnableHeadersVisualStyles = false;
             ProductsDataGrid.Location = new Point(3, 161);
             ProductsDataGrid.Margin = new Padding(0);
             ProductsDataGrid.Name = "ProductsDataGrid";
             ProductsDataGrid.ReadOnly = true;
             ProductsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = SystemColors.Control;
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle11.Padding = new Padding(3);
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle29.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = SystemColors.Control;
+            dataGridViewCellStyle29.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle29.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle29.Padding = new Padding(3);
+            dataGridViewCellStyle29.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = DataGridViewTriState.True;
+            ProductsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle29;
             ProductsDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle12.Padding = new Padding(3);
-            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle30.Padding = new Padding(3);
+            ProductsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle30;
             ProductsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             ProductsDataGrid.Size = new Size(970, 468);
             ProductsDataGrid.TabIndex = 1;
@@ -1107,24 +1703,24 @@
             SupplierDashboardDataGrid.BorderStyle = BorderStyle.None;
             SupplierDashboardDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             SupplierDashboardDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = SystemColors.Control;
-            dataGridViewCellStyle13.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle13.ForeColor = SystemColors.WindowFrame;
-            dataGridViewCellStyle13.Padding = new Padding(5);
-            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Control;
-            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
-            SupplierDashboardDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle31.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle31.BackColor = SystemColors.Control;
+            dataGridViewCellStyle31.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle31.ForeColor = SystemColors.WindowFrame;
+            dataGridViewCellStyle31.Padding = new Padding(5);
+            dataGridViewCellStyle31.SelectionBackColor = SystemColors.Control;
+            dataGridViewCellStyle31.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle31.WrapMode = DataGridViewTriState.True;
+            SupplierDashboardDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
             SupplierDashboardDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.BackColor = SystemColors.Window;
-            dataGridViewCellStyle14.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle14.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Window;
-            dataGridViewCellStyle14.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
-            SupplierDashboardDataGrid.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle32.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle32.BackColor = SystemColors.Window;
+            dataGridViewCellStyle32.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle32.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle32.SelectionBackColor = SystemColors.Window;
+            dataGridViewCellStyle32.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle32.WrapMode = DataGridViewTriState.False;
+            SupplierDashboardDataGrid.DefaultCellStyle = dataGridViewCellStyle32;
             SupplierDashboardDataGrid.EnableHeadersVisualStyles = false;
             SupplierDashboardDataGrid.Location = new Point(3, 53);
             SupplierDashboardDataGrid.Name = "SupplierDashboardDataGrid";
@@ -1625,24 +2221,24 @@
             POSProductsDataGrid.BorderStyle = BorderStyle.None;
             POSProductsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             POSProductsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = SystemColors.Control;
-            dataGridViewCellStyle15.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Control;
-            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
-            POSProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            POSProductsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             POSProductsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             POSProductsDataGrid.Columns.AddRange(new DataGridViewColumn[] { id, hidden_id, product_name, quantity, product_price, Unit, total_amount });
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = SystemColors.Window;
-            dataGridViewCellStyle16.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle16.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = SystemColors.Window;
-            dataGridViewCellStyle16.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
-            POSProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Window;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            POSProductsDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
             POSProductsDataGrid.EnableHeadersVisualStyles = false;
             POSProductsDataGrid.Location = new Point(1, 1);
             POSProductsDataGrid.Name = "POSProductsDataGrid";
@@ -1732,6 +2328,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
+            tableLayoutPanel1.Controls.Add(LaybyButton, 6, 0);
             tableLayoutPanel1.Controls.Add(TakeAwayButton, 5, 0);
             tableLayoutPanel1.Controls.Add(DeliveryButton, 4, 0);
             tableLayoutPanel1.Controls.Add(BillListButton, 2, 0);
@@ -1743,6 +2340,23 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Size = new Size(972, 52);
             tableLayoutPanel1.TabIndex = 0;
+            // 
+            // LaybyButton
+            // 
+            LaybyButton.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            LaybyButton.BackColor = Color.Transparent;
+            LaybyButton.FlatAppearance.BorderColor = Color.FromArgb(37, 150, 190);
+            LaybyButton.FlatAppearance.BorderSize = 2;
+            LaybyButton.FlatStyle = FlatStyle.Flat;
+            LaybyButton.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            LaybyButton.Location = new Point(368, 10);
+            LaybyButton.Margin = new Padding(3, 10, 0, 3);
+            LaybyButton.Name = "LaybyButton";
+            LaybyButton.Size = new Size(83, 35);
+            LaybyButton.TabIndex = 8;
+            LaybyButton.Text = "LAYBY";
+            LaybyButton.UseVisualStyleBackColor = false;
+            LaybyButton.Click += LaybyButton_Click;
             // 
             // TakeAwayButton
             // 
@@ -1817,9 +2431,9 @@
             panel2.Controls.Add(textBox2);
             panel2.Controls.Add(button1);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(610, 3);
+            panel2.Location = new Point(662, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(359, 46);
+            panel2.Size = new Size(307, 46);
             panel2.TabIndex = 7;
             // 
             // textBox2
@@ -2044,438 +2658,6 @@
             MenuListButton.UseVisualStyleBackColor = true;
             MenuListButton.Click += MenuListButton_Click;
             // 
-            // PurchasePanel
-            // 
-            PurchasePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            PurchasePanel.BackColor = Color.White;
-            PurchasePanel.Controls.Add(PurchaseDataGrid);
-            PurchasePanel.Controls.Add(Purchase_TablePanelLayout);
-            PurchasePanel.Location = new Point(21, 95);
-            PurchasePanel.Name = "PurchasePanel";
-            PurchasePanel.Size = new Size(978, 639);
-            PurchasePanel.TabIndex = 13;
-            PurchasePanel.Visible = false;
-            PurchasePanel.VisibleChanged += PurchasePanel_VisibleChanged;
-            // 
-            // PurchaseDataGrid
-            // 
-            PurchaseDataGrid.AllowUserToAddRows = false;
-            PurchaseDataGrid.AllowUserToDeleteRows = false;
-            PurchaseDataGrid.AllowUserToResizeColumns = false;
-            PurchaseDataGrid.AllowUserToResizeRows = false;
-            PurchaseDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            PurchaseDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            PurchaseDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            PurchaseDataGrid.BackgroundColor = Color.White;
-            PurchaseDataGrid.BorderStyle = BorderStyle.None;
-            PurchaseDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            PurchaseDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle17.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            PurchaseDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
-            PurchaseDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = Color.White;
-            dataGridViewCellStyle18.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle18.ForeColor = Color.Black;
-            dataGridViewCellStyle18.SelectionBackColor = Color.White;
-            dataGridViewCellStyle18.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.True;
-            PurchaseDataGrid.DefaultCellStyle = dataGridViewCellStyle18;
-            PurchaseDataGrid.EnableHeadersVisualStyles = false;
-            PurchaseDataGrid.Location = new Point(3, 123);
-            PurchaseDataGrid.Margin = new Padding(0);
-            PurchaseDataGrid.Name = "PurchaseDataGrid";
-            PurchaseDataGrid.ReadOnly = true;
-            PurchaseDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = SystemColors.Control;
-            dataGridViewCellStyle19.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle19.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle19.Padding = new Padding(3);
-            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
-            PurchaseDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
-            PurchaseDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle20.Padding = new Padding(3);
-            PurchaseDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle20;
-            PurchaseDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            PurchaseDataGrid.Size = new Size(970, 506);
-            PurchaseDataGrid.TabIndex = 1;
-            PurchaseDataGrid.CellContentClick += PurchaseDataGrid_CellContentClick;
-            // 
-            // Purchase_TablePanelLayout
-            // 
-            Purchase_TablePanelLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            Purchase_TablePanelLayout.ColumnCount = 4;
-            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            Purchase_TablePanelLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            Purchase_TablePanelLayout.Controls.Add(PurchaseAddButton, 0, 0);
-            Purchase_TablePanelLayout.Controls.Add(comboBox5, 2, 0);
-            Purchase_TablePanelLayout.Controls.Add(panel9, 3, 0);
-            Purchase_TablePanelLayout.Location = new Point(3, 40);
-            Purchase_TablePanelLayout.Name = "Purchase_TablePanelLayout";
-            Purchase_TablePanelLayout.RowCount = 1;
-            Purchase_TablePanelLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            Purchase_TablePanelLayout.Size = new Size(970, 80);
-            Purchase_TablePanelLayout.TabIndex = 0;
-            // 
-            // PurchaseAddButton
-            // 
-            PurchaseAddButton.BackColor = Color.FromArgb(37, 150, 190);
-            PurchaseAddButton.FlatAppearance.BorderSize = 0;
-            PurchaseAddButton.FlatStyle = FlatStyle.Flat;
-            PurchaseAddButton.Image = (Image)resources.GetObject("PurchaseAddButton.Image");
-            PurchaseAddButton.Location = new Point(15, 15);
-            PurchaseAddButton.Margin = new Padding(15, 15, 3, 3);
-            PurchaseAddButton.Name = "PurchaseAddButton";
-            PurchaseAddButton.Size = new Size(40, 40);
-            PurchaseAddButton.TabIndex = 0;
-            PurchaseAddButton.UseVisualStyleBackColor = false;
-            PurchaseAddButton.Click += PurchaseAddButton_Click;
-            // 
-            // comboBox5
-            // 
-            comboBox5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Items.AddRange(new object[] { "25", "50", "75", "100" });
-            comboBox5.Location = new Point(597, 25);
-            comboBox5.Margin = new Padding(15, 25, 3, 3);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(79, 29);
-            comboBox5.TabIndex = 1;
-            comboBox5.Text = "100";
-            comboBox5.Visible = false;
-            // 
-            // panel9
-            // 
-            panel9.Controls.Add(Purchase_SearchTextBox);
-            panel9.Controls.Add(button4);
-            panel9.Location = new Point(679, 0);
-            panel9.Margin = new Padding(0);
-            panel9.Name = "panel9";
-            panel9.Size = new Size(291, 80);
-            panel9.TabIndex = 4;
-            // 
-            // Purchase_SearchTextBox
-            // 
-            Purchase_SearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Purchase_SearchTextBox.Location = new Point(33, 25);
-            Purchase_SearchTextBox.Multiline = true;
-            Purchase_SearchTextBox.Name = "Purchase_SearchTextBox";
-            Purchase_SearchTextBox.PlaceholderText = "Search..";
-            Purchase_SearchTextBox.Size = new Size(150, 29);
-            Purchase_SearchTextBox.TabIndex = 0;
-            Purchase_SearchTextBox.WordWrap = false;
-            Purchase_SearchTextBox.TextChanged += Purchase_SearchTextBox_TextChanged;
-            // 
-            // button4
-            // 
-            button4.BackColor = Color.White;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Image = (Image)resources.GetObject("button4.Image");
-            button4.Location = new Point(5, 25);
-            button4.Name = "button4";
-            button4.Size = new Size(29, 29);
-            button4.TabIndex = 3;
-            button4.UseVisualStyleBackColor = false;
-            // 
-            // ClientsPanel
-            // 
-            ClientsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ClientsPanel.BackColor = Color.White;
-            ClientsPanel.Controls.Add(ClientsDataGrid);
-            ClientsPanel.Controls.Add(tableLayoutPanel3);
-            ClientsPanel.Location = new Point(21, 95);
-            ClientsPanel.Name = "ClientsPanel";
-            ClientsPanel.Size = new Size(978, 639);
-            ClientsPanel.TabIndex = 12;
-            ClientsPanel.Visible = false;
-            ClientsPanel.VisibleChanged += ClientsPanel_VisibleChanged;
-            // 
-            // ClientsDataGrid
-            // 
-            ClientsDataGrid.AllowUserToAddRows = false;
-            ClientsDataGrid.AllowUserToDeleteRows = false;
-            ClientsDataGrid.AllowUserToResizeColumns = false;
-            ClientsDataGrid.AllowUserToResizeRows = false;
-            ClientsDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ClientsDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            ClientsDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            ClientsDataGrid.BackgroundColor = Color.White;
-            ClientsDataGrid.BorderStyle = BorderStyle.None;
-            ClientsDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            ClientsDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle21.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle21.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle21.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle21.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.True;
-            ClientsDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
-            ClientsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = Color.White;
-            dataGridViewCellStyle22.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle22.ForeColor = Color.Black;
-            dataGridViewCellStyle22.SelectionBackColor = Color.White;
-            dataGridViewCellStyle22.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle22.WrapMode = DataGridViewTriState.False;
-            ClientsDataGrid.DefaultCellStyle = dataGridViewCellStyle22;
-            ClientsDataGrid.EnableHeadersVisualStyles = false;
-            ClientsDataGrid.Location = new Point(3, 121);
-            ClientsDataGrid.Margin = new Padding(0);
-            ClientsDataGrid.Name = "ClientsDataGrid";
-            ClientsDataGrid.ReadOnly = true;
-            ClientsDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle23.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = SystemColors.Control;
-            dataGridViewCellStyle23.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle23.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle23.Padding = new Padding(3);
-            dataGridViewCellStyle23.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = DataGridViewTriState.True;
-            ClientsDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle23;
-            ClientsDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle24.Padding = new Padding(3);
-            ClientsDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle24;
-            ClientsDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            ClientsDataGrid.Size = new Size(970, 508);
-            ClientsDataGrid.TabIndex = 1;
-            ClientsDataGrid.CellContentClick += ClientsDataGrid_CellContentClick;
-            // 
-            // tableLayoutPanel3
-            // 
-            tableLayoutPanel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            tableLayoutPanel3.ColumnCount = 4;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            tableLayoutPanel3.Controls.Add(AddClientsButton, 0, 0);
-            tableLayoutPanel3.Controls.Add(comboBox4, 2, 0);
-            tableLayoutPanel3.Controls.Add(panel8, 3, 0);
-            tableLayoutPanel3.Location = new Point(3, 37);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 1;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(970, 80);
-            tableLayoutPanel3.TabIndex = 0;
-            // 
-            // AddClientsButton
-            // 
-            AddClientsButton.BackColor = Color.FromArgb(37, 150, 190);
-            AddClientsButton.FlatAppearance.BorderSize = 0;
-            AddClientsButton.FlatStyle = FlatStyle.Flat;
-            AddClientsButton.Image = (Image)resources.GetObject("AddClientsButton.Image");
-            AddClientsButton.Location = new Point(15, 15);
-            AddClientsButton.Margin = new Padding(15, 15, 3, 3);
-            AddClientsButton.Name = "AddClientsButton";
-            AddClientsButton.Size = new Size(40, 40);
-            AddClientsButton.TabIndex = 0;
-            AddClientsButton.UseVisualStyleBackColor = false;
-            AddClientsButton.Click += AddClientsButton_Click;
-            // 
-            // comboBox4
-            // 
-            comboBox4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Items.AddRange(new object[] { "25", "50", "75", "100" });
-            comboBox4.Location = new Point(597, 25);
-            comboBox4.Margin = new Padding(15, 25, 3, 3);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(79, 29);
-            comboBox4.TabIndex = 1;
-            comboBox4.Text = "100";
-            comboBox4.Visible = false;
-            // 
-            // panel8
-            // 
-            panel8.Controls.Add(Clients_SearchTextBox);
-            panel8.Controls.Add(button3);
-            panel8.Location = new Point(679, 0);
-            panel8.Margin = new Padding(0);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(291, 80);
-            panel8.TabIndex = 4;
-            // 
-            // Clients_SearchTextBox
-            // 
-            Clients_SearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Clients_SearchTextBox.Location = new Point(33, 25);
-            Clients_SearchTextBox.Multiline = true;
-            Clients_SearchTextBox.Name = "Clients_SearchTextBox";
-            Clients_SearchTextBox.PlaceholderText = "Search..";
-            Clients_SearchTextBox.Size = new Size(150, 29);
-            Clients_SearchTextBox.TabIndex = 0;
-            Clients_SearchTextBox.WordWrap = false;
-            Clients_SearchTextBox.TextChanged += Clients_SearchTextBox_TextChanged;
-            // 
-            // button3
-            // 
-            button3.BackColor = Color.White;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Image = (Image)resources.GetObject("button3.Image");
-            button3.Location = new Point(5, 25);
-            button3.Name = "button3";
-            button3.Size = new Size(29, 29);
-            button3.TabIndex = 3;
-            button3.UseVisualStyleBackColor = false;
-            // 
-            // SupplierPanel
-            // 
-            SupplierPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            SupplierPanel.BackColor = Color.White;
-            SupplierPanel.Controls.Add(SupplierDataGrid);
-            SupplierPanel.Controls.Add(Tables_tableLayoutPanel);
-            SupplierPanel.Location = new Point(21, 95);
-            SupplierPanel.Name = "SupplierPanel";
-            SupplierPanel.Size = new Size(978, 639);
-            SupplierPanel.TabIndex = 9;
-            SupplierPanel.Visible = false;
-            SupplierPanel.VisibleChanged += SupplierPanel_VisibleChanged;
-            // 
-            // SupplierDataGrid
-            // 
-            SupplierDataGrid.AllowUserToAddRows = false;
-            SupplierDataGrid.AllowUserToDeleteRows = false;
-            SupplierDataGrid.AllowUserToResizeColumns = false;
-            SupplierDataGrid.AllowUserToResizeRows = false;
-            SupplierDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            SupplierDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            SupplierDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            SupplierDataGrid.BackgroundColor = Color.White;
-            SupplierDataGrid.BorderStyle = BorderStyle.None;
-            SupplierDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            SupplierDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle25.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle25.BackColor = Color.FromArgb(246, 247, 252);
-            dataGridViewCellStyle25.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle25.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle25.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = DataGridViewTriState.True;
-            SupplierDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
-            SupplierDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle26.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = Color.White;
-            dataGridViewCellStyle26.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle26.ForeColor = Color.Black;
-            dataGridViewCellStyle26.SelectionBackColor = Color.White;
-            dataGridViewCellStyle26.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle26.WrapMode = DataGridViewTriState.False;
-            SupplierDataGrid.DefaultCellStyle = dataGridViewCellStyle26;
-            SupplierDataGrid.EnableHeadersVisualStyles = false;
-            SupplierDataGrid.Location = new Point(3, 121);
-            SupplierDataGrid.Margin = new Padding(0);
-            SupplierDataGrid.Name = "SupplierDataGrid";
-            SupplierDataGrid.ReadOnly = true;
-            SupplierDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle27.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = SystemColors.Control;
-            dataGridViewCellStyle27.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle27.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle27.Padding = new Padding(3);
-            dataGridViewCellStyle27.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = DataGridViewTriState.True;
-            SupplierDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
-            SupplierDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle28.Padding = new Padding(3);
-            SupplierDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle28;
-            SupplierDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            SupplierDataGrid.Size = new Size(970, 508);
-            SupplierDataGrid.TabIndex = 1;
-            SupplierDataGrid.CellContentClick += SupplierDataGrid_CellContentClick;
-            // 
-            // Tables_tableLayoutPanel
-            // 
-            Tables_tableLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            Tables_tableLayoutPanel.ColumnCount = 4;
-            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            Tables_tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            Tables_tableLayoutPanel.Controls.Add(SupplierAddButton, 0, 0);
-            Tables_tableLayoutPanel.Controls.Add(comboBox3, 2, 0);
-            Tables_tableLayoutPanel.Controls.Add(panel5, 3, 0);
-            Tables_tableLayoutPanel.Location = new Point(3, 37);
-            Tables_tableLayoutPanel.Name = "Tables_tableLayoutPanel";
-            Tables_tableLayoutPanel.RowCount = 1;
-            Tables_tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            Tables_tableLayoutPanel.Size = new Size(970, 80);
-            Tables_tableLayoutPanel.TabIndex = 0;
-            // 
-            // SupplierAddButton
-            // 
-            SupplierAddButton.BackColor = Color.FromArgb(37, 150, 190);
-            SupplierAddButton.FlatAppearance.BorderSize = 0;
-            SupplierAddButton.FlatStyle = FlatStyle.Flat;
-            SupplierAddButton.Image = (Image)resources.GetObject("SupplierAddButton.Image");
-            SupplierAddButton.Location = new Point(15, 15);
-            SupplierAddButton.Margin = new Padding(15, 15, 3, 3);
-            SupplierAddButton.Name = "SupplierAddButton";
-            SupplierAddButton.Size = new Size(40, 40);
-            SupplierAddButton.TabIndex = 0;
-            SupplierAddButton.UseVisualStyleBackColor = false;
-            SupplierAddButton.Click += SupplierAddButton_Click;
-            // 
-            // comboBox3
-            // 
-            comboBox3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Items.AddRange(new object[] { "25", "50", "75", "100" });
-            comboBox3.Location = new Point(597, 25);
-            comboBox3.Margin = new Padding(15, 25, 3, 3);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(79, 29);
-            comboBox3.TabIndex = 1;
-            comboBox3.Text = "100";
-            comboBox3.Visible = false;
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(SupplierSearchTextBox);
-            panel5.Controls.Add(button5);
-            panel5.Location = new Point(679, 0);
-            panel5.Margin = new Padding(0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(291, 80);
-            panel5.TabIndex = 4;
-            // 
-            // SupplierSearchTextBox
-            // 
-            SupplierSearchTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            SupplierSearchTextBox.Location = new Point(33, 25);
-            SupplierSearchTextBox.Multiline = true;
-            SupplierSearchTextBox.Name = "SupplierSearchTextBox";
-            SupplierSearchTextBox.PlaceholderText = "Search..";
-            SupplierSearchTextBox.Size = new Size(150, 29);
-            SupplierSearchTextBox.TabIndex = 0;
-            SupplierSearchTextBox.WordWrap = false;
-            SupplierSearchTextBox.TextChanged += SupplierSearchTextBox_TextChanged;
-            // 
-            // button5
-            // 
-            button5.BackColor = Color.White;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Image = (Image)resources.GetObject("button5.Image");
-            button5.Location = new Point(5, 25);
-            button5.Name = "button5";
-            button5.Size = new Size(29, 29);
-            button5.TabIndex = 3;
-            button5.UseVisualStyleBackColor = false;
-            // 
             // notifyIcon1
             // 
             notifyIcon1.Icon = (Icon)resources.GetObject("notifyIcon1.Icon");
@@ -2500,6 +2682,26 @@
             Sidebar_panel.ResumeLayout(false);
             ScreenContainer_panel.ResumeLayout(false);
             ScreenContainer_panel.PerformLayout();
+            LaybyPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)LaybyDataGrid).EndInit();
+            tableLayoutPanel6.ResumeLayout(false);
+            panel11.ResumeLayout(false);
+            panel11.PerformLayout();
+            PurchasePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)PurchaseDataGrid).EndInit();
+            Purchase_TablePanelLayout.ResumeLayout(false);
+            panel9.ResumeLayout(false);
+            panel9.PerformLayout();
+            ClientsPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ClientsDataGrid).EndInit();
+            tableLayoutPanel3.ResumeLayout(false);
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
+            SupplierPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)SupplierDataGrid).EndInit();
+            Tables_tableLayoutPanel.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             BranchPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)BranchDataGrid).EndInit();
             tableLayoutPanel5.ResumeLayout(false);
@@ -2541,21 +2743,6 @@
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
-            PurchasePanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)PurchaseDataGrid).EndInit();
-            Purchase_TablePanelLayout.ResumeLayout(false);
-            panel9.ResumeLayout(false);
-            panel9.PerformLayout();
-            ClientsPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)ClientsDataGrid).EndInit();
-            tableLayoutPanel3.ResumeLayout(false);
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
-            SupplierPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)SupplierDataGrid).EndInit();
-            Tables_tableLayoutPanel.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -2704,5 +2891,14 @@
         private TextBox BranchSearchTextBox;
         private Button button8;
         private Label Menu_Branch_label;
+        private Button LaybyButton;
+        private Panel LaybyPanel;
+        private DataGridView LaybyDataGrid;
+        private TableLayoutPanel tableLayoutPanel6;
+        private ComboBox comboBox7;
+        private Panel panel11;
+        private TextBox textBox3;
+        private Button button6;
+        private Label Menu_Layby_label;
     }
 }
