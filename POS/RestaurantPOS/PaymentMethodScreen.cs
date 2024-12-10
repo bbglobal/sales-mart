@@ -106,6 +106,7 @@ namespace POS
                     {
                         MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         statusUpdated = "Updated";
+                        //
                         this.Close();
                     }
                 }

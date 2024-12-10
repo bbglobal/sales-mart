@@ -14,7 +14,9 @@
     <None Remove="Reports\Receipt.rdlc" />
     <None Remove="Reports\SRByCategory.rdlc" />
     <None Remove="Resources\delete.png" />
+    <None Remove="Resources\details.png" />
     <None Remove="Resources\edit.png" />
+    <None Remove="Resources\pay.png" />
     <None Remove="Resources\printIcon.png" />
     <None Remove="Resources\radio_checked.png" />
     <None Remove="Resources\radio_unchecked.png" />
@@ -25,7 +27,9 @@
     <EmbeddedResource Include="Reports\Receipt.rdlc" />
     <EmbeddedResource Include="Reports\SRByCategory.rdlc" />
     <EmbeddedResource Include="Resources\delete.png" />
+    <EmbeddedResource Include="Resources\details.png" />
     <EmbeddedResource Include="Resources\edit.png" />
+    <EmbeddedResource Include="Resources\pay.png" />
     <EmbeddedResource Include="Resources\printIcon.png" />
     <EmbeddedResource Include="Resources\radio_checked.png" />
     <EmbeddedResource Include="Resources\radio_unchecked.png" />
@@ -39,7 +43,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="GSDashboard.cs">
+    <Compile Update="GeneralStorePOS\LaybyDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GeneralStorePOS\LaybyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GeneralStorePOS\StockTransferForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GeneralStorePOS\BranchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="HotelDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GeneralStorePOS\GSDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="DataSet1.Designer.cs">
@@ -62,23 +81,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>GetItemsByCatDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Update="ClientForm.cs">
+    <Compile Update="GeneralStorePOS\ClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="PurchaseForm.cs">
+    <Compile Update="GeneralStorePOS\PurchaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="GSBillList.cs">
+    <Compile Update="GeneralStorePOS\GSBillList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="GSPaymentMethodScreen.cs">
+    <Compile Update="GeneralStorePOS\GSPaymentMethodScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RestaurantPOS\IngredientsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="RestaurantPOS\ProductIngredientsForm.cs" />
     <Compile Update="RestaurantPOS\POSIngredientScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="SupplierForm.cs">
+    <Compile Update="GeneralStorePOS\SupplierForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="POSDataSet1.Designer.cs">
@@ -86,10 +108,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>POSDataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Update="ItemsCategoryForm.cs">
+    <Compile Update="GeneralStorePOS\ItemsCategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ItemsForm.cs">
+    <Compile Update="GeneralStorePOS\ItemsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="SelectTable.cs">
@@ -101,13 +123,13 @@
     <Compile Update="PaymentMethodScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="GSDeliveryForm.cs">
+    <Compile Update="GeneralStorePOS\GSDeliveryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="GSStaffCategoryForm.cs">
+    <Compile Update="GeneralStorePOS\GSStaffCategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="GSStaffForm.cs">
+    <Compile Update="GeneralStorePOS\GSStaffForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="TablesForm.cs">

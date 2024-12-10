@@ -53,7 +53,7 @@ namespace POS
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("insert into bill_list(items,customer,phone,address,date,type,status,total_amount) values(@Items,@Name,@Phone,@Address,@Date,@Type,@Status,@Total)", connection);
+                SqlCommand command = new SqlCommand("insert into bill_list(items,customer,phone,address,date,type,status,total_amount,net_total_amount) values(@Items,@Name,@Phone,@Address,@Date,@Type,@Status,@Total,@NetTotal)", connection);
                 command.Parameters.AddWithValue("@Items", json);
                 command.Parameters.AddWithValue("@Name", Name_TextBox.Text);
                 command.Parameters.AddWithValue("@Phone", Convert.ToInt32(Phone_TextBox.Text));
@@ -62,6 +62,7 @@ namespace POS
                 command.Parameters.AddWithValue("@Type", "Delivery");
                 command.Parameters.AddWithValue("@Status", "In Complete");
                 command.Parameters.AddWithValue("@Total", total);
+                command.Parameters.AddWithValue("@NetTotal", total);
                 int rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {

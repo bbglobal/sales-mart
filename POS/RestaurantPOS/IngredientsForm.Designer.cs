@@ -1,6 +1,6 @@
 ﻿namespace POS
 {
-    partial class ItemsForm
+    partial class IngredientsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,25 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItemsForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IngredientsForm));
             panel3 = new Panel();
             Title_label = new Label();
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
+            MinimumQuantity_TextBox = new TextBox();
             label5 = new Label();
             label4 = new Label();
-            Unit_ComboBox = new ComboBox();
-            Quantity_TextBox = new TextBox();
+            STUnit_ComboBox = new ComboBox();
+            STQuantity_TextBox = new TextBox();
             ProductPrice_TextBox = new TextBox();
             label2 = new Label();
-            Status_ComboBox = new ComboBox();
-            status_label = new Label();
-            Category_ComboBox = new ComboBox();
-            browse_button = new Button();
-            pictureBox1 = new PictureBox();
-            category_label = new Label();
-            ProductName_TextBox = new TextBox();
+            IngName_TextBox = new TextBox();
             label3 = new Label();
             panel4 = new Panel();
             save_button = new Button();
@@ -54,7 +49,6 @@
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel4.SuspendLayout();
             SuspendLayout();
             // 
@@ -67,7 +61,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(655, 104);
+            panel3.Size = new Size(623, 104);
             panel3.TabIndex = 0;
             // 
             // Title_label
@@ -78,9 +72,9 @@
             Title_label.ForeColor = Color.White;
             Title_label.Location = new Point(163, 33);
             Title_label.Name = "Title_label";
-            Title_label.Size = new Size(169, 47);
+            Title_label.Size = new Size(276, 47);
             Title_label.TabIndex = 1;
-            Title_label.Text = "Add Item";
+            Title_label.Text = "Add Ingredients";
             // 
             // label1
             // 
@@ -101,184 +95,120 @@
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(1, 0, 1, 1);
-            panel1.Size = new Size(659, 507);
+            panel1.Size = new Size(627, 521);
             panel1.TabIndex = 1;
             // 
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(MinimumQuantity_TextBox);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(label4);
-            panel2.Controls.Add(Unit_ComboBox);
-            panel2.Controls.Add(Quantity_TextBox);
+            panel2.Controls.Add(STUnit_ComboBox);
+            panel2.Controls.Add(STQuantity_TextBox);
             panel2.Controls.Add(ProductPrice_TextBox);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(Status_ComboBox);
-            panel2.Controls.Add(status_label);
-            panel2.Controls.Add(Category_ComboBox);
-            panel2.Controls.Add(browse_button);
-            panel2.Controls.Add(pictureBox1);
-            panel2.Controls.Add(category_label);
-            panel2.Controls.Add(ProductName_TextBox);
+            panel2.Controls.Add(IngName_TextBox);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(1, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(655, 504);
+            panel2.Size = new Size(623, 518);
             panel2.TabIndex = 1;
+            // 
+            // MinimumQuantity_TextBox
+            // 
+            MinimumQuantity_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            MinimumQuantity_TextBox.Location = new Point(190, 314);
+            MinimumQuantity_TextBox.Multiline = true;
+            MinimumQuantity_TextBox.Name = "MinimumQuantity_TextBox";
+            MinimumQuantity_TextBox.Size = new Size(181, 30);
+            MinimumQuantity_TextBox.TabIndex = 20;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(136, 202);
+            label5.Location = new Point(186, 287);
             label5.Name = "label5";
-            label5.Size = new Size(36, 20);
+            label5.Size = new Size(218, 20);
             label5.TabIndex = 19;
-            label5.Text = "Unit";
+            label5.Text = "Minimum Quantity (acc. to unit)";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(98, 201);
+            label4.Location = new Point(187, 209);
             label4.Name = "label4";
-            label4.Size = new Size(32, 20);
+            label4.Size = new Size(133, 20);
             label4.TabIndex = 18;
-            label4.Text = "Qty";
+            label4.Text = "Qty(Standard Unit)";
             // 
-            // Unit_ComboBox
+            // STUnit_ComboBox
             // 
-            Unit_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
-            Unit_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            Unit_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            Unit_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Unit_ComboBox.FormattingEnabled = true;
-            Unit_ComboBox.IntegralHeight = false;
-            Unit_ComboBox.Items.AddRange(new object[] { "kg", "litres", "piece", "dozen" });
-            Unit_ComboBox.Location = new Point(134, 229);
-            Unit_ComboBox.Name = "Unit_ComboBox";
-            Unit_ComboBox.Size = new Size(70, 28);
-            Unit_ComboBox.TabIndex = 17;
+            STUnit_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
+            STUnit_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            STUnit_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            STUnit_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            STUnit_ComboBox.FormattingEnabled = true;
+            STUnit_ComboBox.IntegralHeight = false;
+            STUnit_ComboBox.Items.AddRange(new object[] { "kg", "litres", "item" });
+            STUnit_ComboBox.Location = new Point(259, 237);
+            STUnit_ComboBox.Name = "STUnit_ComboBox";
+            STUnit_ComboBox.Size = new Size(70, 28);
+            STUnit_ComboBox.TabIndex = 17;
             // 
-            // Quantity_TextBox
+            // STQuantity_TextBox
             // 
-            Quantity_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Quantity_TextBox.Location = new Point(104, 228);
-            Quantity_TextBox.Multiline = true;
-            Quantity_TextBox.Name = "Quantity_TextBox";
-            Quantity_TextBox.Size = new Size(28, 30);
-            Quantity_TextBox.TabIndex = 15;
-            Quantity_TextBox.Text = "1";
+            STQuantity_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            STQuantity_TextBox.Location = new Point(191, 236);
+            STQuantity_TextBox.Multiline = true;
+            STQuantity_TextBox.Name = "STQuantity_TextBox";
+            STQuantity_TextBox.Size = new Size(66, 30);
+            STQuantity_TextBox.TabIndex = 15;
+            STQuantity_TextBox.KeyPress += STQuantity_TextBox_KeyPress;
             // 
             // ProductPrice_TextBox
             // 
             ProductPrice_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ProductPrice_TextBox.Location = new Point(206, 228);
+            ProductPrice_TextBox.Location = new Point(192, 389);
             ProductPrice_TextBox.Multiline = true;
             ProductPrice_TextBox.Name = "ProductPrice_TextBox";
-            ProductPrice_TextBox.Size = new Size(79, 30);
+            ProductPrice_TextBox.Size = new Size(181, 30);
             ProductPrice_TextBox.TabIndex = 14;
+            ProductPrice_TextBox.KeyPress += STQuantity_TextBox_KeyPress;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(201, 201);
+            label2.Location = new Point(187, 362);
             label2.Name = "label2";
-            label2.Size = new Size(75, 20);
+            label2.Size = new Size(93, 20);
             label2.TabIndex = 13;
-            label2.Text = "Item Price";
+            label2.Text = "Cost Per Unit";
             // 
-            // Status_ComboBox
+            // IngName_TextBox
             // 
-            Status_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            Status_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Status_ComboBox.FormattingEnabled = true;
-            Status_ComboBox.IntegralHeight = false;
-            Status_ComboBox.Items.AddRange(new object[] { "Active", "Inactive" });
-            Status_ComboBox.Location = new Point(104, 380);
-            Status_ComboBox.Name = "Status_ComboBox";
-            Status_ComboBox.Size = new Size(181, 28);
-            Status_ComboBox.TabIndex = 12;
-            // 
-            // status_label
-            // 
-            status_label.AutoSize = true;
-            status_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            status_label.Location = new Point(100, 353);
-            status_label.Name = "status_label";
-            status_label.Size = new Size(49, 20);
-            status_label.TabIndex = 11;
-            status_label.Text = "Status";
-            // 
-            // Category_ComboBox
-            // 
-            Category_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
-            Category_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            Category_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            Category_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Category_ComboBox.FormattingEnabled = true;
-            Category_ComboBox.IntegralHeight = false;
-            Category_ComboBox.Location = new Point(104, 302);
-            Category_ComboBox.Name = "Category_ComboBox";
-            Category_ComboBox.Size = new Size(181, 28);
-            Category_ComboBox.TabIndex = 10;
-            // 
-            // browse_button
-            // 
-            browse_button.BackColor = Color.FromArgb(0, 119, 194);
-            browse_button.FlatAppearance.BorderSize = 0;
-            browse_button.FlatStyle = FlatStyle.Flat;
-            browse_button.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            browse_button.ForeColor = Color.White;
-            browse_button.Location = new Point(411, 330);
-            browse_button.Name = "browse_button";
-            browse_button.Size = new Size(103, 38);
-            browse_button.TabIndex = 9;
-            browse_button.Text = "Browse";
-            browse_button.UseVisualStyleBackColor = false;
-            browse_button.Click += browse_button_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(401, 179);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(125, 125);
-            pictureBox1.TabIndex = 8;
-            pictureBox1.TabStop = false;
-            // 
-            // category_label
-            // 
-            category_label.AutoSize = true;
-            category_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            category_label.Location = new Point(100, 275);
-            category_label.Name = "category_label";
-            category_label.Size = new Size(69, 20);
-            category_label.TabIndex = 4;
-            category_label.Text = "Category";
-            // 
-            // ProductName_TextBox
-            // 
-            ProductName_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ProductName_TextBox.Location = new Point(104, 151);
-            ProductName_TextBox.Multiline = true;
-            ProductName_TextBox.Name = "ProductName_TextBox";
-            ProductName_TextBox.Size = new Size(181, 30);
-            ProductName_TextBox.TabIndex = 3;
+            IngName_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            IngName_TextBox.Location = new Point(191, 159);
+            IngName_TextBox.Multiline = true;
+            IngName_TextBox.Name = "IngName_TextBox";
+            IngName_TextBox.Size = new Size(181, 30);
+            IngName_TextBox.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(100, 124);
+            label3.Location = new Point(187, 132);
             label3.Name = "label3";
-            label3.Size = new Size(83, 20);
+            label3.Size = new Size(121, 20);
             label3.TabIndex = 2;
-            label3.Text = "Item Name";
+            label3.Text = "Ingredient Name";
             // 
             // panel4
             // 
@@ -286,9 +216,9 @@
             panel4.Controls.Add(save_button);
             panel4.Controls.Add(cancel_button);
             panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 434);
+            panel4.Location = new Point(0, 448);
             panel4.Name = "panel4";
-            panel4.Size = new Size(655, 70);
+            panel4.Size = new Size(623, 70);
             panel4.TabIndex = 1;
             // 
             // save_button
@@ -324,15 +254,15 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // ItemsForm
+            // IngredientsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(659, 507);
+            ClientSize = new Size(627, 521);
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "ItemsForm";
+            Name = "IngredientsForm";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ProductsForm";
@@ -341,7 +271,6 @@
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel4.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -357,18 +286,13 @@
         private Button cancel_button;
         private Button save_button;
         private Label label3;
-        private TextBox ProductName_TextBox;
-        private Label category_label;
-        private Button browse_button;
-        private PictureBox pictureBox1;
-        private ComboBox Category_ComboBox;
-        private ComboBox Status_ComboBox;
-        private Label status_label;
+        private TextBox IngName_TextBox;
         private TextBox ProductPrice_TextBox;
         private Label label2;
-        private Label label5;
         private Label label4;
-        private ComboBox Unit_ComboBox;
-        private TextBox Quantity_TextBox;
+        private ComboBox STUnit_ComboBox;
+        private TextBox STQuantity_TextBox;
+        private TextBox MinimumQuantity_TextBox;
+        private Label label5;
     }
 }

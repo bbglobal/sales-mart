@@ -34,16 +34,20 @@
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
+            label4 = new Label();
+            label2 = new Label();
+            Unit_ComboBox = new ComboBox();
+            Qty_TextBox = new TextBox();
+            RemoveButton = new Button();
             AddIngredientButton = new Button();
             IngredientsListBox = new ListBox();
+            Ingredients_ComboBox = new ComboBox();
             Product_ComboBox = new ComboBox();
             status_label = new Label();
-            Ingredient_TextBox = new TextBox();
             label3 = new Label();
             panel4 = new Panel();
             save_button = new Button();
             cancel_button = new Button();
-            RemoveButton = new Button();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -59,7 +63,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(447, 104);
+            panel3.Size = new Size(498, 104);
             panel3.TabIndex = 0;
             // 
             // Title_label
@@ -93,26 +97,85 @@
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(1, 0, 1, 1);
-            panel1.Size = new Size(451, 581);
+            panel1.Size = new Size(502, 581);
             panel1.TabIndex = 1;
             // 
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(Unit_ComboBox);
+            panel2.Controls.Add(Qty_TextBox);
             panel2.Controls.Add(RemoveButton);
             panel2.Controls.Add(AddIngredientButton);
             panel2.Controls.Add(IngredientsListBox);
+            panel2.Controls.Add(Ingredients_ComboBox);
             panel2.Controls.Add(Product_ComboBox);
             panel2.Controls.Add(status_label);
-            panel2.Controls.Add(Ingredient_TextBox);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(1, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(447, 578);
+            panel2.Size = new Size(498, 578);
             panel2.TabIndex = 1;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(333, 222);
+            label4.Name = "label4";
+            label4.Size = new Size(36, 20);
+            label4.TabIndex = 20;
+            label4.Text = "Unit";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(269, 222);
+            label2.Name = "label2";
+            label2.Size = new Size(32, 20);
+            label2.TabIndex = 20;
+            label2.Text = "Qty";
+            // 
+            // Unit_ComboBox
+            // 
+            Unit_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            Unit_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Unit_ComboBox.FormattingEnabled = true;
+            Unit_ComboBox.IntegralHeight = false;
+            Unit_ComboBox.Items.AddRange(new object[] { "grams", "ml", "item" });
+            Unit_ComboBox.Location = new Point(319, 251);
+            Unit_ComboBox.Name = "Unit_ComboBox";
+            Unit_ComboBox.Size = new Size(69, 28);
+            Unit_ComboBox.TabIndex = 19;
+            // 
+            // Qty_TextBox
+            // 
+            Qty_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Qty_TextBox.Location = new Point(258, 250);
+            Qty_TextBox.Multiline = true;
+            Qty_TextBox.Name = "Qty_TextBox";
+            Qty_TextBox.Size = new Size(57, 30);
+            Qty_TextBox.TabIndex = 18;
+            // 
+            // RemoveButton
+            // 
+            RemoveButton.BackColor = Color.FromArgb(0, 119, 194);
+            RemoveButton.FlatStyle = FlatStyle.Flat;
+            RemoveButton.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            RemoveButton.ForeColor = Color.White;
+            RemoveButton.Location = new Point(394, 306);
+            RemoveButton.Name = "RemoveButton";
+            RemoveButton.Size = new Size(68, 30);
+            RemoveButton.TabIndex = 17;
+            RemoveButton.Text = "Remove";
+            RemoveButton.UseVisualStyleBackColor = false;
+            RemoveButton.Click += RemoveButton_Click;
             // 
             // AddIngredientButton
             // 
@@ -120,7 +183,7 @@
             AddIngredientButton.FlatStyle = FlatStyle.Flat;
             AddIngredientButton.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             AddIngredientButton.ForeColor = Color.White;
-            AddIngredientButton.Location = new Point(295, 252);
+            AddIngredientButton.Location = new Point(394, 249);
             AddIngredientButton.Name = "AddIngredientButton";
             AddIngredientButton.Size = new Size(60, 30);
             AddIngredientButton.TabIndex = 16;
@@ -135,8 +198,19 @@
             IngredientsListBox.ItemHeight = 20;
             IngredientsListBox.Location = new Point(107, 306);
             IngredientsListBox.Name = "IngredientsListBox";
-            IngredientsListBox.Size = new Size(181, 164);
+            IngredientsListBox.Size = new Size(281, 164);
             IngredientsListBox.TabIndex = 15;
+            // 
+            // Ingredients_ComboBox
+            // 
+            Ingredients_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            Ingredients_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Ingredients_ComboBox.FormattingEnabled = true;
+            Ingredients_ComboBox.IntegralHeight = false;
+            Ingredients_ComboBox.Location = new Point(107, 251);
+            Ingredients_ComboBox.Name = "Ingredients_ComboBox";
+            Ingredients_ComboBox.Size = new Size(148, 28);
+            Ingredients_ComboBox.TabIndex = 14;
             // 
             // Product_ComboBox
             // 
@@ -159,24 +233,15 @@
             status_label.TabIndex = 13;
             status_label.Text = "Product";
             // 
-            // Ingredient_TextBox
-            // 
-            Ingredient_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Ingredient_TextBox.Location = new Point(108, 252);
-            Ingredient_TextBox.Multiline = true;
-            Ingredient_TextBox.Name = "Ingredient_TextBox";
-            Ingredient_TextBox.Size = new Size(181, 30);
-            Ingredient_TextBox.TabIndex = 3;
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(103, 225);
+            label3.Location = new Point(103, 222);
             label3.Name = "label3";
-            label3.Size = new Size(109, 20);
+            label3.Size = new Size(121, 20);
             label3.TabIndex = 2;
-            label3.Text = "Add Ingredient";
+            label3.Text = "Select Ingredient";
             // 
             // panel4
             // 
@@ -186,7 +251,7 @@
             panel4.Dock = DockStyle.Bottom;
             panel4.Location = new Point(0, 508);
             panel4.Name = "panel4";
-            panel4.Size = new Size(447, 70);
+            panel4.Size = new Size(498, 70);
             panel4.TabIndex = 1;
             // 
             // save_button
@@ -222,29 +287,15 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // RemoveButton
-            // 
-            RemoveButton.BackColor = Color.FromArgb(0, 119, 194);
-            RemoveButton.FlatStyle = FlatStyle.Flat;
-            RemoveButton.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            RemoveButton.ForeColor = Color.White;
-            RemoveButton.Location = new Point(295, 306);
-            RemoveButton.Name = "RemoveButton";
-            RemoveButton.Size = new Size(68, 30);
-            RemoveButton.TabIndex = 17;
-            RemoveButton.Text = "Remove";
-            RemoveButton.UseVisualStyleBackColor = false;
-            RemoveButton.Click += RemoveButton_Click;
-            // 
-            // IngredientsForm
+            // ProductIngredientsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(451, 581);
+            ClientSize = new Size(502, 581);
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "IngredientsForm";
+            Name = "ProductIngredientsForm";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StaffCategoryForm";
@@ -268,11 +319,15 @@
         private Button cancel_button;
         private Button save_button;
         private Label label3;
-        private TextBox Ingredient_TextBox;
         private ComboBox Product_ComboBox;
         private Label status_label;
         private Button AddIngredientButton;
         private ListBox IngredientsListBox;
         private Button RemoveButton;
+        private ComboBox Ingredients_ComboBox;
+        private ComboBox Unit_ComboBox;
+        private TextBox Qty_TextBox;
+        private Label label4;
+        private Label label2;
     }
 }

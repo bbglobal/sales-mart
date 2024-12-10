@@ -7,19 +7,25 @@ using System.Reflection;
 using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Numerics;
+using System.Windows.Forms;
 
 namespace POS
 {
-    public partial class Dashboard : Form
+    public partial class HotelDashboard : Form
     {
         #region All Declared Variables
         private PrivateFontCollection privateFonts = new PrivateFontCollection();
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HotelDashboard));
         private System.Windows.Forms.Timer LabelTimer;
         private System.Windows.Forms.Timer PanelTimer;
         private Point Menu_Logo_initialPosition;
         private Point Menu_Logo_targetPosition;
         private Point Menu_Dashboard_label_initialPosition;
+        private Point Menu_GuestInfo_Label_initialPosition;
+        private Point Menu_Rooms_Label_initialPosition;
+        private Point Menu_Billing_Label_initialPosition;
+        private Point Menu_Check_Label_initialPosition;
         private Point Menu_Ingredients_label_initialPosition;
         private Point Menu_Products_label_initialPosition;
         private Point Menu_Tables_label_initialPosition;
@@ -29,6 +35,10 @@ namespace POS
         private Point Menu_Reports_label_initialPosition;
         private Point Menu_Settings_label_initialPosition;
         private Point Menu_Dashboard_label_targetPosition;
+        private Point Menu_GuestInfo_Label_targetPosition;
+        private Point Menu_Rooms_Label_targetPosition;
+        private Point Menu_Billing_Label_targetPosition;
+        private Point Menu_Check_Label_targetPosition;
         private Point Menu_Ingredients_label_targetPosition;
         private Point Menu_Products_label_targetPosition;
         private Point Menu_Tables_label_targetPosition;
@@ -53,7 +63,7 @@ namespace POS
         Image DeleteImage;
 
         #endregion
-        public Dashboard()
+        public HotelDashboard()
         {
             InitializeComponent();
             AdjustFormSize();
@@ -62,6 +72,7 @@ namespace POS
 
             #region Calling Image Resize and Rounded Corner,Timer & Font Functions 
             InitializeLabel(Menu_Dashboard_label, (Image)resources.GetObject("Menu_Dashboard_label.Image"), 25, 25);
+            InitializeLabel(Menu_Billing_Label, (Image)resources.GetObject("Menu_Billing_Label.Image"), 35, 35);
             InitializeLabel(Menu_Ingredients_label, (Image)resources.GetObject("Menu_Ingredients_label.Image"), 25, 25);
             InitializeLabel(Menu_Products_label, (Image)resources.GetObject("Menu_Products_label.Image"), 25, 25);
             InitializeLabel(Menu_Tables_label, (Image)resources.GetObject("Menu_Tables_label.Image"), 25, 27);
@@ -73,6 +84,10 @@ namespace POS
             InitializeLabel(Logo, (Image)resources.GetObject("Logo.Image"), 30, 45);
             InitializeLabel(LogoText, (Image)resources.GetObject("LogoText.Image"), 150, 25);
             RoundCorners(Menu_Dashboard_label, 20);
+            RoundCorners(Menu_GuestInfo_Label, 20);
+            RoundCorners(Menu_Rooms_Label, 20);
+            RoundCorners(Menu_Billing_Label, 20);
+            RoundCorners(Menu_Check_Label, 20);
             RoundCorners(Menu_Ingredients_label, 20);
             RoundCorners(Menu_Products_label, 20);
             RoundCorners(Menu_Tables_label, 20);
@@ -224,31 +239,43 @@ namespace POS
             {
 
                 Menu_Dashboard_label_initialPosition = Menu_Dashboard_label.Location;
-                Menu_Dashboard_label_targetPosition = new Point(10, 112);
+                Menu_Dashboard_label_targetPosition = new Point(10, 85);
+
+                Menu_GuestInfo_Label_initialPosition = Menu_GuestInfo_Label.Location;
+                Menu_GuestInfo_Label_targetPosition = new Point(10, 135);
+
+                Menu_Rooms_Label_initialPosition = Menu_Rooms_Label.Location;
+                Menu_Rooms_Label_targetPosition = new Point(10, 185);
+
+                Menu_Billing_Label_initialPosition = Menu_Billing_Label.Location;
+                Menu_Billing_Label_targetPosition = new Point(10, 235);
+
+                Menu_Check_Label_initialPosition = Menu_Check_Label.Location;
+                Menu_Check_Label_targetPosition = new Point(10, 285);
 
                 Menu_Ingredients_label_initialPosition = Menu_Ingredients_label.Location;
-                Menu_Ingredients_label_targetPosition = new Point(10, 172);
+                Menu_Ingredients_label_targetPosition = new Point(10, 335);
 
                 Menu_Products_label_initialPosition = Menu_Products_label.Location;
-                Menu_Products_label_targetPosition = new Point(10, 232);
+                Menu_Products_label_targetPosition = new Point(10, 385);
 
                 Menu_Tables_label_initialPosition = Menu_Tables_label.Location;
-                Menu_Tables_label_targetPosition = new Point(10, 292);
+                Menu_Tables_label_targetPosition = new Point(10, 435);
 
                 Menu_Staff_label_initialPosition = Menu_Staff_label.Location;
-                Menu_Staff_label_targetPosition = new Point(10, 352);
+                Menu_Staff_label_targetPosition = new Point(10, 485);
 
                 Menu_POS_label_initialPosition = Menu_POS_label.Location;
-                Menu_POS_label_targetPosition = new Point(10, 412);
+                Menu_POS_label_targetPosition = new Point(10, 535);
 
                 Menu_Kitchen_label_initialPosition = Menu_Kitchen_label.Location;
-                Menu_Kitchen_label_targetPosition = new Point(10, 472);
+                Menu_Kitchen_label_targetPosition = new Point(10, 585);
 
                 Menu_Reports_label_initialPosition = Menu_Reports_label.Location;
-                Menu_Reports_label_targetPosition = new Point(10, 532);
+                Menu_Reports_label_targetPosition = new Point(10, 635);
 
                 Menu_Settings_label_initialPosition = Menu_Settings_label.Location;
-                Menu_Settings_label_targetPosition = new Point(10, 592);
+                Menu_Settings_label_targetPosition = new Point(10, 685);
 
                 Menu_Logo_initialPosition = Logo.Location;
                 Menu_Logo_targetPosition = new Point(10, 30);
@@ -269,31 +296,43 @@ namespace POS
             else
             {
                 Menu_Dashboard_label_initialPosition = Menu_Dashboard_label.Location;
-                Menu_Dashboard_label_targetPosition = new Point(55, 112);
+                Menu_Dashboard_label_targetPosition = new Point(55, 85);
+
+                Menu_GuestInfo_Label_initialPosition = Menu_GuestInfo_Label.Location;
+                Menu_GuestInfo_Label_targetPosition = new Point(55, 135);
+
+                Menu_Rooms_Label_initialPosition = Menu_Rooms_Label.Location;
+                Menu_Rooms_Label_targetPosition = new Point(55, 185);
+
+                Menu_Billing_Label_initialPosition = Menu_Billing_Label.Location;
+                Menu_Billing_Label_targetPosition = new Point(55, 235);
+
+                Menu_Check_Label_initialPosition = Menu_Check_Label.Location;
+                Menu_Check_Label_targetPosition = new Point(55, 285);
 
                 Menu_Ingredients_label_initialPosition = Menu_Ingredients_label.Location;
-                Menu_Ingredients_label_targetPosition = new Point(55, 172);
+                Menu_Ingredients_label_targetPosition = new Point(55, 335);
 
                 Menu_Products_label_initialPosition = Menu_Products_label.Location;
-                Menu_Products_label_targetPosition = new Point(55, 232);
+                Menu_Products_label_targetPosition = new Point(55, 385);
 
                 Menu_Tables_label_initialPosition = Menu_Tables_label.Location;
-                Menu_Tables_label_targetPosition = new Point(55, 292);
+                Menu_Tables_label_targetPosition = new Point(55, 435);
 
                 Menu_Staff_label_initialPosition = Menu_Staff_label.Location;
-                Menu_Staff_label_targetPosition = new Point(55, 352);
+                Menu_Staff_label_targetPosition = new Point(55, 485);
 
                 Menu_POS_label_initialPosition = Menu_POS_label.Location;
-                Menu_POS_label_targetPosition = new Point(55, 412);
+                Menu_POS_label_targetPosition = new Point(55, 535);
 
                 Menu_Kitchen_label_initialPosition = Menu_Kitchen_label.Location;
-                Menu_Kitchen_label_targetPosition = new Point(55, 472);
+                Menu_Kitchen_label_targetPosition = new Point(55, 585);
 
                 Menu_Reports_label_initialPosition = Menu_Reports_label.Location;
-                Menu_Reports_label_targetPosition = new Point(55, 532);
+                Menu_Reports_label_targetPosition = new Point(55, 635);
 
                 Menu_Settings_label_initialPosition = Menu_Settings_label.Location;
-                Menu_Settings_label_targetPosition = new Point(55, 592);
+                Menu_Settings_label_targetPosition = new Point(55, 685);
 
                 Menu_Logo_initialPosition = Logo.Location;
                 Menu_Logo_targetPosition = new Point(36, 30);
@@ -324,6 +363,10 @@ namespace POS
             {
                 LabelTimer.Stop();
                 Menu_Dashboard_label.Location = Menu_Dashboard_label_targetPosition;
+                Menu_GuestInfo_Label.Location = Menu_GuestInfo_Label_targetPosition;
+                Menu_Rooms_Label.Location = Menu_Rooms_Label_targetPosition;
+                Menu_Billing_Label.Location = Menu_Billing_Label_targetPosition;
+                Menu_Check_Label.Location = Menu_Check_Label_targetPosition;
                 Menu_Ingredients_label.Location = Menu_Ingredients_label_targetPosition;
                 Menu_Products_label.Location = Menu_Products_label_targetPosition;
                 Menu_Tables_label.Location = Menu_Tables_label_targetPosition;
@@ -340,6 +383,22 @@ namespace POS
                 int Menu_Dashboard_label_newX = (int)(Menu_Dashboard_label_initialPosition.X + (Menu_Dashboard_label_targetPosition.X - Menu_Dashboard_label_initialPosition.X) * progress);
                 int Menu_Dashboard_label_newY = (int)Menu_Dashboard_label_targetPosition.Y;
                 Menu_Dashboard_label.Location = new Point(Menu_Dashboard_label_newX, Menu_Dashboard_label_newY);
+
+                int Menu_GuestInfo_Label_newX = (int)(Menu_GuestInfo_Label_initialPosition.X + (Menu_GuestInfo_Label_targetPosition.X - Menu_GuestInfo_Label_initialPosition.X) * progress);
+                int Menu_GuestInfo_Label_newY = (int)Menu_GuestInfo_Label_targetPosition.Y;
+                Menu_GuestInfo_Label.Location = new Point(Menu_GuestInfo_Label_newX, Menu_GuestInfo_Label_newY);
+
+                int Menu_Rooms_Label_newX = (int)(Menu_Rooms_Label_initialPosition.X + (Menu_Rooms_Label_targetPosition.X - Menu_Rooms_Label_initialPosition.X) * progress);
+                int Menu_Rooms_Label_newY = (int)Menu_Rooms_Label_targetPosition.Y;
+                Menu_Rooms_Label.Location = new Point(Menu_Rooms_Label_newX, Menu_Rooms_Label_newY);
+
+                int Menu_Billing_Label_newX = (int)(Menu_Billing_Label_initialPosition.X + (Menu_Billing_Label_targetPosition.X - Menu_Billing_Label_initialPosition.X) * progress);
+                int Menu_Billing_Label_newY = (int)Menu_Billing_Label_targetPosition.Y;
+                Menu_Billing_Label.Location = new Point(Menu_Billing_Label_newX, Menu_Billing_Label_newY);
+
+                int Menu_Check_Label_newX = (int)(Menu_Check_Label_initialPosition.X + (Menu_Check_Label_targetPosition.X - Menu_Check_Label_initialPosition.X) * progress);
+                int Menu_Check_Label_newY = (int)Menu_Check_Label_targetPosition.Y;
+                Menu_Check_Label.Location = new Point(Menu_Check_Label_newX, Menu_Check_Label_newY);
 
                 int Menu_Ingredients_label_newX = (int)(Menu_Ingredients_label_initialPosition.X + (Menu_Ingredients_label_targetPosition.X - Menu_Ingredients_label_initialPosition.X) * progress);
                 int Menu_Ingredients_label_newY = (int)Menu_Ingredients_label_targetPosition.Y;
@@ -444,6 +503,10 @@ namespace POS
         private void Menu_Dashboard_label_Click_1(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Dashboard_label, "#0077C3");
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -456,6 +519,10 @@ namespace POS
             if (ContentContainer_panel.Visible == false)
             {
                 ContentContainer_panel.Visible = true;
+                GuestInfoPanel.Visible = false;
+                CheckPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                BillingPanel.Visible = false;
                 ProductPanel.Visible = false;
                 IngredientsPanel.Visible = false;
                 StaffPanel.Visible = false;
@@ -467,9 +534,151 @@ namespace POS
             }
         }
 
+
+        private void Menu_GuestInfo_Label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_GuestInfo_Label, "#0077C3");
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Guest Information";
+            if (GuestInfoPanel.Visible == false)
+            {
+                GuestInfoPanel.Visible = true;
+                CheckPanel.Visible = false;
+                BillingPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                ProductPanel.Visible = false;
+                IngredientsPanel.Visible = false;
+                StaffPanel.Visible = false;
+                POSPanel.Visible = false;
+                TablesPanel.Visible = false;
+                KitchenPanel.Visible = false;
+                ReportsPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
+        }
+
+        private void Menu_Rooms_Label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Rooms_Label, "#0077C3");
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Rooms";
+            if (RoomsPanel.Visible == false)
+            {
+                RoomsPanel.Visible = true;
+                GuestInfoPanel.Visible = false;
+                CheckPanel.Visible = false;
+                BillingPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                ProductPanel.Visible = false;
+                IngredientsPanel.Visible = false;
+                StaffPanel.Visible = false;
+                POSPanel.Visible = false;
+                TablesPanel.Visible = false;
+                KitchenPanel.Visible = false;
+                ReportsPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
+        }
+
+        private void Menu_Billing_Label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Billing_Label, "#0077C3");
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Billing Details";
+            if (BillingPanel.Visible == false)
+            {
+                BillingPanel.Visible = true;
+                GuestInfoPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                CheckPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                ProductPanel.Visible = false;
+                IngredientsPanel.Visible = false;
+                StaffPanel.Visible = false;
+                POSPanel.Visible = false;
+                TablesPanel.Visible = false;
+                KitchenPanel.Visible = false;
+                ReportsPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
+        }
+
+        private void Menu_Check_Label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Check_Label, "#0077C3");
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Current_ScreenName_label.Text = "Check In/Check Out";
+            if (CheckPanel.Visible == false)
+            {
+                CheckPanel.Visible = true;
+                GuestInfoPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                BillingPanel.Visible = false;
+                ContentContainer_panel.Visible = false;
+                ProductPanel.Visible = false;
+                IngredientsPanel.Visible = false;
+                StaffPanel.Visible = false;
+                POSPanel.Visible = false;
+                TablesPanel.Visible = false;
+                KitchenPanel.Visible = false;
+                ReportsPanel.Visible = false;
+                //ProductPanel.Visible = false;
+            }
+        }
+
+
         private void Menu_Ingredients_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Ingredients_label, "#0077C3");
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Dashboard_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -483,6 +692,10 @@ namespace POS
             {
                 IngredientsPanel.Visible = true;
                 ContentContainer_panel.Visible = false;
+                CheckPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                BillingPanel.Visible = false;
+                GuestInfoPanel.Visible = false;
                 ProductPanel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
@@ -496,6 +709,10 @@ namespace POS
         private void Menu_Products_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Products_label, "#0077C3");
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -509,6 +726,10 @@ namespace POS
             {
                 ProductPanel.Visible = true;
                 ContentContainer_panel.Visible = false;
+                GuestInfoPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                CheckPanel.Visible = false;
+                BillingPanel.Visible = false;
                 IngredientsPanel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
@@ -522,6 +743,10 @@ namespace POS
         private void Menu_Tables_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Tables_label, "#0077C3");
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
@@ -535,6 +760,10 @@ namespace POS
             {
                 TablesPanel.Visible = true;
                 ContentContainer_panel.Visible = false;
+                GuestInfoPanel.Visible = false;
+                BillingPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                CheckPanel.Visible = false;
                 IngredientsPanel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
@@ -549,6 +778,10 @@ namespace POS
         private async void Menu_POS_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_POS_label, "#0077C3");
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -562,6 +795,10 @@ namespace POS
             {
                 POSPanel.Visible = true;
                 ProductPanel.Visible = false;
+                GuestInfoPanel.Visible = false;
+                CheckPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                BillingPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 IngredientsPanel.Visible = false;
                 StaffPanel.Visible = false;
@@ -593,6 +830,10 @@ namespace POS
         private void Menu_Staff_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Staff_label, "#0077C3");
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -606,6 +847,10 @@ namespace POS
             {
                 StaffPanel.Visible = true;
                 ProductPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                CheckPanel.Visible = false;
+                BillingPanel.Visible = false;
+                GuestInfoPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 IngredientsPanel.Visible = false;
                 POSPanel.Visible = false;
@@ -619,6 +864,10 @@ namespace POS
         private void Menu_Kitchen_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Kitchen_label, "#0077C3");
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -632,6 +881,10 @@ namespace POS
             {
                 KitchenPanel.Visible = true;
                 ProductPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                BillingPanel.Visible = false;
+                GuestInfoPanel.Visible = false;
+                CheckPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 IngredientsPanel.Visible = false;
                 POSPanel.Visible = false;
@@ -645,6 +898,10 @@ namespace POS
         private void Menu_Reports_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Reports_label, "#0077C3");
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -658,6 +915,10 @@ namespace POS
             {
                 ReportsPanel.Visible = true;
                 ProductPanel.Visible = false;
+                GuestInfoPanel.Visible = false;
+                RoomsPanel.Visible = false;
+                BillingPanel.Visible = false;
+                CheckPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 IngredientsPanel.Visible = false;
                 POSPanel.Visible = false;
@@ -671,6 +932,10 @@ namespace POS
         private void Menu_Settings_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Settings_label, "#0077C3");
+            Menu_GuestInfo_Label.BackColor = Color.Transparent;
+            Menu_Rooms_Label.BackColor = Color.Transparent;
+            Menu_Billing_Label.BackColor = Color.Transparent;
+            Menu_Check_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -989,7 +1254,7 @@ namespace POS
         }
         #endregion
 
-        #endregion 
+        #endregion
 
 
         #region All Dashboard Screen Funtions
@@ -1002,15 +1267,20 @@ namespace POS
             CurrentUser_label.Text = $"User Name:  {Session.Username}";
             CurrentUser_label.Location = new Point(CurrentUser_label.Location.X - (CurrentUser_label.Width - CurrentUserInitialWidth), CurrentUser_label.Location.Y);
             Set_CardBox_Positions();
-            SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
-            SetLabelLocations(Menu_Ingredients_label, new Point(55, 172));
-            SetLabelLocations(Menu_Products_label, new Point(55, 232));
-            SetLabelLocations(Menu_Tables_label, new Point(55, 292));
-            SetLabelLocations(Menu_Staff_label, new Point(55, 352));
-            SetLabelLocations(Menu_POS_label, new Point(55, 412));
-            SetLabelLocations(Menu_Kitchen_label, new Point(55, 472));
-            SetLabelLocations(Menu_Reports_label, new Point(55, 532));
-            SetLabelLocations(Menu_Settings_label, new Point(55, 592));
+            AllLabelLocations(55, 85, 50);
+            //SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
+            //SetLabelLocations(Menu_GuestInfo_Label, new Point(55, 157));
+            //SetLabelLocations(Menu_Rooms_Label, new Point(55, 202));
+            //SetLabelLocations(Menu_Billing_Label, new Point(55, 247));
+            //SetLabelLocations(Menu_Check_Label, new Point(55, 292));
+            //SetLabelLocations(Menu_Ingredients_label, new Point(55, 337));
+            //SetLabelLocations(Menu_Products_label, new Point(55, 382));
+            //SetLabelLocations(Menu_Tables_label, new Point(55, 427));
+            //SetLabelLocations(Menu_Staff_label, new Point(55, 472));
+            //SetLabelLocations(Menu_POS_label, new Point(55, 517));
+            //SetLabelLocations(Menu_Kitchen_label, new Point(55, 562));
+            //SetLabelLocations(Menu_Reports_label, new Point(55, 607));
+            //SetLabelLocations(Menu_Settings_label, new Point(55, 652));
             SetLabelColor(Menu_Dashboard_label, "#0077C3");
 
             //Menu_Dashboard_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
@@ -1027,16 +1297,45 @@ namespace POS
             ContentContainer_panel.Visible = true;
         }
 
+        private void AllLabelLocations(int X, int start, int increment)
+        {
+            SetLabelLocations(Menu_Dashboard_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_GuestInfo_Label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Rooms_Label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Billing_Label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Check_Label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Ingredients_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Products_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Tables_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Staff_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_POS_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Kitchen_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Reports_label, new Point(X, start));
+            start += increment;
+            SetLabelLocations(Menu_Settings_label, new Point(X, start));
+        }
+
         #endregion
 
         #region Card Box Positions Functions
         private void Set_CardBox_Positions()
         {
-            Total_Cost_CardBox.Location = new Point(Total_Sale_CardBox.Location.X + 240, Total_Cost_CardBox.Location.Y);
-            Total_Disc_CardBox.Location = new Point(Total_Cost_CardBox.Location.X + 240, Total_Disc_CardBox.Location.Y);
-            Total_Profit_CardBox.Location = new Point(Total_Disc_CardBox.Location.X + 240, Total_Profit_CardBox.Location.Y);
-            Total_Tax_CardBox.Location = new Point(Total_Cost_CardBox.Location.X, Total_Cost_CardBox.Location.Y + 100);
-            Total_Pay_CardBox.Location = new Point(Total_Disc_CardBox.Location.X, Total_Disc_CardBox.Location.Y + 100);
+            Check_Out_CardBox.Location = new Point(Check_In_CardBox.Location.X + 240, Check_Out_CardBox.Location.Y);
+            Reservation_CardBox.Location = new Point(Check_Out_CardBox.Location.X + 240, Reservation_CardBox.Location.Y);
+            Total_Profit_CardBox.Location = new Point(Reservation_CardBox.Location.X + 240, Total_Profit_CardBox.Location.Y);
+            Total_Tax_CardBox.Location = new Point(Check_Out_CardBox.Location.X, Check_Out_CardBox.Location.Y + 100);
+            Total_Pay_CardBox.Location = new Point(Reservation_CardBox.Location.X, Reservation_CardBox.Location.Y + 100);
         }
         #endregion
 
@@ -1731,7 +2030,6 @@ namespace POS
             }
 
         }
-
         private void AddPOSProducts(int pid, decimal price, string category, string name, Image image)
         {
             var w = new ProductCard()
@@ -1759,14 +2057,13 @@ namespace POS
                                 item.Cells["quantity"].Value = int.Parse(item.Cells["quantity"].Value.ToString()) + 1;
                                 item.Cells["total_amount"].Value = decimal.Parse(item.Cells["quantity"].Value.ToString()) *
                                                                    decimal.Parse(item.Cells["product_price"].Value.ToString());
-                                setTotalAmount();
                                 return;
                             }
 
                         }
 
                         POSProductsDataGrid.Rows.Add(new object[] { 0, wdg.id, wdg.product_name, 1, wdg.product_price, wdg.product_price });
-                        setTotalAmount();
+
                     }
                     else
                     {
@@ -1790,27 +2087,10 @@ namespace POS
             //    POSIngredientScreen IngForm = new POSIngredientScreen(wdg.product_name,wdg.product_category,(wdg.product_price).ToString(),wdg.product_image);
             //    IngForm.Show();
             //};
-
-
         }
-        private void setTotalAmount()
-        {
-            decimal total = 0;
-            if (POSProductsDataGrid.Rows.Count > 0)
-            {
-                foreach (DataGridViewRow item in POSProductsDataGrid.Rows)
-                {
-                    total = total + (Convert.ToDecimal(item.Cells["product_price"].Value) * Convert.ToDecimal(item.Cells["quantity"].Value)) ;
-                }
-                TotalAmountLabel.Text = "Total Amount : " + total;
-                TotalAmountLabel.Visible = true;
-            }
-            else
-            {
-                TotalAmountLabel.Visible = false;
-            }
 
-        }
+
+
 
 
         #endregion
@@ -2286,7 +2566,7 @@ namespace POS
         {
             POSProductsDataGrid.RowsDefaultCellStyle.SelectionBackColor = Color.White;
             POSProductsDataGrid.AllowUserToDeleteRows = false;
-            setTotalAmount();
+
         }
 
 
@@ -2302,8 +2582,6 @@ namespace POS
                 if (POSProductsDataGrid.Rows[e.RowIndex].Cells["quantity"].Value == null)
                 {
                     POSProductsDataGrid.Rows[e.RowIndex].Cells["quantity"].Value = 1;
-                    POSProductsDataGrid.Rows[e.RowIndex].Cells["total_amount"].Value = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells["product_price"].Value) * Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-                    setTotalAmount();
                     return;
                 }
                 decimal qty = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
@@ -2311,12 +2589,11 @@ namespace POS
                 if (qty > 0)
                 {
                     POSProductsDataGrid.Rows[e.RowIndex].Cells["total_amount"].Value = Convert.ToDecimal(POSProductsDataGrid.Rows[e.RowIndex].Cells["product_price"].Value) * qty;
-                    setTotalAmount();
                 }
                 else
                 {
                     POSProductsDataGrid.Rows.RemoveAt(e.RowIndex);
-                    setTotalAmount();
+
                 }
 
             }
@@ -2344,6 +2621,7 @@ namespace POS
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     }
                 }
 
@@ -2692,6 +2970,8 @@ namespace POS
 
         #endregion
 
+
+
         private void ReportsPanel_VisibleChanged(object sender, EventArgs e)
         {
             if (ReportsPanel.Visible)
@@ -2732,94 +3012,573 @@ namespace POS
             }
         }
 
-        
-        private async Task updateDashboardValues()
+
+
+        #region All Room Screen Functions
+
+        #region Rooms Tab Button Functions
+
+
+        private void RoomDetailsTab_Click(object sender, EventArgs e)
+        {
+            if (RoomDetailsTab.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                RoomDetailsTab.BackColor = Color.FromArgb(37, 150, 190);
+                RoomDetailsTab.ForeColor = Color.White;
+                RoomTypeTab.BackColor = Color.Transparent;
+                RoomTypeTab.ForeColor = SystemColors.GrayText;
+                RoomViewTab.BackColor = Color.Transparent;
+                RoomViewTab.ForeColor = SystemColors.GrayText;
+                RoomHistoryTab.BackColor = Color.Transparent;
+                RoomHistoryTab.ForeColor = SystemColors.GrayText;
+            }
+
+            if (RoomDetailsPanel.Visible == false)
+            {
+                Rooms_FlowLayoutPanel.Visible = false;
+                RoomTypePanel.Visible = false;
+                RoomHIstory_Panel.Visible = false;
+                RoomDetailsPanel.Visible = true;
+
+                LoadRoomDetailsData();
+            }
+        }
+
+        private void RoomViewTab_Click(object sender, EventArgs e)
+        {
+            if (RoomViewTab.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                RoomViewTab.BackColor = Color.FromArgb(37, 150, 190);
+                RoomViewTab.ForeColor = Color.White;
+                RoomTypeTab.BackColor = Color.Transparent;
+                RoomTypeTab.ForeColor = SystemColors.GrayText;
+                RoomDetailsTab.BackColor = Color.Transparent;
+                RoomDetailsTab.ForeColor = SystemColors.GrayText;
+                RoomHistoryTab.BackColor = Color.Transparent;
+                RoomHistoryTab.ForeColor = SystemColors.GrayText;
+            }
+            if (Rooms_FlowLayoutPanel.Visible == false)
+            {
+                RoomHIstory_Panel.Visible = false;
+                RoomTypePanel.Visible = false;
+                RoomDetailsPanel.Visible = false;
+                Rooms_FlowLayoutPanel.Visible = true;
+                var w = new RoomCard();
+                var w1 = new RoomCard();
+                var w2 = new RoomCard();
+                var w3 = new RoomCard();
+                var w4 = new RoomCard();
+                Rooms_FlowLayoutPanel.Controls.Clear();
+                Rooms_FlowLayoutPanel.Controls.Add(w);
+                Rooms_FlowLayoutPanel.Controls.Add(w1);
+                Rooms_FlowLayoutPanel.Controls.Add(w2);
+                Rooms_FlowLayoutPanel.Controls.Add(w3);
+                Rooms_FlowLayoutPanel.Controls.Add(w4);
+            }
+        }
+
+        private void RoomHistoryTab_Click(object sender, EventArgs e)
+        {
+            if (RoomHistoryTab.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                RoomHistoryTab.BackColor = Color.FromArgb(37, 150, 190);
+                RoomHistoryTab.ForeColor = Color.White;
+                RoomTypeTab.BackColor = Color.Transparent;
+                RoomTypeTab.ForeColor = SystemColors.GrayText;
+                RoomDetailsTab.BackColor = Color.Transparent;
+                RoomDetailsTab.ForeColor = SystemColors.GrayText;
+                RoomViewTab.BackColor = Color.Transparent;
+                RoomViewTab.ForeColor = SystemColors.GrayText;
+            }
+
+            if (RoomHIstory_Panel.Visible == false)
+            {
+                Rooms_FlowLayoutPanel.Visible = false;
+                RoomTypePanel.Visible = false;
+                RoomDetailsPanel.Visible = false;
+                RoomHIstory_Panel.Visible = true;
+                RoomHistoryDataGrid.DataSource = null;
+                RoomHistoryDataGrid.Columns.Clear();
+                RoomHistoryDataGrid.DataSource = SampleDataTable();
+                DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
+                {
+                    HeaderText = "Edit",
+                    Image = ResizeImage((Image)EditImage, 15, 15),
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                };
+                RoomHistoryDataGrid.Columns.Add(EditBtn);
+
+                DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
+                {
+                    HeaderText = "Delete",
+                    Image = ResizeImage((Image)DeleteImage, 15, 15),
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                };
+                RoomHistoryDataGrid.Columns.Add(DelBtn);
+            }
+        }
+
+        private DataTable SampleDataTable()
+        {
+            DataTable dataTable = new DataTable();
+
+            // Define columns
+            dataTable.Columns.Add("ID", typeof(int));
+            dataTable.Columns.Add("Room Type", typeof(string));
+            dataTable.Columns.Add("Room No.", typeof(int));
+            dataTable.Columns.Add("Rent", typeof(int));
+            dataTable.Columns.Add("Occupied", typeof(string));
+
+            // Generate sample data rows
+            dataTable.Rows.Add(1, "A/C Standard", 101, 125, "Y");
+            dataTable.Rows.Add(2, "A/C Standard", 102, 125, "N");
+            dataTable.Rows.Add(3, "A/C Standard", 103, 125, "N");
+            dataTable.Rows.Add(4, "A/C Standard", 104, 125, "Y");
+            dataTable.Rows.Add(5, "A/C Standard", 105, 125, "Y");
+
+
+            return dataTable;
+        }
+
+        private void RoomTypeTab_Click(object sender, EventArgs e)
+        {
+            if (RoomTypeTab.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                RoomTypeTab.BackColor = Color.FromArgb(37, 150, 190);
+                RoomTypeTab.ForeColor = Color.White;
+                RoomHistoryTab.BackColor = Color.Transparent;
+                RoomHistoryTab.ForeColor = SystemColors.GrayText;
+                RoomDetailsTab.BackColor = Color.Transparent;
+                RoomDetailsTab.ForeColor = SystemColors.GrayText;
+                RoomViewTab.BackColor = Color.Transparent;
+                RoomViewTab.ForeColor = SystemColors.GrayText;
+            }
+            if (RoomTypePanel.Visible == false)
+            {
+                Rooms_FlowLayoutPanel.Visible = false;
+                RoomHIstory_Panel.Visible = false;
+                RoomDetailsPanel.Visible = false;
+                RoomTypePanel.Visible = true;
+                LoadRoomTypeData();
+            }
+        }
+        #endregion
+
+
+        #region Room Type Data Load Function 
+        private async Task LoadRoomTypeData()
         {
             try
             {
-                await connection.OpenAsync(); // Open connection asynchronously
-
-                decimal sales = 0;
-                decimal discount = 0;
-                decimal totalCost = 0;
-
-                // Retrieve sales and discount information
-                string querySalesDiscount = "SELECT SUM((discount/100) * total_amount) AS discount, SUM(net_total_amount) AS net_total FROM bill_list";
-                using (SqlCommand command = new SqlCommand(querySalesDiscount, connection))
-                using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                bool addEditDel = false;
+                DataTable dt = new DataTable();
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                SqlConnection connection2 = new SqlConnection(connectionString);
+                await connection2.OpenAsync();
+                SqlCommand cmd = new SqlCommand("select * from room_types", connection2);
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
-                    if (await reader.ReadAsync())
+                    dt.Load(reader);
+                }
+                if (RoomTypeDataGrid.DataSource == null)
+                {
+                    addEditDel = true;
+                    DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
                     {
-                        sales = (decimal)reader["net_total"];
-                        discount = (decimal)reader["discount"];
-                    }
+                        HeaderText = "SR#",
+                        ValueType = typeof(string),
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+                    };
+                    RoomTypeDataGrid.Columns.Insert(0, SR);
+
                 }
 
-                // Update UI with sales and discount information
-                T_Sale_Amount_label.Text = sales.ToString("C"); // Display as currency format
-                T_Disc_Amount_label.Text = discount.ToString("C");
 
-                // Process JSON data from bill_list items
-                string queryJsonData = "SELECT items FROM bill_list WHERE status = 'Paid'";
-                using (SqlCommand cmd = new SqlCommand(queryJsonData, connection))
-                using (SqlDataReader rdr = await cmd.ExecuteReaderAsync())
+                RoomTypeDataGrid.DataSource = dt;
+                RoomTypeDataGrid.Columns["room_type"].HeaderText = "Room Types";
+                RoomTypeDataGrid.Columns["id"].Visible = false;
+
+                if (addEditDel)
                 {
-                    DataTable dt = new DataTable();
-                    if (await rdr.ReadAsync())
+                    DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
                     {
-                        dt.Load(rdr);
-                    }
+                        HeaderText = "Edit",
+                        Image = ResizeImage((Image)EditImage, 15, 15),
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    };
+                    RoomTypeDataGrid.Columns.Add(EditBtn);
 
-                    foreach (DataRow row in dt.Rows)
+                    DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
                     {
-                        string json = row["items"].ToString();
-                        List<string> JSONLIST = JsonConvert.DeserializeObject<List<string>>(json);
-
-                        foreach (var item in JSONLIST)
-                        {
-                            try
-                            {
-                                SqlCommand cmd2 = new SqlCommand("ParseJsonData", connection);
-                                cmd2.CommandType = CommandType.StoredProcedure;
-
-                                // Add parameters
-                                cmd2.Parameters.Add("@jsonData", SqlDbType.NVarChar, -1).Value = item;
-                                cmd2.Parameters.Add("@TOTAL", SqlDbType.Decimal).Direction = ParameterDirection.Output;
-
-                                await cmd2.ExecuteNonQueryAsync();
-
-                                // Retrieve the output parameter value
-                                totalCost += Convert.ToDecimal(cmd2.Parameters["@TOTAL"].Value);
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Error processing item: " + ex.Message);
-                            }
-                        }
-                    }
+                        HeaderText = "Delete",
+                        Image = ResizeImage((Image)DeleteImage, 15, 15),
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    };
+                    RoomTypeDataGrid.Columns.Add(DelBtn);
                 }
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    RoomTypeDataGrid.Rows[i].Cells[0].Value = (i + 1).ToString();
+                }
+                connection2.Close();
+            }
+            catch (Exception)
+            {
 
-                // Display total cost after processing all items
-                T_Cost_Amount_label.Text = totalCost.ToString("C");                 // Display as currency format
-                T_Profit_Amount_label.Text = (sales - totalCost).ToString("C");     // Display as currency format
+                throw;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
+
+
         }
 
-        private void ContentContainer_panel_VisibleChanged(object sender, EventArgs e)
+        #endregion
+
+
+        #region  Room Type Add,Update,Reset and DataGrid Click Event Functions
+        private void AddRoomType_Button_Click(object sender, EventArgs e)
         {
-            if (ContentContainer_panel.Visible == true)
+            if (RoomTypeTextBox.Text != "")
             {
-                updateDashboardValues();
+                string query = $"insert into room_types(room_type) values('{RoomTypeTextBox.Text}')";
+                DataToDataBase(query, "Added");
+                LoadRoomTypeData();
+                RoomTypeTextBox.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Field can't be empty");
             }
         }
+
+
+        int UpdationRTID = -1;
+        private void RoomTypeDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (RoomTypeDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+                    RoomTypeTextBox.Text = RoomTypeDataGrid.Rows[e.RowIndex].Cells["room_type"].Value.ToString();
+                    UpdationRTID = (int)RoomTypeDataGrid.Rows[e.RowIndex].Cells["id"].Value;
+                    UpdateRoomType_Button.Enabled = true;
+                    AddRoomType_Button.Enabled = false;
+                }
+                else if (RoomTypeDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+                    if (MessageBox.Show("Are you sure you want to delete this Room Type?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        string query = $"delete from room_types where id = {RoomTypeDataGrid.Rows[e.RowIndex].Cells["id"].Value}";
+                        DataToDataBase(query, "Deleted");
+                        LoadRoomTypeData();
+                    }
+                }
+            }
+        }
+
+        private void UpdateRoomType_Button_Click(object sender, EventArgs e)
+        {
+            if (RoomTypeTextBox.Text != "")
+            {
+                string query = $"update room_types set room_type = '{RoomTypeTextBox.Text}' where id = {UpdationRTID}";
+                DataToDataBase(query, "Updated");
+                LoadRoomTypeData();
+            }
+            else
+            {
+                MessageBox.Show("Field can't be empty");
+            }
+        }
+
+        private void ResetRoomType_Button_Click(object sender, EventArgs e)
+        {
+            AddRoomType_Button.Enabled = true;
+            UpdateRoomType_Button.Enabled = false;
+            RoomTypeTextBox.Text = "";
+        }
+        #endregion
+
+
+        #region Data to Database Function for Both Room Types Screen and Room Details Screen
+
+        private void DataToDataBase(string query, string message)
+        {
+            try
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                SqlConnection connection2 = new SqlConnection(connectionString);
+                connection2.Open();
+                SqlCommand cmd = new SqlCommand(query, connection2);
+                int rowsAff = cmd.ExecuteNonQuery();
+                if (rowsAff > 0)
+                {
+                    MessageBox.Show($"{message} Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                connection2.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        #endregion
+
+
+        #region Browse Button Function and Image to ByteArray Function 
+
+        string filepath;
+        private void browseRoom_button_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.Filter = "Images(.jpg,.png)|*.png;*.jpg";
+            if (file.ShowDialog() == DialogResult.OK)
+            {
+                filepath = file.FileName;
+                RoomPictureBox.Image = ResizeImage(new Bitmap(filepath), 330, 231);
+            }
+        }
+
+        private byte[] ImageToByteArray(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                // Clone the image to prevent it from being locked
+                using (Image clonedImage = (Image)image.Clone())
+                {
+                    clonedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg); // Adjust format as needed
+                }
+                return ms.ToArray();
+            }
+        }
+
+        #endregion
+
+        #region Room Details Add, Update, Reset ,Load Functions and DataGrid EventListener Funcions
+
+        private void AddRoomDetailsButton_Click(object sender, EventArgs e)
+        {
+            if (RoomNoTextBox.Text != "" && RentTextBox.Text != "" && RoomType_ComboBox.SelectedItem != null && RoomPictureBox.Image != null)
+            {
+                byte[] imageData = ImageToByteArray(RoomPictureBox.Image);
+                string base64Image = Convert.ToBase64String(imageData);
+                string query = $"insert into room_details(room_no,room_type,rent_day,image) values({RoomNoTextBox.Text},'{RoomType_ComboBox.SelectedItem}',{RentTextBox.Text},'{base64Image}')";
+                DataToDataBase(query, "Added");
+                LoadRoomDetailsData();
+                RoomNoTextBox.Text = "";
+                RentTextBox.Text = "";
+                RoomType_ComboBox.SelectedItem = null;
+                RoomPictureBox.Image = null;
+            }
+            else
+            {
+                MessageBox.Show("Field can't be empty");
+            }
+        }
+
+        int UpdationRDID = -1;
+        private void UpdateRoomDetailsButton_Click(object sender, EventArgs e)
+        {
+            if (RoomNoTextBox.Text != "" && RentTextBox.Text != "" && RoomType_ComboBox.SelectedItem != null && RoomPictureBox.Image != null)
+            {
+                byte[] imageData = ImageToByteArray(RoomPictureBox.Image);
+                string base64Image = Convert.ToBase64String(imageData);
+                string query = $"update room_details set room_no = {RoomNoTextBox.Text},room_type = '{RoomType_ComboBox.SelectedItem}',rent_day = {RentTextBox.Text},image = '{base64Image}' where id = {UpdationRDID}";
+                DataToDataBase(query, "Updated");
+                LoadRoomDetailsData();
+            }
+            else
+            {
+                MessageBox.Show("Field can't be empty");
+            }
+        }
+
+        private void ResetRoomDetailsButton_Click(object sender, EventArgs e)
+        {
+            AddRoomDetailsButton.Enabled = true;
+            UpdateRoomDetailsButton.Enabled = false;
+            RoomNoTextBox.Text = "";
+            RentTextBox.Text = "";
+            RoomType_ComboBox.SelectedItem = null;
+            RoomPictureBox.Image = null;
+        }
+
+        private async Task LoadRoomDetailsData()
+        {
+            try
+            {
+                bool addEditDel = false;
+                DataTable dt = new DataTable();
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                SqlConnection connection2 = new SqlConnection(connectionString);
+                await connection2.OpenAsync();
+                SqlCommand cmd = new SqlCommand("select * from room_details", connection2);
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    dt.Load(reader);
+                }
+                if (RoomDetailsDataGrid.DataSource == null)
+                {
+                    addEditDel = true;
+                    DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
+                    {
+                        HeaderText = "SR#",
+                        ValueType = typeof(string),
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+                    };
+                    RoomDetailsDataGrid.Columns.Insert(0, SR);
+
+                }
+
+
+                RoomDetailsDataGrid.DataSource = dt;
+                RoomDetailsDataGrid.Columns["room_no"].HeaderText = "Room No.";
+                RoomDetailsDataGrid.Columns["room_type"].HeaderText = "Room Type";
+                RoomDetailsDataGrid.Columns["rent_day"].HeaderText = "Room/Day";
+                RoomDetailsDataGrid.Columns["id"].Visible = false;
+                RoomDetailsDataGrid.Columns["image"].Visible = false;
+
+                if (addEditDel)
+                {
+                    DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
+                    {
+                        HeaderText = "Edit",
+                        Image = ResizeImage((Image)EditImage, 15, 15),
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    };
+                    RoomDetailsDataGrid.Columns.Add(EditBtn);
+
+                    DataGridViewImageColumn DelBtn = new DataGridViewImageColumn
+                    {
+                        HeaderText = "Delete",
+                        Image = ResizeImage((Image)DeleteImage, 15, 15),
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    };
+                    RoomDetailsDataGrid.Columns.Add(DelBtn);
+                }
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    RoomDetailsDataGrid.Rows[i].Cells[0].Value = (i + 1).ToString();
+                }
+                connection2.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void RoomDetailsDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (RoomDetailsDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                {
+                    RoomNoTextBox.Text = RoomDetailsDataGrid.Rows[e.RowIndex].Cells["room_no"].Value.ToString();
+                    RoomType_ComboBox.SelectedItem = RoomDetailsDataGrid.Rows[e.RowIndex].Cells["room_type"].Value.ToString();
+                    RentTextBox.Text = RoomDetailsDataGrid.Rows[e.RowIndex].Cells["rent_day"].Value.ToString();
+                    RoomPictureBox.Image = ByteArraytoImage(Convert.FromBase64String(RoomDetailsDataGrid.Rows[e.RowIndex].Cells["image"].Value.ToString()));
+                    UpdationRDID = (int)RoomDetailsDataGrid.Rows[e.RowIndex].Cells["id"].Value;
+                    UpdateRoomDetailsButton.Enabled = true;
+                    AddRoomDetailsButton.Enabled = false;
+
+                }
+                else if (RoomDetailsDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                {
+                    if (MessageBox.Show("Are you sure you want to delete this Room?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        string query = $"delete from room_details where id = {RoomDetailsDataGrid.Rows[e.RowIndex].Cells["id"].Value}";
+                        DataToDataBase(query, "Deleted");
+                        LoadRoomDetailsData();
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Room Type ComboBox Set Function and Room Details Panel Visibility Function 
+
+
+        private async Task setRoomTypeComboBox()
+        {
+            try
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                SqlConnection connection2 = new SqlConnection(connectionString);
+                await connection2.OpenAsync();
+                SqlCommand cmd = new SqlCommand("select * from room_types", connection2);
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (reader.Read())
+                    {
+                        RoomType_ComboBox.Items.Add(reader["room_type"].ToString());
+                    }
+                }
+                await connection2.CloseAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        private void RoomDetailsPanel_VisibleChanged(object sender, EventArgs e)
+        {
+            if (RoomDetailsPanel.Visible == true)
+            {
+                LoadRoomDetailsData();
+                if (RoomType_ComboBox.Items.Count == 0)
+                {
+                    setRoomTypeComboBox();
+                }
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+
+
+
+        private void GuestInfoListTabButton_Click(object sender, EventArgs e)
+        {
+            if (GuestInfoListTabButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                GuestInfoListTabButton.BackColor = Color.FromArgb(37, 150, 190);
+                GuestInfoListTabButton.ForeColor = Color.White;
+                GuestInfoTabButton.BackColor = Color.Transparent;
+                GuestInfoTabButton.ForeColor = SystemColors.GrayText;
+            }
+            if (GuestInfoListMiniPanel.Visible == false)
+            {
+                GuestInfoListMiniPanel.Visible = true;
+            }
+        }
+
+        private void GuestInfoTabButton_Click(object sender, EventArgs e)
+        {
+            if (GuestInfoTabButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                GuestInfoTabButton.BackColor = Color.FromArgb(37, 150, 190);
+                GuestInfoTabButton.ForeColor = Color.White;
+                GuestInfoListTabButton.BackColor = Color.Transparent;
+                GuestInfoListTabButton.ForeColor = SystemColors.GrayText;
+            }
+            if (GuestInfoListMiniPanel.Visible == true)
+            {
+                GuestInfoListMiniPanel.Visible = false;
+            }
+        }
+
+
     }
 }
 

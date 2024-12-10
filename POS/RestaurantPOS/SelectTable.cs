@@ -148,13 +148,14 @@ namespace POS
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("insert into bill_list(items,table_name,date,type,status,total_amount) values(@Items,@Table,@Date,@Type,@Status,@Total)", connection);
+                SqlCommand command = new SqlCommand("insert into bill_list(items,table_name,date,type,status,total_amount,net_total_amount) values(@Items,@Table,@Date,@Type,@Status,@Total,@NetTotal)", connection);
                 command.Parameters.AddWithValue("@Items",json);
                 command.Parameters.AddWithValue("@Table", button.Text);
                 command.Parameters.AddWithValue("@Date",DateTime.Now);
                 command.Parameters.AddWithValue("@Type","Dine In");
                 command.Parameters.AddWithValue("@Status","In Complete");
                 command.Parameters.AddWithValue("@Total",total_amount);
+                command.Parameters.AddWithValue("@NetTotal",total_amount);
                 int rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
