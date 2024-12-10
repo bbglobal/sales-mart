@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GSStaffForm));
             panel3 = new Panel();
             Title_label = new Label();
             label1 = new Label();
@@ -49,6 +49,9 @@
             panel4 = new Panel();
             save_button = new Button();
             cancel_button = new Button();
+            label7 = new Label();
+            emailTB = new TextBox();
+            label6 = new Label();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -104,8 +107,11 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(label7);
             panel2.Controls.Add(Shift_ComboBox);
+            panel2.Controls.Add(emailTB);
             panel2.Controls.Add(label5);
+            panel2.Controls.Add(label6);
             panel2.Controls.Add(Phone_TextBox);
             panel2.Controls.Add(Status_ComboBox);
             panel2.Controls.Add(label2);
@@ -296,7 +302,37 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // StaffForm
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9.25F);
+            label7.ForeColor = Color.Red;
+            label7.Location = new Point(325, 402);
+            label7.Name = "label7";
+            label7.Size = new Size(309, 17);
+            label7.TabIndex = 25;
+            label7.Text = "Your email will be used to create your user account.";
+            // 
+            // emailTB
+            // 
+            emailTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            emailTB.Location = new Point(375, 357);
+            emailTB.Multiline = true;
+            emailTB.Name = "emailTB";
+            emailTB.Size = new Size(181, 30);
+            emailTB.TabIndex = 24;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(375, 325);
+            label6.Name = "label6";
+            label6.Size = new Size(46, 20);
+            label6.TabIndex = 23;
+            label6.Text = "Email";
+            // 
+            // GSStaffForm
             // 
             AcceptButton = save_button;
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -306,7 +342,7 @@
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "StaffForm";
+            Name = "GSStaffForm";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StaffForm";
@@ -341,5 +377,8 @@
         private Label label4;
         private ComboBox Shift_ComboBox;
         private Label label5;
+        private Label label7;
+        private TextBox emailTB;
+        private Label label6;
     }
 }

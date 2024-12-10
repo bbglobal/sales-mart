@@ -12,7 +12,8 @@ namespace POS
             // see https://aka.ms/applicationconfiguration.
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new GSDashboard());
+            Application.Run(new LoginForm());
+            //ReportsDSR
         }
     }
 }

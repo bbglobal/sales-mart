@@ -11,8 +11,10 @@
   <ItemGroup>
     <None Remove="MyriadProSemibold.ttf" />
     <None Remove="Report1.rdlc" />
+    <None Remove="Reports\DailySalesReport.rdlc" />
     <None Remove="Reports\Receipt.rdlc" />
     <None Remove="Reports\SRByCategory.rdlc" />
+    <None Remove="Resources\Add.PNG" />
     <None Remove="Resources\delete.png" />
     <None Remove="Resources\details.png" />
     <None Remove="Resources\edit.png" />
@@ -25,6 +27,7 @@
   <ItemGroup>
     <EmbeddedResource Include="MyriadProSemibold.ttf" />
     <EmbeddedResource Include="Reports\Receipt.rdlc" />
+    <EmbeddedResource Include="Reports\DailySalesReport.rdlc" />
     <EmbeddedResource Include="Reports\SRByCategory.rdlc" />
     <EmbeddedResource Include="Resources\delete.png" />
     <EmbeddedResource Include="Resources\details.png" />
@@ -43,6 +46,59 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Add.PNG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CustomerAddFormGS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CustomerUpdateFormGS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EditOrderFormGS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GeneralStorePOS\AddCustomerInfoGS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GeneralStorePOS\LaybyFormUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RestaurantPOS\CustomerUpdateForm.cs" />
+    <Compile Update="RestaurantPOS\CustomerAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GeneralStorePOS\PaymentMethodScreenGS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RestaurantPOS\TableCustomerInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="RestaurantPOS\AddCustomerInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GuestSelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UserEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GeneralStorePOSDataSet1.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralStorePOSDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="GeneralStorePOSDataSet3.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralStorePOSDataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="GeneralStorePOSDataSet5.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralStorePOSDataSet5.xsd</DependentUpon>
+    </Compile>
     <Compile Update="GeneralStorePOS\LaybyDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +149,9 @@
     <Compile Update="GeneralStorePOS\GSPaymentMethodScreen.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ReportsDSR.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="RestaurantPOS\IngredientsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,9 +179,6 @@
     <Compile Update="ProductsCategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="PaymentMethodScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="GeneralStorePOS\GSDeliveryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +188,7 @@
     <Compile Update="GeneralStorePOS\GSStaffForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="AccountsAddForm.cs" />
     <Compile Update="TablesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +228,18 @@
     <None Update="DataSet\GetItemsByCatDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>GetItemsByCatDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="GeneralStorePOSDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GeneralStorePOSDataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="GeneralStorePOSDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GeneralStorePOSDataSet3.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="GeneralStorePOSDataSet5.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GeneralStorePOSDataSet5.Designer.cs</LastGenOutput>
     </None>
     <None Update="POSDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>

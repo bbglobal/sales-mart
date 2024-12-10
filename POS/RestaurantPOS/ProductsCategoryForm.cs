@@ -37,68 +37,86 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            if (Session.SelectedModule == "Restaurant POS")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.SelectedModule == "Hotel Management")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
         }
 
 
         private void SaveData()
         {
-            if (CategoryTypes_TextBox.Text == "" )
+            if (CategoryTypes_TextBox.Text == "")
             {
-                MessageBox.Show("Please fill the field","Error" ,MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                MessageBox.Show("Please fill the field", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
+
+            string currentUsername = Session.Username; 
+            string actionType = rowIndex == -1 ? "Add Product Category" : "Update Product Category";
+            string description = $"{actionType} - {CategoryTypes_TextBox.Text}";
+            DateTime currentTime = DateTime.Now;
+
             try
             {
                 connection.Open();
-                if (rowIndex == -1)
+
+                string query;
+
+                if (rowIndex == -1) 
                 {
-                    string query = "INSERT INTO product_category (types) VALUES (@Types)";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Types", CategoryTypes_TextBox.Text);
-
-                        int rowsAffected = command.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Product Category Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearFields();
-                        }
-                    }
-
-
-                  
+                    query = "INSERT INTO product_category (types) VALUES (@Types)";
                 }
-                else
+                else 
                 {
-                    string query = "UPDATE product_category SET types=@Types WHERE id=@Id";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Types", CategoryTypes_TextBox.Text);
-                        command.Parameters.AddWithValue("@Id", rowIndex);
+                    query = "UPDATE product_category SET types = @Types WHERE id = @Id";
+                }
 
-                        int rowsAffected = command.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Product Category Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Types", CategoryTypes_TextBox.Text);
+
+                    if (rowIndex != -1)
+                    {
+                        command.Parameters.AddWithValue("@Id", rowIndex);
                     }
 
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show(rowIndex == -1 ? "Product Category Added Successfully" : "Product Category Updated Successfully",
+                                        "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                        // Insert log into activity_log table
+                        string logQuery = "INSERT INTO activity_log (action, description, time, username) VALUES (@Action, @Description, @Time, @Username)";
+                        using (SqlCommand logCommand = new SqlCommand(logQuery, connection))
+                        {
+                            logCommand.Parameters.AddWithValue("@Action", actionType);
+                            logCommand.Parameters.AddWithValue("@Description", description);
+                            logCommand.Parameters.AddWithValue("@Time", currentTime);
+                            logCommand.Parameters.AddWithValue("@Username", currentUsername);
+                            logCommand.ExecuteNonQuery();
+                        }
+
+                        ClearFields();
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Message : " + ex.Message);
-
+                MessageBox.Show("Error Message: " + ex.Message);
             }
             finally
             {
                 connection.Close();
             }
         }
-
 
 
         private void SetFields(int rowNo)

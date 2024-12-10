@@ -24,7 +24,7 @@ namespace POS
         SqlConnection connection;
         SqlCommand command;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffForm));
-        public LaybyDetailsForm(string client, decimal total, decimal paid, decimal due,int rowIndex = -1)
+        public LaybyDetailsForm(string client, decimal total, decimal paid, decimal due, int rowIndex = -1)
         {
 
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace POS
 
         }
 
-        private void SampleData() 
+        private void SampleData()
         {
             DataTable laybyTable = new DataTable();
 
@@ -62,166 +62,50 @@ namespace POS
             laybyTable.Columns.Add("Payment Date", typeof(DateTime));
             laybyTable.Columns.Add("Deposit", typeof(decimal));
 
-            // Add sample rows
-            laybyTable.Rows.Add(1, DateTime.Now, 100.00m);
+            try
+            {
+                // Define the query to fetch payment details based on Layby No. from the 'layby' table
+                string query = @"
+            SELECT 
+                ROW_NUMBER() OVER (ORDER BY payment_date) AS [S No.],
+                payment_date AS [Payment Date],
+                deposit AS [Deposit]
+            FROM layby
+            WHERE layby_no = @LaybyNo";
 
-            LayByDetailsDataGrid.DataSource = laybyTable;
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@LaybyNo", rowIndex);  // Pass the LaybyNo parameter
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(laybyTable); // Fill the DataTable with query results
+                }
+
+                // Bind the data to the DataGridView
+                LayByDetailsDataGrid.DataSource = laybyTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching payment details: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
-            connection = new SqlConnection(connectionString);
-        }
-
-        private void SetTypeComboBox()
-        {
-            try
+            if (Session.BranchCode == "PK728")
             {
-                string query = "select types from staff_category";
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    //Type_ComboBox.Items.Add(reader["types"].ToString());
-                }
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
+                connection = new SqlConnection(connectionString);
             }
-            catch (Exception ex)
+            else if (Session.BranchCode == "BR001")
             {
-                MessageBox.Show("Error Message : " + ex);
-            }
-            finally
-            {
-                connection.Close();
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnGSBR001"].ConnectionString;
+                connection = new SqlConnection(connectionString);
             }
         }
-
-
-        //private void SaveData()
-        //{
-        //    if (StaffName_TextBox.Text == "" || Phone_TextBox.Text == "" || Address_TextBox.Text == "" || Type_ComboBox.SelectedItem == null || Status_ComboBox.SelectedItem == null || Shift_ComboBox.SelectedItem == null)
-        //    {
-        //        MessageBox.Show("Please fill all fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-        //        return;
-        //    }
-        //    try
-        //    {
-        //        connection.Open();
-        //        if (rowIndex == -1)
-        //        {
-        //            string query = "INSERT INTO staff_details (shifts,staff_name, type, phone_number, address , status) VALUES (@Shift,@StaffName, @Type, @Phone, @Address, @Status)";
-        //            using (SqlCommand command = new SqlCommand(query, connection))
-        //            {
-        //                command.Parameters.AddWithValue("@StaffName", StaffName_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Type", Type_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Phone", Phone_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Address", Address_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Shift", Shift_ComboBox.SelectedItem.ToString());
-
-        //                //// Convert image to byte array
-        //                //byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image,60,60));
-        //                //command.Parameters.AddWithValue("@ImageData", imageData);
-
-        //                //byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
-        //                //command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
-
-        //                int rowsAffected = command.ExecuteNonQuery();
-        //                if (rowsAffected > 0)
-        //                {
-        //                    MessageBox.Show("Staff Details Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        //                }
-        //            }
-
-
-
-        //        }
-        //        else
-        //        {
-        //            string query = "UPDATE staff_details SET shifts=@Shift,staff_name=@StaffName, type=@Type, phone_number=@Phone,address=@Address,status=@Status WHERE id=@Id";
-        //            using (SqlCommand command = new SqlCommand(query, connection))
-        //            {
-        //                command.Parameters.AddWithValue("@StaffName", StaffName_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Type", Type_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Phone", Phone_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Address", Address_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Shift", Shift_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Id", rowIndex);
-
-        //                //// Convert image to byte array
-        //                //byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image, 60,60));
-        //                //command.Parameters.AddWithValue("@ImageData", imageData);
-
-        //                //byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
-        //                //command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
-
-        //                int rowsAffected = command.ExecuteNonQuery();
-        //                if (rowsAffected > 0)
-        //                {
-        //                    MessageBox.Show("Staff Details Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                }
-        //            }
-
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error Message : " + ex.Message);
-
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-        //}
-
-
-
-
-
-
-        //private void SetFields(int rowNo)
-        //{
-        //    try
-        //    {
-        //        connection.Open();
-        //        string query = $"select * from staff_details where id={rowNo}";
-        //        command = new SqlCommand(query, connection);
-        //        using (SqlDataReader reader = command.ExecuteReader())
-        //        {
-
-        //            while (reader.Read())
-        //            {
-        //                StaffName_TextBox.Text = (string)reader["staff_name"];
-        //                Type_ComboBox.Text = (string)reader["type"];
-        //                Phone_TextBox.Text = Convert.ToInt32(reader["phone_number"]).ToString();
-        //                Address_TextBox.Text = (string)reader["address"];
-        //                Status_ComboBox.Text = (string)reader["status"];
-        //                Shift_ComboBox.Text = (string)reader["shifts"];
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error Message : " + ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-        //}
 
         private void InitializeLabel(Label label, Image image, int newWidth, int newHeight)
         {
-            // Load the image
-            //string fullPath = Path.Combine(GetPro, RelativePath);
-            //Image image = Image.FromFile(path);
             Image resizedImage = ResizeImage(image, newWidth, newHeight);
 
             label.Image = resizedImage;
@@ -238,18 +122,6 @@ namespace POS
             return resizedImg;
         }
 
-        //private void ClearFields()
-        //{
-        //    StaffName_TextBox.Text = "";
-        //    Type_ComboBox.Text = "";
-        //    Phone_TextBox.Text = "";
-        //    Address_TextBox.Text = "";
-        //    Status_ComboBox.Text = "";
-        //    Shift_ComboBox.Text = "";
-
-        //}
-
-
         private void cancel_button_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -262,6 +134,9 @@ namespace POS
             //SaveData();
         }
 
+        private void LayByDetailsDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+        }
     }
 }

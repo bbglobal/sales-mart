@@ -58,10 +58,17 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            if (Session.SelectedModule == "Restaurant POS")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.SelectedModule == "Hotel Management")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
         }
-
 
         private void InitializeLabel(Label label, Image image, int newWidth, int newHeight)
         {
@@ -227,14 +234,6 @@ namespace POS
                         {
                             DataTable dataTable = new DataTable();
                             dataTable.Load(reader);
-                            //DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
-                            //{
-                            //    HeaderText = "SR#",
-                            //    ValueType = typeof(string),
-                            //    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
-
-                            //};
-                            //WorkingDataGridView.Columns.Insert(0, SR);
 
                             WorkingDataGridView.DataSource = dataTable;
                             SetColumnHeaderText(WorkingDataGridView);
@@ -253,10 +252,6 @@ namespace POS
                                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                             };
                             WorkingDataGridView.Columns.Add(PrintBtn);
-                            //for (int i = 0; i < dataTable.Rows.Count; i++)
-                            //{
-                            //    WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
-                            //}
                         }
                     }
 
@@ -288,14 +283,6 @@ namespace POS
 
                     BeginInvoke(new Action(() =>
                     {
-                        //DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
-                        //{
-                        //    HeaderText = "SR#",
-                        //    ValueType = typeof(string),
-                        //    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-
-                        //};
-                        //WorkingDataGridView.Columns.Insert(0, SR);
                         WorkingDataGridView.DataSource = dataTable;
                         SetColumnHeaderText(WorkingDataGridView);
                         DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
@@ -313,10 +300,6 @@ namespace POS
                             AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         };
                         WorkingDataGridView.Columns.Add(PrintBtn);
-                        //for (int i = 0; i < dataTable.Rows.Count; i++)
-                        //{
-                        //    WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
-                        //}
                     }));
                 }
             }
@@ -484,7 +467,7 @@ namespace POS
         }
 
         private void BillListDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        { //billniggers
             if (BillListDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
             {
                 billID = Convert.ToInt32(BillListDataGrid.Rows[e.RowIndex].Cells["bill_id"].Value);

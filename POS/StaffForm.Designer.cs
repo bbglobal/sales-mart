@@ -34,6 +34,9 @@
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
+            label7 = new Label();
+            emailTB = new TextBox();
+            label6 = new Label();
             Shift_ComboBox = new ComboBox();
             label5 = new Label();
             Phone_TextBox = new TextBox();
@@ -104,6 +107,9 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(label7);
+            panel2.Controls.Add(emailTB);
+            panel2.Controls.Add(label6);
             panel2.Controls.Add(Shift_ComboBox);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(Phone_TextBox);
@@ -123,6 +129,37 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(655, 518);
             panel2.TabIndex = 1;
+            panel2.Paint += panel2_Paint;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9.25F);
+            label7.ForeColor = Color.Red;
+            label7.Location = new Point(325, 402);
+            label7.Name = "label7";
+            label7.Size = new Size(309, 17);
+            label7.TabIndex = 22;
+            label7.Text = "Your email will be used to create your user account.";
+            // 
+            // emailTB
+            // 
+            emailTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            emailTB.Location = new Point(375, 357);
+            emailTB.Multiline = true;
+            emailTB.Name = "emailTB";
+            emailTB.Size = new Size(181, 30);
+            emailTB.TabIndex = 21;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(100, 280);
+            label6.Name = "label6";
+            label6.Size = new Size(50, 20);
+            label6.TabIndex = 20;
+            label6.Text = "Phone";
             // 
             // Shift_ComboBox
             // 
@@ -133,7 +170,7 @@
             Shift_ComboBox.FormattingEnabled = true;
             Shift_ComboBox.IntegralHeight = false;
             Shift_ComboBox.Items.AddRange(new object[] { "Morning", "Afternoon", "Evening" });
-            Shift_ComboBox.Location = new Point(104, 394);
+            Shift_ComboBox.Location = new Point(104, 390);
             Shift_ComboBox.Name = "Shift_ComboBox";
             Shift_ComboBox.Size = new Size(181, 28);
             Shift_ComboBox.TabIndex = 19;
@@ -142,7 +179,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(102, 367);
+            label5.Location = new Point(104, 360);
             label5.Name = "label5";
             label5.Size = new Size(39, 20);
             label5.TabIndex = 18;
@@ -156,6 +193,7 @@
             Phone_TextBox.Name = "Phone_TextBox";
             Phone_TextBox.Size = new Size(181, 30);
             Phone_TextBox.TabIndex = 17;
+            Phone_TextBox.TextChanged += Phone_TextBox_TextChanged;
             // 
             // Status_ComboBox
             // 
@@ -204,11 +242,11 @@
             // 
             status_label.AutoSize = true;
             status_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            status_label.Location = new Point(100, 288);
+            status_label.Location = new Point(375, 325);
             status_label.Name = "status_label";
-            status_label.Size = new Size(50, 20);
+            status_label.Size = new Size(46, 20);
             status_label.TabIndex = 11;
-            status_label.Text = "Phone";
+            status_label.Text = "Email";
             // 
             // Type_ComboBox
             // 
@@ -341,5 +379,8 @@
         private Label label4;
         private ComboBox Shift_ComboBox;
         private Label label5;
+        private Label label7;
+        private TextBox emailTB;
+        private Label label6;
     }
 }

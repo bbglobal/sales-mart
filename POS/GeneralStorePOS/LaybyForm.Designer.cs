@@ -34,19 +34,19 @@
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            ExpiryDate_TextBox = new DateTimePicker();
+            ExpiryDateTB = new DateTimePicker();
             label6 = new Label();
-            comboBox1 = new ComboBox();
+            PaymentScheduleComboBox = new ComboBox();
             label3 = new Label();
-            Category_ComboBox = new ComboBox();
+            ClientNameComboBox = new ComboBox();
             category_label = new Label();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            OutstandingAmountTB = new TextBox();
+            TotalAmountTB = new TextBox();
+            DepositTB = new TextBox();
             label5 = new Label();
             label4 = new Label();
             label2 = new Label();
-            Phone_TextBox = new TextBox();
+            DurationTB = new TextBox();
             status_label = new Label();
             panel4 = new Panel();
             save_button = new Button();
@@ -106,19 +106,19 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Controls.Add(ExpiryDate_TextBox);
+            panel2.Controls.Add(ExpiryDateTB);
             panel2.Controls.Add(label6);
-            panel2.Controls.Add(comboBox1);
+            panel2.Controls.Add(PaymentScheduleComboBox);
             panel2.Controls.Add(label3);
-            panel2.Controls.Add(Category_ComboBox);
+            panel2.Controls.Add(ClientNameComboBox);
             panel2.Controls.Add(category_label);
-            panel2.Controls.Add(textBox3);
-            panel2.Controls.Add(textBox2);
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(OutstandingAmountTB);
+            panel2.Controls.Add(TotalAmountTB);
+            panel2.Controls.Add(DepositTB);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(Phone_TextBox);
+            panel2.Controls.Add(DurationTB);
             panel2.Controls.Add(status_label);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
@@ -128,13 +128,13 @@
             panel2.Size = new Size(655, 456);
             panel2.TabIndex = 1;
             // 
-            // ExpiryDate_TextBox
+            // ExpiryDateTB
             // 
-            ExpiryDate_TextBox.Format = DateTimePickerFormat.Short;
-            ExpiryDate_TextBox.Location = new Point(381, 323);
-            ExpiryDate_TextBox.Name = "ExpiryDate_TextBox";
-            ExpiryDate_TextBox.Size = new Size(181, 23);
-            ExpiryDate_TextBox.TabIndex = 27;
+            ExpiryDateTB.Format = DateTimePickerFormat.Short;
+            ExpiryDateTB.Location = new Point(381, 323);
+            ExpiryDateTB.Name = "ExpiryDateTB";
+            ExpiryDateTB.Size = new Size(181, 23);
+            ExpiryDateTB.TabIndex = 27;
             // 
             // label6
             // 
@@ -146,19 +146,19 @@
             label6.TabIndex = 26;
             label6.Text = "Expiry Date";
             // 
-            // comboBox1
+            // PaymentScheduleComboBox
             // 
-            comboBox1.AutoCompleteMode = AutoCompleteMode.Append;
-            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.IntegralHeight = false;
-            comboBox1.Items.AddRange(new object[] { "Daily", "Weekly", "Monthly" });
-            comboBox1.Location = new Point(106, 322);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(119, 28);
-            comboBox1.TabIndex = 25;
+            PaymentScheduleComboBox.AutoCompleteMode = AutoCompleteMode.Append;
+            PaymentScheduleComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            PaymentScheduleComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            PaymentScheduleComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            PaymentScheduleComboBox.FormattingEnabled = true;
+            PaymentScheduleComboBox.IntegralHeight = false;
+            PaymentScheduleComboBox.Items.AddRange(new object[] { "Daily", "Weekly", "Monthly" });
+            PaymentScheduleComboBox.Location = new Point(106, 322);
+            PaymentScheduleComboBox.Name = "PaymentScheduleComboBox";
+            PaymentScheduleComboBox.Size = new Size(119, 28);
+            PaymentScheduleComboBox.TabIndex = 25;
             // 
             // label3
             // 
@@ -170,19 +170,18 @@
             label3.TabIndex = 24;
             label3.Text = "Payment Schedule";
             // 
-            // Category_ComboBox
+            // ClientNameComboBox
             // 
-            Category_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
-            Category_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            Category_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            Category_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Category_ComboBox.FormattingEnabled = true;
-            Category_ComboBox.IntegralHeight = false;
-            Category_ComboBox.Items.AddRange(new object[] { "Jane Smith" });
-            Category_ComboBox.Location = new Point(104, 164);
-            Category_ComboBox.Name = "Category_ComboBox";
-            Category_ComboBox.Size = new Size(181, 28);
-            Category_ComboBox.TabIndex = 23;
+            ClientNameComboBox.AutoCompleteMode = AutoCompleteMode.Append;
+            ClientNameComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            ClientNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            ClientNameComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ClientNameComboBox.FormattingEnabled = true;
+            ClientNameComboBox.IntegralHeight = false;
+            ClientNameComboBox.Location = new Point(104, 164);
+            ClientNameComboBox.Name = "ClientNameComboBox";
+            ClientNameComboBox.Size = new Size(181, 28);
+            ClientNameComboBox.TabIndex = 23;
             // 
             // category_label
             // 
@@ -194,32 +193,32 @@
             category_label.TabIndex = 22;
             category_label.Text = "Client Name";
             // 
-            // textBox3
+            // OutstandingAmountTB
             // 
-            textBox3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox3.Location = new Point(377, 243);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(181, 30);
-            textBox3.TabIndex = 19;
+            OutstandingAmountTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            OutstandingAmountTB.Location = new Point(377, 243);
+            OutstandingAmountTB.Multiline = true;
+            OutstandingAmountTB.Name = "OutstandingAmountTB";
+            OutstandingAmountTB.Size = new Size(181, 30);
+            OutstandingAmountTB.TabIndex = 19;
             // 
-            // textBox2
+            // TotalAmountTB
             // 
-            textBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(377, 164);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(181, 30);
-            textBox2.TabIndex = 19;
+            TotalAmountTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TotalAmountTB.Location = new Point(377, 164);
+            TotalAmountTB.Multiline = true;
+            TotalAmountTB.Name = "TotalAmountTB";
+            TotalAmountTB.Size = new Size(181, 30);
+            TotalAmountTB.TabIndex = 19;
             // 
-            // textBox1
+            // DepositTB
             // 
-            textBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(104, 243);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(181, 30);
-            textBox1.TabIndex = 19;
+            DepositTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DepositTB.Location = new Point(104, 243);
+            DepositTB.Multiline = true;
+            DepositTB.Name = "DepositTB";
+            DepositTB.Size = new Size(181, 30);
+            DepositTB.TabIndex = 19;
             // 
             // label5
             // 
@@ -251,14 +250,14 @@
             label2.TabIndex = 18;
             label2.Text = "Deposit";
             // 
-            // Phone_TextBox
+            // DurationTB
             // 
-            Phone_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Phone_TextBox.Location = new Point(236, 321);
-            Phone_TextBox.Multiline = true;
-            Phone_TextBox.Name = "Phone_TextBox";
-            Phone_TextBox.Size = new Size(54, 30);
-            Phone_TextBox.TabIndex = 17;
+            DurationTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DurationTB.Location = new Point(236, 321);
+            DurationTB.Multiline = true;
+            DurationTB.Name = "DurationTB";
+            DurationTB.Size = new Size(54, 30);
+            DurationTB.TabIndex = 17;
             // 
             // status_label
             // 
@@ -348,17 +347,17 @@
         private Button cancel_button;
         private Button save_button;
         private Label status_label;
-        private TextBox Phone_TextBox;
-        private TextBox textBox1;
+        private TextBox DurationTB;
+        private TextBox DepositTB;
         private Label label2;
-        private ComboBox Category_ComboBox;
+        private ComboBox ClientNameComboBox;
         private Label category_label;
-        private ComboBox comboBox1;
+        private ComboBox PaymentScheduleComboBox;
         private Label label3;
-        private DateTimePicker ExpiryDate_TextBox;
+        private DateTimePicker ExpiryDateTB;
         private Label label6;
-        private TextBox textBox3;
-        private TextBox textBox2;
+        private TextBox OutstandingAmountTB;
+        private TextBox TotalAmountTB;
         private Label label5;
         private Label label4;
     }

@@ -38,8 +38,16 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            if (Session.SelectedModule == "Restaurant POS")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.SelectedModule == "Hotel Management")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
         }
 
         private void SetTypeComboBox()
@@ -71,73 +79,73 @@ namespace POS
         {
             if (ProductName_TextBox.Text == "" || Category_ComboBox.SelectedItem == null || Status_ComboBox.SelectedItem == null || pictureBox1.Image == null)
             {
-                MessageBox.Show("Please fill all fields","Error" ,MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                MessageBox.Show("Please fill all fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
+
+            string currentUsername = Session.Username;  // Replace with actual session username retrieval logic.
+            string actionType = rowIndex == -1 ? "Add Product" : "Update Product";
+            string description = $"{actionType} - {ProductName_TextBox.Text}";
+            DateTime currentTime = DateTime.Now;
+
             try
             {
                 connection.Open();
-                if (rowIndex == -1)
+
+                string query;
+
+                if (rowIndex == -1) // Add Product
                 {
-                    string query = "INSERT INTO products (product_name,product_price, category, status, image, or_image) VALUES (@ProductName,@Price, @Category, @Status, @ImageData, @OR_ImageData)";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@ProductName", ProductName_TextBox.Text);
-                        command.Parameters.AddWithValue("@Price", Convert.ToDouble(ProductPrice_TextBox.Text));
-                        command.Parameters.AddWithValue("@Category", Category_ComboBox.SelectedItem.ToString());
-                        command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
-
-                        // Convert image to byte array
-                        byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image,60,60));
-                        command.Parameters.AddWithValue("@ImageData", imageData);
-                        
-                        byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
-                        command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
-
-                        int rowsAffected = command.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Product Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearFields();
-                        }
-                    }
-
-
-                  
+                    query = "INSERT INTO products (product_name, product_price, category, status, image, or_image) VALUES (@ProductName, @Price, @Category, @Status, @ImageData, @OR_ImageData)";
                 }
-                else
+                else // Update Product
                 {
-                    string query = "UPDATE products SET product_name=@ProductName,product_price = @Price, category=@Category, status=@Status, image=@ImageData, or_image=@OR_ImageData WHERE id=@Id";
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    query = "UPDATE products SET product_name = @ProductName, product_price = @Price, category = @Category, status = @Status, image = @ImageData, or_image = @OR_ImageData WHERE id = @Id";
+                }
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ProductName", ProductName_TextBox.Text);
+                    command.Parameters.AddWithValue("@Price", Convert.ToDouble(ProductPrice_TextBox.Text));
+                    command.Parameters.AddWithValue("@Category", Category_ComboBox.SelectedItem.ToString());
+                    command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
+
+                    if (rowIndex != -1)
                     {
-                        command.Parameters.AddWithValue("@ProductName", ProductName_TextBox.Text);
-                        command.Parameters.AddWithValue("@Price", Convert.ToDouble(ProductPrice_TextBox.Text));
-                        command.Parameters.AddWithValue("@Category", Category_ComboBox.SelectedItem.ToString());
-                        command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Id", rowIndex);
-
-                        // Convert image to byte array
-                        byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image, 60,60));
-                        command.Parameters.AddWithValue("@ImageData", imageData);
-
-                        byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
-                        command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
-
-                        int rowsAffected = command.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Product Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            
-                        }
                     }
 
+                    // Convert image to byte array
+                    byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image, 60, 60));
+                    command.Parameters.AddWithValue("@ImageData", imageData);
 
+                    byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
+                    command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show(rowIndex == -1 ? "Product Added Successfully" : "Product Updated Successfully",
+                                        "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Insert log into activity_log table
+                        string logQuery = "INSERT INTO activity_log (action, description, time, username) VALUES (@Action, @Description, @Time, @Username)";
+                        using (SqlCommand logCommand = new SqlCommand(logQuery, connection))
+                        {
+                            logCommand.Parameters.AddWithValue("@Action", actionType);
+                            logCommand.Parameters.AddWithValue("@Description", description);
+                            logCommand.Parameters.AddWithValue("@Time", currentTime);
+                            logCommand.Parameters.AddWithValue("@Username", currentUsername);
+                            logCommand.ExecuteNonQuery();
+                        }
+
+                        ClearFields();
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Message : " + ex.Message);
-
+                MessageBox.Show("Error Message: " + ex.Message);
             }
             finally
             {

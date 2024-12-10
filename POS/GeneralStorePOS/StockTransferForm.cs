@@ -19,13 +19,14 @@ namespace POS
         private int rowIndex;
         SqlConnection connection;
         SqlCommand command;
+        decimal originalStock;
+        string connectionString;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffForm));
         public StockTransferForm(int rowIndex = -1)
         {
 
             InitializeComponent();
             InitializeDatabaseConnection();
-            //SetTypeComboBox();
             this.rowIndex = rowIndex;
             if (this.rowIndex != -1)
             {
@@ -36,163 +37,31 @@ namespace POS
             }
 
             InitializeLabel(label1, (Image)resources.GetObject("label1.Image"), 45, 60);
+            SetSourceBranch();
+            PopulateDestinationBranch();
+            PopulateProductComboBox();
+            ProductComboBox.SelectedIndexChanged += ProductComboBox_SelectedIndexChanged;
+            TransferAmountTB.KeyPress += TransferStockTB_KeyPress;
+
 
         }
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
-            connection = new SqlConnection(connectionString);
-        }
-
-        private void SetTypeComboBox()
-        {
-            try
+            if (Session.BranchCode == "PK728")
             {
-                string query = "select types from staff_category";
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    //Type_ComboBox.Items.Add(reader["types"].ToString());
-                }
+                connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
+                connection = new SqlConnection(connectionString);
             }
-            catch (Exception ex)
+            else if (Session.BranchCode == "BR001")
             {
-                MessageBox.Show("Error Message : " + ex);
-            }
-            finally
-            {
-                connection.Close();
+                connectionString = ConfigurationManager.ConnectionStrings["myconnGSBR001"].ConnectionString;
+                connection = new SqlConnection(connectionString);
             }
         }
-
-
-        //private void SaveData()
-        //{
-        //    if (StaffName_TextBox.Text == "" || Phone_TextBox.Text == "" || Address_TextBox.Text == "" || Type_ComboBox.SelectedItem == null || Status_ComboBox.SelectedItem == null || Shift_ComboBox.SelectedItem == null)
-        //    {
-        //        MessageBox.Show("Please fill all fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-        //        return;
-        //    }
-        //    try
-        //    {
-        //        connection.Open();
-        //        if (rowIndex == -1)
-        //        {
-        //            string query = "INSERT INTO staff_details (shifts,staff_name, type, phone_number, address , status) VALUES (@Shift,@StaffName, @Type, @Phone, @Address, @Status)";
-        //            using (SqlCommand command = new SqlCommand(query, connection))
-        //            {
-        //                command.Parameters.AddWithValue("@StaffName", StaffName_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Type", Type_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Phone", Phone_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Address", Address_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Shift", Shift_ComboBox.SelectedItem.ToString());
-
-        //                //// Convert image to byte array
-        //                //byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image,60,60));
-        //                //command.Parameters.AddWithValue("@ImageData", imageData);
-
-        //                //byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
-        //                //command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
-
-        //                int rowsAffected = command.ExecuteNonQuery();
-        //                if (rowsAffected > 0)
-        //                {
-        //                    MessageBox.Show("Staff Details Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        //                }
-        //            }
-
-
-
-        //        }
-        //        else
-        //        {
-        //            string query = "UPDATE staff_details SET shifts=@Shift,staff_name=@StaffName, type=@Type, phone_number=@Phone,address=@Address,status=@Status WHERE id=@Id";
-        //            using (SqlCommand command = new SqlCommand(query, connection))
-        //            {
-        //                command.Parameters.AddWithValue("@StaffName", StaffName_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Type", Type_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Phone", Phone_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Address", Address_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Shift", Shift_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Id", rowIndex);
-
-        //                //// Convert image to byte array
-        //                //byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image, 60,60));
-        //                //command.Parameters.AddWithValue("@ImageData", imageData);
-
-        //                //byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
-        //                //command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
-
-        //                int rowsAffected = command.ExecuteNonQuery();
-        //                if (rowsAffected > 0)
-        //                {
-        //                    MessageBox.Show("Staff Details Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                }
-        //            }
-
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error Message : " + ex.Message);
-
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-        //}
-
-
-
-
-
-
-        //private void SetFields(int rowNo)
-        //{
-        //    try
-        //    {
-        //        connection.Open();
-        //        string query = $"select * from staff_details where id={rowNo}";
-        //        command = new SqlCommand(query, connection);
-        //        using (SqlDataReader reader = command.ExecuteReader())
-        //        {
-
-        //            while (reader.Read())
-        //            {
-        //                StaffName_TextBox.Text = (string)reader["staff_name"];
-        //                Type_ComboBox.Text = (string)reader["type"];
-        //                Phone_TextBox.Text = Convert.ToInt32(reader["phone_number"]).ToString();
-        //                Address_TextBox.Text = (string)reader["address"];
-        //                Status_ComboBox.Text = (string)reader["status"];
-        //                Shift_ComboBox.Text = (string)reader["shifts"];
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error Message : " + ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-        //}
 
         private void InitializeLabel(Label label, Image image, int newWidth, int newHeight)
         {
-            // Load the image
-            //string fullPath = Path.Combine(GetPro, RelativePath);
-            //Image image = Image.FromFile(path);
             Image resizedImage = ResizeImage(image, newWidth, newHeight);
 
             label.Image = resizedImage;
@@ -209,16 +78,144 @@ namespace POS
             return resizedImg;
         }
 
-        //private void ClearFields()
-        //{
-        //    StaffName_TextBox.Text = "";
-        //    Type_ComboBox.Text = "";
-        //    Phone_TextBox.Text = "";
-        //    Address_TextBox.Text = "";
-        //    Status_ComboBox.Text = "";
-        //    Shift_ComboBox.Text = "";
+        private void SaveData()
+        {
+            if (string.IsNullOrWhiteSpace(ProductComboBox.Text))
+            {
+                MessageBox.Show("Product selection is required.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-        //}
+            if (string.IsNullOrWhiteSpace(TransferAmountTB.Text))
+            {
+                MessageBox.Show("Transfer amount is required.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!decimal.TryParse(TransferAmountTB.Text, out decimal transferAmount) || transferAmount <= 0)
+            {
+                MessageBox.Show("Transfer amount is 0 or invalid. Please enter a valid amount.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string product = ProductComboBox.Text;
+            string currentBranch = Session.BranchCode; // Current branch from session
+            string sourceCode = currentBranch; // Source branch is the current branch
+            string destinationCode = sourceCode == "PK728" ? "BR001" : "PK728"; // Set destination based on source
+            string sourceConnectionName = sourceCode == "PK728" ? "myconnGS" : "myconnGSBR001";
+            string destinationConnectionName = destinationCode == "PK728" ? "myconnGS" : "myconnGSBR001";
+
+            decimal currentStock = originalStock; // Stock in the source branch
+            decimal newStockSource = currentStock - transferAmount; // Updated source branch stock
+            DateTime transferDate = DateTime.Now;
+            string username = Session.Username;
+
+            try
+            {
+                // Retrieve connection strings from configuration
+                string sourceConnectionString = ConfigurationManager.ConnectionStrings[sourceConnectionName].ConnectionString;
+                string destinationConnectionString = ConfigurationManager.ConnectionStrings[destinationConnectionName].ConnectionString;
+
+                string sourceName = GetBranchName(sourceCode, sourceConnectionString);
+                string destinationName = GetBranchName(destinationCode, destinationConnectionString);
+
+                using (SqlConnection sourceConnection = new SqlConnection(sourceConnectionString))
+                using (SqlConnection destinationConnection = new SqlConnection(destinationConnectionString))
+                {
+                    sourceConnection.Open();
+                    destinationConnection.Open();
+
+                    // 1. Insert into `transfers` table in both databases
+                    string transferQuery = @"INSERT INTO transfers (source, destination, product, current_stock, transferred, transfer_date)
+                                     VALUES (@source, @destination, @product, @currentStock, @transferred, @transferDate)";
+
+                    using (SqlCommand sourceTransferCommand = new SqlCommand(transferQuery, sourceConnection))
+                    using (SqlCommand destinationTransferCommand = new SqlCommand(transferQuery, destinationConnection))
+                    {
+                        foreach (var cmd in new[] { sourceTransferCommand, destinationTransferCommand })
+                        {
+                            cmd.Parameters.AddWithValue("@source", sourceName);
+                            cmd.Parameters.AddWithValue("@destination", destinationName);
+                            cmd.Parameters.AddWithValue("@product", product);
+                            cmd.Parameters.AddWithValue("@currentStock", currentStock);
+                            cmd.Parameters.AddWithValue("@transferred", transferAmount);
+                            cmd.Parameters.AddWithValue("@transferDate", transferDate);
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    // 2. Insert into `activity_log` in both databases
+                    string activityLogQuery = @"INSERT INTO activity_log (action, description, time, username)
+                                        VALUES (@action, @description, @time, @username)";
+                    string action = "Transfer";
+                    string description = $"Transferred {transferAmount} units of {product} from {sourceName} to {destinationName}";
+
+                    using (SqlCommand sourceLogCommand = new SqlCommand(activityLogQuery, sourceConnection))
+                    using (SqlCommand destinationLogCommand = new SqlCommand(activityLogQuery, destinationConnection))
+                    {
+                        foreach (var cmd in new[] { sourceLogCommand, destinationLogCommand })
+                        {
+                            cmd.Parameters.AddWithValue("@action", action);
+                            cmd.Parameters.AddWithValue("@description", description);
+                            cmd.Parameters.AddWithValue("@time", transferDate);
+                            cmd.Parameters.AddWithValue("@username", username);
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    // 3. Update stock in the source branch database
+                    string updateSourceStockQuery = @"UPDATE items SET quantity = @newQuantity WHERE item_name = @product";
+                    using (SqlCommand updateSourceStockCommand = new SqlCommand(updateSourceStockQuery, sourceConnection))
+                    {
+                        updateSourceStockCommand.Parameters.AddWithValue("@newQuantity", newStockSource);
+                        updateSourceStockCommand.Parameters.AddWithValue("@product", product);
+
+                        updateSourceStockCommand.ExecuteNonQuery();
+                    }
+
+                    // 4. Update stock in the destination branch database
+                    string updateDestinationStockQuery = @"UPDATE items SET quantity = quantity + @transferred WHERE item_name = @product";
+                    using (SqlCommand updateDestinationStockCommand = new SqlCommand(updateDestinationStockQuery, destinationConnection))
+                    {
+                        updateDestinationStockCommand.Parameters.AddWithValue("@transferred", transferAmount);
+                        updateDestinationStockCommand.Parameters.AddWithValue("@product", product);
+
+                        updateDestinationStockCommand.ExecuteNonQuery();
+                    }
+
+                    // Success message
+                    MessageBox.Show("Transfer successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Clear fields and reset
+                    TransferAmountTB.Clear();
+                    ProductComboBox.SelectedIndex = -1;
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error processing transfer: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Helper method to get branch name by branch code
+        private string GetBranchName(string branchCode, string connectionString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT branch_name FROM branches WHERE branch_code = @branchCode";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@branchCode", branchCode);
+                    object result = command.ExecuteScalar();
+                    return result?.ToString() ?? branchCode; // Fallback to code if name is not found
+                }
+            }
+        }
+
 
 
         private void cancel_button_Click(object sender, EventArgs e)
@@ -230,7 +227,207 @@ namespace POS
 
         private void save_button_Click(object sender, EventArgs e)
         {
-            //SaveData();
+            SaveData();
+        }
+
+        private void SetSourceBranch()
+        {
+            if (!string.IsNullOrEmpty(Session.BranchCode))
+            {
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        string query = "SELECT branch_name FROM branches WHERE branch_code = @BranchCode";
+
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@BranchCode", Session.BranchCode);
+                            object result = command.ExecuteScalar();
+
+                            if (result != null)
+                            {
+                                SourceBranchComboBox.Text = result.ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Branch not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while fetching the branch: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No branch code found in the session.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void PopulateDestinationBranch()
+        {
+            if (!string.IsNullOrEmpty(Session.BranchCode))
+            {
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        string query = "SELECT branch_code, branch_name FROM branches WHERE branch_code != @BranchCode";
+
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@BranchCode", Session.BranchCode);
+
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                DestinationBranchComboBox.Items.Clear();
+
+                                while (reader.Read())
+                                {
+                                    DestinationBranchComboBox.Items.Add(reader["branch_name"].ToString());
+                                }
+
+                                if (DestinationBranchComboBox.Items.Count > 0)
+                                {
+                                    DestinationBranchComboBox.SelectedIndex = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while fetching the branch names: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No branch code found in the session.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void PopulateProductComboBox()
+        {
+            string query = "SELECT item_name FROM items";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    // Open the connection
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            ProductComboBox.Items.Clear();
+                            while (reader.Read())
+                            {
+                                ProductComboBox.Items.Add(reader["item_name"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error populating product combo box: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ProductComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ProductComboBox.SelectedItem == null)
+                return;
+
+            string selectedItemName = ProductComboBox.SelectedItem.ToString();
+            string query = "SELECT quantity FROM items WHERE item_name = @itemName";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@itemName", selectedItemName);
+                        object result = command.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            originalStock = Convert.ToInt32(result);
+                            CurrentStockTextBox.Text = originalStock.ToString(); // Update the TextBox
+                        }
+                        else
+                        {
+                            originalStock = 0;
+                            CurrentStockTextBox.Text = "0";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error fetching item quantity: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void TransferStockTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TransferAmountTB_TextChanged(object sender, EventArgs e)
+        {
+            // Ensure TransferAmountTB is not empty
+            if (string.IsNullOrWhiteSpace(TransferAmountTB.Text))
+            {
+                CurrentStockTextBox.Text = originalStock.ToString();
+                return;
+            }
+
+            // Parse the transfer amount
+            if (decimal.TryParse(TransferAmountTB.Text, out decimal transferAmount))
+            {
+                // Check if transfer amount exceeds current stock
+                if (transferAmount > originalStock)
+                {
+                    MessageBox.Show("Enter a valid number. Transfer amount cannot exceed current stock.",
+                                    "Invalid Input",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+
+                    // Clear the TransferAmountTB and reset current stock display
+                    TransferAmountTB.Clear();
+                    CurrentStockTextBox.Text = originalStock.ToString();
+                    return;
+                }
+
+                // Calculate the new stock dynamically
+                decimal updatedStock = originalStock - transferAmount;
+
+                // Update current stock, ensuring it doesn't go negative
+                CurrentStockTextBox.Text = updatedStock < 0 ? "0" : updatedStock.ToString();
+            }
+            else
+            {
+                // If parsing fails, reset TransferAmountTB and currentstockTB
+                MessageBox.Show("Please enter a valid numeric value.",
+                                "Invalid Input",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                TransferAmountTB.Clear();
+                CurrentStockTextBox.Text = originalStock.ToString();
+            }
         }
 
 

@@ -37,16 +37,24 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            if (Session.SelectedModule == "Restaurant POS")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.SelectedModule == "Hotel Management")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
         }
 
 
         private void SaveData()
         {
-            if (CategoryTypes_TextBox.Text == "" )
+            if (CategoryTypes_TextBox.Text == "")
             {
-                MessageBox.Show("Please fill the field","Error" ,MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                MessageBox.Show("Please fill the field", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
             try
@@ -68,7 +76,7 @@ namespace POS
                     }
 
 
-                  
+
                 }
                 else
                 {
@@ -159,11 +167,16 @@ namespace POS
         }
 
         string filepath;
- 
+
 
         private void save_button_Click(object sender, EventArgs e)
         {
             SaveData();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

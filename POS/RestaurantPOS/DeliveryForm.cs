@@ -30,7 +30,12 @@ namespace POS
             InitializeLabel(label1, (Image)resources.GetObject("label1.Image"), 45, 60);
 
         }
-
+        public DeliveryForm()
+        {
+            InitializeComponent();
+            InitializeDatabaseConnection();
+            InitializeLabel(label1, (Image)resources.GetObject("label1.Image"), 45, 60);
+        }
         public string InsertStatus
         { 
             get { return insertStatus; }
@@ -38,22 +43,30 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            if (Session.SelectedModule == "Restaurant POS")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.SelectedModule == "Hotel Management")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
         }
-
 
         private void SaveData()
         {
             if (Name_TextBox.Text == "" && Phone_TextBox.Text == "" && Address_TextBox.Text == "")
             {
-                MessageBox.Show("Please fill the field","Error" ,MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                MessageBox.Show("Please fill the field", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
+
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("insert into bill_list(items,customer,phone,address,date,type,status,total_amount,net_total_amount) values(@Items,@Name,@Phone,@Address,@Date,@Type,@Status,@Total,@NetTotal)", connection);
+                SqlCommand command = new SqlCommand("insert into bill_list(items, customer, phone, address, date, type, status, total_amount, net_total_amount) values(@Items, @Name, @Phone, @Address, @Date, @Type, @Status, @Total, @NetTotal); SELECT SCOPE_IDENTITY();", connection);
                 command.Parameters.AddWithValue("@Items", json);
                 command.Parameters.AddWithValue("@Name", Name_TextBox.Text);
                 command.Parameters.AddWithValue("@Phone", Convert.ToInt32(Phone_TextBox.Text));
@@ -63,10 +76,25 @@ namespace POS
                 command.Parameters.AddWithValue("@Status", "In Complete");
                 command.Parameters.AddWithValue("@Total", total);
                 command.Parameters.AddWithValue("@NetTotal", total);
-                int rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected > 0)
+
+                // Get the generated BillID
+                int billId = Convert.ToInt32(command.ExecuteScalar());
+
+                if (billId > 0)
                 {
                     MessageBox.Show("Saved Successfully");
+                    string currentUsername = Session.Username; ; 
+
+                    // Insert into Activity Log table
+                    string activityDescription = $"New delivery order added to bill list (BillID: {billId}), Total: {total}";
+                    SqlCommand logCommand = new SqlCommand("INSERT INTO activity_log (action, description, time, username) VALUES (@ActionType, @Description, @ActionDate, @Username)", connection);
+                    logCommand.Parameters.AddWithValue("@ActionType", "Insert");
+                    logCommand.Parameters.AddWithValue("@Description", activityDescription);
+                    logCommand.Parameters.AddWithValue("@ActionDate", DateTime.Now);
+                    logCommand.Parameters.AddWithValue("@Username", currentUsername); // Insert the username
+
+                    logCommand.ExecuteNonQuery();
+
                     insertStatus = "Inserted";
                 }
                 else
@@ -83,12 +111,8 @@ namespace POS
                 connection.Close();
                 this.Close();
             }
-
         }
 
-
-
-       
 
         private void InitializeLabel(Label label, Image image, int newWidth, int newHeight)
         {

@@ -35,14 +35,18 @@ namespace POS
 
         }
 
-
-
-
-
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            if (Session.SelectedModule == "Restaurant POS")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.SelectedModule == "Hotel Management")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
         }
 
 
@@ -123,13 +127,6 @@ namespace POS
         #endregion
 
 
-
-
-
-
-
-
-
         private void SaveData()
         {
             if (IngName_TextBox.Text == "" || STQuantity_TextBox.Text == "" || STUnit_ComboBox.SelectedItem == null || MinimumQuantity_TextBox.Text == "" || ProductPrice_TextBox.Text == "")
@@ -137,67 +134,72 @@ namespace POS
                 MessageBox.Show("Please fill all fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
+
+            string currentUsername = Session.Username; 
+            string actionType = rowIndex == -1 ? "Add Ingredient" : "Update Ingredient";
+            string description = $"{actionType} - {IngName_TextBox.Text}";
+            DateTime currentTime = DateTime.Now;
+
             try
             {
                 connection.Open();
-                if (rowIndex == -1)
+
+                string query;
+
+                if (rowIndex == -1) // Add Ingredient
                 {
-                    string query = "INSERT INTO ingredients (ingredient_name,standard_quantity,standard_unit,cost_per_unit, min_quantity) VALUES (@IngName,@STQuantity,@STUnit,@CostPerUnit, @MinQuantity)";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@IngName", IngName_TextBox.Text);
-                        command.Parameters.AddWithValue("@STQuantity", Convert.ToDecimal(STQuantity_TextBox.Text));
-                        command.Parameters.AddWithValue("@STUnit", STUnit_ComboBox.SelectedItem.ToString());
-                        command.Parameters.AddWithValue("@CostPerUnit", Convert.ToDecimal(ProductPrice_TextBox.Text));
-                        command.Parameters.AddWithValue("@MinQuantity", Convert.ToDecimal(MinimumQuantity_TextBox.Text));
-
-
-                        int rowsAffected = command.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Ingredient Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearFields();
-                        }
-                    }
-
-
-
+                    query = "INSERT INTO ingredients (ingredient_name, standard_quantity, standard_unit, cost_per_unit, min_quantity) " +
+                            "VALUES (@IngName, @STQuantity, @STUnit, @CostPerUnit, @MinQuantity)";
                 }
-                else
+                else // Update Ingredient
                 {
-                    string query = "UPDATE ingredients SET ingredient_name=@IngName,standard_quantity=@STQuantity,standard_unit=@STUnit,cost_per_unit = @CostPerUnit, min_quantity=@MinQuantity WHERE id=@Id";
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    query = "UPDATE ingredients SET ingredient_name = @IngName, standard_quantity = @STQuantity, " +
+                            "standard_unit = @STUnit, cost_per_unit = @CostPerUnit, min_quantity = @MinQuantity " +
+                            "WHERE id = @Id";
+                }
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IngName", IngName_TextBox.Text);
+                    command.Parameters.AddWithValue("@STQuantity", Convert.ToDecimal(STQuantity_TextBox.Text));
+                    command.Parameters.AddWithValue("@STUnit", STUnit_ComboBox.SelectedItem.ToString());
+                    command.Parameters.AddWithValue("@CostPerUnit", Convert.ToDecimal(ProductPrice_TextBox.Text));
+                    command.Parameters.AddWithValue("@MinQuantity", Convert.ToDecimal(MinimumQuantity_TextBox.Text));
+
+                    if (rowIndex != -1)
                     {
-                        command.Parameters.AddWithValue("@IngName", IngName_TextBox.Text);
-                        command.Parameters.AddWithValue("@STQuantity", Convert.ToDecimal(STQuantity_TextBox.Text));
-                        command.Parameters.AddWithValue("@STUnit", STUnit_ComboBox.SelectedItem.ToString());
-                        command.Parameters.AddWithValue("@CostPerUnit", Convert.ToDecimal(ProductPrice_TextBox.Text));
-                        command.Parameters.AddWithValue("@MinQuantity", Convert.ToDecimal(MinimumQuantity_TextBox.Text));
                         command.Parameters.AddWithValue("@Id", rowIndex);
-
-                        int rowsAffected = command.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Ingredient Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        }
                     }
 
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show(rowIndex == -1 ? "Ingredient Added Successfully" : "Ingredient Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                        // Insert log into activity_log table
+                        string logQuery = "INSERT INTO activity_log (action, description, time, username) VALUES (@Action, @Description, @Time, @Username)";
+                        using (SqlCommand logCommand = new SqlCommand(logQuery, connection))
+                        {
+                            logCommand.Parameters.AddWithValue("@Action", actionType);
+                            logCommand.Parameters.AddWithValue("@Description", description);
+                            logCommand.Parameters.AddWithValue("@Time", currentTime);
+                            logCommand.Parameters.AddWithValue("@Username", currentUsername);
+                            logCommand.ExecuteNonQuery();
+                        }
+
+                        ClearFields();
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Message : " + ex.Message);
-
+                MessageBox.Show("Error Message: " + ex.Message);
             }
             finally
             {
                 connection.Close();
             }
         }
-
-
 
 
         private void SetFields(int rowNo)

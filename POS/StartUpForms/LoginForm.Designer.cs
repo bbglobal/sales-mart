@@ -34,7 +34,8 @@
             button1 = new Button();
             linkLabel1 = new LinkLabel();
             linkLabel2 = new LinkLabel();
-            Category_ComboBox = new ComboBox();
+            LoginModuleComboBox = new ComboBox();
+            BranchComboBox = new ComboBox();
             SuspendLayout();
             // 
             // textBox1
@@ -108,22 +109,38 @@
             linkLabel2.TabStop = true;
             linkLabel2.Text = "Create an account";
             linkLabel2.Visible = false;
-            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
-            // Category_ComboBox
+            // LoginModuleComboBox
             // 
-            Category_ComboBox.Anchor = AnchorStyles.None;
-            Category_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
-            Category_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            Category_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Category_ComboBox.FormattingEnabled = true;
-            Category_ComboBox.IntegralHeight = false;
-            Category_ComboBox.Items.AddRange(new object[] { "Restaurant POS", "General Store", "Retail Store", "Hotel Management" });
-            Category_ComboBox.Location = new Point(203, 229);
-            Category_ComboBox.Name = "Category_ComboBox";
-            Category_ComboBox.Size = new Size(389, 28);
-            Category_ComboBox.TabIndex = 11;
-            Category_ComboBox.Text = "Module Select...";
+            LoginModuleComboBox.Anchor = AnchorStyles.None;
+            LoginModuleComboBox.AutoCompleteMode = AutoCompleteMode.Append;
+            LoginModuleComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            LoginModuleComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LoginModuleComboBox.FormattingEnabled = true;
+            LoginModuleComboBox.IntegralHeight = false;
+            LoginModuleComboBox.Items.AddRange(new object[] { "Restaurant POS", "General Store", "Hotel Management" });
+            LoginModuleComboBox.Location = new Point(203, 229);
+            LoginModuleComboBox.Name = "LoginModuleComboBox";
+            LoginModuleComboBox.Size = new Size(309, 28);
+            LoginModuleComboBox.TabIndex = 11;
+            LoginModuleComboBox.Text = "Module Select...";
+            LoginModuleComboBox.SelectedIndexChanged += LoginModuleComboBox_SelectedIndexChanged;
+            // 
+            // BranchComboBox
+            // 
+            BranchComboBox.Anchor = AnchorStyles.None;
+            BranchComboBox.AutoCompleteMode = AutoCompleteMode.Append;
+            BranchComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            BranchComboBox.Enabled = false;
+            BranchComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BranchComboBox.FormattingEnabled = true;
+            BranchComboBox.IntegralHeight = false;
+            BranchComboBox.Items.AddRange(new object[] { "Restaurant POS", "General Store", "Hotel Management" });
+            BranchComboBox.Location = new Point(518, 229);
+            BranchComboBox.Name = "BranchComboBox";
+            BranchComboBox.Size = new Size(74, 28);
+            BranchComboBox.TabIndex = 12;
+            BranchComboBox.Text = "Branch";
             // 
             // LoginForm
             // 
@@ -134,7 +151,8 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(798, 569);
-            Controls.Add(Category_ComboBox);
+            Controls.Add(BranchComboBox);
+            Controls.Add(LoginModuleComboBox);
             Controls.Add(linkLabel2);
             Controls.Add(linkLabel1);
             Controls.Add(button1);
@@ -155,6 +173,7 @@
         private Button button1;
         private LinkLabel linkLabel1;
         private LinkLabel linkLabel2;
-        private ComboBox Category_ComboBox;
+        private ComboBox LoginModuleComboBox;
+        private ComboBox BranchComboBox;
     }
 }

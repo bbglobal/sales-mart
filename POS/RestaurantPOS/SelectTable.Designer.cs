@@ -50,6 +50,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(896, 527);
             panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint;
             // 
             // SelectTableFlowLayoutPanel
             // 
@@ -61,6 +62,7 @@
             SelectTableFlowLayoutPanel.Name = "SelectTableFlowLayoutPanel";
             SelectTableFlowLayoutPanel.Size = new Size(824, 383);
             SelectTableFlowLayoutPanel.TabIndex = 1;
+            SelectTableFlowLayoutPanel.Paint += SelectTableFlowLayoutPanel_Paint;
             // 
             // panel2
             // 

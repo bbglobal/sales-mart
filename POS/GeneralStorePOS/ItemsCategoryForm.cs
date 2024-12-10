@@ -37,8 +37,16 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            if (Session.BranchCode == "PK728")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.BranchCode == "BR001")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnGSBR001"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
         }
 
 

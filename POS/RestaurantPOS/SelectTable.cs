@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace POS
@@ -20,7 +14,12 @@ namespace POS
         string json = "";
         decimal total_amount = 0;
         string updatedString = "";
-        public SelectTable(string json,decimal total_amount)
+
+        // Properties for Customer Name and Phone Number
+        public string CustomerName { get; private set; }
+        public string PhoneNumber { get; private set; }
+
+        public SelectTable(string json, decimal total_amount)
         {
             this.json = json;
             this.total_amount = total_amount;
@@ -37,16 +36,21 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            if (Session.SelectedModule == "Restaurant POS")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.SelectedModule == "Hotel Management")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
         }
-
 
         private void InitializeLabel(Label label, Image image, int newWidth, int newHeight)
         {
-
             Image resizedImage = ResizeImage(image, newWidth, newHeight);
-
             label.Image = resizedImage;
         }
 
@@ -66,30 +70,26 @@ namespace POS
             this.Close();
         }
 
-
-        private void LoadTables() 
+        private void LoadTables()
         {
             DataTable dt = new DataTable();
             try
             {
                 connection.Open();
                 SelectTableFlowLayoutPanel.Controls.Clear();
-                SqlCommand command = new SqlCommand("select * from tables",connection);
+                SqlCommand command = new SqlCommand("select * from tables", connection);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     dt.Load(reader);
                 }
-                
 
                 if (dt.Rows.Count > 0)
                 {
-                    
                     foreach (DataRow row in dt.Rows)
                     {
                         SqlCommand cmd = new SqlCommand($"select * from bill_list where table_name='{row["table_name"]}' and status='In Complete'", connection);
                         using (SqlDataReader sqlDataReader = cmd.ExecuteReader())
                         {
-
                             if (sqlDataReader.HasRows)
                             {
                                 Button TableButton1 = new Button();
@@ -129,43 +129,6 @@ namespace POS
                     }
                 }
             }
-
-            
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally 
-            {
-                connection.Close();
-               
-            }
-        }
-
-        private void TableButton_Click(object? sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            try
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand("insert into bill_list(items,table_name,date,type,status,total_amount,net_total_amount) values(@Items,@Table,@Date,@Type,@Status,@Total,@NetTotal)", connection);
-                command.Parameters.AddWithValue("@Items",json);
-                command.Parameters.AddWithValue("@Table", button.Text);
-                command.Parameters.AddWithValue("@Date",DateTime.Now);
-                command.Parameters.AddWithValue("@Type","Dine In");
-                command.Parameters.AddWithValue("@Status","In Complete");
-                command.Parameters.AddWithValue("@Total",total_amount);
-                command.Parameters.AddWithValue("@NetTotal",total_amount);
-                int rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected > 0)
-                {
-                    MessageBox.Show("Saved Successfully");
-                    updatedString = "Added";
-                }
-                else {
-                    MessageBox.Show("There was a problem saving");
-                }
-            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -173,18 +136,90 @@ namespace POS
             finally
             {
                 connection.Close();
-                this.Close();
             }
         }
 
+        private void TableButton_Click(object? sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+
+            // Ask for customer information before proceeding
+            using (TableCustomerInfo customerForm = new TableCustomerInfo())
+            {
+                if (customerForm.ShowDialog() == DialogResult.OK)
+                {
+                    CustomerName = customerForm.CustomerName;
+                    PhoneNumber = customerForm.PhoneNumber;
+
+                    try
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("insert into bill_list(items, table_name, customer, phone, date, type, status, total_amount, net_total_amount) values(@Items, @Table, @Customer, @Phone, @Date, @Type, @Status, @Total, @NetTotal); SELECT SCOPE_IDENTITY();", connection);
+                        command.Parameters.AddWithValue("@Items", json);
+                        command.Parameters.AddWithValue("@Table", button.Text);
+                        command.Parameters.AddWithValue("@Customer", CustomerName);
+                        command.Parameters.AddWithValue("@Phone", string.IsNullOrWhiteSpace(PhoneNumber) ? (object)DBNull.Value : PhoneNumber);
+                        command.Parameters.AddWithValue("@Date", DateTime.Now);
+                        command.Parameters.AddWithValue("@Type", "Dine In");
+                        command.Parameters.AddWithValue("@Status", "In Complete");
+                        command.Parameters.AddWithValue("@Total", total_amount);
+                        command.Parameters.AddWithValue("@NetTotal", total_amount);
+
+                        // Get the generated BillID
+                        int billId = Convert.ToInt32(command.ExecuteScalar());
+
+                        if (billId > 0)
+                        {
+                            MessageBox.Show("Saved Successfully");
+
+                            // Fetch the current username from the session or a global variable
+                            string currentUsername = Session.Username; ; // Replace with your method to fetch the username
+
+                            // Insert into Activity Log table
+                            string activityDescription = $"New order added to bill list (BillID: {billId}), Table: {button.Text}, Total: {total_amount}";
+                            SqlCommand logCommand = new SqlCommand("INSERT INTO activity_log (action, description, time, username) VALUES (@ActionType, @Description, @ActionDate, @Username)", connection);
+                            logCommand.Parameters.AddWithValue("@ActionType", "Insert");
+                            logCommand.Parameters.AddWithValue("@Description", activityDescription);
+                            logCommand.Parameters.AddWithValue("@ActionDate", DateTime.Now);
+                            logCommand.Parameters.AddWithValue("@Username", currentUsername); // Insert the username
+
+                            logCommand.ExecuteNonQuery();
+
+                            updatedString = "Added";
+                        }
+                        else
+                        {
+                            MessageBox.Show("There was a problem saving");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+            this.Close();
+        }
+
+        private string GetCurrentUsername()
+        {
+            // Return the current username. Replace this with your actual method to get the username from the session or global state.
+            return "CurrentUsername"; // Example static username, replace with actual session or context.
+        }
 
 
+        private void SelectTableFlowLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+            // You can add custom painting logic if needed
+        }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
-
-
-
-
-
+        }
     }
 }

@@ -20,18 +20,22 @@ namespace POS
         SqlConnection connection;
         SqlCommand command;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffForm));
+        string connectionString;
         public LaybyForm(int rowIndex = -1)
         {
 
             InitializeComponent();
             InitializeDatabaseConnection();
-            //SetTypeComboBox();
+            PopulateClientNames();
+            DepositTB.KeyPress += NumericTextBox_KeyPress;
+            DurationTB.KeyPress += NumericTextBox_KeyPress;
+            TotalAmountTB.KeyPress += NumericTextBox_KeyPress;
+            OutstandingAmountTB.ReadOnly = true;
             this.rowIndex = rowIndex;
             if (this.rowIndex != -1)
             {
                 Title_label.Text = "Layby Payment";
                 save_button.Text = "Save";
-                //SetFields(this.rowIndex);
 
             }
 
@@ -41,152 +45,18 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
-            connection = new SqlConnection(connectionString);
-        }
-
-        private void SetTypeComboBox()
-        {
-            try
+            if (Session.BranchCode == "PK728")
             {
-                string query = "select types from staff_category";
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    //Type_ComboBox.Items.Add(reader["types"].ToString());
-                }
+                connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
+                connection = new SqlConnection(connectionString);
             }
-            catch (Exception ex)
+            else if (Session.BranchCode == "BR001")
             {
-                MessageBox.Show("Error Message : " + ex);
-            }
-            finally
-            {
-                connection.Close();
+                connectionString = ConfigurationManager.ConnectionStrings["myconnGSBR001"].ConnectionString;
+                connection = new SqlConnection(connectionString);
             }
         }
 
-
-        //private void SaveData()
-        //{
-        //    if (StaffName_TextBox.Text == "" || Phone_TextBox.Text == "" || Address_TextBox.Text == "" || Type_ComboBox.SelectedItem == null || Status_ComboBox.SelectedItem == null || Shift_ComboBox.SelectedItem == null)
-        //    {
-        //        MessageBox.Show("Please fill all fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-        //        return;
-        //    }
-        //    try
-        //    {
-        //        connection.Open();
-        //        if (rowIndex == -1)
-        //        {
-        //            string query = "INSERT INTO staff_details (shifts,staff_name, type, phone_number, address , status) VALUES (@Shift,@StaffName, @Type, @Phone, @Address, @Status)";
-        //            using (SqlCommand command = new SqlCommand(query, connection))
-        //            {
-        //                command.Parameters.AddWithValue("@StaffName", StaffName_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Type", Type_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Phone", Phone_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Address", Address_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Shift", Shift_ComboBox.SelectedItem.ToString());
-
-        //                //// Convert image to byte array
-        //                //byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image,60,60));
-        //                //command.Parameters.AddWithValue("@ImageData", imageData);
-
-        //                //byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
-        //                //command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
-
-        //                int rowsAffected = command.ExecuteNonQuery();
-        //                if (rowsAffected > 0)
-        //                {
-        //                    MessageBox.Show("Staff Details Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        //                }
-        //            }
-
-
-
-        //        }
-        //        else
-        //        {
-        //            string query = "UPDATE staff_details SET shifts=@Shift,staff_name=@StaffName, type=@Type, phone_number=@Phone,address=@Address,status=@Status WHERE id=@Id";
-        //            using (SqlCommand command = new SqlCommand(query, connection))
-        //            {
-        //                command.Parameters.AddWithValue("@StaffName", StaffName_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Type", Type_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Phone", Phone_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Address", Address_TextBox.Text);
-        //                command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Shift", Shift_ComboBox.SelectedItem.ToString());
-        //                command.Parameters.AddWithValue("@Id", rowIndex);
-
-        //                //// Convert image to byte array
-        //                //byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image, 60,60));
-        //                //command.Parameters.AddWithValue("@ImageData", imageData);
-
-        //                //byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
-        //                //command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
-
-        //                int rowsAffected = command.ExecuteNonQuery();
-        //                if (rowsAffected > 0)
-        //                {
-        //                    MessageBox.Show("Staff Details Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //                }
-        //            }
-
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error Message : " + ex.Message);
-
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-        //}
-
-
-
-
-
-
-        //private void SetFields(int rowNo)
-        //{
-        //    try
-        //    {
-        //        connection.Open();
-        //        string query = $"select * from staff_details where id={rowNo}";
-        //        command = new SqlCommand(query, connection);
-        //        using (SqlDataReader reader = command.ExecuteReader())
-        //        {
-
-        //            while (reader.Read())
-        //            {
-        //                StaffName_TextBox.Text = (string)reader["staff_name"];
-        //                Type_ComboBox.Text = (string)reader["type"];
-        //                Phone_TextBox.Text = Convert.ToInt32(reader["phone_number"]).ToString();
-        //                Address_TextBox.Text = (string)reader["address"];
-        //                Status_ComboBox.Text = (string)reader["status"];
-        //                Shift_ComboBox.Text = (string)reader["shifts"];
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error Message : " + ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-        //}
 
         private void InitializeLabel(Label label, Image image, int newWidth, int newHeight)
         {
@@ -209,18 +79,6 @@ namespace POS
             return resizedImg;
         }
 
-        //private void ClearFields()
-        //{
-        //    StaffName_TextBox.Text = "";
-        //    Type_ComboBox.Text = "";
-        //    Phone_TextBox.Text = "";
-        //    Address_TextBox.Text = "";
-        //    Status_ComboBox.Text = "";
-        //    Shift_ComboBox.Text = "";
-
-        //}
-
-
         private void cancel_button_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -230,9 +88,144 @@ namespace POS
 
         private void save_button_Click(object sender, EventArgs e)
         {
-            //SaveData();
+            SaveData();
+        }
+        private void PopulateClientNames()
+        {
+            try
+            {
+                string query = "SELECT client_name FROM clients";
+
+                // Use connectionString instead of connection
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                ClientNameComboBox.Items.Add(reader["client_name"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching client names: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
+
+        private void SaveData()
+        {
+            // Validate that all fields are filled
+            if (string.IsNullOrWhiteSpace(ClientNameComboBox.Text))
+            {
+                MessageBox.Show("Please select a client name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(DepositTB.Text))
+            {
+                MessageBox.Show("Please enter the deposit amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(PaymentScheduleComboBox.Text))
+            {
+                MessageBox.Show("Please select a payment schedule.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(DurationTB.Text))
+            {
+                MessageBox.Show("Please enter the duration.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(TotalAmountTB.Text))
+            {
+                MessageBox.Show("Please enter the total amount.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Parse numeric fields and calculate Outstanding Amount
+            decimal deposit = decimal.Parse(DepositTB.Text);
+            decimal totalAmount = decimal.Parse(TotalAmountTB.Text);
+            decimal outstandingAmount = totalAmount - deposit;
+
+            // Display the calculated Outstanding Amount in the read-only textbox
+            OutstandingAmountTB.Text = outstandingAmount.ToString("F2"); // Format as currency or 2 decimal places
+
+            // Parse other fields
+            int duration = int.Parse(DurationTB.Text);
+            DateTime expiryDate = DateTime.Parse(ExpiryDateTB.Text);
+
+            try
+            {
+                // Insert data into the database, including payment_date
+                string query = "INSERT INTO layby (client_name, deposit, payment_schedule, duration, total_amount, outstanding_amount, expiry_date, payment_date, status) " +
+                               "VALUES (@ClientName, @Deposit, @PaymentSchedule, @Duration, @TotalAmount, @OutstandingAmount, @ExpiryDate, @PaymentDate, @Status)";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // Add parameters
+                        command.Parameters.AddWithValue("@ClientName", ClientNameComboBox.Text);
+                        command.Parameters.AddWithValue("@Deposit", deposit);
+                        command.Parameters.AddWithValue("@PaymentSchedule", PaymentScheduleComboBox.Text);
+                        command.Parameters.AddWithValue("@Duration", duration);
+                        command.Parameters.AddWithValue("@TotalAmount", totalAmount);
+                        command.Parameters.AddWithValue("@OutstandingAmount", outstandingAmount);
+                        command.Parameters.AddWithValue("@ExpiryDate", expiryDate);
+                        command.Parameters.AddWithValue("@PaymentDate", DateTime.Now); // Current date
+                        command.Parameters.AddWithValue("@Status", "Pending");
+
+                        // Execute the query
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                // Inform the user and close the form
+                MessageBox.Show("Layby record saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while saving data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void NumericTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Ensure sender is a System.Windows.Forms.TextBox
+            if (sender is System.Windows.Forms.TextBox textBox)
+            {
+                // Allow digits, control characters (e.g., backspace), and a single decimal point
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+                {
+                    e.Handled = true; // Reject the input
+                }
+
+                // Allow only one decimal point
+                if (e.KeyChar == '.' && textBox.Text.Contains("."))
+                {
+                    e.Handled = true; // Reject the input
+                }
+
+                // Prevent leading decimal point (e.g., ".5" instead of "0.5")
+                if (e.KeyChar == '.' && textBox.Text.Length == 0)
+                {
+                    e.Handled = true; // Reject the input
+                }
+            }
+            else
+            {
+                e.Handled = true; // Reject if sender is not a TextBox
+            }
+        }
 
     }
 }

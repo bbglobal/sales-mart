@@ -33,23 +33,23 @@
             Title_label = new Label();
             label1 = new Label();
             panel1 = new Panel();
-            panel2 = new Panel();
-            textBox1 = new TextBox();
+            panelimistakenlychanged = new Panel();
+            SourceBranchComboBox = new TextBox();
+            ProductComboBox = new ComboBox();
+            label4 = new Label();
+            DestinationBranchComboBox = new ComboBox();
+            label3 = new Label();
+            category_label = new Label();
+            CurrentStockTextBox = new TextBox();
             label2 = new Label();
-            Phone_TextBox = new TextBox();
+            TransferAmountTB = new TextBox();
             status_label = new Label();
             panel4 = new Panel();
             save_button = new Button();
             cancel_button = new Button();
-            Category_ComboBox = new ComboBox();
-            category_label = new Label();
-            comboBox1 = new ComboBox();
-            label3 = new Label();
-            comboBox2 = new ComboBox();
-            label4 = new Label();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
+            panelimistakenlychanged.SuspendLayout();
             panel4.SuspendLayout();
             SuspendLayout();
             // 
@@ -90,7 +90,7 @@
             // 
             panel1.BackColor = Color.FromArgb(37, 150, 190);
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(panel2);
+            panel1.Controls.Add(panelimistakenlychanged);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(0);
@@ -99,36 +99,103 @@
             panel1.Size = new Size(613, 573);
             panel1.TabIndex = 1;
             // 
-            // panel2
+            // panelimistakenlychanged
             // 
-            panel2.BackColor = Color.White;
-            panel2.Controls.Add(comboBox2);
-            panel2.Controls.Add(label4);
-            panel2.Controls.Add(comboBox1);
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(Category_ComboBox);
-            panel2.Controls.Add(category_label);
-            panel2.Controls.Add(textBox1);
-            panel2.Controls.Add(label2);
-            panel2.Controls.Add(Phone_TextBox);
-            panel2.Controls.Add(status_label);
-            panel2.Controls.Add(panel4);
-            panel2.Controls.Add(panel3);
-            panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(1, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(609, 570);
-            panel2.TabIndex = 1;
+            panelimistakenlychanged.BackColor = Color.White;
+            panelimistakenlychanged.Controls.Add(SourceBranchComboBox);
+            panelimistakenlychanged.Controls.Add(ProductComboBox);
+            panelimistakenlychanged.Controls.Add(label4);
+            panelimistakenlychanged.Controls.Add(DestinationBranchComboBox);
+            panelimistakenlychanged.Controls.Add(label3);
+            panelimistakenlychanged.Controls.Add(category_label);
+            panelimistakenlychanged.Controls.Add(CurrentStockTextBox);
+            panelimistakenlychanged.Controls.Add(label2);
+            panelimistakenlychanged.Controls.Add(TransferAmountTB);
+            panelimistakenlychanged.Controls.Add(status_label);
+            panelimistakenlychanged.Controls.Add(panel4);
+            panelimistakenlychanged.Controls.Add(panel3);
+            panelimistakenlychanged.Dock = DockStyle.Fill;
+            panelimistakenlychanged.Location = new Point(1, 0);
+            panelimistakenlychanged.Name = "panelimistakenlychanged";
+            panelimistakenlychanged.Size = new Size(609, 570);
+            panelimistakenlychanged.TabIndex = 1;
             // 
-            // textBox1
+            // SourceBranchComboBox
             // 
-            textBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(199, 375);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(181, 30);
-            textBox1.TabIndex = 19;
+            SourceBranchComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SourceBranchComboBox.Location = new Point(199, 158);
+            SourceBranchComboBox.Multiline = true;
+            SourceBranchComboBox.Name = "SourceBranchComboBox";
+            SourceBranchComboBox.ReadOnly = true;
+            SourceBranchComboBox.Size = new Size(181, 30);
+            SourceBranchComboBox.TabIndex = 26;
+            // 
+            // ProductComboBox
+            // 
+            ProductComboBox.AutoCompleteMode = AutoCompleteMode.Append;
+            ProductComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            ProductComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            ProductComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ProductComboBox.FormattingEnabled = true;
+            ProductComboBox.IntegralHeight = false;
+            ProductComboBox.Location = new Point(199, 303);
+            ProductComboBox.Name = "ProductComboBox";
+            ProductComboBox.Size = new Size(181, 28);
+            ProductComboBox.TabIndex = 25;
+            ProductComboBox.SelectedIndexChanged += ProductComboBox_SelectedIndexChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(195, 276);
+            label4.Name = "label4";
+            label4.Size = new Size(60, 20);
+            label4.TabIndex = 24;
+            label4.Text = "Product";
+            // 
+            // DestinationBranchComboBox
+            // 
+            DestinationBranchComboBox.AutoCompleteMode = AutoCompleteMode.Append;
+            DestinationBranchComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            DestinationBranchComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            DestinationBranchComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DestinationBranchComboBox.FormattingEnabled = true;
+            DestinationBranchComboBox.IntegralHeight = false;
+            DestinationBranchComboBox.Location = new Point(199, 229);
+            DestinationBranchComboBox.Name = "DestinationBranchComboBox";
+            DestinationBranchComboBox.Size = new Size(181, 28);
+            DestinationBranchComboBox.TabIndex = 23;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(195, 202);
+            label3.Name = "label3";
+            label3.Size = new Size(134, 20);
+            label3.TabIndex = 22;
+            label3.Text = "Destination Branch";
+            // 
+            // category_label
+            // 
+            category_label.AutoSize = true;
+            category_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            category_label.Location = new Point(195, 125);
+            category_label.Name = "category_label";
+            category_label.Size = new Size(103, 20);
+            category_label.TabIndex = 20;
+            category_label.Text = "Source Branch";
+            // 
+            // CurrentStockTextBox
+            // 
+            CurrentStockTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CurrentStockTextBox.Location = new Point(199, 375);
+            CurrentStockTextBox.Multiline = true;
+            CurrentStockTextBox.Name = "CurrentStockTextBox";
+            CurrentStockTextBox.ReadOnly = true;
+            CurrentStockTextBox.Size = new Size(181, 30);
+            CurrentStockTextBox.TabIndex = 19;
             // 
             // label2
             // 
@@ -140,14 +207,15 @@
             label2.TabIndex = 18;
             label2.Text = "Current Stock";
             // 
-            // Phone_TextBox
+            // TransferAmountTB
             // 
-            Phone_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Phone_TextBox.Location = new Point(199, 449);
-            Phone_TextBox.Multiline = true;
-            Phone_TextBox.Name = "Phone_TextBox";
-            Phone_TextBox.Size = new Size(181, 30);
-            Phone_TextBox.TabIndex = 17;
+            TransferAmountTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TransferAmountTB.Location = new Point(199, 449);
+            TransferAmountTB.Multiline = true;
+            TransferAmountTB.Name = "TransferAmountTB";
+            TransferAmountTB.Size = new Size(181, 30);
+            TransferAmountTB.TabIndex = 17;
+            TransferAmountTB.TextChanged += TransferAmountTB_TextChanged;
             // 
             // status_label
             // 
@@ -203,75 +271,6 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // Category_ComboBox
-            // 
-            Category_ComboBox.AutoCompleteMode = AutoCompleteMode.Append;
-            Category_ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            Category_ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            Category_ComboBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Category_ComboBox.FormattingEnabled = true;
-            Category_ComboBox.IntegralHeight = false;
-            Category_ComboBox.Location = new Point(199, 152);
-            Category_ComboBox.Name = "Category_ComboBox";
-            Category_ComboBox.Size = new Size(181, 28);
-            Category_ComboBox.TabIndex = 21;
-            // 
-            // category_label
-            // 
-            category_label.AutoSize = true;
-            category_label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            category_label.Location = new Point(195, 125);
-            category_label.Name = "category_label";
-            category_label.Size = new Size(103, 20);
-            category_label.TabIndex = 20;
-            category_label.Text = "Source Branch";
-            // 
-            // comboBox1
-            // 
-            comboBox1.AutoCompleteMode = AutoCompleteMode.Append;
-            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.IntegralHeight = false;
-            comboBox1.Location = new Point(199, 229);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(181, 28);
-            comboBox1.TabIndex = 23;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(195, 202);
-            label3.Name = "label3";
-            label3.Size = new Size(134, 20);
-            label3.TabIndex = 22;
-            label3.Text = "Destination Branch";
-            // 
-            // comboBox2
-            // 
-            comboBox2.AutoCompleteMode = AutoCompleteMode.Append;
-            comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.IntegralHeight = false;
-            comboBox2.Location = new Point(199, 303);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(181, 28);
-            comboBox2.TabIndex = 25;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(195, 276);
-            label4.Name = "label4";
-            label4.Size = new Size(60, 20);
-            label4.TabIndex = 24;
-            label4.Text = "Product";
-            // 
             // StockTransferForm
             // 
             AcceptButton = save_button;
@@ -289,8 +288,8 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            panelimistakenlychanged.ResumeLayout(false);
+            panelimistakenlychanged.PerformLayout();
             panel4.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -300,20 +299,20 @@
         private Panel panel3;
         private Label label1;
         private Panel panel1;
-        private Panel panel2;
+        private Panel panelimistakenlychanged;
         private Label Title_label;
         private Panel panel4;
         private Button cancel_button;
         private Button save_button;
         private Label status_label;
-        private TextBox Phone_TextBox;
-        private TextBox textBox1;
+        private TextBox TransferAmountTB;
+        private TextBox CurrentStockTextBox;
         private Label label2;
-        private ComboBox comboBox2;
+        private ComboBox ProductComboBox;
         private Label label4;
-        private ComboBox comboBox1;
+        private ComboBox DestinationBranchComboBox;
         private Label label3;
-        private ComboBox Category_ComboBox;
         private Label category_label;
+        private TextBox SourceBranchComboBox;
     }
 }

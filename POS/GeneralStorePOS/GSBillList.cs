@@ -31,7 +31,7 @@ namespace POS
             InitializeDatabaseConnection();
             InitializeLabel(label2, (Image)resources.GetObject("label1.Image"), 45, 60);
             ImageEditDelLoad();
-            LoadDataAsync(BillListDataGrid, "select * from bill_list where status='Complete' order by bill_id DESC", "Async");
+            LoadDataAsync(BillListDataGrid, "select * from bill_list where status='In Complete' or status = 'Incomplete' order by bill_id DESC", "Async"); //tabdeli
             StatusComboBox.SelectedIndex = 0;
             StatusComboBox.SelectedIndexChanged += StatusComboBox_SelectedIndexChanged;
         }
@@ -58,8 +58,16 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            if (Session.BranchCode == "PK728")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.BranchCode == "BR001")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnGSBR001"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
         }
 
 
@@ -158,11 +166,11 @@ namespace POS
             RadioButtonSelect(All_label, TakeAway_label, Delivery_label);
             RadioButtonSelected = "";
             string SelectedItem = StatusComboBox.SelectedItem.ToString();
-            LoadDataAsync(BillListDataGrid, $"select * from bill_list where status='{SelectedItem}' order by bill_id DESC", "Sync");
+            //LoadDataAsync(BillListDataGrid, $"select * from bill_list where status='{SelectedItem}' order by bill_id DESC", "Sync");
+            LoadDataAsync(BillListDataGrid, $"select * from bill_list where type IN ('Take Away', 'Delivery')  and status= '{SelectedItem}' order by bill_id DESC", "Sync");
+
 
         }
-
-
 
         private void TakeAway_label_Click(object sender, EventArgs e)
         {
@@ -487,11 +495,21 @@ namespace POS
                 string SelectedItem = StatusComboBox.SelectedItem.ToString();
                 LoadDataAsync(BillListDataGrid, $"select * from bill_list where status='{SelectedItem}' order by bill_id DESC", "Sync");
             }
-            else 
+            else
             {
                 string SelectedItem = StatusComboBox.SelectedItem.ToString();
                 LoadDataAsync(BillListDataGrid, $"select * from bill_list where type='{RadioButtonSelected}' and status='{SelectedItem}' order by bill_id DESC", "Sync");
             }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void StatusComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

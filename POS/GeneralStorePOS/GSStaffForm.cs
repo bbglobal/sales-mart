@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -41,8 +42,16 @@ namespace POS
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            if (Session.BranchCode == "PK728")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnGS"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.BranchCode == "BR001")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnGSBR001"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
         }
 
         private void SetTypeComboBox()
@@ -73,17 +82,29 @@ namespace POS
 
         private void SaveData()
         {
-            if (StaffName_TextBox.Text == "" || Phone_TextBox.Text == "" || Address_TextBox.Text == "" || Type_ComboBox.SelectedItem == null || Status_ComboBox.SelectedItem == null || Shift_ComboBox.SelectedItem == null)
+            // Check if all fields are filled
+            if (StaffName_TextBox.Text == "" || Phone_TextBox.Text == "" || Address_TextBox.Text == "" || Type_ComboBox.SelectedItem == null || Status_ComboBox.SelectedItem == null || Shift_ComboBox.SelectedItem == null || emailTB.Text == "")
             {
                 MessageBox.Show("Please fill all fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
+
+            // Email validation
+            string email = emailTB.Text;
+            if (!IsValidEmail(email))
+            {
+                MessageBox.Show("Please enter a valid email address", "Invalid Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
                 connection.Open();
+
+                // If adding new staff (rowIndex == -1), insert data
                 if (rowIndex == -1)
                 {
-                    string query = "INSERT INTO staff_details (shifts,staff_name, type, phone_number, address , status) VALUES (@Shift,@StaffName, @Type, @Phone, @Address, @Status)";
+                    string query = "INSERT INTO staff_details (shifts, staff_name, type, phone_number, address, status, email) VALUES (@Shift, @StaffName, @Type, @Phone, @Address, @Status, @Email)";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@StaffName", StaffName_TextBox.Text);
@@ -92,28 +113,20 @@ namespace POS
                         command.Parameters.AddWithValue("@Address", Address_TextBox.Text);
                         command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Shift", Shift_ComboBox.SelectedItem.ToString());
+                        command.Parameters.AddWithValue("@Email", email);
 
-                        //// Convert image to byte array
-                        //byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image,60,60));
-                        //command.Parameters.AddWithValue("@ImageData", imageData);
-
-                        //byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
-                        //command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
-
+                        // Execute the query
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Staff Details Added Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                         }
                     }
-
-
-
                 }
                 else
                 {
-                    string query = "UPDATE staff_details SET shifts=@Shift,staff_name=@StaffName, type=@Type, phone_number=@Phone,address=@Address,status=@Status WHERE id=@Id";
+                    // If updating existing staff, use the update query
+                    string query = "UPDATE staff_details SET shifts = @Shift, staff_name = @StaffName, type = @Type, phone_number = @Phone, address = @Address, status = @Status, email = @Email WHERE id = @Id";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@StaffName", StaffName_TextBox.Text);
@@ -122,29 +135,21 @@ namespace POS
                         command.Parameters.AddWithValue("@Address", Address_TextBox.Text);
                         command.Parameters.AddWithValue("@Status", Status_ComboBox.SelectedItem.ToString());
                         command.Parameters.AddWithValue("@Shift", Shift_ComboBox.SelectedItem.ToString());
+                        command.Parameters.AddWithValue("@Email", email);
                         command.Parameters.AddWithValue("@Id", rowIndex);
 
-                        //// Convert image to byte array
-                        //byte[] imageData = ImageToByteArray(ResizeImage(pictureBox1.Image, 60,60));
-                        //command.Parameters.AddWithValue("@ImageData", imageData);
-
-                        //byte[] or_imageData = ImageToByteArray(pictureBox1.Image);
-                        //command.Parameters.AddWithValue("@OR_ImageData", or_imageData);
-
+                        // Execute the query
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Staff Details Updated Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
-
-
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Message : " + ex.Message);
-
+                MessageBox.Show("Error Message: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -152,31 +157,15 @@ namespace POS
             }
         }
 
+        // Email validation method
+        private bool IsValidEmail(string email)
+        {
+            // Regular expression to check email format
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(email);
+        }
 
-
-
-        //private byte[] ImageToByteArray(Image image)
-        //{
-        //    using (MemoryStream ms = new MemoryStream())
-        //    {
-        //        // Clone the image to prevent it from being locked
-        //        using (Image clonedImage = (Image)image.Clone())
-        //        {
-        //            clonedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg); // Adjust format as needed
-        //        }
-        //        return ms.ToArray();
-        //    }
-        //}
-
-
-        //private Image ByteArraytoImage(byte[] imageData)
-        //{
-        //    using (MemoryStream ms = new MemoryStream(imageData))
-        //    {
-        //        Image image = new Bitmap(Image.FromStream(ms));
-        //        return image;
-        //    }
-        //}
 
         private void SetFields(int rowNo)
         {
@@ -196,6 +185,7 @@ namespace POS
                         Address_TextBox.Text = (string)reader["address"];
                         Status_ComboBox.Text = (string)reader["status"];
                         Shift_ComboBox.Text = (string)reader["shifts"];
+                        emailTB.Text = (string)reader["email"];
                     }
                 }
             }

@@ -7,6 +7,7 @@ using System.Reflection;
 using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Security.Policy;
 
 namespace POS
 {
@@ -18,7 +19,6 @@ namespace POS
         private System.Windows.Forms.Timer LabelTimer;
         private System.Windows.Forms.Timer PanelTimer;
         private Point Menu_Logo_initialPosition;
-        private Point Menu_Logo_targetPosition;
         private Point Menu_Dashboard_label_initialPosition;
         private Point Menu_Ingredients_label_initialPosition;
         private Point Menu_Products_label_initialPosition;
@@ -28,6 +28,7 @@ namespace POS
         private Point Menu_Kitchen_label_initialPosition;
         private Point Menu_Reports_label_initialPosition;
         private Point Menu_Settings_label_initialPosition;
+        private Point Menu_Logo_targetPosition;
         private Point Menu_Dashboard_label_targetPosition;
         private Point Menu_Ingredients_label_targetPosition;
         private Point Menu_Products_label_targetPosition;
@@ -37,31 +38,46 @@ namespace POS
         private Point Menu_Kitchen_label_targetPosition;
         private Point Menu_Reports_label_targetPosition;
         private Point Menu_Settings_label_targetPosition;
+        private Point Menu_Attendance_Label_InitialPosition;
+        private Point Menu_Attendance_Label_targetPosition;
+        private Point LogOutLabel_initialPosition;
+        private Point LogOutLabel_targetPosition;
+        private Point Menu_Admin_Label_targetPosition;
+        private Point Menu_Admin_Label_initialPosition; // Added for Admin label
         private int targetWidth;
         private int initialWidth;
         private int ScreenContainer_panelinitialWidth;
         private int ScreenContainer_paneltargetWidth;
         private int ScreenContainer_panelinitialLeft;
         private int ScreenContainer_paneltargetLeft;
-        private const int AnimationDuration = 600; // Duration of the animation in milliseconds
-        private const int PanelAnimationDuration = 100; // Duration of the animation in milliseconds
+        private const int AnimationDuration = 600;
+        private const int PanelAnimationDuration = 100;
         private DateTime animationStartTime;
         private SqlConnection connection;
         private SqlCommand command;
         private DataGridView WorkingDataGridView;
         Image EditImage;
         Image DeleteImage;
+        private string Unionquery = @"
+        SELECT username, password, email, Role, Access FROM POS.dbo.users
+        UNION ALL
+        SELECT username, password, email, role, Access FROM GeneralStorePOS.dbo.users
+        UNION ALL
+        SELECT username, password, email, role, Access FROM HotelManagementPOS.dbo.users;";
 
         #endregion
+
         public Dashboard()
         {
             InitializeComponent();
             AdjustFormSize();
             InitializeDatabaseConnection();
             ImageEditDelLoad();
+            #region Calling Image Resize and Rounded Corner, Timer & Font Functions
 
-            #region Calling Image Resize and Rounded Corner,Timer & Font Functions 
+            Menu_Admin_Label.Location = new Point(55, 645); //ADMIN LABEL
             InitializeLabel(Menu_Dashboard_label, (Image)resources.GetObject("Menu_Dashboard_label.Image"), 25, 25);
+            InitializeLabel(Menu_Admin_Label, (Image)resources.GetObject("Menu_Admin_Label.Image"), 25, 25); // Initialize Admin label
             InitializeLabel(Menu_Ingredients_label, (Image)resources.GetObject("Menu_Ingredients_label.Image"), 25, 25);
             InitializeLabel(Menu_Products_label, (Image)resources.GetObject("Menu_Products_label.Image"), 25, 25);
             InitializeLabel(Menu_Tables_label, (Image)resources.GetObject("Menu_Tables_label.Image"), 25, 27);
@@ -69,7 +85,10 @@ namespace POS
             InitializeLabel(Menu_POS_label, (Image)resources.GetObject("Menu_POS_label.Image"), 25, 25);
             InitializeLabel(Menu_Kitchen_label, (Image)resources.GetObject("Menu_Kitchen_label.Image"), 25, 25);
             InitializeLabel(Menu_Reports_label, (Image)resources.GetObject("Menu_Reports_label.Image"), 25, 25);
-            InitializeLabel(Menu_Settings_label, (Image)resources.GetObject("Menu_Settings_label.Image"), 30, 30);
+            InitializeLabel(Menu_Settings_label, (Image)resources.GetObject("Menu_Settings_label.Image"), 25, 25);
+            InitializeLabel(Menu_Attendance_Label, (Image)resources.GetObject("Menu_Attendance_Label.Image"), 25, 25);
+            InitializeLabel(Menu_Admin_Label, (Image)resources.GetObject("Menu_Admin_Label.Image"), 25, 25);
+            InitializeLabel(LogOutLabel, (Image)resources.GetObject("LogOutLabel.Image"), 25, 25);
             InitializeLabel(Logo, (Image)resources.GetObject("Logo.Image"), 30, 45);
             InitializeLabel(LogoText, (Image)resources.GetObject("LogoText.Image"), 150, 25);
             RoundCorners(Menu_Dashboard_label, 20);
@@ -81,10 +100,14 @@ namespace POS
             RoundCorners(Menu_Kitchen_label, 20);
             RoundCorners(Menu_Reports_label, 20);
             RoundCorners(Menu_Settings_label, 20);
+            RoundCorners(Menu_Attendance_Label, 20);
+            RoundCorners(Menu_Admin_Label, 20);
+            RoundCorners(LogOutLabel, 20);
+
             InitializeTimer();
-            //LoadCustomFont("POS.MyriadProSemibold.ttf");
             #endregion
         }
+
 
 
         #region Adjust Form Size Function
@@ -250,6 +273,15 @@ namespace POS
                 Menu_Settings_label_initialPosition = Menu_Settings_label.Location;
                 Menu_Settings_label_targetPosition = new Point(10, 592);
 
+                Menu_Admin_Label_initialPosition = Menu_Admin_Label.Location;
+                Menu_Admin_Label_targetPosition = new Point(10, 652); //ADMIN LABEL 
+
+                Menu_Attendance_Label_InitialPosition = Menu_Attendance_Label.Location;
+                Menu_Attendance_Label_targetPosition = new Point(10, 712);
+
+                LogOutLabel_initialPosition = LogOutLabel.Location;
+                LogOutLabel_targetPosition = new Point(10, 772);
+
                 Menu_Logo_initialPosition = Logo.Location;
                 Menu_Logo_targetPosition = new Point(10, 30);
 
@@ -295,6 +327,15 @@ namespace POS
                 Menu_Settings_label_initialPosition = Menu_Settings_label.Location;
                 Menu_Settings_label_targetPosition = new Point(55, 592);
 
+                Menu_Admin_Label_initialPosition = Menu_Admin_Label.Location;
+                Menu_Admin_Label_targetPosition = new Point(55, 652); //ADMIN LABEL 
+
+                Menu_Attendance_Label_InitialPosition = Menu_Attendance_Label.Location;
+                Menu_Attendance_Label_targetPosition = new Point(55, 712);
+
+                LogOutLabel_initialPosition = LogOutLabel.Location;
+                LogOutLabel_targetPosition = new Point(55, 772);
+
                 Menu_Logo_initialPosition = Logo.Location;
                 Menu_Logo_targetPosition = new Point(36, 30);
 
@@ -313,7 +354,6 @@ namespace POS
 
         }
 
-        #endregion
 
         #region Label and Panel Timer Tick Event Functions 
 
@@ -332,6 +372,9 @@ namespace POS
                 Menu_Kitchen_label.Location = Menu_Kitchen_label_targetPosition;
                 Menu_Reports_label.Location = Menu_Reports_label_targetPosition;
                 Menu_Settings_label.Location = Menu_Settings_label_targetPosition;
+                Menu_Admin_Label.Location = Menu_Admin_Label_targetPosition; //ADMIN LABEL
+                Menu_Attendance_Label.Location = Menu_Attendance_Label_targetPosition;
+                LogOutLabel.Location = LogOutLabel_targetPosition;
                 Logo.Location = Menu_Logo_targetPosition;
 
             }
@@ -377,9 +420,22 @@ namespace POS
                 int Menu_Logo_newY = (int)Menu_Logo_targetPosition.Y;
                 Logo.Location = new Point(Menu_Logo_newX, Menu_Logo_newY);
 
+                int Menu_Admin_Label_newX = (int)(Menu_Admin_Label_initialPosition.X + (Menu_Admin_Label_targetPosition.X - Menu_Admin_Label_initialPosition.X) * progress);
+                int Menu_Admin_Label_newY = (int)Menu_Admin_Label_targetPosition.Y;
+                Menu_Admin_Label.Location = new Point(Menu_Admin_Label_newX, Menu_Admin_Label_newY); //ADMIN LABEL
+
+                int Menu_Attendance_label_newX = (int)(Menu_Attendance_Label_InitialPosition.X + (Menu_Attendance_Label_targetPosition.X - Menu_Attendance_Label_InitialPosition.X) * progress);
+                int Menu_Attendance_label_newY = (int)Menu_Attendance_Label_targetPosition.Y;
+                Menu_Attendance_Label.Location = new Point(Menu_Attendance_label_newX, Menu_Attendance_label_newY);
+
+                int LogOut_label_newX = (int)(LogOutLabel_initialPosition.X + (LogOutLabel_targetPosition.X - LogOutLabel_initialPosition.X) * progress);
+                int LogOut_label_newY = (int)LogOutLabel_targetPosition.Y;
+                LogOutLabel.Location = new Point(LogOut_label_newX, LogOut_label_newY);
+
 
             }
         }
+        #endregion
 
         private void PanelTimer_Tick(object sender, EventArgs e)
         {
@@ -444,6 +500,7 @@ namespace POS
         private void Menu_Dashboard_label_Click_1(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Dashboard_label, "#0077C3");
+            SetLabelColor(Menu_Dashboard_label, "#0077C3");
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -452,10 +509,15 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Menu_Admin_Label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Dashboard";
+            Menu_Attendance_Label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
+
             if (ContentContainer_panel.Visible == false)
             {
                 ContentContainer_panel.Visible = true;
+                AttendancePanel.Visible = false;
                 ProductPanel.Visible = false;
                 IngredientsPanel.Visible = false;
                 StaffPanel.Visible = false;
@@ -464,6 +526,8 @@ namespace POS
                 KitchenPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                CustomerPanel.Visible = false;
+                AdminPanel.Visible = false;
             }
         }
 
@@ -478,10 +542,15 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Menu_Admin_Label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Ingredients";
+            Menu_Attendance_Label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
+
             if (IngredientsPanel.Visible == false)
             {
                 IngredientsPanel.Visible = true;
+                AttendancePanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 ProductPanel.Visible = false;
                 StaffPanel.Visible = false;
@@ -490,12 +559,15 @@ namespace POS
                 KitchenPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                AdminPanel.Visible = false;
+                CustomerPanel.Visible = false;
             }
         }
 
         private void Menu_Products_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Products_label, "#0077C3");
+            Menu_Attendance_Label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -504,18 +576,23 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
+            Menu_Admin_Label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Products/Restaurant";
             if (ProductPanel.Visible == false)
             {
                 ProductPanel.Visible = true;
                 ContentContainer_panel.Visible = false;
                 IngredientsPanel.Visible = false;
+                AttendancePanel.Visible = false;
                 StaffPanel.Visible = false;
                 POSPanel.Visible = false;
                 TablesPanel.Visible = false;
                 KitchenPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                AdminPanel.Visible = false;
+                CustomerPanel.Visible = false;
             }
         }
 
@@ -530,10 +607,14 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Menu_Admin_Label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
+            Menu_Attendance_Label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Tables";
             if (TablesPanel.Visible == false)
             {
                 TablesPanel.Visible = true;
+                AttendancePanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 IngredientsPanel.Visible = false;
                 StaffPanel.Visible = false;
@@ -542,6 +623,8 @@ namespace POS
                 KitchenPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                AdminPanel.Visible = false;
+                CustomerPanel.Visible = false;
             }
         }
 
@@ -556,11 +639,15 @@ namespace POS
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Menu_Admin_Label.BackColor = Color.Transparent;
+            Menu_Attendance_Label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "POS";
             if (POSPanel.Visible == false)
             {
                 POSPanel.Visible = true;
+                AttendancePanel.Visible = false;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 IngredientsPanel.Visible = false;
@@ -568,7 +655,9 @@ namespace POS
                 TablesPanel.Visible = false;
                 KitchenPanel.Visible = false;
                 ReportsPanel.Visible = false;
+                CustomerPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                AdminPanel.Visible = false;
                 StartTransition(60, "Hide");
                 AddPOSCategory();
                 await Task.Delay(100);
@@ -593,6 +682,7 @@ namespace POS
         private void Menu_Staff_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Staff_label, "#0077C3");
+            Menu_Attendance_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -601,10 +691,13 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
+            Menu_Admin_Label.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Staff";
             if (StaffPanel.Visible == false)
             {
                 StaffPanel.Visible = true;
+                AttendancePanel.Visible = false;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 IngredientsPanel.Visible = false;
@@ -613,12 +706,15 @@ namespace POS
                 KitchenPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                CustomerPanel.Visible = false;
+                AdminPanel.Visible = false;
             }
         }
 
         private void Menu_Kitchen_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Kitchen_label, "#0077C3");
+            Menu_Attendance_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -627,10 +723,13 @@ namespace POS
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Menu_Admin_Label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Kitchen";
             if (KitchenPanel.Visible == false)
             {
                 KitchenPanel.Visible = true;
+                AttendancePanel.Visible = false;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 IngredientsPanel.Visible = false;
@@ -639,12 +738,15 @@ namespace POS
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                CustomerPanel.Visible = false;
+                AdminPanel.Visible = false;
             }
         }
 
         private void Menu_Reports_label_Click(object sender, EventArgs e)
         {
             SetLabelColor(Menu_Reports_label, "#0077C3");
+            Menu_Attendance_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -653,10 +755,13 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Menu_Admin_Label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
             Current_ScreenName_label.Text = "Reports";
             if (ReportsPanel.Visible == false)
             {
                 ReportsPanel.Visible = true;
+                AttendancePanel.Visible = false;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
                 IngredientsPanel.Visible = false;
@@ -665,12 +770,15 @@ namespace POS
                 StaffPanel.Visible = false;
                 KitchenPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                AdminPanel.Visible = false;
+                CustomerPanel.Visible = false;
             }
         }
 
         private void Menu_Settings_label_Click(object sender, EventArgs e)
-        {
+        { //niggers
             SetLabelColor(Menu_Settings_label, "#0077C3");
+            Menu_Attendance_Label.BackColor = Color.Transparent;
             Menu_Products_label.BackColor = Color.Transparent;
             Menu_Ingredients_label.BackColor = Color.Transparent;
             Menu_Tables_label.BackColor = Color.Transparent;
@@ -679,6 +787,31 @@ namespace POS
             Menu_Kitchen_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Admin_Label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
+            string query = "SELECT * FROM customers";
+            CustomerPanel.Visible = true;
+            ReportsPanel.Visible = false;
+            AttendancePanel.Visible = false;
+            ProductPanel.Visible = false;
+            ContentContainer_panel.Visible = false;
+            IngredientsPanel.Visible = false;
+            POSPanel.Visible = false;
+            TablesPanel.Visible = false;
+            StaffPanel.Visible = false;
+            KitchenPanel.Visible = false;
+            //ProductPanel.Visible = false;
+            AdminPanel.Visible = false;
+            Current_ScreenName_label.Text = "Customers";
+            LoadDataAsync(CustomersGridView, query, "Sync");
+            SetColumnHeaderText(CustomersGridView);
+            LoadDataAsync(PurchaseHistoryGridView, "SELECT * FROM purchase_history", "Sync");
+            SetColumnHeaderText(PurchaseHistoryGridView);
+            if (PurchaseHistoryButton.ForeColor == Color.FromArgb(37, 150, 190))
+            {
+                CustomerAddButton.Visible = false;
+            }
+
         }
         #endregion
 
@@ -765,8 +898,81 @@ namespace POS
                     {
                         connection.Close();
                     }
+
                 }
+
             }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private void LoadDataAsync2(DataGridView myDataGrid, string query, string method)
+        {
+            command = new SqlCommand(query, connection);
+            WorkingDataGridView = myDataGrid;
+            WorkingDataGridView.DataSource = null;
+            WorkingDataGridView.Columns.Clear();
+            try
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+                if (method == "Async")
+                {
+                    command.BeginExecuteReader(OnReaderComplete, null);
+                }
+                else
+                {
+                    try
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            DataGridViewTextBoxColumn SR = new DataGridViewTextBoxColumn
+                            {
+                                HeaderText = "SR#",
+                                ValueType = typeof(string),
+                                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+                            };
+                            WorkingDataGridView.Columns.Insert(0, SR);
+
+
+                            WorkingDataGridView.DataSource = dataTable;
+                            SetColumnHeaderText(WorkingDataGridView);
+                            DataGridViewImageColumn EditBtn = new DataGridViewImageColumn
+                            {
+                                HeaderText = "Edit",
+                                Image = ResizeImage((Image)EditImage, 15, 15),
+                                AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                            };
+                            WorkingDataGridView.Columns.Add(EditBtn);
+                            for (int i = 0; i < dataTable.Rows.Count; i++)
+                            {
+                                WorkingDataGridView.Rows[i].Cells[0].Value = (i + 1).ToString();
+                            }
+                        }
+                    }
+
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+
+                    finally
+                    {
+                        connection.Close();
+                    }
+
+                }
+
+            }
+
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
@@ -776,7 +982,7 @@ namespace POS
         private void OnReaderComplete(IAsyncResult result)
         {
             try
-            {
+            { //niggers
                 using (SqlDataReader reader = command.EndExecuteReader(result))
                 {
                     DataTable dataTable = new DataTable();
@@ -905,9 +1111,104 @@ namespace POS
                 dataGridView.Columns["cost_per_unit"].HeaderText = "Cost(per unit)";
                 dataGridView.Columns["min_quantity"].HeaderText = "Min Qty";
 
+            }
+
+            else if (dataGridView == CustomersGridView)
+            {
+
+                dataGridView.Columns["customer_id"].HeaderText = "ID";
+                dataGridView.Columns["customer_id"].Width = 50;
+                dataGridView.Columns["customer_name"].HeaderText = "Name";
+                dataGridView.Columns["phone_number"].HeaderText = "Phone";
+                dataGridView.Columns["email"].HeaderText = "Email";
+                dataGridView.Columns["address"].HeaderText = "Address";
+                dataGridView.Columns["email"].Width = 280;
+                dataGridView.Columns["last_purchase_date"].HeaderText = "Last Purchase Date";
+                dataGridView.Columns["credit"].HeaderText = "Credit";
+                dataGridView.Columns["credit"].Width = 140;
+                dataGridView.Columns["points"].HeaderText = "Points";
 
             }
 
+            else if (dataGridView == PurchaseHistoryGridView)
+            {
+
+                dataGridView.Columns["purchase_id"].HeaderText = "Purchase ID";
+                dataGridView.Columns["customer_id"].HeaderText = " Customer ID";
+                dataGridView.Columns["customer_name"].HeaderText = "Name";
+                dataGridView.Columns["bill_id"].HeaderText = "Bill ID";
+                dataGridView.Columns["purchase_date"].HeaderText = "Date";
+                dataGridView.Columns["purchase_time"].HeaderText = "Time";
+
+            }
+
+
+            else if (dataGridView == TimesheetGridView)
+            {
+                dataGridView.Columns["name"].HeaderText = "Name";
+                dataGridView.Columns["email"].HeaderText = "Email";
+                dataGridView.Columns["clock_in_time"].HeaderText = "Clock In Time";
+                dataGridView.Columns["clock_out_time"].HeaderText = "Clock Out Time";
+                dataGridView.Columns["worked_hours"].HeaderText = "Worked Hours(Day)";
+                dataGridView.Columns["monthly_total_hours"].HeaderText = "Work Hours(Month)";
+
+            }
+            else if (dataGridView == ActivityGridView)
+            {
+                dataGridView.Columns["time"].HeaderText = "Time";
+                dataGridView.Columns["action"].HeaderText = "Action";
+                dataGridView.Columns["description"].HeaderText = "Description";
+                dataGridView.Columns["username"].HeaderText = "Action By";
+
+            }
+            else if (dataGridView == AdminOrdersDataGrid)
+            {
+                dataGridView.Columns["bill_id"].HeaderText = "Bill ID";
+                dataGridView.Columns["table_name"].HeaderText = "Table";
+                dataGridView.Columns["customer"].HeaderText = "Customer";
+                dataGridView.Columns["phone"].HeaderText = "Phone";
+                dataGridView.Columns["date"].HeaderText = "Date";
+                dataGridView.Columns["type"].HeaderText = "Type";
+                dataGridView.Columns["status"].HeaderText = "Status";
+                dataGridView.Columns["total_amount"].HeaderText = "Total";
+                dataGridView.Columns["discount"].HeaderText = "Discount";
+                dataGridView.Columns["net_total_amount"].HeaderText = "Net";
+
+            }
+
+            else if (dataGridView == adminDataGrid)
+            {
+                if (dataGridView.Columns["id"] != null)
+                {
+                    dataGridView.Columns["id"].Visible = false;
+                }
+
+                if (dataGridView.Columns["username"] != null)
+                {
+                    dataGridView.Columns["username"].HeaderText = "Username";
+                }
+
+                if (dataGridView.Columns["email"] != null)
+                {
+                    dataGridView.Columns["email"].HeaderText = "Email";
+                }
+
+                if (dataGridView.Columns["password"] != null)
+                {
+                    dataGridView.Columns["password"].HeaderText = "Password";
+                    dataGridView.Columns["password"].Visible = true;
+                }
+
+                if (dataGridView.Columns["role"] != null)
+                {
+                    dataGridView.Columns["role"].HeaderText = "Role";
+                }
+
+                if (dataGridView.Columns["Access"] != null)
+                {
+                    dataGridView.Columns["Access"].HeaderText = "Access";
+                }
+            }
 
 
             foreach (DataGridViewColumn column in dataGridView.Columns)
@@ -989,7 +1290,7 @@ namespace POS
         }
         #endregion
 
-        #endregion 
+        #endregion
 
 
         #region All Dashboard Screen Funtions
@@ -997,10 +1298,13 @@ namespace POS
         #region Dashboard Load Event
         private async void Dashboard_Load(object sender, EventArgs e)
         {
+            Session.RetrieveRole();
 
             int CurrentUserInitialWidth = CurrentUser_label.Width;
             CurrentUser_label.Text = $"User Name:  {Session.Username}";
             CurrentUser_label.Location = new Point(CurrentUser_label.Location.X - (CurrentUser_label.Width - CurrentUserInitialWidth), CurrentUser_label.Location.Y);
+
+            // Set positions of the cards
             Set_CardBox_Positions();
             SetLabelLocations(Menu_Dashboard_label, new Point(55, 112));
             SetLabelLocations(Menu_Ingredients_label, new Point(55, 172));
@@ -1011,20 +1315,26 @@ namespace POS
             SetLabelLocations(Menu_Kitchen_label, new Point(55, 472));
             SetLabelLocations(Menu_Reports_label, new Point(55, 532));
             SetLabelLocations(Menu_Settings_label, new Point(55, 592));
+            SetLabelLocations(Menu_Admin_Label, new Point(55, 652));
+            SetLabelLocations(Menu_Attendance_Label, new Point(55, 712));
+            SetLabelLocations(LogOutLabel, new Point(57, 772));
+
+            // Set the label colors
             SetLabelColor(Menu_Dashboard_label, "#0077C3");
 
-            //Menu_Dashboard_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            //Menu_Products_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            //Menu_Tables_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            //Menu_Staff_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            //Menu_POS_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            //Menu_Kitchen_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            //Menu_Reports_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            //Menu_Settings_label.Font = new Font(privateFonts.Families[0], 12f, FontStyle.Regular);
-            //Thread.Sleep(10000);
+            // Initialize the chart
             InitiateChart();
             await Task.Delay(10);
+
+            // Make the content container visible
             ContentContainer_panel.Visible = true;
+
+            if (Session.Role != "admin")
+            {
+                Menu_Staff_label.Enabled = false;
+                Menu_Admin_Label.Enabled = false;
+                MessageBox.Show("Admin and staff panel are only available for admins.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         #endregion
@@ -1225,56 +1535,96 @@ namespace POS
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                try
                 {
-                    if (ProductsDataGrid.Columns["product_name"] != null)
+                    // Handle Edit action
+                    if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
                     {
-                        ProductsForm productsForm = new ProductsForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
-                        productsForm.ShowDialog();
-                        LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
-                    }
-                    else if (ProductsDataGrid.Columns["types"] != null)
-                    {
-                        ProductsCategoryForm productsCatForm = new ProductsCategoryForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
-                        productsCatForm.ShowDialog();
-                        LoadDataAsync(ProductsDataGrid, "select * from product_category", "Sync");
-                    }
-                    else
-                    {
-                        ProductIngredientsForm IngForm = new ProductIngredientsForm((int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
-                        IngForm.ShowDialog();
-                        LoadDataAsync(ProductsDataGrid, "select * from product_ingredients", "Sync");
+                        if (ProductsDataGrid.Columns["product_name"] != null)
+                        {
+                            // Editing a product
+                            int productId = (int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value;
+                            ProductsForm productsForm = new ProductsForm(productId);
+                            productsForm.ShowDialog();
+                            LoadDataAsync(ProductsDataGrid, "select * from products", "Sync");
+
+                            // Log activity for editing product
+                            LogActivity("Edit Product", $"Product edited: ID {productId}");
+
+                        }
+                        else if (ProductsDataGrid.Columns["types"] != null)
+                        {
+                            // Editing a product category
+                            int categoryId = (int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value;
+                            ProductsCategoryForm productsCatForm = new ProductsCategoryForm(categoryId);
+                            productsCatForm.ShowDialog();
+                            LoadDataAsync(ProductsDataGrid, "select * from product_category", "Sync");
+
+                            // Log activity for editing product category
+                            LogActivity("Edit Product Category", $"Product category edited: ID {categoryId}");
+
+                        }
+                        else
+                        {
+                            // Editing product ingredients
+                            int ingredientId = (int)ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value;
+                            ProductIngredientsForm IngForm = new ProductIngredientsForm(ingredientId);
+                            IngForm.ShowDialog();
+                            LoadDataAsync(ProductsDataGrid, "select * from product_ingredients", "Sync");
+
+                            // Log activity for editing product ingredient
+                            LogActivity("Edit Product Ingredient", $"Product ingredient edited: ID {ingredientId}");
+                        }
                     }
 
+                    // Handle Delete action
+                    else if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                    {
+                        if (ProductsDataGrid.Columns["product_name"] != null)
+                        {
+                            // Deleting a product
+                            int productId = Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                            if (MessageBox.Show("Are you sure you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                            {
+                                DeleteRowFromDatabase(productId, "products", ProductsDataGrid, e.RowIndex);
+
+                                // Log activity for deleting product
+                                LogActivity("Delete Product", $"Product deleted: ID {productId}");
+                            }
+                        }
+                        else if (ProductsDataGrid.Columns["types"] != null)
+                        {
+                            // Deleting a product category
+                            int categoryId = Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                            if (MessageBox.Show("Are you sure you want to delete this product category?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                            {
+                                DeleteRowFromDatabase(categoryId, "product_category", ProductsDataGrid, e.RowIndex);
+
+                                // Log activity for deleting product category
+                                LogActivity("Delete Product Category", $"Product category deleted: ID {categoryId}");
+                            }
+                        }
+                        else
+                        {
+                            // Deleting product ingredients
+                            int ingredientId = Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                            if (MessageBox.Show("Are you sure you want to delete this Ingredient?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                            {
+                                DeleteRowFromDatabase(ingredientId, "product_ingredients", ProductsDataGrid, e.RowIndex);
+
+                                // Log activity for deleting product ingredient
+                                LogActivity("Delete Product Ingredient", $"Product ingredient deleted: ID {ingredientId}");
+                            }
+                        }
+                    }
                 }
-
-                else if (ProductsDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                catch (Exception ex)
                 {
-                    if (ProductsDataGrid.Columns["product_name"] != null)
-                    {
-                        if (MessageBox.Show("Are you sure you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        {
-                            DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "products", ProductsDataGrid, e.RowIndex);
-                        }
-                    }
-                    else if (ProductsDataGrid.Columns["types"] != null)
-                    {
-                        if (MessageBox.Show("Are you sure you want to delete this product category?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        {
-                            DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "product_category", ProductsDataGrid, e.RowIndex);
-                        }
-                    }
-                    else
-                    {
-                        if (MessageBox.Show("Are you sure you want to delete this Ingredient?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        {
-                            DeleteRowFromDatabase(Convert.ToInt32(ProductsDataGrid.Rows[e.RowIndex].Cells["id"].Value), "product_ingredients", ProductsDataGrid, e.RowIndex);
-                        }
-                    }
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
         }
+
 
         #endregion
 
@@ -1364,25 +1714,50 @@ namespace POS
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (Ingredients_DataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                try
                 {
-                    IngredientsForm ingredientsForm = new IngredientsForm((int)Ingredients_DataGrid.Rows[e.RowIndex].Cells["id"].Value);
-                    ingredientsForm.ShowDialog();
-                    LoadDataAsync(Ingredients_DataGrid, "select * from ingredients", "Sync");
-                }
-
-                else if (Ingredients_DataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
-                {
-
-                    if (MessageBox.Show("Are you sure you want to delete this Ingredient?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    // Handle Edit action
+                    if (Ingredients_DataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
                     {
-                        DeleteRowFromDatabase(Convert.ToInt32(Ingredients_DataGrid.Rows[e.RowIndex].Cells["id"].Value), "ingredients", Ingredients_DataGrid, e.RowIndex);
+                        int itemId = (int)Ingredients_DataGrid.Rows[e.RowIndex].Cells["id"].Value;
+                        string ingredientName = Ingredients_DataGrid.Rows[e.RowIndex].Cells["ingredient_name"].Value.ToString();
+                        string actionDescription = $"Ingredient edited: {ingredientName}";
+
+                        IngredientsForm ingredientsForm = new IngredientsForm(itemId);
+                        ingredientsForm.ShowDialog();
+                        LoadDataAsync(Ingredients_DataGrid, "select * from ingredients", "Sync");
+
+                        // Log the activity after the edit
+                        LogActivity("Edit", actionDescription);
                     }
 
-                }
+                    // Handle Delete action
+                    else if (Ingredients_DataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                    {
+                        int itemId = Convert.ToInt32(Ingredients_DataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                        string ingredientName = Ingredients_DataGrid.Rows[e.RowIndex].Cells["ingredient_name"].Value.ToString();
+                        string actionDescription = "";
 
+                        if (MessageBox.Show("Are you sure you want to delete this Ingredient?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            DeleteRowFromDatabase(itemId, "ingredients", Ingredients_DataGrid, e.RowIndex);
+                            actionDescription = $"Ingredient deleted: {ingredientName}";
+                        }
+
+                        // Log the activity after the delete
+                        if (!string.IsNullOrEmpty(actionDescription))
+                        {
+                            LogActivity("Delete", actionDescription);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
 
         #endregion
 
@@ -1481,45 +1856,143 @@ namespace POS
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                if (StaffDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                try
                 {
-                    if (StaffDataGrid.Columns["staff_name"] != null)
+                    // Handle Edit action
+                    if (StaffDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
                     {
-                        StaffForm staffForm = new StaffForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
-                        staffForm.ShowDialog();
-                        LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
-                    }
-                    else
-                    {
-                        StaffCategoryForm staffcategory = new StaffCategoryForm((int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
-                        staffcategory.ShowDialog();
-                        LoadDataAsync(StaffDataGrid, "select * from staff_category", "Sync");
-                    }
-                }
-
-                else if (StaffDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
-                {
-
-                    if (StaffDataGrid.Columns["staff_name"] != null)
-                    {
-                        if (MessageBox.Show("Are you sure you want to delete this staff detail?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        if (StaffDataGrid.Columns["staff_name"] != null)
                         {
-                            DeleteRowFromDatabase(Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value), "staff_details", StaffDataGrid, e.RowIndex);
+                            int staffId = (int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value;
+                            string staffName = StaffDataGrid.Rows[e.RowIndex].Cells["staff_name"].Value.ToString();
+                            string actionDescription = $"Staff edited: {staffName}";
+
+                            // Open the StaffForm for editing
+                            StaffForm staffForm = new StaffForm(staffId);
+                            staffForm.ShowDialog();
+
+                            // Reload data to reflect changes
+                            LoadDataAsync(StaffDataGrid, "select * from staff_details", "Sync");
+
+                            // Log the activity
+                            LogActivity("Edit", actionDescription);
+                        }
+                        else
+                        {
+                            // If it's a staff category, handle category edit
+                            int categoryId = (int)StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value;
+                            string categoryName = StaffDataGrid.Rows[e.RowIndex].Cells["category_name"].Value.ToString();
+                            string actionDescription = $"Staff category edited: {categoryName}";
+
+                            StaffCategoryForm staffCategoryForm = new StaffCategoryForm(categoryId);
+                            staffCategoryForm.ShowDialog();
+
+                            // Reload data for category edit
+                            LoadDataAsync(StaffDataGrid, "select * from staff_category", "Sync");
+
+                            // Log the activity
+                            LogActivity("Edit", actionDescription);
                         }
                     }
-                    else
+
+                    // Handle Delete action
+                    else if (StaffDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
                     {
-                        if (MessageBox.Show("Are you sure you want to delete this staff category?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        if (StaffDataGrid.Columns["staff_name"] != null)
                         {
-                            DeleteRowFromDatabase(Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value), "staff_category", StaffDataGrid, e.RowIndex);
+                            if (MessageBox.Show("Are you sure you want to delete this staff detail? This will also delete the staff's user account.", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                            {
+                                int staffId = Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                                string staffName = StaffDataGrid.Rows[e.RowIndex].Cells["staff_name"].Value.ToString();
+                                string actionDescription = $"Staff deleted: {staffName}";
+
+                                // Delete staff and user records
+                                DeleteStaffAndUser(staffId);
+
+                                // Log the activity
+                                LogActivity("Delete", actionDescription);
+
+                                // Remove row from DataGridView
+                                StaffDataGrid.Rows.RemoveAt(e.RowIndex);
+                                MessageBox.Show("Staff and associated user account deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                        else
+                        {
+                            // Handle delete for staff category
+                            if (MessageBox.Show("Are you sure you want to delete this staff category?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                            {
+                                int categoryId = Convert.ToInt32(StaffDataGrid.Rows[e.RowIndex].Cells["id"].Value);
+                                string categoryName = StaffDataGrid.Rows[e.RowIndex].Cells["category_name"].Value.ToString();
+                                string actionDescription = $"Staff category deleted: {categoryName}";
+
+                                // Delete the staff category
+                                DeleteRowFromDatabase(categoryId, "staff_category", StaffDataGrid, e.RowIndex);
+
+                                // Log the activity
+                                LogActivity("Delete", actionDescription);
+                            }
                         }
                     }
-
-
                 }
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
+        private void DeleteStaffAndUser(int staffId)
+        {
+            try
+            {
+                connection.Open();
+
+                // Retrieve the email from the staff_details record to use in deleting the user
+                string emailQuery = "SELECT email FROM staff_details WHERE id = @StaffId";
+                string email = "";
+
+                using (SqlCommand getEmailCommand = new SqlCommand(emailQuery, connection))
+                {
+                    getEmailCommand.Parameters.AddWithValue("@StaffId", staffId);
+                    var result = getEmailCommand.ExecuteScalar();
+                    if (result != null)
+                    {
+                        email = result.ToString();
+                    }
+                }
+
+                // Delete the staff record from staff_details
+                string deleteStaffQuery = "DELETE FROM staff_details WHERE id = @StaffId";
+                using (SqlCommand deleteStaffCommand = new SqlCommand(deleteStaffQuery, connection))
+                {
+                    deleteStaffCommand.Parameters.AddWithValue("@StaffId", staffId);
+                    deleteStaffCommand.ExecuteNonQuery();
+                }
+
+                // Delete the user record from users where the email matches
+                if (!string.IsNullOrEmpty(email))
+                {
+                    string deleteUserQuery = "DELETE FROM users WHERE email = @Email";
+                    using (SqlCommand deleteUserCommand = new SqlCommand(deleteUserQuery, connection))
+                    {
+                        deleteUserCommand.Parameters.AddWithValue("@Email", email);
+                        deleteUserCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+
 
         private void StaffDataGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -1800,7 +2273,7 @@ namespace POS
             {
                 foreach (DataGridViewRow item in POSProductsDataGrid.Rows)
                 {
-                    total = total + (Convert.ToDecimal(item.Cells["product_price"].Value) * Convert.ToDecimal(item.Cells["quantity"].Value)) ;
+                    total = total + (Convert.ToDecimal(item.Cells["product_price"].Value) * Convert.ToDecimal(item.Cells["quantity"].Value));
                 }
                 TotalAmountLabel.Text = "Total Amount : " + total;
                 TotalAmountLabel.Visible = true;
@@ -1959,8 +2432,10 @@ namespace POS
         {
             NewScreen();
         }
-
-
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            NewScreen();
+        }
 
 
         private int BillID = -1;
@@ -1995,9 +2470,14 @@ namespace POS
             Menu_Staff_label.BackColor = Color.Transparent;
             Menu_Reports_label.BackColor = Color.Transparent;
             Menu_Settings_label.BackColor = Color.Transparent;
+            Menu_Admin_Label.BackColor = Color.Transparent;
+            Menu_Attendance_Label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
+
             Current_ScreenName_label.Text = "Kitchen";
             if (KitchenPanel.Visible == false)
             {
+                AttendancePanel.Visible = false;
                 KitchenPanel.Visible = true;
                 ProductPanel.Visible = false;
                 ContentContainer_panel.Visible = false;
@@ -2007,16 +2487,16 @@ namespace POS
                 StaffPanel.Visible = false;
                 ReportsPanel.Visible = false;
                 //ProductPanel.Visible = false;
+                AdminPanel.Visible = false;
             }
         }
 
 
 
-
-
-
         private void DinInButton_Click(object sender, EventArgs e)
         {
+            string CustomerName;
+            string PhoneNumber;
             if (BillID != -1)
             {
                 MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -2056,20 +2536,17 @@ namespace POS
             }
         }
 
-
-
-
-
-
         private void TakeAwayButton_Click(object sender, EventArgs e)
         {
             if (BillID != -1)
             {
-                MessageBox.Show("Complete the Selected Bill Payement First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show("Complete the Selected Bill Payment First", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
             }
+
             if (POSProductsDataGrid.Rows.Count > 0)
             {
+                // Calculate json and total_amount from POSProductsDataGrid rows
                 List<string> columnValues = new List<string>();
                 decimal total_amount = 0;
 
@@ -2080,43 +2557,68 @@ namespace POS
                     columnValues.Add(ItemsValue + "-" + QtyValue);
                     total_amount += Convert.ToDecimal(row.Cells["total_amount"].Value.ToString());
                 }
-                string json = JsonConvert.SerializeObject(columnValues);
-                try
-                {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand("insert into bill_list(items,date,type,status,total_amount,net_total_amount) values(@Items,@Date,@Type,@Status,@Total,@NetTotal)", connection);
-                    command.Parameters.AddWithValue("@Items", json);
-                    command.Parameters.AddWithValue("@Date", DateTime.Now);
-                    command.Parameters.AddWithValue("@Type", "Take Away");
-                    command.Parameters.AddWithValue("@Status", "In Complete");
-                    command.Parameters.AddWithValue("@Total", total_amount);
-                    command.Parameters.AddWithValue("@NetTotal", total_amount);
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Saved Successfully");
-                        POSProductsDataGrid.Rows.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("There was a problem saving");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    connection.Close();
-                }
 
+                string json = JsonConvert.SerializeObject(columnValues);
+
+                // Open the AddCustomerInfo form with json and total_amount
+                AddCustomerInfo addCustomerInfoForm = new AddCustomerInfo(json, total_amount);
+                DialogResult result = addCustomerInfoForm.ShowDialog();
+
+                // Check if user confirmed to add customer details
+                if (result == DialogResult.OK)
+                {
+                    MessageBox.Show("Order saved with customer details.");
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    // Insert without customer details
+                    try
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("INSERT INTO bill_list (items, date, type, status, total_amount, net_total_amount) VALUES (@Items, @Date, @Type, @Status, @Total, @NetTotal); SELECT SCOPE_IDENTITY();", connection);
+                        command.Parameters.AddWithValue("@Items", json);
+                        command.Parameters.AddWithValue("@Date", DateTime.Now);
+                        command.Parameters.AddWithValue("@Type", "Take Away");
+                        command.Parameters.AddWithValue("@Status", "Incomplete");
+                        command.Parameters.AddWithValue("@Total", total_amount);
+                        command.Parameters.AddWithValue("@NetTotal", total_amount);
+
+                        // Get the generated BillID (the new record's ID)
+                        int billId = Convert.ToInt32(command.ExecuteScalar());
+
+                        if (billId > 0)
+                        {
+                            MessageBox.Show("Saved Successfully without customer details.");
+                            POSProductsDataGrid.Rows.Clear();
+
+                            // Log the activity
+                            string actionDescription = $"Order inserted into bill list (BillID: {billId}). Total: {total_amount}";
+                            LogActivity("Insert", actionDescription);
+                        }
+                        else
+                        {
+                            MessageBox.Show("There was a problem saving.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("Please select something first", "Select", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
+
+
+
+
 
         private void DeliveryButton_Click(object sender, EventArgs e)
         {
@@ -2330,36 +2832,59 @@ namespace POS
 
         private void FastCashButton_Click(object sender, EventArgs e)
         {
-
             try
             {
-                connection.Open();
-                string query = "UPDATE bill_list SET status=@Status WHERE bill_id=@Id";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Status", "Paid");
-                    command.Parameters.AddWithValue("@Id", BillID);
+                // Display confirmation message box
+                DialogResult result = MessageBox.Show("Fast cash out will not add any points to the customer if they exist in the database. Confirm?",
+                                                       "Confirm Fast Cash", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
+                if (result == DialogResult.Yes)
+                {
+                    connection.Open();
+                    string query = "UPDATE bill_list SET status=@Status WHERE bill_id=@Id";
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        command.Parameters.AddWithValue("@Status", "Paid");
+                        command.Parameters.AddWithValue("@Id", BillID);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            // Log the successful fast cash transaction to the activity log
+                            string username = Session.Username; // Get the username of the logged-in user
+                            string logQuery = "INSERT INTO activity_log (time, action, username, description) VALUES (@ActivityDate, @Action, @Username, @Description)";
+                            using (SqlCommand logCommand = new SqlCommand(logQuery, connection))
+                            {
+                                logCommand.Parameters.AddWithValue("@ActivityDate", DateTime.Now);  // Log current date and time
+                                logCommand.Parameters.AddWithValue("@Action", "Fast Cash Payment");
+                                logCommand.Parameters.AddWithValue("@Username", username); // Add the username here
+                                logCommand.Parameters.AddWithValue("@Description", "Fast cash payment processed for Bill ID: " + BillID); // Include Bill ID in description
+                                logCommand.ExecuteNonQuery();
+                            }
+
+                            MessageBox.Show("Saved Successfully. Fast Cash processed without adding points.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }
-
+                else
+                {
+                    MessageBox.Show("Fast cash transaction was canceled.", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error Message : " + ex.Message);
-
             }
             finally
             {
                 connection.Close();
             }
+
+            // Call other methods (like updating inventory and opening a new screen)
             UpdateIngredientsInventory();
             NewScreen();
         }
+
 
         private void CheckOutButton_Click(object sender, EventArgs e)
         {
@@ -2370,6 +2895,7 @@ namespace POS
                 if (pms.ShowDialog() != DialogResult.OK)
                 {
                     updateStatus = pms.StatusUpdated;
+                    NewScreen();
                 }
             }
             if (updateStatus == "Updated")
@@ -2732,7 +3258,7 @@ namespace POS
             }
         }
 
-        
+
         private async Task updateDashboardValues()
         {
             try
@@ -2742,6 +3268,8 @@ namespace POS
                 decimal sales = 0;
                 decimal discount = 0;
                 decimal totalCost = 0;
+                decimal cancelledSales = 0;  // New variable to store cancelled sales value
+                int cancelledOrdersCount = 0; // Variable to store the count of cancelled orders
 
                 // Retrieve sales and discount information
                 string querySalesDiscount = "SELECT SUM((discount/100) * total_amount) AS discount, SUM(net_total_amount) AS net_total FROM bill_list";
@@ -2755,12 +3283,28 @@ namespace POS
                     }
                 }
 
+                // Calculate cancelled sales and cancelled orders count
+                string queryCancelledSales = "SELECT COUNT(*) AS cancelled_orders, SUM(net_total_amount) AS cancelled_sales FROM bill_list WHERE status = 'Cancelled'";
+                using (SqlCommand cmdCancelled = new SqlCommand(queryCancelledSales, connection))
+                using (SqlDataReader rdrCancelled = await cmdCancelled.ExecuteReaderAsync())
+                {
+                    if (await rdrCancelled.ReadAsync())
+                    {
+                        cancelledOrdersCount = (int)rdrCancelled["cancelled_orders"];
+                        cancelledSales = (decimal)rdrCancelled["cancelled_sales"];
+                    }
+                }
+
                 // Update UI with sales and discount information
+                sales = sales - cancelledSales;
                 T_Sale_Amount_label.Text = sales.ToString("C"); // Display as currency format
                 T_Disc_Amount_label.Text = discount.ToString("C");
 
+                // Update T_Pay_Amount_label with cancelled orders count and sales amount
+                T_Pay_Amount_label.Text = $"({cancelledOrdersCount}) {cancelledSales.ToString("C")}";
+
                 // Process JSON data from bill_list items
-                string queryJsonData = "SELECT items FROM bill_list WHERE status = 'Paid'";
+                string queryJsonData = "SELECT items FROM bill_list WHERE status = 'Paid' or status = 'Cancelled'";
                 using (SqlCommand cmd = new SqlCommand(queryJsonData, connection))
                 using (SqlDataReader rdr = await cmd.ExecuteReaderAsync())
                 {
@@ -2813,6 +3357,8 @@ namespace POS
             }
         }
 
+
+
         private void ContentContainer_panel_VisibleChanged(object sender, EventArgs e)
         {
             if (ContentContainer_panel.Visible == true)
@@ -2820,6 +3366,828 @@ namespace POS
                 updateDashboardValues();
             }
         }
+
+        #region Admin Panel
+
+        private void Menu_Admin_Label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Admin_Label, "#0077C3");
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
+            Menu_Attendance_Label.BackColor = Color.Transparent;
+            AttendancePanel.Visible = false;
+            AdminPanel.Visible = true;
+            ContentContainer_panel.Visible = false;
+            ProductPanel.Visible = false;
+            IngredientsPanel.Visible = false;
+            StaffPanel.Visible = false;
+            POSPanel.Visible = false;
+            TablesPanel.Visible = false;
+            KitchenPanel.Visible = false;
+            ReportsPanel.Visible = false;
+            CustomerPanel.Visible = false;
+            AdminOrdersDataGrid.Visible = false;
+
+            Current_ScreenName_label.Text = "Admin";
+            LoadDataAsync(adminDataGrid, Unionquery, "Sync");
+
+            AdminOrdersDataGrid.Visible = false;
+            adminDataGrid.Visible = true;
+            AdminUsersButton.BackColor = Color.FromArgb(37, 150, 190);
+            AdminUsersButton.ForeColor = Color.White;
+            AdminBillsButton.BackColor = Color.Transparent;
+            AdminBillsButton.ForeColor = SystemColors.GrayText;
+            button4.Visible = true;
+            AdminSearchTB.Visible = true;
+            button6.Visible = true;
+            // Attach search event
+            AdminSearchTB.TextChanged += AdminSearchTB_TextChanged;
+        }
+
+        private void AdminUsersButton_Click(object sender, EventArgs e)
+        {
+            if (AdminUsersButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                AdminUsersButton.BackColor = Color.FromArgb(37, 150, 190);
+                AdminUsersButton.ForeColor = Color.White;
+                AdminBillsButton.BackColor = Color.Transparent;
+                AdminBillsButton.ForeColor = SystemColors.GrayText;
+                AdminOrdersDataGrid.Visible = false;
+            }
+            if (adminDataGrid.Visible == false)
+            {
+                adminDataGrid.Visible = true;
+                button4.Visible = true;
+                AdminSearchTB.Visible = true;
+                button6.Visible = true;
+                LoadDataAsync(adminDataGrid, Unionquery, "Sync");
+            }
+        }
+
+        private void AdminBillsButton_Click(object sender, EventArgs e)
+        {
+            if (AdminBillsButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                AdminBillsButton.BackColor = Color.FromArgb(37, 150, 190);
+                AdminBillsButton.ForeColor = Color.White;
+                AdminUsersButton.BackColor = Color.Transparent;
+                AdminUsersButton.ForeColor = SystemColors.GrayText;
+
+            }
+            if (adminDataGrid.Visible == true)
+            {
+                adminDataGrid.Visible = false;
+                button4.Visible = false;
+                AdminSearchTB.Visible = false;
+                button6.Visible = false;
+                AdminOrdersDataGrid.Visible = true;
+                LoadDataAsync2(AdminOrdersDataGrid, "select bill_id, table_name, customer, phone, date, type , status , total_amount , discount , net_total_amount from bill_list", "Sync");
+            }
+        }
+        private async void button4_Click(object sender, EventArgs e)
+        {
+            AccountsAddForm AAForm = new AccountsAddForm();
+            AAForm.ShowDialog();
+            LoadDataAsync(adminDataGrid, Unionquery, "Sync");
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                try
+                {
+                    if (adminDataGrid.Columns[e.ColumnIndex].HeaderText == "Edit")
+                    {
+                        string username = adminDataGrid.Rows[e.RowIndex].Cells["username"].Value.ToString();
+                        string email = adminDataGrid.Rows[e.RowIndex].Cells["email"].Value.ToString();
+                        string password = adminDataGrid.Rows[e.RowIndex].Cells["password"].Value.ToString(); // Make sure you have the password column
+                        UserEditForm editForm = new UserEditForm(email, username, password, e.RowIndex);
+                        editForm.ShowDialog();
+
+                        LoadDataAsync(adminDataGrid, Unionquery, "Sync");
+                    }
+                    else if (adminDataGrid.Columns[e.ColumnIndex].HeaderText == "Delete")
+                    {
+                        if (MessageBox.Show("Are you sure you want to delete this user?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            string userEmail = adminDataGrid.Rows[e.RowIndex].Cells["email"].Value.ToString();
+                            string deleteQuery = "DELETE FROM users WHERE email = @UserEmail";
+                            List<string> connectionStrings = new List<string> { "myconn", "myconnGS", "myconnHM" };
+
+                            // Loop through each database connection string and delete the user
+                            foreach (string connStringName in connectionStrings)
+                            {
+                                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[connStringName].ConnectionString))
+                                {
+                                    conn.Open(); // Use synchronous open
+                                    using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                                    {
+                                        cmd.Parameters.AddWithValue("@UserEmail", userEmail);
+                                        int rowsAffected = cmd.ExecuteNonQuery(); // Execute the command
+                                        if (rowsAffected > 0)
+                                        {
+                                            // Optionally, you can show how many rows were affected for debugging
+                                            // Console.WriteLine($"{rowsAffected} row(s) deleted from {connStringName}.");
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Remove the user from the DataGridView
+                            adminDataGrid.Rows.RemoveAt(e.RowIndex);
+                            MessageBox.Show("User deleted successfully from all databases.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //yet to be added to activity log
+                            ; LoadDataAsync(adminDataGrid, Unionquery, "Sync");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
+        private void AdminSearchTB_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = AdminSearchTB.Text;
+
+            string query = $@"
+        SELECT username, password, email, Role, Access 
+        FROM POS.dbo.users 
+        WHERE username LIKE '%{searchText}%' 
+        OR Access LIKE '%{searchText}%' 
+        OR email LIKE '%{searchText}%' 
+        OR Role LIKE '%{searchText}%'
+        UNION ALL
+        SELECT username, password, email, Role, Access 
+        FROM GeneralStorePOS.dbo.users 
+        WHERE username LIKE '%{searchText}%' 
+        OR Access LIKE '%{searchText}%' 
+        OR email LIKE '%{searchText}%' 
+        OR Role LIKE '%{searchText}%'
+        UNION ALL
+        SELECT username, password, email, Role, Access 
+        FROM HotelManagementPOS.dbo.users 
+        WHERE username LIKE '%{searchText}%' 
+        OR Access LIKE '%{searchText}%' 
+        OR email LIKE '%{searchText}%' 
+        OR Role LIKE '%{searchText}%';";
+
+            LoadDataAsync(adminDataGrid, query, "Sync");
+        }
+
+
+
+
+        #endregion
+
+        #region Timesheet Panel
+        private void Menu_Attendance_Label_Click(object sender, EventArgs e)
+        {
+            SetLabelColor(Menu_Attendance_Label, "#0077C3");
+            Menu_Admin_Label.BackColor = Color.Transparent;
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
+            LogOutLabel.BackColor = Color.Transparent;
+
+            AttendancePanel.Visible = true;
+            TimesheetPanel.Visible = true;
+            AdminPanel.Visible = false;
+            CustomerPanel.Visible = false;
+            ContentContainer_panel.Visible = false;
+            ProductPanel.Visible = false;
+            IngredientsPanel.Visible = false;
+            StaffPanel.Visible = false;
+            POSPanel.Visible = false;
+            TablesPanel.Visible = false;
+            KitchenPanel.Visible = false;
+            ReportsPanel.Visible = false;
+            LoadTimesheetData();
+            TimesheetSearchBox.TextChanged += TimesheetSearchBox_TextChanged;
+            SetColumnHeaderText(TimesheetGridView);
+            Current_ScreenName_label.Text = "Tracking";
+        }
+
+        private void LoadTimesheetData()
+        {
+            string query = "SELECT name, email, clock_in_time, clock_out_time, worked_hours, monthly_total_hours FROM timesheet";
+            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dt = new DataTable();
+                            dt.Load(reader);
+                            dt.Columns.Add("SR#", typeof(int));
+                            int serialNumber = 1;
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                row["SR#"] = serialNumber++;
+                            }
+                            dt.Columns["SR#"].SetOrdinal(0);
+                            TimesheetGridView.DataSource = dt;
+                            TimesheetGridView.Columns["SR#"].Width = 55;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle any errors that may occur
+                    MessageBox.Show("Error loading timesheet data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    // Ensure the connection is closed
+                    connection.Close();
+                }
+            }
+        }
+
+        private void TimesheetSearchBox_TextChanged(object sender, EventArgs e)
+        {
+            // Get the search term
+            string searchTerm = TimesheetSearchBox.Text.ToLower();
+
+            // Filter the rows in the DataGridView based on the search term
+            if (TimesheetGridView.DataSource is DataTable dt)
+            {
+                // Apply filter
+                dt.DefaultView.RowFilter = string.Format("name LIKE '%{0}%' OR email LIKE '%{0}%'",
+                                                         searchTerm);
+            }
+        }
+
+        private void ScreenContainer_panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void TimesheetButton_Click_1(object sender, EventArgs e)
+        {
+            if (TimesheetButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                TimesheetButton.BackColor = Color.FromArgb(37, 150, 190);
+                TimesheetButton.ForeColor = Color.White;
+                ActivityLogButton.BackColor = Color.Transparent;
+                ActivityLogButton.ForeColor = SystemColors.GrayText;
+                ActivityLogPanel.Visible = false;
+            }
+            if (TimesheetPanel.Visible == false)
+            {
+                TimesheetPanel.Visible = true;
+                TimesheetSearchBox.TextChanged += TimesheetSearchBox_TextChanged;
+            }
+        }
+
+        private void ActivityLogButton_Click(object sender, EventArgs e)
+        {
+            if (ActivityLogButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                ActivityLogButton.BackColor = Color.FromArgb(37, 150, 190);
+                ActivityLogButton.ForeColor = Color.White;
+                TimesheetButton.BackColor = Color.Transparent;
+                TimesheetButton.ForeColor = SystemColors.GrayText;
+                TimesheetPanel.Visible = false;
+            }
+            if (ActivityLogPanel.Visible == false)
+            {
+                ActivityLogPanel.Visible = true;
+                ActivityLogSearchBox.TextChanged += ActivitySearchBox_TextChanged;
+                LoadActivityLogData();
+                SetColumnHeaderText(ActivityGridView);
+
+            }
+        }
+        #endregion
+
+        #region Activity Log
+
+        private void LoadActivityLogData()
+        {
+            string query = "SELECT time, action, description, username FROM activity_log";
+            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dt = new DataTable();
+                            dt.Load(reader);
+                            dt.Columns.Add("SR#", typeof(int));
+                            int serialNumber = 1;
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                row["SR#"] = serialNumber++;
+                            }
+                            dt.Columns["SR#"].SetOrdinal(0);
+                            dt.Columns["description"].SetOrdinal(3);
+                            dt.Columns["username"].SetOrdinal(3);
+                            ActivityGridView.DataSource = dt;
+
+                            foreach (DataGridViewColumn column in ActivityGridView.Columns)
+                            {
+                                if (column.Name != "description")
+                                {
+                                    column.Width = 240;
+                                }
+                            }
+
+                            ActivityGridView.Columns["SR#"].Width = 55;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading activity log data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void ActivitySearchBox_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = ActivityLogSearchBox.Text.ToLower();
+            if (ActivityGridView.DataSource is DataTable dt)
+            {
+                // Apply filter
+                dt.DefaultView.RowFilter = string.Format("action LIKE '%{0}%' OR description LIKE '%{0}%' OR username LIKE '%{0}%'", searchTerm);
+            }
+        }
+
+        #endregion
+
+        #region CheckOut
+        private void CheckOut_Click_1(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Are you sure you want to check out?",
+                "Check Out",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+                string username = Session.Username;
+                DateTime currentDate = DateTime.Now.Date;
+                int currentMonth = currentDate.Month;
+                int currentYear = currentDate.Year;
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        connection.Open();
+
+                        // Check if there is a check-in for today without a checkout
+                        string checkQuery = @"SELECT clock_in_time FROM timesheet 
+                                      WHERE name = @username 
+                                      AND CAST(clock_in_time AS DATE) = @currentDate 
+                                      AND clock_out_time IS NULL";
+
+                        using (SqlCommand checkCmd = new SqlCommand(checkQuery, connection))
+                        {
+                            checkCmd.Parameters.AddWithValue("@username", username);
+                            checkCmd.Parameters.AddWithValue("@currentDate", currentDate);
+
+                            var clockInTime = checkCmd.ExecuteScalar();
+
+                            if (clockInTime != null)
+                            {
+                                DateTime clockIn = (DateTime)clockInTime;
+                                DateTime clockOut = DateTime.Now;
+
+                                // Calculate worked hours
+                                TimeSpan workedHours = clockOut - clockIn;
+                                double workedHoursDecimal = Math.Round(workedHours.TotalHours, 2); // Rounded to 2 decimal places
+
+                                // Update the timesheet with clock-out time and worked hours
+                                string updateQuery = @"UPDATE timesheet 
+                                               SET clock_out_time = @clockOutTime, 
+                                                   worked_hours = @workedHours 
+                                               WHERE name = @username 
+                                               AND CAST(clock_in_time AS DATE) = @currentDate 
+                                               AND clock_out_time IS NULL";
+
+                                using (SqlCommand updateCmd = new SqlCommand(updateQuery, connection))
+                                {
+                                    updateCmd.Parameters.AddWithValue("@clockOutTime", clockOut);
+                                    updateCmd.Parameters.AddWithValue("@workedHours", workedHoursDecimal);
+                                    updateCmd.Parameters.AddWithValue("@username", username);
+                                    updateCmd.Parameters.AddWithValue("@currentDate", currentDate);
+
+                                    updateCmd.ExecuteNonQuery();
+                                }
+
+                                // Calculate the monthly total hours worked
+                                string monthlyTotalQuery = @"SELECT SUM(worked_hours) FROM timesheet 
+                                                     WHERE name = @username 
+                                                     AND MONTH(clock_in_time) = @currentMonth 
+                                                     AND YEAR(clock_in_time) = @currentYear";
+
+                                using (SqlCommand monthlyTotalCmd = new SqlCommand(monthlyTotalQuery, connection))
+                                {
+                                    monthlyTotalCmd.Parameters.AddWithValue("@username", username);
+                                    monthlyTotalCmd.Parameters.AddWithValue("@currentMonth", currentMonth);
+                                    monthlyTotalCmd.Parameters.AddWithValue("@currentYear", currentYear);
+
+                                    var monthlyTotal = monthlyTotalCmd.ExecuteScalar();
+                                    double monthlyTotalHours = monthlyTotal != DBNull.Value ? Convert.ToDouble(monthlyTotal) : 0;
+
+                                    // Optionally, you could update this in the timesheet table
+                                    string updateMonthlyTotalQuery = @"UPDATE timesheet 
+                                                               SET monthly_total_hours = @monthlyTotalHours 
+                                                               WHERE name = @username 
+                                                               AND MONTH(clock_in_time) = @currentMonth 
+                                                               AND YEAR(clock_in_time) = @currentYear";
+
+                                    using (SqlCommand updateMonthlyTotalCmd = new SqlCommand(updateMonthlyTotalQuery, connection))
+                                    {
+                                        updateMonthlyTotalCmd.Parameters.AddWithValue("@monthlyTotalHours", monthlyTotalHours);
+                                        updateMonthlyTotalCmd.Parameters.AddWithValue("@username", username);
+                                        updateMonthlyTotalCmd.Parameters.AddWithValue("@currentMonth", currentMonth);
+                                        updateMonthlyTotalCmd.Parameters.AddWithValue("@currentYear", currentYear);
+
+                                        updateMonthlyTotalCmd.ExecuteNonQuery();
+                                    }
+
+                                    // Insert the action into the activity log
+                                    string logQuery = @"INSERT INTO activity_log (time, action, description, username) 
+                                                VALUES (@timestamp, @action, @description, @username)";
+
+                                    using (SqlCommand logCmd = new SqlCommand(logQuery, connection))
+                                    {
+                                        logCmd.Parameters.AddWithValue("@timestamp", DateTime.Now);
+                                        logCmd.Parameters.AddWithValue("@action", "Checkout");
+                                        logCmd.Parameters.AddWithValue("@description", $"User checked out. Worked hours: {workedHoursDecimal}, Monthly total hours: {monthlyTotalHours}");
+                                        logCmd.Parameters.AddWithValue("@username", username);
+
+                                        logCmd.ExecuteNonQuery();
+                                    }
+
+                                    MessageBox.Show($"You have successfully checked out. Worked hours: {workedHoursDecimal}\n" +
+                                                    $"Monthly total hours: {monthlyTotalHours}",
+                                                    "Checkout", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("No check-in found for today or already checked out.", "Checkout Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred during checkout: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region LogOut
+
+        private void LogOutLabel_Click(object sender, EventArgs e)
+        {
+            // Set the color of the logout label
+            SetLabelColor(LogOutLabel, "#0077C3");
+
+            // Reset the background color of other menu labels
+            Menu_Admin_Label.BackColor = Color.Transparent;
+            Menu_Products_label.BackColor = Color.Transparent;
+            Menu_Tables_label.BackColor = Color.Transparent;
+            Menu_Dashboard_label.BackColor = Color.Transparent;
+            Menu_POS_label.BackColor = Color.Transparent;
+            Menu_Staff_label.BackColor = Color.Transparent;
+            Menu_Reports_label.BackColor = Color.Transparent;
+            Menu_Settings_label.BackColor = Color.Transparent;
+            Menu_Kitchen_label.BackColor = Color.Transparent;
+            Menu_Ingredients_label.BackColor = Color.Transparent;
+            Menu_Attendance_Label.BackColor = Color.Transparent;
+
+            // Show confirmation message box
+            DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Confirm Log Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            // If the user confirms to log out
+            if (result == DialogResult.Yes)
+            {
+                // Insert logout action into the activity log
+                string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+                string username = Session.Username; // Assuming you have a session variable for username
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        connection.Open();
+
+                        string logQuery = @"INSERT INTO activity_log (time, action, description, username) 
+                                    VALUES (@timestamp, @action, @description, @username)";
+
+                        using (SqlCommand logCmd = new SqlCommand(logQuery, connection))
+                        {
+                            logCmd.Parameters.AddWithValue("@timestamp", DateTime.Now);
+                            logCmd.Parameters.AddWithValue("@action", "Logout");
+                            logCmd.Parameters.AddWithValue("@description", "User logged out successfully.");
+                            logCmd.Parameters.AddWithValue("@username", username);
+
+                            logCmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred while logging the logout action: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                Session.ClearSession();
+                Application.Exit();
+                LoginForm loginform = new LoginForm();
+                loginform.Show();
+            }
+        }
+
+        #endregion
+
+        #region Customer 
+        private void CustomersGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                try
+                {
+                    // Handle Edit action
+                    if (CustomersGridView.Columns[e.ColumnIndex].HeaderText == "Edit")
+                    {
+                        string customerId = CustomersGridView.Rows[e.RowIndex].Cells["customer_id"].Value.ToString();
+                        string customerName = CustomersGridView.Rows[e.RowIndex].Cells["customer_name"].Value.ToString();
+                        string phoneNumber = CustomersGridView.Rows[e.RowIndex].Cells["phone_number"].Value.ToString();
+                        string email = CustomersGridView.Rows[e.RowIndex].Cells["email"].Value.ToString();
+                        string address = CustomersGridView.Rows[e.RowIndex].Cells["address"].Value.ToString();
+                        DateTime lastPurchaseDate = CustomersGridView.Rows[e.RowIndex].Cells["last_purchase_date"].Value is DateTime dateValue
+                            ? dateValue
+                            : DateTime.MinValue; // Handle the case if MinValue is not desired
+                        string credit = CustomersGridView.Rows[e.RowIndex].Cells["credit"].Value.ToString();
+                        string points = CustomersGridView.Rows[e.RowIndex].Cells["points"].Value.ToString();
+
+                        // Pass the data to the CustomerUpdateForm
+                        CustomerUpdateForm updateForm = new CustomerUpdateForm(customerId, customerName, phoneNumber, email, address, lastPurchaseDate, credit, points, e.RowIndex);
+                        updateForm.ShowDialog();
+
+                        // Optionally, reload data after the update
+                        LoadDataAsync(CustomersGridView, "SELECT * FROM customers", "Sync");
+
+                        // Log the activity of editing the customer
+                        LogActivity("Edit Customer", $"Customer edited: {customerName} (ID: {customerId})");
+
+                    }
+                    // Handle Delete action
+                    else if (CustomersGridView.Columns[e.ColumnIndex].HeaderText == "Delete")
+                    {
+                        if (MessageBox.Show("Are you sure you want to delete this customer?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        {
+                            string customerId = CustomersGridView.Rows[e.RowIndex].Cells["customer_id"].Value.ToString();
+                            string customerName = CustomersGridView.Rows[e.RowIndex].Cells["customer_name"].Value.ToString();
+
+                            string deleteQuery = "DELETE FROM customers WHERE customer_id = @CustomerId";
+
+                            // Use only the "myconn" connection string
+                            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["myconn"].ConnectionString))
+                            {
+                                conn.Open(); // Use synchronous open
+                                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                                {
+                                    cmd.Parameters.AddWithValue("@CustomerId", customerId);
+                                    int rowsAffected = cmd.ExecuteNonQuery(); // Execute the command
+                                    if (rowsAffected > 0)
+                                    {
+                                        // Optionally, you can show how many rows were affected for debugging
+                                        // Console.WriteLine($"{rowsAffected} row(s) deleted.");
+                                    }
+                                }
+                            }
+
+                            // Remove the customer from the DataGridView
+                            CustomersGridView.Rows.RemoveAt(e.RowIndex);
+                            MessageBox.Show("Customer deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // Reload the data after deletion
+                            LoadDataAsync(CustomersGridView, "SELECT * FROM customers", "Sync");
+
+                            // Log the activity of deleting the customer
+                            LogActivity("Delete Customer", $"Customer deleted: {customerName} (ID: {customerId})");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        // Method to log activity
+        private void LogActivity(string actionType, string description)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["myconn"].ConnectionString))
+                {
+                    conn.Open();
+                    string logQuery = "INSERT INTO activity_log (action, description, time, username) VALUES (@Action, @Description, @Time, @Username)";
+
+                    using (SqlCommand logCommand = new SqlCommand(logQuery, conn))
+                    {
+                        logCommand.Parameters.AddWithValue("@Action", actionType);
+                        logCommand.Parameters.AddWithValue("@Description", description);
+                        logCommand.Parameters.AddWithValue("@Time", DateTime.Now);
+                        logCommand.Parameters.AddWithValue("@Username", Session.Username); // Replace with your current session user retrieval
+
+                        logCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while logging activity: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void CustomerAddButton_Click(object sender, EventArgs e)
+        {
+            CustomerAddForm customerAddForm = new CustomerAddForm();
+            customerAddForm.ShowDialog();
+            LoadDataAsync(CustomersGridView, "Select * from customers", "Sync");
+        }
+
+        private void CustomerDetailsButton_Click(object sender, EventArgs e)
+        {
+            if (CustomerDetailsButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                CustomerDetailsButton.BackColor = Color.FromArgb(37, 150, 190);
+                CustomerDetailsButton.ForeColor = Color.White;
+                PurchaseHistoryButton.BackColor = Color.Transparent;
+                PurchaseHistoryButton.ForeColor = SystemColors.GrayText;
+                LoadDataAsync(CustomersGridView, "SELECT * FROM CUSTOMERS", "Sync");
+                PurchaseHistoryGridView.Visible = false;
+                CustomersGridView.Visible = true;
+                CustomerAddButton.Visible = true;
+            }
+
+        }
+
+        private void PurchaseHistoryButton_Click(object sender, EventArgs e)
+        {
+            if (PurchaseHistoryButton.BackColor != Color.FromArgb(37, 150, 190))
+            {
+                PurchaseHistoryButton.BackColor = Color.FromArgb(37, 150, 190);
+                PurchaseHistoryButton.ForeColor = Color.White;
+                CustomerDetailsButton.BackColor = Color.Transparent;
+                CustomerDetailsButton.ForeColor = SystemColors.GrayText;
+                LoadDataAsync(PurchaseHistoryGridView, "SELECT * FROM purchase_history", "Sync");
+                SetColumnHeaderText(PurchaseHistoryGridView);
+                CustomersGridView.Visible = false;
+                PurchaseHistoryGridView.Visible = true;
+                CustomerAddButton.Visible = false;
+
+            }
+
+        }
+
+        private void PurchaseHistoryButton_ForeColorChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CustomersSearchBox_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = CustomersSearchBox.Text.ToLower();  // Get the search text
+
+            try
+            {
+                if (CustomersGridView.Visible)  // Check if the CustomersGridView is visible
+                {
+                    // Filtering the CustomersGridView based on the search text
+                    foreach (DataGridViewRow row in CustomersGridView.Rows)
+                    {
+                        bool isVisible = row.Cells["customer_name"].Value.ToString().ToLower().Contains(searchText) ||
+                                         row.Cells["phone_number"].Value.ToString().ToLower().Contains(searchText) ||
+                                         row.Cells["email"].Value.ToString().ToLower().Contains(searchText) ||
+                                         row.Cells["address"].Value.ToString().ToLower().Contains(searchText);
+
+                        row.Visible = isVisible;  // Hide or show row based on the condition
+                    }
+                }
+                else if (PurchaseHistoryGridView.Visible)  // Check if the PurchaseHistoryGridView is visible
+                {
+                    // Filtering the PurchaseHistoryGridView based on the search text
+                    foreach (DataGridViewRow row in PurchaseHistoryGridView.Rows)
+                    {
+                        bool isVisible = row.Cells["customer_name"].Value.ToString().ToLower().Contains(searchText) ||
+                                         row.Cells["bill_id"].Value.ToString().ToLower().Contains(searchText) ||
+                                         row.Cells["purchase_date"].Value.ToString().ToLower().Contains(searchText) ||
+                                         row.Cells["purchase_time"].Value.ToString().ToLower().Contains(searchText);
+
+                        row.Visible = isVisible;  // Hide or show row based on the condition
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occurred while searching: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        private void PurchaseHistoryGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (PurchaseHistoryGridView.Columns[e.ColumnIndex].HeaderText == "Edit" || PurchaseHistoryGridView.Columns[e.ColumnIndex].HeaderText == "Delete")
+            {
+                MessageBox.Show("Purchase history can neither be edited or deleted", "Purchase History", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        // Class representing an item from the deserialized JSON
+        public class Item
+        {
+            public string Name { get; set; }
+            public int Quantity { get; set; }
+        }
+
+        private void AdminOrdersDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if a valid cell is clicked
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            // Get the clicked column header text
+            string headerText = AdminOrdersDataGrid.Columns[e.ColumnIndex].HeaderText;
+
+            // Check if the clicked column is "Edit"
+            if (headerText == "Edit")
+            {
+                // Fetch the bill_id and status from the clicked row
+                string billId = AdminOrdersDataGrid.Rows[e.RowIndex].Cells["bill_id"].Value?.ToString();
+                string orderStatus = AdminOrdersDataGrid.Rows[e.RowIndex].Cells["status"].Value?.ToString();
+
+                if (!string.IsNullOrEmpty(billId))
+                {
+                    // Check if the order status is "Cancelled"
+                    if (orderStatus == "Cancelled")
+                    {
+                        MessageBox.Show("Cancelled orders cannot be edited.", "Edit Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return; // Stop further processing if the order is cancelled
+                    }
+
+                    // Instantiate the EditOrderForm and pass the bill_id
+                    EditOrderForm editOrderForm = new EditOrderForm(billId);
+                    editOrderForm.ShowDialog();
+
+                    // Optionally, refresh the data in AdminOrdersDataGrid after edit
+                    LoadDataAsync2(AdminOrdersDataGrid, "select bill_id, table_name, customer, phone, date, type , status , total_amount , discount , net_total_amount from bill_list", "Sync");
+                }
+            }
+        }
+
+        private void Sidebar_panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
+
 

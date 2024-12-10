@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GSDeliveryForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeliveryForm));
             panel3 = new Panel();
             Title_label = new Label();
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
+            Address_TextBox = new TextBox();
+            label4 = new Label();
+            Phone_TextBox = new TextBox();
+            label2 = new Label();
             Name_TextBox = new TextBox();
             label3 = new Label();
             panel4 = new Panel();
             save_button = new Button();
             cancel_button = new Button();
-            Phone_TextBox = new TextBox();
-            label2 = new Label();
-            Address_TextBox = new TextBox();
-            label4 = new Label();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -58,7 +58,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(498, 104);
+            panel3.Size = new Size(486, 104);
             panel3.TabIndex = 0;
             // 
             // Title_label
@@ -92,7 +92,7 @@
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(1, 0, 1, 1);
-            panel1.Size = new Size(502, 425);
+            panel1.Size = new Size(490, 399);
             panel1.TabIndex = 1;
             // 
             // panel2
@@ -109,13 +109,51 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(1, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(498, 422);
+            panel2.Size = new Size(486, 396);
             panel2.TabIndex = 1;
+            // 
+            // Address_TextBox
+            // 
+            Address_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Address_TextBox.Location = new Point(268, 154);
+            Address_TextBox.Multiline = true;
+            Address_TextBox.Name = "Address_TextBox";
+            Address_TextBox.Size = new Size(181, 76);
+            Address_TextBox.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(268, 131);
+            label4.Name = "label4";
+            label4.Size = new Size(62, 20);
+            label4.TabIndex = 6;
+            label4.Text = "Address";
+            // 
+            // Phone_TextBox
+            // 
+            Phone_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Phone_TextBox.Location = new Point(29, 249);
+            Phone_TextBox.Multiline = true;
+            Phone_TextBox.Name = "Phone_TextBox";
+            Phone_TextBox.Size = new Size(181, 30);
+            Phone_TextBox.TabIndex = 5;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(29, 226);
+            label2.Name = "label2";
+            label2.Size = new Size(50, 20);
+            label2.TabIndex = 4;
+            label2.Text = "Phone";
             // 
             // Name_TextBox
             // 
             Name_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Name_TextBox.Location = new Point(32, 172);
+            Name_TextBox.Location = new Point(29, 154);
             Name_TextBox.Multiline = true;
             Name_TextBox.Name = "Name_TextBox";
             Name_TextBox.Size = new Size(181, 30);
@@ -125,7 +163,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(28, 145);
+            label3.Location = new Point(29, 131);
             label3.Name = "label3";
             label3.Size = new Size(49, 20);
             label3.TabIndex = 2;
@@ -137,9 +175,9 @@
             panel4.Controls.Add(save_button);
             panel4.Controls.Add(cancel_button);
             panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 352);
+            panel4.Location = new Point(0, 326);
             panel4.Name = "panel4";
-            panel4.Size = new Size(498, 70);
+            panel4.Size = new Size(486, 70);
             panel4.TabIndex = 1;
             // 
             // save_button
@@ -175,49 +213,11 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // Phone_TextBox
-            // 
-            Phone_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Phone_TextBox.Location = new Point(32, 244);
-            Phone_TextBox.Multiline = true;
-            Phone_TextBox.Name = "Phone_TextBox";
-            Phone_TextBox.Size = new Size(181, 30);
-            Phone_TextBox.TabIndex = 5;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(28, 217);
-            label2.Name = "label2";
-            label2.Size = new Size(50, 20);
-            label2.TabIndex = 4;
-            label2.Text = "Phone";
-            // 
-            // Address_TextBox
-            // 
-            Address_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Address_TextBox.Location = new Point(268, 172);
-            Address_TextBox.Multiline = true;
-            Address_TextBox.Name = "Address_TextBox";
-            Address_TextBox.Size = new Size(181, 76);
-            Address_TextBox.TabIndex = 7;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(264, 145);
-            label4.Name = "label4";
-            label4.Size = new Size(62, 20);
-            label4.TabIndex = 6;
-            label4.Text = "Address";
-            // 
             // DeliveryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(502, 425);
+            ClientSize = new Size(490, 399);
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;

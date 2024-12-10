@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GSBillList));
             panel1 = new Panel();
             StatusComboBox = new ComboBox();
@@ -66,11 +66,12 @@
             StatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             StatusComboBox.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             StatusComboBox.FormattingEnabled = true;
-            StatusComboBox.Items.AddRange(new object[] { "Complete", "Paid" });
+            StatusComboBox.Items.AddRange(new object[] { "Incomplete", "Paid" });
             StatusComboBox.Location = new Point(847, 102);
             StatusComboBox.Name = "StatusComboBox";
             StatusComboBox.Size = new Size(94, 25);
             StatusComboBox.TabIndex = 6;
+            StatusComboBox.SelectedIndexChanged += StatusComboBox_SelectedIndexChanged_1;
             // 
             // BillListDataGrid
             // 
@@ -83,31 +84,31 @@
             BillListDataGrid.BorderStyle = BorderStyle.None;
             BillListDataGrid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             BillListDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(0, 119, 195);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            BillListDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(0, 119, 195);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            BillListDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             BillListDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.GrayText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Window;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.GrayText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            BillListDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = SystemColors.Window;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.GrayText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Window;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.GrayText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            BillListDataGrid.DefaultCellStyle = dataGridViewCellStyle5;
             BillListDataGrid.EnableHeadersVisualStyles = false;
             BillListDataGrid.Location = new Point(12, 143);
             BillListDataGrid.Name = "BillListDataGrid";
             BillListDataGrid.ReadOnly = true;
             BillListDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             BillListDataGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            BillListDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            BillListDataGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
             BillListDataGrid.Size = new Size(938, 417);
             BillListDataGrid.TabIndex = 5;
             BillListDataGrid.CellContentClick += BillListDataGrid_CellContentClick;
@@ -169,6 +170,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(961, 89);
             panel2.TabIndex = 0;
+            panel2.Paint += panel2_Paint;
             // 
             // button1
             // 

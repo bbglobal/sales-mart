@@ -34,19 +34,17 @@
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            Phone_TextBox = new TextBox();
-            Address_TextBox = new TextBox();
+            BranchCodeTB = new TextBox();
+            label2 = new Label();
+            PhoneTB = new TextBox();
+            AddressTB = new TextBox();
             label4 = new Label();
             status_label = new Label();
-            StaffName_TextBox = new TextBox();
+            BranchNameTB = new TextBox();
             label3 = new Label();
             panel4 = new Panel();
             save_button = new Button();
             cancel_button = new Button();
-            textBox1 = new TextBox();
-            label2 = new Label();
-            textBox2 = new TextBox();
-            label5 = new Label();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -102,15 +100,13 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Controls.Add(textBox2);
-            panel2.Controls.Add(label5);
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(BranchCodeTB);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(Phone_TextBox);
-            panel2.Controls.Add(Address_TextBox);
+            panel2.Controls.Add(PhoneTB);
+            panel2.Controls.Add(AddressTB);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(status_label);
-            panel2.Controls.Add(StaffName_TextBox);
+            panel2.Controls.Add(BranchNameTB);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
@@ -120,23 +116,42 @@
             panel2.Size = new Size(655, 456);
             panel2.TabIndex = 1;
             // 
-            // Phone_TextBox
+            // BranchCodeTB
             // 
-            Phone_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Phone_TextBox.Location = new Point(104, 321);
-            Phone_TextBox.Multiline = true;
-            Phone_TextBox.Name = "Phone_TextBox";
-            Phone_TextBox.Size = new Size(181, 30);
-            Phone_TextBox.TabIndex = 17;
+            BranchCodeTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BranchCodeTB.Location = new Point(104, 238);
+            BranchCodeTB.Multiline = true;
+            BranchCodeTB.Name = "BranchCodeTB";
+            BranchCodeTB.Size = new Size(181, 30);
+            BranchCodeTB.TabIndex = 19;
             // 
-            // Address_TextBox
+            // label2
             // 
-            Address_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Address_TextBox.Location = new Point(375, 164);
-            Address_TextBox.Multiline = true;
-            Address_TextBox.Name = "Address_TextBox";
-            Address_TextBox.Size = new Size(181, 69);
-            Address_TextBox.TabIndex = 14;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(100, 211);
+            label2.Name = "label2";
+            label2.Size = new Size(93, 20);
+            label2.TabIndex = 18;
+            label2.Text = "Branch Code";
+            // 
+            // PhoneTB
+            // 
+            PhoneTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            PhoneTB.Location = new Point(104, 321);
+            PhoneTB.Multiline = true;
+            PhoneTB.Name = "PhoneTB";
+            PhoneTB.Size = new Size(181, 30);
+            PhoneTB.TabIndex = 17;
+            // 
+            // AddressTB
+            // 
+            AddressTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            AddressTB.Location = new Point(375, 164);
+            AddressTB.Multiline = true;
+            AddressTB.Name = "AddressTB";
+            AddressTB.Size = new Size(181, 69);
+            AddressTB.TabIndex = 14;
             // 
             // label4
             // 
@@ -158,14 +173,14 @@
             status_label.TabIndex = 11;
             status_label.Text = "Phone";
             // 
-            // StaffName_TextBox
+            // BranchNameTB
             // 
-            StaffName_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            StaffName_TextBox.Location = new Point(104, 157);
-            StaffName_TextBox.Multiline = true;
-            StaffName_TextBox.Name = "StaffName_TextBox";
-            StaffName_TextBox.Size = new Size(181, 30);
-            StaffName_TextBox.TabIndex = 3;
+            BranchNameTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BranchNameTB.Location = new Point(104, 157);
+            BranchNameTB.Multiline = true;
+            BranchNameTB.Name = "BranchNameTB";
+            BranchNameTB.Size = new Size(181, 30);
+            BranchNameTB.TabIndex = 3;
             // 
             // label3
             // 
@@ -221,44 +236,6 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // textBox1
-            // 
-            textBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(104, 238);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(181, 30);
-            textBox1.TabIndex = 19;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(100, 211);
-            label2.Name = "label2";
-            label2.Size = new Size(93, 20);
-            label2.TabIndex = 18;
-            label2.Text = "Branch Code";
-            // 
-            // textBox2
-            // 
-            textBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(375, 275);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(181, 69);
-            textBox2.TabIndex = 21;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(371, 248);
-            label5.Name = "label5";
-            label5.Size = new Size(42, 20);
-            label5.TabIndex = 20;
-            label5.Text = "Note";
-            // 
             // BranchForm
             // 
             AcceptButton = save_button;
@@ -293,14 +270,12 @@
         private Button cancel_button;
         private Button save_button;
         private Label label3;
-        private TextBox StaffName_TextBox;
+        private TextBox BranchNameTB;
         private Label status_label;
-        private TextBox Phone_TextBox;
-        private TextBox Address_TextBox;
+        private TextBox PhoneTB;
+        private TextBox AddressTB;
         private Label label4;
-        private TextBox textBox2;
-        private Label label5;
-        private TextBox textBox1;
+        private TextBox BranchCodeTB;
         private Label label2;
     }
 }

@@ -34,13 +34,18 @@
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            ExpiryDate_TextBox = new DateTimePicker();
+            PerishableCB = new CheckBox();
+            TAXTB = new TextBox();
+            label12 = new Label();
+            ExpiryDateTB = new DateTimePicker();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
             Unit_ComboBox = new ComboBox();
+            SellingPriceTB = new TextBox();
             Quantity_TextBox = new TextBox();
-            ProductPrice_TextBox = new TextBox();
+            label7 = new Label();
+            CostPriceTB = new TextBox();
             label2 = new Label();
             Status_ComboBox = new ComboBox();
             status_label = new Label();
@@ -48,21 +53,15 @@
             browse_button = new Button();
             pictureBox1 = new PictureBox();
             category_label = new Label();
+            textBox4 = new TextBox();
+            SellingPriceTaxTB = new TextBox();
             ProductName_TextBox = new TextBox();
+            label11 = new Label();
+            label10 = new Label();
             label3 = new Label();
             panel4 = new Panel();
             save_button = new Button();
             cancel_button = new Button();
-            label7 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            comboBox1 = new ComboBox();
-            label8 = new Label();
-            label9 = new Label();
-            label10 = new Label();
-            textBox3 = new TextBox();
-            label11 = new Label();
-            textBox4 = new TextBox();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -119,19 +118,18 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Controls.Add(ExpiryDate_TextBox);
+            panel2.Controls.Add(PerishableCB);
+            panel2.Controls.Add(TAXTB);
+            panel2.Controls.Add(label12);
+            panel2.Controls.Add(ExpiryDateTB);
             panel2.Controls.Add(label6);
-            panel2.Controls.Add(label9);
-            panel2.Controls.Add(label8);
             panel2.Controls.Add(label5);
-            panel2.Controls.Add(comboBox1);
             panel2.Controls.Add(label4);
-            panel2.Controls.Add(textBox2);
             panel2.Controls.Add(Unit_ComboBox);
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(SellingPriceTB);
             panel2.Controls.Add(Quantity_TextBox);
             panel2.Controls.Add(label7);
-            panel2.Controls.Add(ProductPrice_TextBox);
+            panel2.Controls.Add(CostPriceTB);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(Status_ComboBox);
             panel2.Controls.Add(status_label);
@@ -140,7 +138,7 @@
             panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(category_label);
             panel2.Controls.Add(textBox4);
-            panel2.Controls.Add(textBox3);
+            panel2.Controls.Add(SellingPriceTaxTB);
             panel2.Controls.Add(ProductName_TextBox);
             panel2.Controls.Add(label11);
             panel2.Controls.Add(label10);
@@ -153,13 +151,45 @@
             panel2.Size = new Size(655, 643);
             panel2.TabIndex = 1;
             // 
-            // ExpiryDate_TextBox
+            // PerishableCB
             // 
-            ExpiryDate_TextBox.Format = DateTimePickerFormat.Short;
-            ExpiryDate_TextBox.Location = new Point(102, 523);
-            ExpiryDate_TextBox.Name = "ExpiryDate_TextBox";
-            ExpiryDate_TextBox.Size = new Size(181, 23);
-            ExpiryDate_TextBox.TabIndex = 21;
+            PerishableCB.AutoSize = true;
+            PerishableCB.Location = new Point(189, 494);
+            PerishableCB.Name = "PerishableCB";
+            PerishableCB.Size = new Size(103, 19);
+            PerishableCB.TabIndex = 24;
+            PerishableCB.Text = "Not Perishable";
+            PerishableCB.UseVisualStyleBackColor = true;
+            PerishableCB.CheckedChanged += PerishableCB_CheckedChanged;
+            // 
+            // TAXTB
+            // 
+            TAXTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TAXTB.Location = new Point(102, 378);
+            TAXTB.Multiline = true;
+            TAXTB.Name = "TAXTB";
+            TAXTB.Size = new Size(73, 30);
+            TAXTB.TabIndex = 23;
+            TAXTB.Text = "18";
+            TAXTB.TextChanged += TAXTB_TextChanged;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label12.Location = new Point(98, 351);
+            label12.Name = "label12";
+            label12.Size = new Size(56, 20);
+            label12.TabIndex = 22;
+            label12.Text = "Tax (%)";
+            // 
+            // ExpiryDateTB
+            // 
+            ExpiryDateTB.Format = DateTimePickerFormat.Short;
+            ExpiryDateTB.Location = new Point(102, 523);
+            ExpiryDateTB.Name = "ExpiryDateTB";
+            ExpiryDateTB.Size = new Size(181, 23);
+            ExpiryDateTB.TabIndex = 21;
             // 
             // label6
             // 
@@ -205,6 +235,16 @@
             Unit_ComboBox.Size = new Size(70, 28);
             Unit_ComboBox.TabIndex = 17;
             // 
+            // SellingPriceTB
+            // 
+            SellingPriceTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SellingPriceTB.Location = new Point(102, 304);
+            SellingPriceTB.Multiline = true;
+            SellingPriceTB.Name = "SellingPriceTB";
+            SellingPriceTB.Size = new Size(181, 30);
+            SellingPriceTB.TabIndex = 14;
+            SellingPriceTB.TextChanged += SellingPriceTB_TextChanged;
+            // 
             // Quantity_TextBox
             // 
             Quantity_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -215,14 +255,24 @@
             Quantity_TextBox.TabIndex = 15;
             Quantity_TextBox.Text = "1";
             // 
-            // ProductPrice_TextBox
+            // label7
             // 
-            ProductPrice_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ProductPrice_TextBox.Location = new Point(206, 228);
-            ProductPrice_TextBox.Multiline = true;
-            ProductPrice_TextBox.Name = "ProductPrice_TextBox";
-            ProductPrice_TextBox.Size = new Size(79, 30);
-            ProductPrice_TextBox.TabIndex = 14;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(136, 281);
+            label7.Name = "label7";
+            label7.Size = new Size(90, 20);
+            label7.TabIndex = 13;
+            label7.Text = "Selling Price";
+            // 
+            // CostPriceTB
+            // 
+            CostPriceTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CostPriceTB.Location = new Point(206, 228);
+            CostPriceTB.Multiline = true;
+            CostPriceTB.Name = "CostPriceTB";
+            CostPriceTB.Size = new Size(79, 30);
+            CostPriceTB.TabIndex = 14;
             // 
             // label2
             // 
@@ -303,6 +353,25 @@
             category_label.TabIndex = 4;
             category_label.Text = "Category";
             // 
+            // textBox4
+            // 
+            textBox4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox4.Location = new Point(100, 447);
+            textBox4.Multiline = true;
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(181, 30);
+            textBox4.TabIndex = 3;
+            // 
+            // SellingPriceTaxTB
+            // 
+            SellingPriceTaxTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SellingPriceTaxTB.Location = new Point(179, 378);
+            SellingPriceTaxTB.Multiline = true;
+            SellingPriceTaxTB.Name = "SellingPriceTaxTB";
+            SellingPriceTaxTB.ReadOnly = true;
+            SellingPriceTaxTB.Size = new Size(104, 30);
+            SellingPriceTaxTB.TabIndex = 3;
+            // 
             // ProductName_TextBox
             // 
             ProductName_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -312,11 +381,31 @@
             ProductName_TextBox.Size = new Size(181, 30);
             ProductName_TextBox.TabIndex = 3;
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label11.Location = new Point(96, 420);
+            label11.Name = "label11";
+            label11.Size = new Size(64, 20);
+            label11.TabIndex = 2;
+            label11.Text = "Barcode";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(162, 351);
+            label10.Name = "label10";
+            label10.Size = new Size(154, 20);
+            label10.TabIndex = 2;
+            label10.Text = "Selling Price (Incl. tax)";
+            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(100, 124);
+            label3.Location = new Point(104, 124);
             label3.Name = "label3";
             label3.Size = new Size(83, 20);
             label3.TabIndex = 2;
@@ -366,107 +455,6 @@
             cancel_button.UseVisualStyleBackColor = false;
             cancel_button.Click += cancel_button_Click;
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(199, 277);
-            label7.Name = "label7";
-            label7.Size = new Size(90, 20);
-            label7.TabIndex = 13;
-            label7.Text = "Selling Price";
-            // 
-            // textBox1
-            // 
-            textBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(204, 304);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(79, 30);
-            textBox1.TabIndex = 14;
-            // 
-            // textBox2
-            // 
-            textBox2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.Location = new Point(102, 304);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(28, 30);
-            textBox2.TabIndex = 15;
-            textBox2.Text = "1";
-            // 
-            // comboBox1
-            // 
-            comboBox1.AutoCompleteMode = AutoCompleteMode.Append;
-            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.IntegralHeight = false;
-            comboBox1.Items.AddRange(new object[] { "kg", "litres", "piece", "dozen" });
-            comboBox1.Location = new Point(132, 305);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(70, 28);
-            comboBox1.TabIndex = 17;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(96, 277);
-            label8.Name = "label8";
-            label8.Size = new Size(32, 20);
-            label8.TabIndex = 18;
-            label8.Text = "Qty";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(134, 278);
-            label9.Name = "label9";
-            label9.Size = new Size(36, 20);
-            label9.TabIndex = 19;
-            label9.Text = "Unit";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(98, 351);
-            label10.Name = "label10";
-            label10.Size = new Size(154, 20);
-            label10.TabIndex = 2;
-            label10.Text = "Selling Price (Incl. tax)";
-            // 
-            // textBox3
-            // 
-            textBox3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox3.Location = new Point(102, 378);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(181, 30);
-            textBox3.TabIndex = 3;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(96, 420);
-            label11.Name = "label11";
-            label11.Size = new Size(64, 20);
-            label11.TabIndex = 2;
-            label11.Text = "Barcode";
-            // 
-            // textBox4
-            // 
-            textBox4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox4.Location = new Point(100, 447);
-            textBox4.Multiline = true;
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(181, 30);
-            textBox4.TabIndex = 3;
-            // 
             // ItemsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -507,23 +495,22 @@
         private ComboBox Category_ComboBox;
         private ComboBox Status_ComboBox;
         private Label status_label;
-        private TextBox ProductPrice_TextBox;
+        private TextBox CostPriceTB;
         private Label label2;
         private Label label5;
         private Label label4;
         private ComboBox Unit_ComboBox;
         private TextBox Quantity_TextBox;
-        private DateTimePicker ExpiryDate_TextBox;
+        private DateTimePicker ExpiryDateTB;
         private Label label6;
-        private Label label9;
-        private Label label8;
-        private ComboBox comboBox1;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private TextBox SellingPriceTB;
         private Label label7;
         private TextBox textBox4;
-        private TextBox textBox3;
+        private TextBox SellingPriceTaxTB;
         private Label label11;
         private Label label10;
+        private TextBox TAXTB;
+        private Label label12;
+        private CheckBox PerishableCB;
     }
 }

@@ -34,6 +34,19 @@
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
+            label11 = new Label();
+            label7 = new Label();
+            UseCredit = new TextBox();
+            AvailableCreditCB = new CheckBox();
+            CustomerPointsCB = new CheckBox();
+            label10 = new Label();
+            label9 = new Label();
+            label8 = new Label();
+            CustomerNameLabel = new Label();
+            CustomerIDTB = new TextBox();
+            CustomerCreditTB = new TextBox();
+            CustomerNameTB = new TextBox();
+            CustomerPointsTB = new TextBox();
             Change_TextBox = new TextBox();
             label6 = new Label();
             CashReceived_TextBox = new TextBox();
@@ -62,7 +75,7 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(510, 104);
+            panel3.Size = new Size(543, 104);
             panel3.TabIndex = 0;
             // 
             // Title_label
@@ -96,12 +109,25 @@
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(1, 0, 1, 1);
-            panel1.Size = new Size(514, 424);
+            panel1.Size = new Size(547, 518);
             panel1.TabIndex = 1;
             // 
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(label11);
+            panel2.Controls.Add(label7);
+            panel2.Controls.Add(UseCredit);
+            panel2.Controls.Add(AvailableCreditCB);
+            panel2.Controls.Add(CustomerPointsCB);
+            panel2.Controls.Add(label10);
+            panel2.Controls.Add(label9);
+            panel2.Controls.Add(label8);
+            panel2.Controls.Add(CustomerNameLabel);
+            panel2.Controls.Add(CustomerIDTB);
+            panel2.Controls.Add(CustomerCreditTB);
+            panel2.Controls.Add(CustomerNameTB);
+            panel2.Controls.Add(CustomerPointsTB);
             panel2.Controls.Add(Change_TextBox);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(CashReceived_TextBox);
@@ -117,25 +143,161 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(1, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(510, 421);
+            panel2.Size = new Size(543, 515);
             panel2.TabIndex = 1;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label11.Location = new Point(422, 250);
+            label11.Name = "label11";
+            label11.Size = new Size(62, 20);
+            label11.TabIndex = 24;
+            label11.Text = "Useable";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(345, 230);
+            label7.Name = "label7";
+            label7.Size = new Size(71, 20);
+            label7.TabIndex = 23;
+            label7.Text = "Available";
+            // 
+            // UseCredit
+            // 
+            UseCredit.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            UseCredit.Location = new Point(422, 273);
+            UseCredit.Multiline = true;
+            UseCredit.Name = "UseCredit";
+            UseCredit.ReadOnly = true;
+            UseCredit.Size = new Size(60, 30);
+            UseCredit.TabIndex = 22;
+            UseCredit.Text = "0";
+            // 
+            // AvailableCreditCB
+            // 
+            AvailableCreditCB.AutoSize = true;
+            AvailableCreditCB.Location = new Point(437, 309);
+            AvailableCreditCB.Name = "AvailableCreditCB";
+            AvailableCreditCB.Size = new Size(45, 19);
+            AvailableCreditCB.TabIndex = 21;
+            AvailableCreditCB.Text = "Use";
+            AvailableCreditCB.UseVisualStyleBackColor = true;
+            AvailableCreditCB.CheckedChanged += AvailableCreditCB_CheckedChanged;
+            // 
+            // CustomerPointsCB
+            // 
+            CustomerPointsCB.AutoSize = true;
+            CustomerPointsCB.Location = new Point(437, 403);
+            CustomerPointsCB.Name = "CustomerPointsCB";
+            CustomerPointsCB.Size = new Size(45, 19);
+            CustomerPointsCB.TabIndex = 20;
+            CustomerPointsCB.Text = "Use";
+            CustomerPointsCB.UseVisualStyleBackColor = true;
+            CustomerPointsCB.CheckedChanged += CustomerPointsCB_CheckedChanged;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(349, 344);
+            label10.Name = "label10";
+            label10.Size = new Size(48, 20);
+            label10.TabIndex = 19;
+            label10.Text = "Points";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(349, 250);
+            label9.Name = "label9";
+            label9.Size = new Size(49, 20);
+            label9.TabIndex = 18;
+            label9.Text = "Credit";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(189, 250);
+            label8.Name = "label8";
+            label8.Size = new Size(91, 20);
+            label8.TabIndex = 17;
+            label8.Text = "Customer ID";
+            // 
+            // CustomerNameLabel
+            // 
+            CustomerNameLabel.AutoSize = true;
+            CustomerNameLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CustomerNameLabel.Location = new Point(31, 250);
+            CustomerNameLabel.Name = "CustomerNameLabel";
+            CustomerNameLabel.Size = new Size(116, 20);
+            CustomerNameLabel.TabIndex = 16;
+            CustomerNameLabel.Text = "Customer Name";
+            // 
+            // CustomerIDTB
+            // 
+            CustomerIDTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CustomerIDTB.Location = new Point(189, 273);
+            CustomerIDTB.Multiline = true;
+            CustomerIDTB.Name = "CustomerIDTB";
+            CustomerIDTB.ReadOnly = true;
+            CustomerIDTB.Size = new Size(133, 30);
+            CustomerIDTB.TabIndex = 15;
+            // 
+            // CustomerCreditTB
+            // 
+            CustomerCreditTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CustomerCreditTB.Location = new Point(349, 273);
+            CustomerCreditTB.Multiline = true;
+            CustomerCreditTB.Name = "CustomerCreditTB";
+            CustomerCreditTB.ReadOnly = true;
+            CustomerCreditTB.Size = new Size(60, 30);
+            CustomerCreditTB.TabIndex = 14;
+            CustomerCreditTB.Text = "0";
+            // 
+            // CustomerNameTB
+            // 
+            CustomerNameTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CustomerNameTB.Location = new Point(31, 273);
+            CustomerNameTB.Multiline = true;
+            CustomerNameTB.Name = "CustomerNameTB";
+            CustomerNameTB.ReadOnly = true;
+            CustomerNameTB.Size = new Size(133, 30);
+            CustomerNameTB.TabIndex = 13;
+            // 
+            // CustomerPointsTB
+            // 
+            CustomerPointsTB.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CustomerPointsTB.Location = new Point(349, 367);
+            CustomerPointsTB.Multiline = true;
+            CustomerPointsTB.Name = "CustomerPointsTB";
+            CustomerPointsTB.ReadOnly = true;
+            CustomerPointsTB.Size = new Size(133, 30);
+            CustomerPointsTB.TabIndex = 12;
+            CustomerPointsTB.Text = "0";
             // 
             // Change_TextBox
             // 
             Change_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Change_TextBox.Location = new Point(189, 259);
+            Change_TextBox.Location = new Point(189, 367);
             Change_TextBox.Multiline = true;
             Change_TextBox.Name = "Change_TextBox";
             Change_TextBox.ReadOnly = true;
             Change_TextBox.Size = new Size(133, 30);
             Change_TextBox.TabIndex = 11;
+            Change_TextBox.Text = "0";
             Change_TextBox.KeyPress += Change_TextBox_KeyPress;
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(185, 232);
+            label6.Location = new Point(185, 344);
             label6.Name = "label6";
             label6.Size = new Size(59, 20);
             label6.TabIndex = 10;
@@ -144,11 +306,12 @@
             // CashReceived_TextBox
             // 
             CashReceived_TextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            CashReceived_TextBox.Location = new Point(31, 259);
+            CashReceived_TextBox.Location = new Point(27, 367);
             CashReceived_TextBox.Multiline = true;
             CashReceived_TextBox.Name = "CashReceived_TextBox";
             CashReceived_TextBox.Size = new Size(133, 30);
             CashReceived_TextBox.TabIndex = 9;
+            CashReceived_TextBox.Text = "0";
             CashReceived_TextBox.TextChanged += CashReceived_TextBox_TextChanged;
             CashReceived_TextBox.KeyPress += CashReceived_TextBox_KeyPress;
             // 
@@ -156,7 +319,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(27, 232);
+            label5.Location = new Point(27, 344);
             label5.Name = "label5";
             label5.Size = new Size(104, 20);
             label5.TabIndex = 8;
@@ -191,6 +354,7 @@
             Discount_TextBox.Name = "Discount_TextBox";
             Discount_TextBox.Size = new Size(133, 30);
             Discount_TextBox.TabIndex = 5;
+            Discount_TextBox.Text = "0";
             Discount_TextBox.TextChanged += Discount_TextBox_TextChanged;
             Discount_TextBox.KeyPress += Discount_TextBox_KeyPress;
             // 
@@ -231,9 +395,9 @@
             panel4.Controls.Add(save_button);
             panel4.Controls.Add(cancel_button);
             panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 351);
+            panel4.Location = new Point(0, 445);
             panel4.Name = "panel4";
-            panel4.Size = new Size(510, 70);
+            panel4.Size = new Size(543, 70);
             panel4.TabIndex = 1;
             // 
             // save_button
@@ -273,7 +437,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(514, 424);
+            ClientSize = new Size(547, 518);
             ControlBox = false;
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -311,5 +475,18 @@
         private Label label4;
         private TextBox Discount_TextBox;
         private Label label2;
+        private TextBox CustomerPointsTB;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private Label CustomerNameLabel;
+        private TextBox CustomerIDTB;
+        private TextBox CustomerCreditTB;
+        private TextBox CustomerNameTB;
+        private CheckBox AvailableCreditCB;
+        private CheckBox CustomerPointsCB;
+        private TextBox UseCredit;
+        private Label label11;
+        private Label label7;
     }
 }

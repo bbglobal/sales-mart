@@ -1,10 +1,12 @@
-﻿
+﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
-
+using System.Drawing;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace POS
-{
+{   //yet to be added to activity log
     public partial class PaymentMethodScreen : Form
     {
         private string statusUpdated = "";
@@ -12,17 +14,19 @@ namespace POS
         SqlConnection connection;
         SqlCommand command;
         System.Windows.Forms.TextBox targetTextBox;
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffCategoryForm));
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentMethodScreen));
         private decimal total_amount;
+        private NumberKeypad Nk;
+
         public PaymentMethodScreen(decimal total_amount, int rowIndex)
         {
-
             InitializeComponent();
             InitializeDatabaseConnection();
             this.total_amount = total_amount;
             this.rowIndex = rowIndex;
             SetFields(this.total_amount);
             InitializeLabel(label1, (Image)resources.GetObject("label1.Image"), 45, 60);
+
             foreach (Control control in panel2.Controls)
             {
                 if (control is System.Windows.Forms.TextBox textBox)
@@ -31,99 +35,273 @@ namespace POS
                     textBox.Click += TextBox_Click;
                 }
             }
-
         }
 
-        private void TextBox_Click(object? sender, EventArgs e)
+        private void InitializeDatabaseConnection()
+        {
+            if (Session.SelectedModule == "Restaurant POS")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+            else if (Session.SelectedModule == "Hotel Management")
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["myconnHM"].ConnectionString;
+                connection = new SqlConnection(connectionString);
+            }
+        }
+
+        public string StatusUpdated
+        {
+            get { return statusUpdated; }
+        }
+
+        private void TextBox_Click(object sender, EventArgs e)
         {
             targetTextBox = (System.Windows.Forms.TextBox)sender;
             if (targetTextBox == Discount_TextBox || targetTextBox == CashReceived_TextBox)
             {
-                if (Nk.Visible == false)
+                if (!Nk.Visible)
                 {
                     Nk.Show();
                 }
             }
         }
 
-        public string StatusUpdated
-        { 
-            get { return statusUpdated; }
-        }
-
-
-
-        private void TextBox_Enter(object? sender, EventArgs e)
+        private void TextBox_Enter(object sender, EventArgs e)
         {
             targetTextBox = (System.Windows.Forms.TextBox)sender;
             targetTextBox.SelectionStart = targetTextBox.Text.Length;
-            if (Nk.Visible == false)
+            if (!Nk.Visible)
             {
                 Nk.Show();
             }
-            //else
-            //{
-            //    Nk.BringToFront();
-            //}
         }
-
-        private void InitializeDatabaseConnection()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["myconn"].ConnectionString;
-            connection = new SqlConnection(connectionString);
-        }
-
 
         private void SaveData()
         {
-            //if (BillAmount_TextBox.Text == "")
-            //{
-            //    MessageBox.Show("Please fill the field", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            //    return;
-            //}
+            decimal netTotal = Convert.ToDecimal(NetAmount_TextBox.Text);
+            decimal change = Convert.ToDecimal(Change_TextBox.Text);
 
+            // Flag to control payment validity
+            bool isPaymentValid = true;
 
-            try
-             {
-                connection.Open();
-                string query = "UPDATE bill_list SET status=@Status,discount=@Discount,net_total_amount=@NetTotal,cash_received=@CashReceived,change=@Change WHERE bill_id=@Id";
-                using (SqlCommand command = new SqlCommand(query, connection))
+            // Condition for no payment provided
+            if (Convert.ToDecimal(CashReceived_TextBox.Text) == 0
+                && !AvailableCreditCB.Checked
+                && !CustomerPointsCB.Checked)
+            {
+                MessageBox.Show("No payment has been provided (cash, credit, or points). Please review the payment details before saving.",
+                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                isPaymentValid = false; // Mark payment as invalid
+            }
+
+            if (netTotal < 0 || change < 0)
+            {
+                MessageBox.Show("Net total amount or change cannot be negative. Please adjust the values.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                isPaymentValid = false; // Mark payment as invalid
+            }
+
+            if (!isPaymentValid)
+            {
+                // Exit method early if payment is invalid
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(CustomerIDTB.Text))
+            {
+                try
                 {
-                    string disc = Discount_TextBox.Text;
-                    if (disc == "")
-                    {
-                        disc = "0";
-                    }
-                    command.Parameters.AddWithValue("@Status", "Paid"); 
-                    command.Parameters.AddWithValue("@Discount", Convert.ToDecimal(disc));
-                    command.Parameters.AddWithValue("@NetTotal", Convert.ToDecimal(NetAmount_TextBox.Text));
-                    command.Parameters.AddWithValue("@CashReceived", Convert.ToDecimal(CashReceived_TextBox.Text));
-                    command.Parameters.AddWithValue("@Change", Convert.ToDecimal(Change_TextBox.Text));
-                    command.Parameters.AddWithValue("@Id", rowIndex);
+                    connection.Open();
 
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected > 0)
+                    string email = null;
+                    string username = Session.Username;
+
+                    // Get email from database based on customer ID
+                    string emailQuery = "SELECT email FROM customers WHERE customer_id = @CustomerId";
+                    using (SqlCommand emailCommand = new SqlCommand(emailQuery, connection))
                     {
-                        MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        statusUpdated = "Updated";
-                        //
-                        this.Close();
+                        emailCommand.Parameters.AddWithValue("@CustomerId", CustomerIDTB.Text);
+                        var result = emailCommand.ExecuteScalar();
+                        if (result != null)
+                        {
+                            email = result.ToString();
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(email))
+                    {
+                        MessageBox.Show("Customer not found. Data will not be saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    decimal discountAmount = string.IsNullOrEmpty(Discount_TextBox.Text) ? 0 : Convert.ToDecimal(Discount_TextBox.Text);
+                    decimal originalBillAmount = Convert.ToDecimal(BillAmount_TextBox.Text);
+                    decimal adjustedNetTotal = originalBillAmount - discountAmount;
+
+                    if (adjustedNetTotal < 0)
+                    {
+                        MessageBox.Show("Discount amount is greater than the total bill. Please adjust the discount.", "Invalid Discount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    decimal customerCredit = Convert.ToDecimal(CustomerCreditTB.Text);
+                    decimal creditUsed = Convert.ToDecimal(UseCredit.Text);
+                    decimal creditToDeduct = Math.Min(creditUsed, adjustedNetTotal);
+                    decimal remainingCredit = customerCredit - creditToDeduct;
+                    if (isPaymentValid && AvailableCreditCB.Checked)
+                    {
+                        creditToDeduct = Math.Min(creditToDeduct, customerCredit);
+                        adjustedNetTotal -= creditToDeduct;
+
+                    }
+
+                    decimal cashReceived = Convert.ToDecimal(CashReceived_TextBox.Text);
+                    decimal finalChange = cashReceived - adjustedNetTotal;
+
+
+                    if (finalChange < 0)
+                    {
+                        MessageBox.Show("Cash received is less than the final total after applying credit and discount.", "Insufficient Payment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    // Save payment details
+                    string updateQuery = "UPDATE bill_list SET status=@Status, discount=@Discount, net_total_amount=@NetTotal, cash_received=@CashReceived, change=@Change WHERE bill_id=@Id";
+                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@Status", "Paid");
+                        command.Parameters.AddWithValue("@Discount", discountAmount);
+                        command.Parameters.AddWithValue("@NetTotal", adjustedNetTotal);
+                        command.Parameters.AddWithValue("@CashReceived", cashReceived);
+                        command.Parameters.AddWithValue("@Change", finalChange);
+                        command.Parameters.AddWithValue("@Id", rowIndex);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            // Add 2% points to customer on successful payment
+                            decimal pointsToAdd = adjustedNetTotal * 0.02m;
+                            pointsToAdd = Math.Round(pointsToAdd, 2);
+
+                            string pointsQuery = "SELECT points FROM customers WHERE email = @Email";
+                            decimal currentPoints = 0;
+                            using (SqlCommand pointsCommand = new SqlCommand(pointsQuery, connection))
+                            {
+                                pointsCommand.Parameters.AddWithValue("@Email", email);
+                                var result = pointsCommand.ExecuteScalar();
+                                if (result != null)
+                                {
+                                    currentPoints = Convert.ToDecimal(result);
+                                }
+                            }
+
+                            decimal newPoints = currentPoints + pointsToAdd;
+                            string updatePointsQuery = "UPDATE customers SET points = @NewPoints WHERE email = @Email";
+                            using (SqlCommand updatePointsCommand = new SqlCommand(updatePointsQuery, connection))
+                            {
+                                updatePointsCommand.Parameters.AddWithValue("@NewPoints", newPoints);
+                                updatePointsCommand.Parameters.AddWithValue("@Email", email);
+                                updatePointsCommand.ExecuteNonQuery();
+                            }
+
+                            // Log the payment
+                            string logQuery = "INSERT INTO activity_log (time, action, username, description) VALUES (@ActivityDate, @Action, @Username, @Description)";
+                            using (SqlCommand logCommand = new SqlCommand(logQuery, connection))
+                            {
+                                logCommand.Parameters.AddWithValue("@ActivityDate", DateTime.Now);
+                                logCommand.Parameters.AddWithValue("@Action", "Payment Successful");
+                                logCommand.Parameters.AddWithValue("@Username", username);
+                                logCommand.Parameters.AddWithValue("@Description", "Payment successful for Bill ID: " + rowIndex);
+                                logCommand.ExecuteNonQuery();
+                            }
+
+                            MessageBox.Show($"Payment Successful! {pointsToAdd} Points added to Customer: {CustomerNameTB.Text}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            string creditUpdateQuery = "UPDATE customers SET credit = @RemainingCredit WHERE email = @Email";
+                            using (SqlCommand creditCommand = new SqlCommand(creditUpdateQuery, connection))
+                            {
+                                creditCommand.Parameters.AddWithValue("@RemainingCredit", remainingCredit);
+                                creditCommand.Parameters.AddWithValue("@Email", email);
+                                creditCommand.ExecuteNonQuery();
+                            }
+                            this.Close();
+                        }
                     }
                 }
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error Message : " + ex.Message);
+                try
+                {
+                    if(Convert.ToDecimal(CashReceived_TextBox.Text) == 0)
+                    {
+                        MessageBox.Show("No cash has been received. Please review the payment details before saving.",
+                            "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return; // Exit the method to prevent saving
+                    }
+                    connection.Open();
+                    string query = "UPDATE bill_list SET status=@Status, discount=@Discount, net_total_amount=@NetTotal, cash_received=@CashReceived, change=@Change WHERE bill_id=@Id";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        string disc = Discount_TextBox.Text;
+                        if (string.IsNullOrEmpty(disc))
+                        {
+                            disc = "0";
+                        }
+                        decimal discountAmount = Convert.ToDecimal(disc);
+                        decimal originalBillAmount = Convert.ToDecimal(BillAmount_TextBox.Text);
+                        decimal adjustedNetTotal = originalBillAmount - discountAmount;
 
-            }
-            finally
-            {
-                connection.Close();
+                        if (adjustedNetTotal < 0)
+                        {
+                            MessageBox.Show("Discount amount is greater than the total bill. Please adjust the discount.", "Invalid Discount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        command.Parameters.AddWithValue("@Status", "Paid");
+                        command.Parameters.AddWithValue("@Discount", discountAmount);
+                        command.Parameters.AddWithValue("@NetTotal", adjustedNetTotal);
+                        command.Parameters.AddWithValue("@CashReceived", Convert.ToDecimal(CashReceived_TextBox.Text));
+                        command.Parameters.AddWithValue("@Change", change);
+                        command.Parameters.AddWithValue("@Id", rowIndex);
+
+                        string username = Session.Username;
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            // Log the successful payment to the activity log
+                            string logQuery = "INSERT INTO activity_log (time, action, username, description) VALUES (@ActivityDate, @Action, @Username, @Description)";
+                            using (SqlCommand logCommand = new SqlCommand(logQuery, connection))
+                            {
+                                logCommand.Parameters.AddWithValue("@ActivityDate", DateTime.Now);  // Log current date and time
+                                logCommand.Parameters.AddWithValue("@Action", "Payment Successful");
+                                logCommand.Parameters.AddWithValue("@Username", username); // Add the username here
+                                logCommand.Parameters.AddWithValue("@Description", "Payment successful for Bill ID: " + rowIndex); // Include Bill ID in description
+                                logCommand.ExecuteNonQuery();
+                            }
+
+                            MessageBox.Show("Saved Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Message : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
-
-
 
         private void SetFields(decimal rowNo)
         {
@@ -133,9 +311,7 @@ namespace POS
 
         private void InitializeLabel(Label label, Image image, int newWidth, int newHeight)
         {
-
             Image resizedImage = ResizeImage(image, newWidth, newHeight);
-
             label.Image = resizedImage;
         }
 
@@ -150,24 +326,17 @@ namespace POS
             return resizedImg;
         }
 
-
         private void cancel_button_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-
 
         private void save_button_Click(object sender, EventArgs e)
         {
             SaveData();
         }
 
-
-
         #region All KeyPress Events Functions for Allowing only numbers
-
-
         private void BillAmount_TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
@@ -212,20 +381,86 @@ namespace POS
                 e.Handled = true;
             }
         }
-
         #endregion
 
-
-
-
-        NumberKeypad Nk;
         private void PaymentMethodScreen_Load(object sender, EventArgs e)
         {
             int x = this.Location.X + cancel_button.Location.X;
             int y = this.Location.Y + Change_TextBox.Location.Y + Change_TextBox.Height + 20;
             Nk = new NumberKeypad(x, y);
             Nk.NumberButtonPressed += Nk_NumberButtonPressed;
+            LoadCustomerName(rowIndex);
         }
+
+        private bool LoadCustomerName(int billId)
+        {
+            try
+            {
+                connection.Open();
+                string query = "SELECT customer, phone FROM bill_list WHERE bill_id = @BillId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@BillId", billId);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        string customerName = reader["customer"].ToString();
+                        string customerPhone = reader["phone"].ToString();
+                        CustomerNameTB.Text = customerName;
+                        reader.Close(); 
+
+                        string customerQuery = "SELECT customer_id, points, credit FROM customers WHERE customer_name = @CustomerName AND phone_number = @PhoneNumber";
+                        using (SqlCommand customerCommand = new SqlCommand(customerQuery, connection))
+                        {
+                            customerCommand.Parameters.AddWithValue("@CustomerName", customerName);
+                            customerCommand.Parameters.AddWithValue("@PhoneNumber", customerPhone);
+
+                            SqlDataReader customerReader = customerCommand.ExecuteReader();
+                            if (customerReader.Read())
+                            {
+                                CustomerIDTB.Text = customerReader["customer_id"].ToString();
+                                CustomerPointsTB.Text = customerReader["points"].ToString();
+                                CustomerCreditTB.Text = customerReader["credit"].ToString();
+                                decimal netAmount = Convert.ToDecimal(NetAmount_TextBox.Text);
+                                decimal customerCredit = Convert.ToDecimal(CustomerCreditTB.Text);
+                                if (customerCredit <= netAmount)
+                                {
+                                    UseCredit.Text = customerCredit.ToString("0.00");
+                                }
+                                else if (customerCredit > netAmount){
+                                    UseCredit.Text = netAmount.ToString("0.00");
+                                }
+
+                                customerReader.Close();
+                                return true; 
+                            }
+                            else
+                            {
+                                MessageBox.Show("Customer not found in database. Store credit and loyalty points will not be available for this order's payment.",
+                                                "Customer Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                customerReader.Close();
+                                return false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        CustomerNameTB.Text = "";
+                        return false; 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
 
         private void Nk_NumberButtonPressed(object sender, int number)
         {
@@ -249,83 +484,97 @@ namespace POS
                     targetTextBox.Text += ".";
                     targetTextBox.SelectionStart = targetTextBox.Text.Length;
                 }
-                else if (number == -5)
-                {
-
-                }
-                else
+                else if (number != -5)
                 {
                     targetTextBox.Text += number.ToString();
                     targetTextBox.SelectionStart = targetTextBox.Text.Length;
                 }
             }
-            
         }
 
-        //Percent Work fixed
-        // Decimal places fixed
         private void Discount_TextBox_TextChanged(object sender, EventArgs e)
         {
             string text = Discount_TextBox.Text;
-            
-            if (Discount_TextBox.Text != "")
-            {
-                if (text[text.Length - 1] == Convert.ToChar("."))
-                {
-                    return;
-                }
-                if (Convert.ToDecimal(Discount_TextBox.Text) > 100)
-                {
-                    MessageBox.Show("Discount can't be greater than 100","Failed",MessageBoxButtons.OK,MessageBoxIcon.Hand);
-                    Discount_TextBox.Text = "";
-                    return;
-                }
-            }
-            
-           
-            if (Discount_TextBox.Text != "")
-            {
 
-                decimal bill = Convert.ToDecimal(BillAmount_TextBox.Text);
-                decimal disc = Convert.ToDecimal(Discount_TextBox.Text);
-                NetAmount_TextBox.Text = (bill - ((disc / 100) * bill)).ToString("F2"); 
-
-            }
-            else
+            if (!string.IsNullOrEmpty(text))
             {
-                NetAmount_TextBox.Text = BillAmount_TextBox.Text;
-            }
-            if (CashReceived_TextBox.Text != "" && Change_TextBox.Text != "")
-            {
-                UpdateCashAndChangeTextBox();
-            }
-            
-        }
-
-        private void CashReceived_TextBox_TextChanged(object sender, EventArgs e)
-        {
-            UpdateCashAndChangeTextBox();
-        }
-
-        private void UpdateCashAndChangeTextBox() 
-        {
-            if (CashReceived_TextBox.Text != "")
-            {
-                decimal net = Convert.ToDecimal(NetAmount_TextBox.Text);
-                decimal cash = Convert.ToDecimal(CashReceived_TextBox.Text);
-                if (cash > net)
+                decimal discountPercentage;
+                if (decimal.TryParse(text, out discountPercentage))
                 {
-                    Change_TextBox.Text = (cash - net).ToString("F2");
-                }
-                else if (cash == net)
-                {
-                    Change_TextBox.Text = "0.00";
+                    if (discountPercentage > 100)
+                    {
+                        MessageBox.Show("Discount cannot be more than 100.", "Invalid Discount", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Discount_TextBox.Text = "0";
+                        discountPercentage = 0;
+                    }
+                    decimal billAmount = Convert.ToDecimal(BillAmount_TextBox.Text);
+                    decimal discountAmount = (discountPercentage / 100) * billAmount;
+                    decimal netAmount = billAmount - discountAmount;
+                    NetAmount_TextBox.Text = netAmount.ToString();
                 }
                 else
                 {
-                    Change_TextBox.Text = "";
+
+                    Discount_TextBox.Text = "0";
+                    NetAmount_TextBox.Text = Convert.ToDecimal(BillAmount_TextBox.Text).ToString();
                 }
             }
+            else
+            {
+
+                decimal billAmount = Convert.ToDecimal(BillAmount_TextBox.Text);
+                NetAmount_TextBox.Text = billAmount.ToString();
+            }
         }
+
+
+        private void CashReceived_TextBox_TextChanged(object sender, EventArgs e)
+        {
+            string text = CashReceived_TextBox.Text;
+            if (!string.IsNullOrEmpty(text))
+            {
+                decimal cashReceived = Convert.ToDecimal(text);
+                decimal netAmount = Convert.ToDecimal(NetAmount_TextBox.Text);
+                decimal change = cashReceived - netAmount;
+                Change_TextBox.Text = change.ToString();
+            }
+        }
+
+        private void CustomerPointsCB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CustomerPointsCB.Checked)
+            {
+                decimal points = Convert.ToDecimal(CustomerPointsTB.Text); 
+                decimal netAmount = Convert.ToDecimal(NetAmount_TextBox.Text);  
+                netAmount -= points;  
+                NetAmount_TextBox.Text = netAmount.ToString("F2");  
+            }
+            else
+            {
+                decimal points = Convert.ToDecimal(CustomerPointsTB.Text); 
+                decimal netAmount = Convert.ToDecimal(NetAmount_TextBox.Text);  
+                netAmount += points;  
+                NetAmount_TextBox.Text = netAmount.ToString("F2");  
+            }
+        }
+
+        private void AvailableCreditCB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AvailableCreditCB.Checked)
+            {
+                decimal credit = Convert.ToDecimal(UseCredit.Text); 
+                decimal netAmount = Convert.ToDecimal(NetAmount_TextBox.Text);  
+                netAmount -= credit;  
+                NetAmount_TextBox.Text = netAmount.ToString("F2");  
+            }
+            else
+            {
+                decimal credit = Convert.ToDecimal(UseCredit.Text);
+                decimal netAmount = Convert.ToDecimal(NetAmount_TextBox.Text);  
+                netAmount += credit;  
+                NetAmount_TextBox.Text = netAmount.ToString("F2");  
+            }
+        }
+
     }
 }
